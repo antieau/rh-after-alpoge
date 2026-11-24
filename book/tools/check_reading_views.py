@@ -33,12 +33,34 @@ def main():
     statements = json.loads((EVIDENCE / 'statement-map.json').read_text())['items']
     labels = {i['tag'] for i in statements}
     views = []
+    # A subsection shares its section's counter with the statements (Subsection 9.4.358 is followed by
+    # Lemma 9.4.359), so its view holds the statements numbered after it and before the section's
+    # next subsection.
+    def position(ref):
+        section, _, n = ref.rpartition('.')
+        return section, int(n)
+    starts = {}
+    for t, k, r in tags:
+        if k == 'subsection':
+            section, n = position(r)
+            starts.setdefault(section, []).append(n)
+    subsections = {}
+    for t, k, r in tags:
+        if k == 'subsection':
+            section, n = position(r)
+            following = [m for m in starts[section] if m > n]
+            subsections[t] = (section, n, min(following) if following else float('inf'))
     for tag, kind, ref in tags:
         if kind not in ['chapter', 'section', 'subsection']:
             continue
         text = (SITE / 'read' / (tag + '.html')).read_text()
         page = Page(text)
-        expected = {t for t, k, r in tags if t in labels and r.startswith(ref + '.')}
+        if kind == 'subsection':
+            section, start, end = subsections[tag]
+            expected = {t for t, k, r in tags if t in labels and r.startswith(section + '.')
+                        and r.count('.') == section.count('.') + 1 and start < position(r)[1] < end}
+        else:
+            expected = {t for t, k, r in tags if t in labels and r.startswith(ref + '.')}
         actual = set(re.findall(r'<article[^>]+id="([A-Z0-9]{4})"', text))
         if actual != expected:
             failures.append({'view': tag, 'missing': sorted(expected - actual), 'extra': sorted(actual - expected)})
