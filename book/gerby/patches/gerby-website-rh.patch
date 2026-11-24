@@ -178,7 +178,7 @@ index 924a0ec02a74f38bafa73b2b67781b85507268fe..5d8d13c2311f45694c64438208f96019
  <p>The mathematical publishing software developed by Pieter Belmans and Raymond Cheng.</p>
  {% endblock %}
 diff --git a/gerby/templates/layout.html b/gerby/templates/layout.html
-index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..e3879b15987a2f672d01a7ffd4adac52fe9581cc 100644
+index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..8bf2bd0ba2cc08380276cc13a2f63da1ede95c5c 100644
 --- a/gerby/templates/layout.html
 +++ b/gerby/templates/layout.html
 @@ -8,9 +8,10 @@
@@ -236,7 +236,7 @@ index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..e3879b15987a2f672d01a7ffd4adac52
        </section>
      </div>
    </div>
-+  <footer class="site-credit">Created by Benjamin Antieau at Resolution.</footer>
++  <footer class="site-credit">Source, issues and pull requests: <a href="https://github.com/antieau/rh-after-alpoge">github.com/antieau/rh-after-alpoge</a>.<br>Created by Benjamin Antieau at Resolution.</footer>
    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
  </div>
  </body>

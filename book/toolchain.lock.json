@@ -20,8 +20,8 @@
       "patch_sha256": "382bb84bd1a99a77ef35d8e4f315acbffabdb8a757220df30fb02dbbdba26269",
       "overlay": {
         "patch": "gerby/patches/gerby-website-rh.patch",
-        "tree": "3d60d09deda7a792bc668d9db40f981b5c218481",
-        "patch_sha256": "fa69f723198a3208a188c2f39cef3d8ed043b37da420fab8bead5610a18e2459"
+        "tree": "861ee9acf6effd0630ca231093d5b42744fb5373",
+        "patch_sha256": "3efdfd1495fc25aab4568d9cecca33974261a4a65e7f1ca84da80cec64c07ebc"
       }
     },
     "plastex": {

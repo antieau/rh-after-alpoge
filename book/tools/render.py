@@ -193,10 +193,10 @@ def page(title, here, body, refresh=False, depth=0):
 <script>window.MathJax = {mj};</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 </head><body><main>
-<nav>{nav}<a href="https://alpo.ge/remark.pdf">Alpöge's announcement</a></nav>
+<nav>{nav}<a href="https://alpo.ge/remark.pdf">Alpöge's announcement</a><a href="https://github.com/antieau/rh-after-alpoge">Source on GitHub</a></nav>
 {body}
 <footer>A reading of Levent Alpöge's Lean proof; a working draft, not Alpöge's own exposition.
-Rendered {when(datetime.now(timezone.utc).isoformat())}.<br>Created by Benjamin Antieau at Resolution.</footer>
+Rendered {when(datetime.now(timezone.utc).isoformat())}.<br>Source, issues and pull requests: <a href="https://github.com/antieau/rh-after-alpoge">github.com/antieau/rh-after-alpoge</a>.<br>Created by Benjamin Antieau at Resolution.</footer>
 </main>{RELATIVE_TIME}</body></html>
 """
 
