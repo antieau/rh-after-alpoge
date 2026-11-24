@@ -1,0 +1,428 @@
+{
+  "id": "host-fields",
+  "title": "Host fields, auxiliary primes and windows of scales",
+  "state": "drafted",
+  "summary": "For a primitive character $\\psi$ and a scale $x$ the argument works in an abelian CM field $E$: the compositum of the real subfield of $\\mathbf Q(\\zeta_{2^{e+2}})$ with $2^{e}\\asymp x^{2+8\\varepsilon}$, the field cut out by $\\psi$, and $\\mathbf Q(\\sqrt{-q},\\sqrt{-d})$ for auxiliary primes with $\\log q\\approx Y^{\\varepsilon/5}$. The chapter chooses the primes $q,d$ so that every twist of a character of bounded conductor by $(\\cdot/q)$ or $(\\cdot/d)$ satisfies a square-root bound for its Chebyshev sum on $[Y,Y^{A}]$; this rests on a zero-density estimate and a mean-square bound over quadratic twists. Behrend's construction gives the thick places of the host, a large set of Galois elements that every Frobenius orbit meets at most twice in each stretch of length about $\\log x$; it is not used to choose the $2$-power tower. The chapter then assembles hosts that satisfy all host conditions at every scale of a set with windows of exponent $3/2$.",
+  "timeline": [
+    11,
+    19
+  ],
+  "progress": "Completion pass: frame renamed Galois datum, the orbit condition of the good host defined (hf-good-orbit), and the proofs of fieldChi, meanSqK, box_of_S, levelData, thinH, topsChoiceH and the Behrend corollary written step by step; 46 statements, no OPEN items.",
+  "statements": [
+    {
+      "lean": "UpperTheory.Top.WinPair",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+      "line": 27,
+      "role": "new",
+      "statement": "Let $0<\\varepsilon$ and $Y>1$, and put $L=Y^{\\varepsilon/5}$. A pair of primes $(q,d)$ is admissible at $Y$ if $q\\equiv3\\pmod8$, $d\\equiv7\\pmod{16}$, $L/2<\\log q\\le L$, $\\tfrac12L\\log^2Y<\\log d\\le L\\log^2Y$, $q\\mid d+1$, and every odd prime $p\\le L$ divides $d+1$.",
+      "reference": "",
+      "label": "hf-admissible-pair"
+    },
+    {
+      "lean": "UpperTheory.Top.IsChiField",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+      "line": 19,
+      "role": "new",
+      "statement": "Let $\\psi$ be a primitive Dirichlet character of conductor $N_\\psi$, let $e\\ge0$, and let $q,d$ be odd primes. A number field $E$ is the host field of $(\\psi,e,q,d)$ if for some $N$ divisible by $2^{e+2}$, $N_\\psi$, $q$ and $d$ it is isomorphic to the subfield of $\\mathbf Q(\\zeta_N)$ fixed by the automorphisms $\\zeta_N\\mapsto\\zeta_N^{a}$ with $a\\equiv\\pm1\\pmod{2^{e+2}}$, $\\psi(a)=1$ and $(a/q)=(a/d)=1$. Thus $E$ is the compositum of $\\mathbf Q(\\zeta_{2^{e+2}})^{+}$, the field cut out by $\\psi$, and $\\mathbf Q(\\sqrt{-q},\\sqrt{-d})$ when $q\\equiv d\\equiv3\\pmod 4$; it is a CM field.",
+      "reference": "",
+      "label": "hf-host-field-of-character"
+    },
+    {
+      "lean": "GlobalTheory.EX.RankVal",
+      "file": "Development/AbelianVarietyTheory/Definitions/GlobalTwisting/PairRowIffQdRows.lean",
+      "line": 28,
+      "role": "new",
+      "statement": "Let $(x,\\varepsilon,J)$ be a scale and $\\delta_1=x^{-\\varepsilon/8}$. A rank datum with $n,k,m,t$ is adapted to the scale if $x^{2+8\\varepsilon}\\le n\\le2x^{2+8\\varepsilon}$, $\\sqrt{x\\delta_1}\\le m\\le2\\sqrt{x\\delta_1}$, $x^{9/2+10\\varepsilon}\\le k\\le2x^{9/2+10\\varepsilon}$, and $r+t=8fr+4+\\lceil x^{377}\\rceil w$ with $f=2n$, $r=k+m-1$ and $w=8\\lceil10r(f+f^2(k-1)^3x^{2\\varepsilon}/m)/8\\rceil$.",
+      "reference": "",
+      "label": "hf-adapted-ranks"
+    },
+    {
+      "lean": "GlobalTheory.ZerosNearOne.density_and_regions",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DensityAndRegions.lean",
+      "line": 10,
+      "role": "standard",
+      "reference": "Gallagher, Invent. Math. 11 (1970); Montgomery, LNM 227 (1971), Chapter 12; Davenport, Multiplicative Number Theory, Chapters 13 and 14. Used in Chapter 13 (through LitThin), not in the choice of auxiliary primes.",
+      "statement": "There are constants $C_1,c>0$ with the following properties. (a) For $Q\\ge3$, the zeros $\\rho$ of $L(s,\\chi)$, for primitive $\\chi$ of conductor at most $Q$, with $\\operatorname{Re}\\rho\\ge1-1/400$ and $|\\operatorname{Im}\\rho|\\le Q$, number at most $C_1Q^{1/4}$ counted with multiplicity. (b) Let $\\chi$ be primitive of conductor $N\\ge3$. If $L(\\rho,\\chi)=0$ with $\\operatorname{Re}\\rho\\ge1-c/\\log\\max(N,N|\\operatorname{Im}\\rho|)$, then $\\chi$ is real, $\\rho$ is real and simple, and $\\rho$ is the only zero of $L(s,\\chi)$ in that region. (c) Every zero $\\rho$ of $\\zeta$ with $0<\\operatorname{Re}\\rho<1$ has $\\operatorname{Re}\\rho\\le1-c/\\log(|\\operatorname{Im}\\rho|+3)$.",
+      "label": "hf-zero-density-regions"
+    },
+    {
+      "lean": "Formalism.HermitianLattices.Ext.PrimesInProgressions.pnt_progressions_relative_weak_holds",
+      "file": "Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/PNTFinal.lean",
+      "line": 22,
+      "role": "standard",
+      "statement": "Primes in progressions: (a) the prime number theorem modulo $M$ ($8\\mid M$) with the exceptional zero term, with relative error $A_0(e^{-c_3\\log X/\\log M}+e^{-\\sqrt{c_3\\log X}})$ for $\\log X\\ge C_0\\log M\\log(\\log M+2)$; (b) two real characters of moduli at most $Z$ with real zeros in $(1-c_0/\\log Z,1)$ agree; (c) a real zero of a real nontrivial character modulo $M$ is at most $1-c_1/M$.",
+      "reference": "Gallagher, Invent. Math. 11 (1970); Davenport, Multiplicative Number Theory, Chapters 14 and 20. Also page_across and excBound.",
+      "label": "hf-primes-progressions"
+    },
+    {
+      "lean": "QH.twistK",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/twistK.lean",
+      "line": 148,
+      "role": "new",
+      "statement": "For primes $q$ in $(\\sqrt U,U]$ in a progression modulo $m_0$, $8\\mid m_0$, with $\\log U$ between $Y^{\\varepsilon/6}$ and $Y^{\\varepsilon/5}\\log^2Y$ and at least $\\frac14\\log^2Y\\log m_0$: there is $s^*$ such that $|\\sum_q(\\frac qs)|\\le Y^{-B}|P|$ for every odd squarefree $1<s\\le Y^A$ prime to $m_0$ other than $s^*$.",
+      "reference": "",
+      "label": "hf-twisted-prime-sums"
+    },
+    {
+      "lean": "QH.RR_le",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/RRLe.lean",
+      "line": 9,
+      "role": "new",
+      "statement": "Estimates for sums of $c_y(n)=\\Lambda(n)\\min(1,y/n)$ over powers of a prime ($\\le3\\log y$), their squares summed over primes ($\\ll y\\log y$), over prime powers with even exponent or prime dividing $m_0$ ($\\ll\\sqrt y+w\\log y$), and over $n\\le Z$ ($\\ll y\\log Z$).",
+      "reference": "",
+      "label": "hf-prime-power-sums"
+    },
+    {
+      "lean": "QH.pairEx",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/pairEx.lean",
+      "line": 112,
+      "role": "new",
+      "statement": "Let $M\\ge1$, $0<\\varepsilon<1/52$ and $A\\ge1$. There is $Y_1$ such that for every $Y\\ge Y_1$ there are primes $q,d$, admissible at $Y$ and prime to $M$, with the following properties. For every Dirichlet character $\\xi$ modulo $M$ and every $(i,j)\\in\\{0,1\\}^2$ other than $(0,0)$, the primitive character $\\chi$ inducing $\\xi\\,(\\cdot/q)^{i}(\\cdot/d)^{j}$ satisfies $|g_\\chi(y)|\\le y^{1/2+\\varepsilon/2}$ and $|\\tfrac{L'}{L}(1,\\chi)|\\le4\\log y$ for all $y\\in[Y,Y^{A}]$. For every real primitive character $\\rho$ of conductor dividing $8M$ and every such $(i,j)$, the primitive character inducing $\\rho\\,(\\cdot/q)^{i}(\\cdot/d)^{j}$ has no zeros with $\\operatorname{Re}s>1-1/400$ and $|\\operatorname{Im}s|\\le 8M\\exp(Y^{\\varepsilon/5})\\exp(Y^{\\varepsilon/5}\\log^2Y)^{j}$. Here $g_\\chi(y)=\\sum_{n\\le y}\\Lambda(n)\\chi(n)(y/n-1)+y\\frac{L'}{L}(1,\\chi)$.",
+      "reference": "",
+      "label": "hf-good-pairs-exist"
+    },
+    {
+      "lean": "Formalism.FrobeniusOrbits.hostThickExists",
+      "file": "Formalism/FrobeniusOrbits/FrobeniusOrbitsProofs/ThickExists.lean",
+      "line": 181,
+      "role": "standard",
+      "reference": "Behrend, Proc. Nat. Acad. Sci. 32 (1946); the construction is the sphere construction in Mathlib",
+      "statement": "There is $C>0$ such that for all integers $n\\ge0$ and $L\\ge2$ there is a finite set $T$ of non-negative integers with $4Ls<n$ for $s\\in T$, with $|T|\\ge n\\,e^{-C\\sqrt{\\log n\\log L}}/L$, and with no relations $j(s_2-s_1)=i(s_3-s_1)$ for pairwise distinct $s_1,s_2,s_3\\in T$ and integers $i\\ne j$ with $0<|i|,|j|\\le L$. Behrend's construction gives it with $C=32$; the set is used for the thick places of a host, whose Frobenius orbits it meets at most twice per window of length $L$.",
+      "label": "hf-behrend-set"
+    },
+    {
+      "lean": "Formalism.HC.EAtH",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean",
+      "line": 144,
+      "role": "new",
+      "statement": "Let $K$ be a level with integer $o_K$ and exceptional character $\\psi_K$ if any (Chapter 2). Let $\\Phi$ be a Galois datum with Galois group $\\{\\pm1\\}^2\\times A$, index $o$ and cyclic subgroup $A_0$, let $E$ be a host field on $\\Phi$, let $T\\subset A$ be finite and $x,\\varepsilon,C$ real. The host conditions for $K$ at $(x,\\varepsilon,C)$ with top classes $T$ require: $o=o_K$; every $\\chi\\in K$ is $\\chi_\\theta$ for some $\\theta\\in X^+$; if $\\psi_K$ exists it is the primitive character $\\chi_{-q}$ of the first sign, and otherwise $\\chi_{-q}\\notin K$ (not empty for cyclic levels); for every $\\gamma\\in A$, $|\\#\\{t\\in T:t-\\gamma\\in A_0\\}-\\lambda_\\gamma|T||\\le x^{-1+\\varepsilon}|T|$ with $\\lambda_\\gamma=4/(3o+1)$ on $A_0$ and $3/(3o+1)$ off it; and every $\\theta\\in X^-$, and every $\\theta\\in X^+$ with $\\chi_\\theta\\notin K$, has $|g_{\\chi_\\theta}(x)|\\le x^{1/2+\\varepsilon}$ and $|\\frac{L'}{L}(1,\\chi_\\theta)|\\le C\\log x$.",
+      "reference": "",
+      "label": "hf-host-conditions"
+    },
+    {
+      "lean": "UpperTheory.Top.hostOfField",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/HostOfField.lean",
+      "line": 8,
+      "role": "new",
+      "statement": "Let $0<\\varepsilon<1/52$ and $C_0\\ge1$. There are constants $C_8\\ge C_0$, $c_6,C_b>0$ and $x_0$ such that the following holds for every scale $x\\ge x_0$ with ranks adapted to $(x,\\varepsilon)$. Let $E_0$ be a candidate host field whose auxiliary primes $(q,d)$ are admissible at some $Y$ in the allowed range and satisfy the conclusion of the existence of good prime pairs with modulus $M\\le C_0$ on $[Y,x]$, and whose remaining invariants are bounded by $C_0$. Then $E_0$ extends to a host with an auxiliary prime $q_0\\equiv1\\pmod{Q_Sqd}$, $q_0\\le(Q_Sqd)^{C_8}$, that satisfies all host conditions (Chebyshev bounds for all host characters at scales $y\\ge e^{x^{\\varepsilon/3}}/3$, absence of real zeros with $\\operatorname{Re}s>1-1/400$ in boxes, norm primes $g_i=\\pi\\bar\\pi$ with $\\pi\\equiv1$), and a set $T$ of Frobenius classes with the distribution property of the host conditions at $x$.",
+      "reference": "",
+      "label": "hf-good-host-exists"
+    },
+    {
+      "lean": "UpperTheory.Top.supplyChi",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/SupplyChi.lean",
+      "line": 8,
+      "role": "main",
+      "statement": "Let $\\psi$ be a primitive Dirichlet character that satisfies the weakening of Vandiver's conjecture with exponent $401$ (Chapter 10). Then for every $0<\\varepsilon<1/52$ there are constants and a set of scales with windows of exponent $3/2$ such that for every large scale $x$ in it there are a rank datum adapted to $(x,\\varepsilon)$, a host $H$ good at the scale, and an auxiliary prime $q_0$, such that the host field $E$ satisfies the host conditions of the cyclic level of $\\psi$ at $(x,\\varepsilon,4)$ and the Tate-Shafarevich bound $(t,e^{x^{\\varepsilon}/2})$, $t$ the twist parameter of the rank datum.",
+      "reference": "",
+      "label": "hf-hosts-on-windows"
+    },
+    {
+      "lean": "Formalism.HC.Frame",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ZsmulGeneratorEqZeroOfProjection.lean",
+      "line": 15,
+      "role": "new",
+      "label": "hf-frame",
+      "statement": "A Galois datum with $2$-power exponent $e$: a finite abelian group $A$ of order $n$ with its elements numbered $0,\\ldots,n-1$, a surjection $h:A\\to(\\mathbf Z/2^{e+2})^\\times/\\{\\pm1\\}$ and $a_0\\in A$ with $h$ injective on $A_0=\\langle a_0\\rangle$; its Galois group is $\\{\\pm1\\}^2\\times A$, with characters $X^\\pm$ trivial on $\\tau_1(A_0)$ and $\\pm1$ at $\\iota_d$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.HC.HostRaw",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ConjEMemHostFIff.lean",
+      "line": 12,
+      "role": "new",
+      "label": "hf-framed-host-field",
+      "statement": "A host field on a Galois datum: primes $q\\equiv3\\ (8)$, $d\\equiv7\\ (16)$ with $(\\frac{-d}{q})=1$, a modulus $Q_S$ divisible by $2^{e+2}$, a Galois field $E\\subset\\mathbf Q(\\zeta_{Q_Sqd})$ with Galois group identified with that of the frame, and an Artin map from $(\\mathbf Z/Q_Sqd)^\\times$ compatible with the cyclotomic one, with prescribed behaviour of $-1$, of the $2$-power tower and of the inertia at $q$ and $d$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.HC.HostRaw.der",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/InertiaGaloisSymmetry/OfRawToHostRaw.lean",
+      "line": 9,
+      "role": "new",
+      "label": "hf-host-field-properties",
+      "statement": "A host field on a Galois datum is CM of degree $4n$, its Artin map is surjective and gives the Frobenius elements, the inertia at $d$ is $\\{1,\\iota_d\\}$, $E/F$ is unramified at all finite primes, and $\\mathfrak D_{E/K}=\\mathfrak b\\bar{\\mathfrak b}$ with $\\mathfrak b+\\bar{\\mathfrak b}=1$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.Top.isChiField",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/IsChiField.lean",
+      "line": 5,
+      "role": "new",
+      "label": "hf-kernel-host-field",
+      "statement": "If the Artin map of a host field has the kernel cut out by $\\pm1$ modulo $2^{e+2}$, $\\psi$ and the two Legendre symbols, then $E$ is a host field of $(\\psi,e,q,d)$.",
+      "reference": ""
+    },
+    {
+      "lean": "HostParam.Seam.FieldRows",
+      "file": "Development/AutomorphicArithmetic/CoprimeRanks/SecondSetNoRelation.lean",
+      "line": 13,
+      "role": "new",
+      "label": "hf-host-field-rows",
+      "statement": "A host field has splitting bound $B$ if the first sign is $(\\frac{\\cdot}{q})$ with $\\sqrt{-q}\\in E$, $E\\not\\subset\\mathbf Q(\\zeta_{N/\\ell})$ for $\\ell\\mid Q_S$, $Q_S\\le n^2$, $o^{64}\\le2^e$, $q\\ne3$, $(\\frac{-d}{p})=1$ for odd $p\\le B$ and $4\\ell\\le B$ for odd $\\ell\\mid Q_S$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.Top.fieldChi",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/FieldChi.lean",
+      "line": 20,
+      "role": "new",
+      "label": "hf-host-field-exists",
+      "statement": "For a primitive $\\psi$ there are $c\\ge1$, $e_0$ such that for $e\\ge e_0$ and admissible $q,d$ there is a Galois datum with $n=c2^e$ and index the order of $\\psi$ and a host field on it with splitting bound $B$, $Q_S\\mid\\operatorname{lcm}(2^{e+2},N_\\psi)$, the kernel of $\\psi$, the powers of $\\psi$ in $X^+$, and every character trivial on $\\tau_1(A_0)$ of the form $\\xi(\\frac{\\cdot}{q})^i(\\frac{\\cdot}{d})^j$ with $\\xi\\in\\langle\\psi\\rangle$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.Top.PairGood",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/PairGood.lean",
+      "line": 18,
+      "role": "new",
+      "label": "hf-good-pair",
+      "statement": "A pair $(q,d)$ is good for $(M,\\varepsilon,Y,X)$ if it is admissible at $Y$, prime to $M$, every twist $\\xi(\\frac{\\cdot}{q})^i(\\frac{\\cdot}{d})^j$, $(i,j)\\ne(0,0)$, $\\xi$ mod $M$, has $|g_\\chi(y)|\\le y^{1/2+\\varepsilon/2}$ and $|\\frac{L'}{L}(1,\\chi)|\\le4\\log y$ on $[Y,X]$, and the real such twists have no zeros with $\\operatorname{Re}s>1-1/400$ up to height $8Me^{Y^{\\varepsilon/5}}e^{jY^{\\varepsilon/5}\\log^2Y}$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.HermitianLattices.Ext.PrimitiveCharacterCasts.ZD.zero_density_box",
+      "file": "Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/CountZAll.lean",
+      "line": 13,
+      "role": "standard",
+      "label": "hf-zero-density-box",
+      "statement": "At most $CQ^{1/4}$ primitive characters of conductor at most $Q$ have a zero with $\\operatorname{Re}s>1-1/400$ and $|\\operatorname{Im}s|\\le Q$. This is the zero-density input of the choice of auxiliary primes.",
+      "reference": "Gallagher, Invent. Math. 11 (1970); Montgomery, LNM 227 (1971), Chapter 12 (weaker: counts characters, not zeros)"
+    },
+    {
+      "lean": "QH.meanSqK",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/meanSqK.lean",
+      "line": 51,
+      "role": "new",
+      "label": "hf-mean-square",
+      "statement": "Mean square over primes $q$ in a progression of the truncated twisted sums $S=\\sum_{n\\le Y^{400K}}\\Lambda(n)\\min(1,y/n)\\kappa(n)(\\frac nq)$: $\\sum_q|S|^2\\le Cy\\log y\\cdot\\#\\{q\\}$ for $y\\in[Y,Y^K]$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.HermitianLattices.Ext.BoxTail.tail_box_negLD",
+      "file": "Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailBox.lean",
+      "line": 35,
+      "role": "new",
+      "statement": "If $L(s,\\chi)$, $\\chi\\ne1$ of modulus $N\\le Q$, has no zeros with $\\operatorname{Re}s>1-1/400$, $|\\operatorname{Im}s|\\le Q$, then $|\\frac{L'}{L}(s,\\chi)|\\le K_\\delta\\log Q$ for $\\operatorname{Re}s\\ge1-1/400+\\delta$, $|\\operatorname{Im}s|\\le Q-1$.",
+      "reference": "",
+      "label": "hf-log-derivative-box"
+    },
+    {
+      "lean": "Formalism.HermitianLattices.Ext.BoxTail.tail_contour",
+      "file": "Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailContour.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "Under a zero-free box of height $Q$: $|\\Sigma_\\chi(z+z\\eta)-\\Sigma_\\chi(z)+z\\eta\\frac{L'}{L}(1,\\chi)|\\le A_\\delta\\log Q(\\eta z^{1-1/400+\\delta}\\log Q+z^2/Q)$, with $\\Sigma_\\chi(y)=\\sum_{n\\le y}\\Lambda(n)\\chi(n)(y/n-1)$; by a contour shift in Perron's formula.",
+      "reference": "",
+      "label": "hf-box-tail"
+    },
+    {
+      "lean": "QH.box_of_S",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/BoxOfS.lean",
+      "line": 28,
+      "role": "new",
+      "label": "hf-chebyshev-from-twisted-sum",
+      "statement": "If $\\chi=\\kappa(\\frac{\\cdot}{q})$ has a zero-free box near $1$ of height $Q$ and the truncated twisted sum is at most $y^{1/2+\\tau}/2$ on $[Y,Y^K]$, then $|g_\\chi(y)|\\le y^{1/2+\\tau}$ there and $|\\frac{L'}{L}(1,\\chi)|\\le C\\log Y$.",
+      "reference": ""
+    },
+    {
+      "lean": "QH.pair_share",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/PairShare.lean",
+      "line": 26,
+      "role": "new",
+      "label": "hf-most-primes-good",
+      "statement": "All but a proportion $\\eta$ of the primes $q\\equiv3\\ (8)$ in $(e^{z/2},e^z]$, and then of the primes $d$ in the progression of admissible $d$, give twists that are good (zero-free box, Chebyshev bound, $L'/L$ bound).",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.Top.boundedTw",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/BoundedTw.lean",
+      "line": 45,
+      "role": "new",
+      "label": "hf-bounded-characters",
+      "statement": "In a host field built from $\\psi$ with a good pair, every character in $X^-$ and every character in $X^+$ not inducing a power of $\\psi$ satisfies $|g_\\chi(x)|\\le x^{1/2+\\varepsilon}$ and $|\\frac{L'}{L}(1,\\chi)|\\le4\\log x$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.MainNotions.G.IsGoodOrbit",
+      "file": "Formalism/SharpRestriction/GrowthBounds/UnramifiedQuadraticSetting.lean",
+      "line": 250,
+      "role": "new",
+      "statement": "Good sets of positions in $\\{0,\\ldots,n'-1\\}$ for $(x,\\varepsilon,L_2)$: at most $K_\\varepsilon$ in every window of length $L_2$, a marked tile among every $M_0+1$ consecutive tiles, at most $N_1$ in every window of length $G'$; an orbit $t+\\langle y\\rangle$ is good for $T$ if the positions of $T$ from its base point (the element of least number) form a good set.",
+      "reference": "",
+      "label": "hf-good-orbit"
+    },
+    {
+      "lean": "GlobalTheory.EX.Scales",
+      "file": "Development/AutomorphicArithmetic/PrimeDiscriminants/Scales.lean",
+      "line": 9,
+      "role": "new",
+      "label": "hf-windows",
+      "statement": "Scales $(x,\\varepsilon,J)$ with $x>1$, $0<\\varepsilon<1/52$, $J\\ge1$, and sets of scales $(J_W,W)$ with $W$ having windows of exponent $\\lambda$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.Top.winPairs",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/WinPairs.lean",
+      "line": 5,
+      "role": "new",
+      "label": "hf-windows-exist",
+      "statement": "If $\\psi$ satisfies the weakening of Vandiver's conjecture with exponent $401$, there is $J$ such that every $x$ in windows $[Z,Z^{3/2}]$, $Z$ arbitrarily large, has $Y\\in[x^{1/J},x]$, a good pair for $(N_\\psi,\\varepsilon,Y,x)$ and $e$ with $c2^e\\asymp x^{2+8\\varepsilon}$, such that all host fields of $(\\psi,e,q,d)$ satisfy the Tate-Shafarevich bound $(\\lfloor x^{400}\\rfloor,e^{x^\\varepsilon/2})$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.FrobeniusOrbits.NoRel",
+      "file": "Formalism/FrobeniusOrbits/HostThickExists.lean",
+      "line": 13,
+      "role": "new",
+      "label": "hf-no-short-relations",
+      "statement": "A finite set $T$ of non-negative integers has no relations of length $L$ if $j(s_2-s_1)\\ne i(s_3-s_1)$ for pairwise distinct $s_k\\in T$ and integers $i\\ne j$ with $0<|i|,|j|\\le L$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.BernoulliSumsFrobeniusOrbits.thickFrame2",
+      "file": "Development/AutomorphicArithmetic/ThickFrames/ThickFrame2Large.lean",
+      "line": 29,
+      "role": "new",
+      "label": "hf-behrend-set-at-scale",
+      "statement": "At a scale $x$, for a Galois datum with $n\\asymp x^{2+8\\varepsilon}$ and $2\\le L\\ll\\log x$, there is a Behrend set $T$ with $4Ls<n_0$, $4L|T|\\le n_0$, $|T|\\ge x^{-\\varepsilon}n$ and $|T|\\ge n_0e^{-C_T\\sqrt{\\log n_0\\log L}}/L$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.HC.Frame.hostThickOrbit",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/FrameFacts.lean",
+      "line": 821,
+      "role": "new",
+      "label": "hf-thick-orbits",
+      "statement": "For a Behrend set $T$ with $4Ls<n_0$ and $T^\\sharp=\\{sa_0+u_0\\}$, an arithmetic progression $t+iy$ in $A$ meets $T^\\sharp$ at most twice in any $L$ consecutive steps if $y$ has order $>4L$, and at most once in total otherwise.",
+      "reference": ""
+    },
+    {
+      "lean": "GlobalTheory.EX.exists_ranks_rankVal_frame",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsRanksRankValFrame.lean",
+      "line": 45,
+      "role": "new",
+      "label": "hf-adapted-ranks-exist",
+      "statement": "For $x$ large every Galois datum with $x^{2+8\\varepsilon}\\le n\\le2x^{2+8\\varepsilon}$ underlies a rank datum adapted to the scale, and adapted rank data have $t\\le x^{400}$.",
+      "reference": ""
+    },
+    {
+      "lean": "Formalism.BasicNotions.Host",
+      "file": "Formalism/LocalRingCardinality/DataHost.lean",
+      "line": 39,
+      "role": "new",
+      "label": "hf-host",
+      "statement": "A host for a rank datum: a host field on its Galois datum with splitting bound, $q,d>4tr+1$, a CM-type embedding, a square root $\\mathfrak b$ of the relative different, level primes $g_0,g_1,p,p'$, an ideal $\\mathfrak c$ of $\\mathcal O_K$, top classes $T_{\\mathrm{top}}\\subset A$, a Behrend set $T_2$ with $u_0$, $L_w$, and a constant $C_T$; its thick places are $\\tau_2(sa_0+u_0)$, $s\\in T_2$.",
+      "reference": ""
+    },
+    {
+      "lean": "HostParam.Seam.exists_host",
+      "file": "Development/AutomorphicArithmetic/CoprimeRanks/SecondSetNoRelation.lean",
+      "line": 100,
+      "role": "new",
+      "label": "hf-host-extension",
+      "statement": "A host field with splitting bound $B$ and $q,d>4tr+1$ extends to a host with any admissible choice of level primes, $\\mathfrak c$, top classes and Behrend set.",
+      "reference": ""
+    },
+    {
+      "lean": "GlobalTheory.EX.HostGood",
+      "file": "Development/AbelianVarietyTheory/Definitions/GlobalTwisting/ThinScalesIffHostBound.lean",
+      "line": 101,
+      "role": "new",
+      "label": "hf-good-host",
+      "statement": "A host is good at a scale with constants $(C_8,C_5,c_6,C_b)$ and auxiliary prime $q_0$: sizes of $q,d$, of the top classes and of the Behrend set; norm primes $g_i=\\pi\\bar\\pi$, $\\pi\\equiv1$, of size $(kb)^8$ with disjoint exceptional sets; small level primes $\\equiv1$ modulo the conductor; Chebyshev and $L'/L$ bounds for $\\chi_{-q},\\chi_{-d},\\chi_{-q}\\chi_{-d}$; zero-free boxes for the real characters; a Chebyshev bound for all characters at $y\\ge e^{x^{\\varepsilon/3}}/3$; and few top classes with bad Frobenius orbits.",
+      "reference": ""
+    },
+    {
+      "lean": "QH.psi_thin",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/PsiThin.lean",
+      "line": 385,
+      "role": "standard",
+      "statement": "For a primitive $\\chi$ of conductor $N\\le e^\\lambda$ without a real zero in $(1-c_1,1)$: $|\\psi(u,\\chi)-\\delta_\\chi u|\\le Cu(\\log u+\\lambda)^2\\exp(-c\\log u/(\\lambda+\\sqrt{\\log u}))$.",
+      "reference": "Davenport, Multiplicative Number Theory, Chapters 14, 19 and 20.",
+      "label": "hf-pnt-character"
+    },
+    {
+      "lean": "QH.g_integral",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/GIntegral.lean",
+      "line": 229,
+      "role": "new",
+      "statement": "For primitive $\\chi$ and $y\\ge1$: $g_\\chi(y)=-y\\int_y^\\infty(\\psi(u,\\chi)-\\delta_\\chi u)u^{-2}\\,du$.",
+      "reference": "",
+      "label": "hf-chebyshev-integral"
+    },
+    {
+      "lean": "GlobalTheory.T.normPrimesImagQuad_short_interval_lower_bound",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NormPrimesImagQuadShortIntervalLowerBoundStatement.lean",
+      "line": 8,
+      "role": "standard",
+      "statement": "At least $c'hX/((4dM^2)^A\\log X)$ primes $g\\in(X,X(1+h)]$ are norms $\\pi\\bar\\pi$ with $\\pi\\equiv1\\pmod M$ from $\\mathbf Q(\\sqrt{-d})$, when $\\log(4dM^2)\\le c\\sqrt{\\log X}$ and $e^{-c\\sqrt{\\log X}}\\le h\\le1$.",
+      "reference": "Lagarias-Odlyzko (1977); Stark, Invent. Math. 23 (1974). A consequence of the prime ideal theorem for Hecke L-functions of Q(sqrt(-d)).",
+      "label": "hf-norm-primes-short"
+    },
+    {
+      "lean": "GlobalTheory.choice_count",
+      "file": "Development/AbelianVarietyTheory/Proofs/FoundationProofs/DivLeRpowThreeQuarters.lean",
+      "line": 221,
+      "role": "new",
+      "statement": "For $g_1\\in[Y,2Y]$ at most $(3r+1)(1+2r^2(Y^{3/4}+1))$ integers $g\\in[Y,2Y]$ have $\\mathcal B_r(g)\\cap\\mathcal B_r(g_1)\\ne\\emptyset$.",
+      "reference": "",
+      "label": "hf-exceptional-primes"
+    },
+    {
+      "lean": "UpperTheory.T3.levelData",
+      "file": "Development/AutomorphicArithmetic/ShortNorms/levelData.lean",
+      "line": 36,
+      "role": "new",
+      "label": "hf-norm-primes",
+      "statement": "Choice of the level primes: norm primes $g_0\\ne g_1$ from $\\mathbf Q(\\sqrt{-d})$ with $\\pi\\equiv1\\ (N)$ of size $(kb)^8$ with disjoint exceptional sets, and primes $p,p'\\equiv1\\ (15N)$, $q_0\\equiv1\\ (N)$ at most $N^{C_1}$; from primes represented by norms in short intervals and a Linnik-type bound.",
+      "reference": ""
+    },
+    {
+      "lean": "QH.thinH",
+      "file": "Development/AutomorphicArithmetic/MeanSquareBounds/GaussSumFunctionEq.lean",
+      "line": 55,
+      "role": "new",
+      "label": "hf-host-chebyshev",
+      "statement": "If $\\log N\\le2x^{\\varepsilon/5}\\log^2x$ and the real characters of the host involving $q$ or $d$ have no real zeros in $(1-1/400,1)$, then every character of the host field has $|g_\\chi(y)|\\le ye^{-cx^{\\varepsilon/8}}$ for $y\\ge e^{x^{\\varepsilon/3}}/3$.",
+      "reference": ""
+    },
+    {
+      "lean": "UpperTheory.BernoulliSumsFrobeniusOrbits.not_good_le",
+      "file": "Development/AutomorphicArithmetic/ThickFrames/NotGoodLe.lean",
+      "line": 84,
+      "role": "new",
+      "statement": "For a random set of positions with independent probabilities in $[3\\delta_1/4,\\delta_1]$ along an orbit of length $n'\\in[x^{\\varepsilon/4},C_ox^{2+8\\varepsilon}]$, the probability that the positions together with a given one are not good is at most $C_bx^{-2}$.",
+      "reference": "",
+      "label": "hf-orbit-failure"
+    },
+    {
+      "lean": "UpperTheory.BernoulliSumsFrobeniusOrbits.select",
+      "file": "Development/AutomorphicArithmetic/ThickFrames/select.lean",
+      "line": 70,
+      "role": "new",
+      "statement": "Selection lemma: a random subset with independent probabilities at most $\\delta$ has a value whose class counts are within $D$ of their means ($2\\delta|\\mathcal A|\\le D^2$) and whose weighted count of bad elements is at most four times its mean bound.",
+      "reference": "",
+      "label": "hf-random-selection"
+    },
+    {
+      "lean": "UpperTheory.BernoulliSumsFrobeniusOrbits.topsChoiceH",
+      "file": "Development/AutomorphicArithmetic/ThickFrames/topsChoiceH.lean",
+      "line": 30,
+      "role": "new",
+      "label": "hf-top-classes",
+      "statement": "Top classes $T\\subset A$ of size about $\\delta_1n$, distributed over the cosets of $A_0$ with weights $4:3:\\cdots:3$ up to $x^{-1+\\varepsilon}$, and with few bad Frobenius orbits at inert primes, exist; by a random choice.",
+      "reference": ""
+    },
+    {
+      "lean": "GlobalTheory.EX.HostExW",
+      "file": "Development/AbelianVarietyTheory/Definitions/GlobalTwisting/ThinScalesIffHostBound.lean",
+      "line": 120,
+      "role": "new",
+      "label": "hf-hosts-on-windows-def",
+      "statement": "Hosts satisfying a requirement $P$ exist on windows of exponent $\\lambda$ if for every $\\varepsilon$ there are constants and a set of scales with windows of exponent $\\lambda$ at whose large scales there are an adapted rank datum, a good host and $q_0$ satisfying $P$.",
+      "reference": ""
+    }
+  ],
+  "updated": "2026-11-20T19:10:16+00:00"
+}

@@ -1,0 +1,738 @@
+\chapter{Slopes of Hermitian lattices and a frame form of Bost's inequality}\label{chapter-hermitian-slopes}
+
+In Alpöge's argument the Arakelov slope of a Hermitian lattice over a CM field plays the role
+that the determinant plays in Stepanov's method. This chapter recalls slopes, the
+Harder--Narasimhan polygon and Bost's slope inequality, and proves a form of the inequality for
+many maps $B_i:N_i\to C$ into one lattice: if, at one infinite place, the maps are close to a
+tight frame, then the slope of $C$ is at least the rank-weighted mean of the numbers
+$\mu(N_i)-h(B_i)$, up to explicit losses. The last section applies this to the lattice glued
+across tuples of Hecke characters, which gives the lower bound in the comparison inequality of
+Chapter~\ref{chapter-inert-prime-balance}.
+
+\section{Hermitian lattices and their slopes}\label{section-hs-slopes}
+
+\begin{definition}\label{hs-hermitian-lattice}
+Let $K$ be a totally complex number field, let $r=[K:\mathbf Q]/2$ be the number of its infinite
+places, and for each infinite place $v$ fix an embedding $\sigma_v:K\to\mathbf C$ in the class
+$v$. For a $K$-vector space $V$ write $V_v=V\otimes_{K,\sigma_v}\mathbf C$, and for a $K$-linear
+map $\varphi$ write $\varphi_v=\varphi\otimes_{K,\sigma_v}\mathbf C$.
+\begin{enumerate}
+\item A \emph{Hermitian space} over $K$ is a finite-dimensional $K$-vector space $V$ together
+  with a positive definite Hermitian inner product $h_v$ on $V_v$ for every infinite place $v$.
+  We write $\|x\|_v=h_v(x,x)^{1/2}$. The dual $V^\vee=\operatorname{Hom}_K(V,K)$ is a Hermitian
+  space with the dual norms $\|f\|_v=\sup\{|f_v(x)|:x\in V_v,\ \|x\|_v\leq1\}$.
+\item A \emph{Hermitian lattice} in a Hermitian space $V$ is a finitely generated
+  $\mathcal O_K$-submodule $A\subset V$. Its rank is $\operatorname{rk}A=\dim_K KA$, where $KA$
+  is the $K$-span of $A$. Its dual is the $\mathcal O_K$-submodule
+  $A^\vee=\{f\in V^\vee: f(A)\subset\mathcal O_K\}$ of $V^\vee$.
+\item A \emph{sublattice} of $A$ is an $\mathcal O_K$-submodule $A'\subset A$, with the norms
+  of $V$. It is \emph{saturated} if $A'=A\cap KA'$. In that case the quotient $A/A'$ is a
+  Hermitian lattice in the Hermitian space $KA/KA'$, whose norm at $v$ is the quotient norm:
+  the norm of the orthogonal projection onto the orthogonal complement of $(KA')_v$ in $(KA)_v$.
+\item Let $V$ and $W$ be Hermitian spaces over $K$ and let $\varphi:V\to W$ be a nonzero
+  $K$-linear map. Its \emph{height} is
+  \[
+   h(\varphi)=\frac1r\sum_v\log\|\varphi_v\|^2,
+  \]
+  where $\|\varphi_v\|$ is the operator norm of $\varphi_v:V_v\to W_v$.
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/LocalRingCardinality/DataArith.lean}{Formalism.BasicNotions.HLat}
+\leanref{Formalism/HermitianLattices/StatementMaj.lean}{Formalism.HermitianLatticesTheory.realize}
+\leanref{Formalism/HarderNarasimhan/StatementPl.lean}{Formalism.HN.htMap}
+\leanref{Formalism/HarderNarasimhan/QuotRealize.lean}{Formalism.HN.dualLat}
+\leanref{Formalism/HarderNarasimhan/QuotRealize.lean}{Formalism.HN.dualFrame}
+
+\begin{definition}\label{hs-slopes}
+Let $K$ be a totally complex number field with $r$ infinite places and discriminant $d_K$, let
+$V$ be a Hermitian space over $K$ (Definition~\ref{hs-hermitian-lattice}), and let $A\subset V$
+be a nonzero Hermitian lattice of rank $n$. Then $A$ is a lattice in the real vector space
+$(KA)\otimes_{\mathbf Q}\mathbf R=\prod_v(KA)_v$, which carries the inner product
+$\sum_v\operatorname{Re}h_v$; let $\operatorname{covol}(A)$ be its covolume there.
+\begin{enumerate}
+\item The \emph{Arakelov degree} and the \emph{slope} of $A$ are
+  \[
+   \widehat{\deg}(A)=-\log\operatorname{covol}(A)-rn\log2+\frac n2\log|d_K|,
+   \qquad
+   \mu(A)=\frac{\widehat{\deg}(A)}{rn}.
+  \]
+\item The \emph{maximal} and \emph{minimal slopes} of $A$ are
+  \[
+   \mu_{\max}(A)=\sup_{A'}\mu(A'),\qquad \mu_{\min}(A)=\inf_{A''}\mu(A/A''),
+  \]
+  where $A'$ runs over the nonzero sublattices of $A$ and $A''$ over the saturated sublattices
+  of $A$ different from $A$.
+\item For $\theta\in\mathbf R$ let $A^{\geq\theta}$ be the sum of all nonzero sublattices
+  $A'\subset A$ with $\mu_{\min}(A')\geq\theta$, and $A^{\geq\theta}=0$ if there are none.
+  The \emph{Harder--Narasimhan slopes} of $A$ are
+  \[
+   \mu_j(A)=\sup\{\theta\in\mathbf R:\operatorname{rk}A^{\geq\theta}\geq j\}
+   \qquad(1\leq j\leq n).
+  \]
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/LatticeSlopes/Statement.lean}{Formalism.F.covol}
+\leanref{Formalism/HarderNarasimhan/StatementPl.lean}{Formalism.HN.muDef}
+\leanref{Formalism/HarderNarasimhan/StatementPl.lean}{Formalism.HN.muMaxDef}
+\leanref{Formalism/HarderNarasimhan/StatementPl.lean}{Formalism.HN.muMinDef}
+\leanref{Formalism/HarderNarasimhan/Statement.lean}{Formalism.HN.hnStep}
+\leanref{Formalism/HarderNarasimhan/Statement.lean}{Formalism.HN.slopeList}
+
+\begin{remark}\label{hs-normalization}
+The covolume of $\mathcal O_K$ in $K\otimes_{\mathbf Q}\mathbf R=\mathbf C^r$ with the inner
+product $\sum_v\operatorname{Re}(z_v\bar w_v)$ is $2^{-r}|d_K|^{1/2}$, so
+$\widehat{\deg}(\mathcal O_K)=0$ for the metric $|\sigma_v(\cdot)|$ at every place.
+Equivalently,
+\[
+ \mu(A)=2\,\mu_{\mathbf Z}(A)-\log2+\frac{\log|d_K|}{[K:\mathbf Q]},
+ \qquad \mu_{\mathbf Z}(A)=\frac{-\log\operatorname{covol}(A)}{[K:\mathbf Q]\operatorname{rk}A},
+\]
+where $\mu_{\mathbf Z}(A)$ is the slope of $A$ as a Euclidean lattice. Let $\overline A$ be the
+Hermitian vector bundle over $\operatorname{Spec}\mathcal O_K$ given by $A$, with the norm
+$\|\cdot\|_v$ at $\sigma_v$ and its conjugate at $\bar\sigma_v$. Then $\widehat{\deg}(A)$ is the
+Arakelov degree of $\overline A$ in the conventions of \cite[\S1.3]{Bos20}, so
+$\mu(A)=\widehat\mu(\overline A)/r$, where $\widehat\mu=\widehat{\deg}/\operatorname{rk}$ is
+Bost's slope; the same holds for $\mu_{\max}$ and $\mu_{\min}$. Similarly
+$h(\varphi)=\frac1r\sum_{\sigma:K\to\mathbf C}\log\|\varphi_\sigma\|$ is the archimedean part of
+Bost's height of $\varphi$ \cite[\S1.4.3]{Bos20}, divided by $r$. Compared with the slope
+$\widehat{\deg}/([K:\mathbf Q]\operatorname{rk})$ used in many papers, $\mu$ and $h$ are doubled.
+\end{remark}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/SizeMu.lean}{Formalism.HN.size_maximal_slope}
+
+\begin{proposition}\label{hs-hn-polygon}
+Let $K$ be a totally complex number field, let $V$ be a Hermitian space over $K$, let $A\subset V$
+be a nonzero Hermitian lattice of rank $n$ (Definition~\ref{hs-hermitian-lattice}), and let
+$\theta\in\mathbf R$. With the notation of Definition~\ref{hs-slopes}:
+\begin{enumerate}
+\item $\mu_{\min}(A)\leq\mu(A)\leq\mu_{\max}(A)$, and $\mu_{\max}(A)=\mu(A')$ for some nonzero
+  saturated sublattice $A'$ of $A$.
+\item $A^{\geq\theta}$ is a saturated sublattice of $A$. If $A^{\geq\theta}\neq0$, then
+  $\mu_{\min}(A^{\geq\theta})\geq\theta$. Every nonzero sublattice $A'\subset A$ with
+  $\mu_{\min}(A')\geq\theta$ is contained in $A^{\geq\theta}$.
+\item $\mu_1(A)\geq\mu_2(A)\geq\cdots\geq\mu_n(A)$, the number of $j$ with
+  $\mu_j(A)\geq\theta$ is $\operatorname{rk}A^{\geq\theta}$, and
+  $\sum_{j=1}^n\mu_j(A)=n\,\mu(A)$.
+\item $\mu_1(A)=\mu_{\max}(A)$ and $\mu_n(A)=\mu_{\min}(A)$; in particular
+  $\mu_{\min}(A)\leq\mu_j(A)\leq\mu_{\max}(A)$ for every $j$.
+\end{enumerate}
+\end{proposition}
+\leanref{Formalism/HarderNarasimhan/ShiftInvariance.lean}{Formalism.HN.muChar}
+\leanref{Formalism/HarderNarasimhan/ShiftInvariance.lean}{Formalism.HN.hnStep_spec}
+\leanref{Formalism/HarderNarasimhan/ShiftInvariance.lean}{Formalism.HN.hnSlopes}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/HNExtreme.lean}{Formalism.HN.polygon_extreme_slopes}
+
+These are the properties of the Harder--Narasimhan filtration of a Hermitian lattice:
+$A^{\geq\theta}$ is the largest step of the filtration whose last subquotient has slope at least
+$\theta$, and $\mu_1(A),\ldots,\mu_n(A)$ are the slopes of the subquotients, each repeated as
+often as its rank. See Stuhler \cite{Stu76,Stu77} and Grayson \cite{Gra84}.
+
+\section{Bost's slope inequality}\label{section-hs-bost}
+
+\begin{theorem}\label{hs-bost-slope-inequality}
+Let $K$ be a totally complex number field, let $V$ and $W$ be Hermitian spaces over $K$, let
+$\varphi:V\to W$ be a $K$-linear map, and let $A\subset V$ be a Hermitian lattice with
+$\varphi(A)\neq0$ (Definition~\ref{hs-hermitian-lattice}). Give $\varphi(A)$ the norms of $W$.
+\begin{enumerate}
+\item $\mu_{\min}(A)-h(\varphi)\leq\mu_{\min}(\varphi(A))$.
+\item Let $B\subset W$ be a Hermitian lattice with $\varphi(A)\subset B$. Then
+  $\mu_{\min}(A)\leq\mu_{\max}(B)+h(\varphi)$. If $\varphi$ is injective on $A$, then
+  $\mu_{\max}(A)\leq\mu_{\max}(B)+h(\varphi)$.
+\end{enumerate}
+\end{theorem}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/SlopeIneqMean.lean}{Formalism.HN.slope_inequality_mean}
+
+This is Bost's slope inequality \cite{Bos96}, \cite[Proposition~4.5]{Bos01}, in the form of
+\cite[Proposition~1.4.1]{Bos20}, written in the normalization of Remark~\ref{hs-normalization}.
+Part~(2) is the inequality for injective maps, applied to the sublattices of $A$ and to
+$A/(A\cap\ker\varphi)$; part~(1) is the dual inequality for surjective maps, applied to
+$A\to\varphi(A)$. Since $\varphi(A)\subset B$, the contributions of the finite places to Bost's
+height are at most $0$, and they are omitted.
+
+\section{Almost tight frames}\label{section-hs-frames}
+
+\begin{definition}\label{hs-almost-tight-frame}
+Let $E$ be a finite-dimensional complex inner product space and let $I$ be a finite set. For
+$i\in I$ let $V_i$ be a finite-dimensional complex inner product space, let $B_i:V_i\to E$ be a
+linear map and let $c_i\geq0$ be a real number. Put
+\[
+ F_i=c_iB_i^*B_i\in\operatorname{End}(V_i),\qquad Q=\sum_{i\in I}c_iB_iB_i^*\in\operatorname{End}(E),
+\]
+and write $\|M\|_{\mathrm{HS}}^2=\operatorname{tr}(M^*M)$ for the Hilbert--Schmidt norm. Let $e$
+and $\eta$ be real numbers. The family $(B_i,c_i)_{i\in I}$ is an \emph{$(e,\eta)$-almost tight
+frame} in $E$ if
+\[
+ \sum_{i\in I}\|F_i-1_{V_i}\|_{\mathrm{HS}}^2\leq e\sum_{i\in I}\dim V_i
+ \qquad\text{and}\qquad
+ \dim E\cdot\operatorname{tr}(Q^2)\leq(1+\eta)\,(\operatorname{tr}Q)^2 .
+\]
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.FrameDeviationLinear}
+\leanref{Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.FrameTraceRatioLinear}
+
+\begin{remark}\label{hs-tight-frame-meaning}
+The operator $Q$ is positive semidefinite, so the Cauchy--Schwarz inequality for its eigenvalues
+gives $\dim E\cdot\operatorname{tr}(Q^2)\geq(\operatorname{tr}Q)^2$, with equality if and only
+if $Q$ is a scalar. Thus $\eta$ measures how far $Q$ is from a scalar, and $e$ measures how far
+the maps $c_i^{1/2}B_i$ are from isometric embeddings. If $\dim E\geq1$ and $e=\eta=0$, each
+$c_i^{1/2}B_i$ is an isometric embedding and $\sum_ic_iB_iB_i^*$ is the scalar
+$\sum_i\dim V_i/\dim E$: the images of the $V_i$ form a tight frame of subspaces of $E$.
+\end{remark}
+
+\begin{lemma}\label{hs-frame-complement}
+Let $E$ be a finite-dimensional complex inner product space and let $I$ be a finite set. For
+$i\in I$ let $V_i$ be a finite-dimensional complex inner product space, let $B_i:V_i\to E$ be a
+linear map, let $c_i>0$, and let $U_i\subset V_i$ be a subspace. Suppose that
+$\sum_i\dim V_i>0$. Let $e$, $\eta$ and $\varepsilon$ be real numbers with $0\leq e\leq1/4$,
+$\eta\geq0$ and
+\[
+ \sum_{i\in I}(\dim V_i-\dim U_i)\leq\varepsilon\sum_{i\in I}\dim V_i,
+\]
+and suppose that $(B_i,c_i)_{i\in I}$ is an $(e,\eta)$-almost tight frame in $E$
+(Definition~\ref{hs-almost-tight-frame}). Then the orthogonal complement of
+$\sum_iB_i(U_i)$ in $E$ has dimension at most $(\eta+4\varepsilon+4\sqrt e)\dim E$.
+\end{lemma}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/FrameLinearAlgebraFirst.lean}{Formalism.HN.frame_linear_algebra_first}
+
+\begin{proof}
+Put $d_i=\dim V_i$, $R=\sum_id_i>0$, $D=\dim E$, $F_i=c_iB_i^*B_i$ and
+$Q=\sum_ic_iB_iB_i^*$. Let $U$ be the orthogonal complement of $\sum_iB_i(U_i)$ and $w=\dim U$.
+If $D=0$ there is nothing to prove, so let $D\geq1$. Since
+$0\leq\sum_i(d_i-\dim U_i)\leq\varepsilon R$, we have $\varepsilon\geq0$.
+
+We use two consequences of the Cauchy--Schwarz inequality. For an orthonormal family
+$g_1,\ldots,g_k$ in an inner product space and an operator $A$ on it,
+\[
+ \Big|\sum_{l=1}^k\operatorname{Re}\langle g_l,Ag_l\rangle\Big|\leq\sum_l\|Ag_l\|
+ \leq\sqrt k\,\|A\|_{\mathrm{HS}}. \tag{a}
+\]
+Applied to $A=F_i-1$ and an orthonormal family $f_1,\ldots,f_k$ in $V_i$, using
+$\langle f_l,F_if_l\rangle=c_i\|B_if_l\|^2$, this gives
+\[
+ \Big|c_i\sum_{l=1}^k\|B_if_l\|^2-k\Big|\leq\sqrt k\,\|F_i-1\|_{\mathrm{HS}}. \tag{b}
+\]
+
+\emph{Lower bound for $T=\operatorname{tr}Q$.} We have
+$\operatorname{tr}Q=\sum_i\operatorname{tr}F_i$, and (b) for an orthonormal basis of $V_i$ gives
+$\operatorname{tr}F_i\geq d_i-\sqrt{d_i}\,\|F_i-1\|_{\mathrm{HS}}$. By the Cauchy--Schwarz
+inequality and the first frame condition,
+$\sum_i\sqrt{d_i}\,\|F_i-1\|_{\mathrm{HS}}\leq\sqrt R\,(eR)^{1/2}=R\sqrt e$. Hence
+$T\geq R(1-\sqrt e)\geq R/2>0$, using $e\leq1/4$.
+
+\emph{Upper bound for the trace of $Q$ on $U$.} Let $g_1,\ldots,g_w$ be an orthonormal basis of
+$U$ and $t_U=\sum_l\langle g_l,Qg_l\rangle=\sum_ic_i\sum_l\|B_i^*g_l\|^2$. Since $g_l$ is
+orthogonal to $B_i(U_i)$, the vector $B_i^*g_l$ lies in $U_i^\perp$. Let $f_1,\ldots,f_{k_i}$ be an
+orthonormal basis of $U_i^\perp$, where $k_i=d_i-\dim U_i$. Then
+\[
+ \sum_l\|B_i^*g_l\|^2=\sum_m\sum_l|\langle g_l,B_if_m\rangle|^2\leq\sum_m\|B_if_m\|^2
+\]
+by Bessel's inequality, and (b) gives
+$c_i\sum_m\|B_if_m\|^2\leq k_i+\sqrt{k_i}\,\|F_i-1\|_{\mathrm{HS}}$. Summing over $i$ and using
+the Cauchy--Schwarz inequality, $\sum_ik_i\leq\varepsilon R$ and the first frame condition,
+\[
+ t_U\leq\varepsilon R+(\varepsilon R)^{1/2}(eR)^{1/2}=R\big(\varepsilon+\sqrt{\varepsilon e}\big).
+\]
+
+\emph{Lower bound for the trace of $Q$ on $U$.} Let $A=Q-(T/D)\cdot1$. Then
+$\|A\|_{\mathrm{HS}}^2=\operatorname{tr}(Q^2)-T^2/D\leq\eta T^2/D$ by the second frame condition,
+and (a) gives
+\[
+ t_U-\frac TDw=\sum_l\operatorname{Re}\langle g_l,Ag_l\rangle\geq-\sqrt w\,\|A\|_{\mathrm{HS}}.
+\]
+
+\emph{Conclusion.} If $\varepsilon\geq1/4$, then $w\leq D\leq4\varepsilon D$. Let
+$\varepsilon<1/4$ and $y=(D/T)\|A\|_{\mathrm{HS}}$, so that $y^2\leq\eta D$. Multiplying the two
+bounds for $t_U$ by $D/T$ and using $R\leq2T$ gives
+\[
+ w-\sqrt w\,y\leq\frac{DR}{T}\big(\varepsilon+\sqrt{\varepsilon e}\big)\leq2D\big(\varepsilon+\sqrt{\varepsilon e}\big).
+\]
+Since $\sqrt w\,y\leq(w+y^2)/2\leq(w+\eta D)/2$, this gives
+$w\leq(\eta+4\varepsilon+4\sqrt{\varepsilon e})D$, and $\sqrt{\varepsilon e}\leq\sqrt e$
+because $\varepsilon<1$.
+\end{proof}
+
+\begin{definition}\label{hs-near-orthogonal}
+Let $E$ be a finite-dimensional complex inner product space and let $I$ be a finite set. For
+$i\in I$ let $F_i$ be a complex inner product space of finite dimension $d_i$, let
+$\hat B_i:F_i\to E$ be a linear map and let $\gamma_i\geq0$. Let $D^*>0$, $\eta_0$, $\eta_1$ and
+$e_0$ be real numbers. The family $(\hat B_i,\gamma_i)_{i\in I}$ is
+\emph{$(D^*,\eta_0,\eta_1,e_0)$-nearly orthogonal} in $E$ if
+\begin{enumerate}
+\item $\gamma_i\gamma_j\|\hat B_i^*\hat B_j\|_{\mathrm{HS}}^2\leq(1+\eta_0)\,d_id_j/D^*$ for all
+  $i\neq j$ in $I$;
+\item $\|\gamma_i\hat B_i^*\hat B_i-1_{F_i}\|_{\mathrm{HS}}^2\leq e_0\,d_i$ for all $i\in I$;
+\item $\dim E\leq(1+\eta_1)D^*$.
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.InputSG}
+
+\begin{lemma}\label{hs-near-orthogonal-frame}
+Let $E$ be a finite-dimensional complex inner product space and let $I$ be a finite set. For
+$i\in I$ let $F_i$ be a complex inner product space of finite dimension $d_i$, let
+$\hat B_i:F_i\to E$ be a linear map, let $\gamma_i\geq0$, and let $\nu_i:U_i\to F_i$ be an
+isometric embedding of a complex inner product space $U_i$ of dimension $r_i$. Let
+$D^*,\sigma,\eta_0,\eta_1,e_0,\delta_e$ be real numbers with
+\[
+ D^*>0,\quad 0<\sigma\leq\tfrac1{20},\quad \frac{D^*}{\sigma}\leq\sum_id_i,\quad
+ -1\leq\eta_0\leq\tfrac\sigma2,\quad \eta_1\leq\tfrac\sigma2,\quad e_0\geq0,\quad
+ \sqrt{e_0}\leq\tfrac\sigma2,\quad 0\leq\delta_e\leq\tfrac14,
+\]
+and $\sum_i(d_i-r_i)\leq\delta_e\sum_id_i$. Suppose that $(\hat B_i,\gamma_i)_{i\in I}$ is
+$(D^*,\eta_0,\eta_1,e_0)$-nearly orthogonal in $E$ (Definition~\ref{hs-near-orthogonal}). Then
+$(\hat B_i\nu_i,\gamma_i)_{i\in I}$ is a $(2e_0,\,5\sigma+3\sqrt{\delta_e})$-almost tight frame in
+$E$ (Definition~\ref{hs-almost-tight-frame}), $2e_0\leq1/4$ and $\sum_ir_i>0$.
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/JointDModelAppliesUnitLattice.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.ramification_linear_case_holds}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/TraceConjTransposeMulSelf.lean}{Formalism.LFunctionChainParameters.HilbertSchmidtNormSquare.compressTraceSquareBound}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/TraceConjTransposeMulSelf.lean}{Formalism.LFunctionChainParameters.HilbertSchmidtNormSquare.compressDiagDefectBound}
+
+\begin{proof}
+Put $R=\sum_id_i$, $R'=\sum_ir_i$, $D=\dim E$, $a=\sqrt{e_0}$ and $t=\sqrt{\delta_e}$. For
+$i,j\in I$ let $K_{ij}=(\gamma_i\gamma_j)^{1/2}\hat B_i^*\hat B_j:F_j\to F_i$ and $K_i=K_{ii}$,
+and let $Q=\sum_i\gamma_i\hat B_i\hat B_i^*$. For the compressed family put
+$K'_{ij}=\nu_i^*K_{ij}\nu_j$, $K'_i=K'_{ii}$ and $Q'=\sum_i\gamma_i\hat B_i\nu_i\nu_i^*\hat B_i^*$.
+Expanding the products gives
+\[
+ \operatorname{tr}Q=\sum_i\operatorname{tr}K_i,\qquad
+ \operatorname{tr}(Q^2)=\sum_{i,j}\|K_{ij}\|_{\mathrm{HS}}^2,
+\]
+and the same identities for $Q'$ and the $K'_{ij}$. Note that $R\geq D^*/\sigma>0$.
+
+\emph{Bounds for $Q$.} For an operator $M$ on a space of dimension $d$, the Cauchy--Schwarz
+inequality gives $|\operatorname{tr}(M-1)|\leq\sqrt d\,\|M-1\|_{\mathrm{HS}}$. With condition
+(2) of near orthogonality this gives
+$\operatorname{tr}K_i\geq d_i-\sqrt{d_i}\,(e_0d_i)^{1/2}=(1-a)d_i$, so
+$\operatorname{tr}Q\geq(1-a)R$. Also
+$\|K_i\|_{\mathrm{HS}}\leq\|1\|_{\mathrm{HS}}+\|K_i-1\|_{\mathrm{HS}}\leq(1+a)\sqrt{d_i}$. With
+condition (1), and since $1+\eta_0\geq0$,
+\[
+ \operatorname{tr}(Q^2)\leq(1+\eta_0)\frac{R^2}{D^*}+(1+a)^2R\leq\frac{R^2}{D^*}X,
+ \qquad X=(1+\eta_0)+(1+a)^2\sigma,
+\]
+where the last step uses $R\leq\sigma R^2/D^*$, which is the hypothesis $D^*/\sigma\leq R$. In
+particular $\operatorname{tr}Q>0$, so $D\geq1$, and condition (3) gives $1+\eta_1\geq0$.
+
+\emph{Compression.} Since the $\nu_i$ are isometric embeddings,
+$\|\nu_i^*M\nu_j\|_{\mathrm{HS}}\leq\|M\|_{\mathrm{HS}}$ for every linear map $M:F_j\to F_i$. Hence
+$\operatorname{tr}(Q'^2)\leq\operatorname{tr}(Q^2)$ and
+$\|K'_i-1\|_{\mathrm{HS}}=\|\nu_i^*(K_i-1)\nu_i\|_{\mathrm{HS}}\leq\|K_i-1\|_{\mathrm{HS}}$. Let
+$P_i=\nu_i\nu_i^*$, the orthogonal projection onto $\nu_i(U_i)$. The projection $1-P_i$ has
+trace $d_i-r_i$ and Hilbert--Schmidt norm $(d_i-r_i)^{1/2}$, so
+\[
+ \operatorname{tr}K_i-\operatorname{tr}K'_i=\operatorname{tr}\big(K_i(1-P_i)\big)
+ =(d_i-r_i)+\operatorname{tr}\big((K_i-1)(1-P_i)\big)
+ \leq(d_i-r_i)+(d_i-r_i)^{1/2}\,a\sqrt{d_i}.
+\]
+Summing and using the Cauchy--Schwarz inequality and $\sum_i(d_i-r_i)\leq\delta_eR$ gives
+$\operatorname{tr}Q-\operatorname{tr}Q'\leq(t^2+ta)R$, so
+\[
+ \operatorname{tr}Q'\geq bR,\qquad b=1-a-t^2-ta\geq0,
+\]
+since $a\leq1/40$ and $t\leq1/2$.
+
+\emph{The second frame condition.} The elementary inequalities
+\[
+ (1+\eta_1)\big((1+\eta_0)+(1+a)^2\sigma\big)\leq(1+5\sigma)(1-a)^2
+ \leq(1+5\sigma+3t)\,b^2
+\]
+hold for $0<\sigma\leq1/20$, $-1\leq\eta_0\leq\sigma/2$, $\eta_1\leq\sigma/2$,
+$1+\eta_1\geq0$, $0\leq a\leq\sigma/2$ and $0\leq t\leq1/2$. For the first, $1+\eta_1\leq1+\sigma/2$
+and $(1+\eta_0)+(1+a)^2\sigma\leq(1+\sigma/2)+(1+\sigma/2)^2\sigma$, both sides being
+nonnegative. Expanding,
+\[
+ (1+\tfrac\sigma2)\big((1+\tfrac\sigma2)+(1+\tfrac\sigma2)^2\sigma\big)
+ =1+2\sigma+\tfrac74\sigma^2+\tfrac34\sigma^3+\tfrac18\sigma^4,\qquad
+ (1+5\sigma)(1-\tfrac\sigma2)^2=1+4\sigma-\tfrac{19}4\sigma^2+\tfrac54\sigma^3,
+\]
+and the difference of the second and the first is
+$\sigma(2-\frac{13}2\sigma+\frac12\sigma^2-\frac18\sigma^3)>0$ for $0<\sigma\leq1/4$. Finally
+$(1-\sigma/2)^2\leq(1-a)^2$ because $0\leq a\leq\sigma/2<1$. For the second, write
+$b=(1-a)-t(t+a)$. Then $2(1+5\sigma+3t)(t+a)\leq3(1-a)$, since $\sigma\leq1/20$, $a\leq\sigma/2\leq1/40$
+and $t\leq1/2$ make the left side at most $2(1+\frac14+\frac32)(\frac12+\frac1{40})=2.8875$ and the
+right side at least $3\cdot\frac{39}{40}=2.925$. Hence
+\[
+ (1+5\sigma+3t)b^2\geq(1+5\sigma+3t)\big((1-a)^2-2(1-a)t(t+a)\big)
+ \geq(1+5\sigma+3t)(1-a)^2-3t(1-a)^2=(1+5\sigma)(1-a)^2.
+\]
+With condition (3) the two inequalities give
+\[
+ D\operatorname{tr}(Q'^2)\leq D\frac{R^2}{D^*}X\leq(1+\eta_1)XR^2\leq(1+5\sigma+3t)\,b^2R^2
+ \leq(1+5\sigma+3t)(\operatorname{tr}Q')^2.
+\]
+
+\emph{The first frame condition.} Since $\sum_i(d_i-r_i)\leq\delta_eR\leq R/2$, we have
+$R'\geq R/2>0$. Then
+$\sum_i\|K'_i-1\|_{\mathrm{HS}}^2\leq\sum_i\|K_i-1\|_{\mathrm{HS}}^2\leq e_0R\leq2e_0R'$. Finally
+$2e_0=2a^2\leq2(1/40)^2\leq1/4$.
+\end{proof}
+
+\section{Two counting lemmas}\label{section-hs-counting}
+
+\begin{lemma}\label{hs-share}
+Let $J$ be a finite set and $(x_j)_{j\in J}$ real numbers. Let $s$, $u$ and $\tau$ be real
+numbers with $u\geq0$, $\tau\geq0$, $|J|\,s\leq\sum_jx_j$ and $x_j\leq s+u$ for all $j$. Then
+\[
+ \#\{j\in J:x_j<s-\tau\}\leq|J|\,\frac{u}{u+\tau},
+\]
+where the right-hand side is read as $0$ if $u=\tau=0$.
+\end{lemma}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/TheoremFSharp.lean}{Formalism.HN.thmF_share}
+
+\begin{proof}
+Let $k$ be the number of $j$ with $x_j<s-\tau$. Bounding these $x_j$ by $s-\tau$ and the others
+by $s+u$ gives $|J|s\leq\sum_jx_j\leq k(s-\tau)+(|J|-k)(s+u)$, that is,
+$k(u+\tau)\leq|J|u$. If $u+\tau>0$ this is the claim. If $u=\tau=0$, then every $x_j\leq s$
+while their mean is at least $s$, so every $x_j=s$ and $k=0$.
+\end{proof}
+
+\begin{lemma}\label{hs-layer-cake}
+Let $n\geq1$ be an integer, let $x_1,\ldots,x_n$ and $a$ be real numbers, let $H\geq0$, and let
+$w:\mathbf R\to\mathbf R$ be a function such that $\tau\mapsto\min(1,w(\tau))$ is integrable on
+$[0,H]$. Suppose that $x_j\geq a-H$ for all $j$ and that
+$\#\{j:x_j<a-\tau\}\leq w(\tau)\,n$ for all $\tau\in[0,H]$. Then
+\[
+ a-\int_0^H\min\big(1,w(\tau)\big)\,d\tau\leq\frac1n\sum_{j=1}^nx_j .
+\]
+\end{lemma}
+\leanref{Formalism/CorankShare/CorankShareProofs/LayerCakeFormula.lean}{Formalism.CorankShareLayerCake.FR.layer_cake_formula}
+
+\begin{proof}
+Since $a-x_j\leq H$, we have
+$a-x_j\leq\max(a-x_j,0)=\int_0^H\mathbf 1[x_j<a-\tau]\,d\tau$ for each $j$. Averaging over $j$,
+\[
+ a-\frac1n\sum_jx_j\leq\int_0^H\frac{\#\{j:x_j<a-\tau\}}n\,d\tau
+ \leq\int_0^H\min\big(1,w(\tau)\big)\,d\tau,
+\]
+since the integrand is at most $1$ and at most $w(\tau)$.
+\end{proof}
+
+\section{The frame form of the slope inequality}\label{section-hs-frame-inequality}
+
+\begin{situation}\label{hs-frame-situation}
+Let $K$ be a totally complex number field. Let $W$ be a Hermitian space over $K$ and let
+$C\subset W$ be a Hermitian lattice with $KC=W$ (Definition~\ref{hs-hermitian-lattice}). Let $I$
+be a nonempty finite set. For $i\in I$ let $V_i$ be a nonzero Hermitian space over $K$ of
+dimension $d_i$, let $N_i\subset V_i$ be a Hermitian lattice with $KN_i=V_i$, let
+$B_i:V_i\to W$ be a $K$-linear map with $B_i(N_i)\subset C$, and let $h_i$ be a real number with
+$h(B_i)\leq h_i$ whenever $B_i\neq0$. Let $s$, $u$ and $H$ be real numbers with $u\geq0$,
+$H\geq0$ and
+\[
+ s\sum_{i\in I}d_i\leq\sum_{i\in I}d_i\big(\mu(N_i)-h_i\big),\qquad
+ \mu_{\max}(N_i)-h_i\leq s+u\quad(i\in I),\qquad
+ s-\mu_{\min}(C)\leq H .
+\]
+Let $v$ be an infinite place of $K$, and give the complex vector spaces $V_{i,v}$ and $W_v$
+arbitrary Hermitian inner products. Let $\ell\geq0$ be an integer, give
+$W_v\oplus\mathbf C^\ell$ the orthogonal sum of the inner product of $W_v$ and the standard one,
+and for $i\in I$ let $\tilde B_i:V_{i,v}\to W_v\oplus\mathbf C^\ell$ be a linear map whose
+component in $W_v$ is $B_{i,v}$. In the bounds below, $u\log(1+H/u)$ means $0$ when $u=0$.
+\end{situation}
+\leanref{Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.LatGeom}
+\leanref{Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.LatNum}
+
+\begin{theorem}\label{hs-frame-slope-inequality-sharp}
+In Situation~\ref{hs-frame-situation}, let $\delta$, $e$ and $\eta$ be real numbers with
+$0\leq\delta<1$, $0\leq e\leq1/4$ and $\eta\geq0$, and let $\gamma_i>0$ for $i\in I$. Suppose
+that $(1-\delta)(\dim W+\ell)\leq\dim W$ and that $(\tilde B_i,\gamma_i)_{i\in I}$ is an
+$(e,\eta)$-almost tight frame in $W_v\oplus\mathbf C^\ell$
+(Definition~\ref{hs-almost-tight-frame}). Then
+\[
+ \mu(C)\geq s-\frac1{1-\delta}\Big(4u\log\Big(1+\frac Hu\Big)+(\eta+4\sqrt e)H\Big).
+\]
+\end{theorem}
+\leanref{Formalism/HarderNarasimhan/ShiftInvariance.lean}{Formalism.HN.theoremFSharp}
+\leanref{Formalism/HarderNarasimhan/HarderNarasimhanProofs/TheoremFSharp.lean}{Formalism.HN.frame_theorem_sharp}
+
+\begin{proof}
+Put $R=\sum_id_i>0$, $n=\dim W$ and $E=W_v\oplus\mathbf C^\ell$, and let $P:E\to W_v$ be the
+projection, so that $P\tilde B_i=B_{i,v}$. For $\tau\geq0$ put
+\[
+ \varepsilon(\tau)=\frac u{u+\tau},\qquad
+ w(\tau)=\frac1{1-\delta}\big(\eta+4\varepsilon(\tau)+4\sqrt e\big),
+\]
+with $\varepsilon(0)=0$ if $u=0$, and, with the notation of Definition~\ref{hs-slopes},
+\[
+ N_i(\tau)=N_i^{\geq s-\tau+h_i},\qquad C(\tau)=C^{\geq s-\tau},\qquad
+ M(\tau)=\sum_{i\in I}B_i\big(N_i(\tau)\big)\subset C.
+\]
+
+\emph{Step 0: $n\geq1$.} If $n=0$, then $(1-\delta)\dim E\leq0$ gives $E=0$, so every
+$\tilde B_i=0$ and the first frame condition reads $R\leq eR$, which contradicts $e\leq1/4$.
+
+\emph{Step 1: $\sum_i(d_i-\operatorname{rk}N_i(\tau))\leq\varepsilon(\tau)R$.} Apply
+Lemma~\ref{hs-share} to the numbers $\mu_j(N_i)-h_i$ for $i\in I$ and $1\leq j\leq d_i$. By
+Proposition~\ref{hs-hn-polygon}(3) and the first condition of the situation, their sum is
+$\sum_id_i(\mu(N_i)-h_i)\geq sR$. By Proposition~\ref{hs-hn-polygon}(4) and the second
+condition, each is at most $\mu_{\max}(N_i)-h_i\leq s+u$. So at most $\varepsilon(\tau)R$ of them
+are less than $s-\tau$. For each $i$ the number of $j$ with $\mu_j(N_i)-h_i<s-\tau$ is
+$d_i-\operatorname{rk}N_i(\tau)$, by Proposition~\ref{hs-hn-polygon}(3).
+
+\emph{Step 2: $M(\tau)\subset C(\tau)$.} Let $i\in I$ with $B_i(N_i(\tau))\neq0$. Then
+$N_i(\tau)\neq0$ and $B_i\neq0$, so $\mu_{\min}(N_i(\tau))\geq s-\tau+h_i$ by
+Proposition~\ref{hs-hn-polygon}(2) and $h(B_i)\leq h_i$. Bost's inequality,
+Theorem~\ref{hs-bost-slope-inequality}(1), gives
+\[
+ \mu_{\min}\big(B_i(N_i(\tau))\big)\geq\mu_{\min}\big(N_i(\tau)\big)-h(B_i)\geq s-\tau .
+\]
+Since $B_i(N_i(\tau))\subset C$, Proposition~\ref{hs-hn-polygon}(2) gives
+$B_i(N_i(\tau))\subset C(\tau)$. Summing over $i$ gives $M(\tau)\subset C(\tau)$, so
+$\operatorname{rk}M(\tau)\leq\operatorname{rk}C(\tau)$.
+
+\emph{Step 3: $n-\operatorname{rk}M(\tau)\leq w(\tau)n$.} For each $i$ let
+$U_i=(KN_i(\tau))_v\subset V_{i,v}$, the complex span of the image of $N_i(\tau)$; its dimension
+is $\operatorname{rk}N_i(\tau)$. By Step~1,
+$\sum_i(\dim V_{i,v}-\dim U_i)\leq\varepsilon(\tau)R$. Lemma~\ref{hs-frame-complement}, applied
+to the almost tight frame $(\tilde B_i,\gamma_i)$ and the subspaces $U_i$, shows that
+$S=\sum_i\tilde B_i(U_i)$ satisfies
+\[
+ \dim S^\perp\leq\big(\eta+4\varepsilon(\tau)+4\sqrt e\big)(n+\ell).
+\]
+Now $P(S)=\sum_iB_{i,v}(U_i)=(KM(\tau))_v$ has dimension $\operatorname{rk}M(\tau)$, and the
+kernel of $P$ has dimension $\ell$, so $\dim S\leq\operatorname{rk}M(\tau)+\ell$. Hence
+\[
+ n-\operatorname{rk}M(\tau)\leq(n+\ell)-\dim S=\dim S^\perp
+ \leq\big(\eta+4\varepsilon(\tau)+4\sqrt e\big)\frac{n}{1-\delta}=w(\tau)n,
+\]
+using $(1-\delta)(n+\ell)\leq n$.
+
+\emph{Step 4: layer cake.} Let $x_j=\mu_j(C)$ for $1\leq j\leq n$. For $0\leq\tau\leq H$,
+Proposition~\ref{hs-hn-polygon}(3) and Steps~2 and~3 give
+\[
+ \#\{j:x_j<s-\tau\}=n-\operatorname{rk}C(\tau)\leq n-\operatorname{rk}M(\tau)\leq w(\tau)n .
+\]
+By Proposition~\ref{hs-hn-polygon}(4) and the third condition of the situation,
+$x_j\geq\mu_{\min}(C)\geq s-H$. Lemma~\ref{hs-layer-cake} with $a=s$ and
+Proposition~\ref{hs-hn-polygon}(3) give
+\[
+ \mu(C)=\frac1n\sum_jx_j\geq s-\int_0^H\min\big(1,w(\tau)\big)\,d\tau
+ \geq s-\int_0^Hw(\tau)\,d\tau .
+\]
+Finally $\int_0^H4u/(u+\tau)\,d\tau=4u\log(1+H/u)$ for $u>0$, and the integrand vanishes for
+$u=0$ and $\tau>0$, so
+$\int_0^Hw(\tau)\,d\tau=(1-\delta)^{-1}\big(4u\log(1+H/u)+(\eta+4\sqrt e)H\big)$.
+\end{proof}
+
+\begin{corollary}\label{hs-frame-slope-inequality}
+In Situation~\ref{hs-frame-situation}, let $\delta$, $e$ and $\eta$ be real numbers with
+$0\leq\delta<1$, $0\leq e\leq1/4$ and $\eta\geq0$, and let $\gamma_i>0$ for $i\in I$. Suppose
+that $(1-\delta)(\dim W+\ell)\leq\dim W$ and that $(\tilde B_i,\gamma_i)_{i\in I}$ is an
+$(e,\eta)$-almost tight frame in $W_v\oplus\mathbf C^\ell$
+(Definition~\ref{hs-almost-tight-frame}). Then
+\[
+ \mu(C)\geq s-\log|I|-\frac1{1-\delta}\Big(4u\log\Big(1+\frac Hu\Big)+(\eta+4\sqrt e)H\Big).
+\]
+\end{corollary}
+\leanref{Formalism/HarderNarasimhan/ShiftInvariance.lean}{Formalism.HN.theoremF}
+
+\begin{proof}
+Since $I$ is nonempty, $\log|I|\geq0$, and the bound follows from
+Theorem~\ref{hs-frame-slope-inequality-sharp}.
+\end{proof}
+
+\begin{remark}\label{hs-comparison-with-bost}
+We compare Theorem~\ref{hs-frame-slope-inequality-sharp} with Bost's inequality,
+Theorem~\ref{hs-bost-slope-inequality}.
+
+\emph{What is the same.} The lattices, slopes and heights are Bost's, divided by the number $r$
+of infinite places (Remark~\ref{hs-normalization}). The only arithmetic input of the proof is
+part~(1) of Bost's inequality. It is applied to one map $B_i$ at a time, and to the steps
+$N_i^{\geq\theta}$ of the Harder--Narasimhan filtrations. The rest of the proof is linear
+algebra at the place $v$ and counting.
+
+\emph{What Bost's inequality gives by itself.} If the lattices $B_i(N_i)$ together span $W$,
+put $\theta=\min_i(\mu_{\min}(N_i)-h_i)$. Part~(1) of Bost's inequality and
+Proposition~\ref{hs-hn-polygon}(2) put every $B_i(N_i)$ in $C^{\geq\theta}$, so
+$C^{\geq\theta}=C$ and
+\[
+ \mu(C)\geq\mu_{\min}(C)\geq\min_{i\in I}\big(\mu_{\min}(N_i)-h_i\big).
+\]
+For one map this cannot be improved in general. Let $N=N'\oplus N''$ be an orthogonal sum in
+which $N''$ is semistable, that is $\mu_{\max}(N'')=\mu(N'')$, and $\mu(N'')\leq\mu_{\min}(N')$.
+The orthogonal projection of $N$ onto $N''$ has height $0$, and its image $N''$ has slope
+$\mu(N'')=\mu_{\min}(N)$, while $\mu(N)$ may be much larger.
+
+\emph{What is new.} For many maps, Theorem~\ref{hs-frame-slope-inequality-sharp} replaces
+$\min_i(\mu_{\min}(N_i)-h_i)$ by the rank-weighted mean $s$ of the numbers $\mu(N_i)-h_i$,
+which may be much larger. The hypothesis that allows this is the almost tight frame at the
+single place $v$. By Lemma~\ref{hs-frame-complement}, subspaces of the $V_{i,v}$ of small total
+codimension have images filling all but a small part of $W_v$. By Lemma~\ref{hs-share}, the steps
+of the Harder--Narasimhan filtrations of the $N_i$ above a threshold carry most of the rank. So
+these steps map onto most of $C$, and the bulk of the slopes of the $N_i$ controls the bulk of
+the slopes of $C$. The frame condition involves only the complex linear maps $B_{i,v}$, with
+arbitrary inner products and the extra space $\mathbf C^\ell$; the metrics of the lattices enter
+only through the heights $h_i$. Take $s$ equal to the rank-weighted mean of the numbers
+$\mu(N_i)-h_i$. Through the duality $\mu(A^\vee)=-\mu(A)$ \cite[\S1.3]{Bos20} and the
+transposes $B_i^{\mathrm t}:C^\vee\to N_i^\vee$, which have the same heights, the theorem then
+bounds $\mu(C^\vee)$ above by the rank-weighted mean of the numbers $\mu(N_i^\vee)+h_i$, plus the
+losses. This is a counterpart for many maps of Bost's bound
+$\mu(A)\leq\mu_{\max}(B)+h(\varphi)$ for an injective map, with the maximal slope of the target
+replaced by a mean of the slopes of the targets.
+
+\emph{The losses.} There are four.
+\begin{enumerate}
+\item The factor $(1-\delta)^{-1}$: the frame lives in $W_v\oplus\mathbf C^\ell$, and the part of
+  it in $\mathbf C^\ell$ is lost. One may take $\delta=0$ when $\ell=0$.
+\item The term $(\eta+4\sqrt e)H$: the defects of the frame, $\eta$ for $Q$ not being a scalar
+  and $e$ for the maps $\gamma_i^{1/2}\tilde B_i$ not being isometric embeddings
+  (Remark~\ref{hs-tight-frame-meaning}), each multiplied by the depth $H$ of the slopes of $C$
+  below $s$.
+\item The term $4u\log(1+H/u)$: the spread $u$ of the slopes $\mu_{\max}(N_i)-h_i$ above their
+  mean. It comes from Lemma~\ref{hs-share}, which bounds the share of the slopes below
+  $s-\tau$ by $u/(u+\tau)$, integrated over $0\leq\tau\leq H$. It vanishes when $u=0$, that
+  is, when every $N_i$ is semistable ($\mu_{\max}(N_i)=\mu(N_i)$) with $\mu(N_i)-h_i=s$.
+\item Corollary~\ref{hs-frame-slope-inequality} subtracts $\log|I|$ as well. This costs nothing
+  in the proof, since $\log|I|\geq0$; it is the form used in Definition~\ref{hs-frame-bound},
+  where $|I|$ is the number of words.
+\end{enumerate}
+In particular, for an exact tight frame ($e=\eta=0$) with $\ell=\delta=0$ and $u=0$, the theorem
+gives $\mu(C)\geq s$ with no loss.
+\end{remark}
+
+\section{The frame bound for the glued lattice}\label{section-hs-glued}
+
+\begin{corollary}\label{hs-frame-from-near-orthogonality}
+In Situation~\ref{hs-frame-situation}, let $\delta$ be a real number with $0\leq\delta<1$ and
+$(1-\delta)(\dim W+\ell)\leq\dim W$, and let $\gamma_i>0$ for $i\in I$. For $i\in I$ let $F_i$ be a
+complex inner product space of finite dimension $d_i^{\mathrm f}$, let
+$\nu_i:V_{i,v}\to F_i$ be an isometric embedding and let
+$\hat B_i:F_i\to W_v\oplus\mathbf C^\ell$ be a linear map with $\tilde B_i=\hat B_i\nu_i$. Let
+$D^*,\sigma,\eta_0,\eta_1,e_0,\delta_e$ be real numbers with
+\[
+ D^*>0,\quad 0<\sigma\leq\tfrac1{20},\quad \frac{D^*}{\sigma}\leq\sum_id_i^{\mathrm f},\quad
+ -1\leq\eta_0\leq\tfrac\sigma2,\quad \eta_1\leq\tfrac\sigma2,\quad e_0\geq0,\quad
+ \sqrt{e_0}\leq\tfrac\sigma2,\quad 0\leq\delta_e\leq\tfrac14,
+\]
+and $\sum_i(d_i^{\mathrm f}-d_i)\leq\delta_e\sum_id_i^{\mathrm f}$. Suppose that
+$(\hat B_i,\gamma_i)_{i\in I}$ is $(D^*,\eta_0,\eta_1,e_0)$-nearly orthogonal in
+$W_v\oplus\mathbf C^\ell$ (Definition~\ref{hs-near-orthogonal}). Then, with
+$\eta=5\sigma+3\sqrt{\delta_e}$,
+\[
+ \mu(C)\geq s-\frac1{1-\delta}\Big(4u\log\Big(1+\frac Hu\Big)+\big(\eta+4\sqrt{2e_0}\big)H\Big),
+\]
+and, in particular,
+\[
+ \mu(C)\geq s-\log|I|-\frac1{1-\delta}\Big(4u\log\Big(1+\frac Hu\Big)+\big(\eta+4\sqrt{2e_0}\big)H\Big).
+\]
+\end{corollary}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/JointDModelAppliesUnitLattice.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.ramification_condition_holds}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/JointDModelAppliesUnitLattice.lean}{Formalism.LFunctionChainParameters.MatrixLatticeEstimates.joint_a_ramified_holds}
+
+\begin{proof}
+By Lemma~\ref{hs-near-orthogonal-frame}, applied to the spaces $F_i$ of dimension
+$d_i^{\mathrm f}$ and the embeddings $\nu_i$ of the spaces $V_{i,v}$ of dimension $d_i$, the family
+$(\tilde B_i,\gamma_i)$ is a $(2e_0,\eta)$-almost tight frame in $W_v\oplus\mathbf C^\ell$ and
+$2e_0\leq1/4$. Theorem~\ref{hs-frame-slope-inequality-sharp} and
+Corollary~\ref{hs-frame-slope-inequality}, with $e=2e_0$, give the two bounds.
+\end{proof}
+
+\begin{definition}\label{hs-frame-realisation}
+Let $D$ be a definite-side datum (Definition~\ref{th-definite-datum}), with coefficient field
+$L$, set of words $\mathcal W$, row deficit $\delta$ and real number $D^*>0$. Its division
+datum consists of a Hermitian space $V_{RR}$ over $L$ with an $\mathcal O_L$-submodule
+$RR\subset V_{RR}$, the glued lattice, and, for each word $u$, a Hermitian space $V_u$ over $L$,
+an $\mathcal O_L$-submodule $N_u\subset V_u$, an $L$-linear map $B_u:V_u\to V_{RR}^\vee$ and a
+real number $h_u$. Put $CC=RR^\vee=\{f\in V_{RR}^\vee:f(RR)\subset\mathcal O_L\}$. For each word
+$u$ let $M_u$ be the finite-dimensional complex vector space of the member of $D$ at $u$
+(Definition~\ref{th-definite-datum}(3)). Let $\sigma$, $\delta_e$ and $e_B$ be real numbers. Then $D$ is
+\emph{frame-realised with parameters $(\sigma,\delta_e,e_B)$} if there are an infinite place $v$
+of $L$, Hermitian inner products on the complex vector spaces $V_{u,v}$ and $(V_{RR}^\vee)_v$, an
+integer $\ell\geq0$, real numbers $\gamma_u>0$ ($u\in\mathcal W$) and $\eta_0,\eta_1,e_0$, and for
+each word $u$ a complex inner product space $F_u$ of dimension $\dim M_u$, an isometric
+embedding $\nu_u:V_{u,v}\to F_u$ and a linear map
+$\hat B_u:F_u\to(V_{RR}^\vee)_v\oplus\mathbf C^\ell$, such that the following hold.
+\begin{enumerate}
+\item $CC$ is finitely generated and spans $V_{RR}^\vee$; each $N_u$ is finitely generated
+  and spans $V_u$; $\sum_u\dim V_u>0$; and for each word $u$, $B_u(N_u)\subset CC$, and $h(B_u)\leq h_u$ if
+  $B_u\neq0$.
+\item $0\leq\delta<1$ and $(1-\delta)(\dim V_{RR}+\ell)\leq\dim V_{RR}$.
+\item For each word $u$, the component of $\hat B_u\nu_u$ in $(V_{RR}^\vee)_v$ is $B_{u,v}$.
+\item $-1\leq\eta_0\leq\sigma/2$, $\eta_1\leq\sigma/2$, $e_0\geq0$, $\sqrt{e_0}\leq\sigma/2$ and
+  $2e_0\leq e_B$.
+\item $\sum_u(\dim M_u-\dim V_u)\leq\delta_e\sum_u\dim M_u$.
+\item $(\hat B_u,\gamma_u)_{u\in\mathcal W}$ is $(D^*,\eta_0,\eta_1,e_0)$-nearly orthogonal in
+  $(V_{RR}^\vee)_v\oplus\mathbf C^\ell$ (Definition~\ref{hs-near-orthogonal}).
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/SharpRestriction/GlobalSchurBounds/TopDensityNGeSixteen.lean}{Formalism.MainNotions.Lnk.FrameReal_at}
+
+\begin{definition}\label{hs-frame-bound}
+Let $D$ be a definite-side datum (Definition~\ref{th-definite-datum}), with set of words
+$\mathcal W$, row deficit $\delta$, and division datum $RR$, $N_u$, $B_u$, $h_u$ as in
+Definition~\ref{hs-frame-realisation}; put $CC=RR^\vee$. Suppose that $CC$ and the $N_u$ are
+nonzero and finitely generated, so that their slopes are defined (Definition~\ref{hs-slopes}).
+Let $d_u=\operatorname{rk}N_u$ be the rank of $N_u$, and put
+\[
+ s_D=\frac{\sum_ud_u\big(\mu(N_u)-h_u\big)}{\sum_ud_u},
+ \qquad
+ u_D=\max_{u\in\mathcal W}\big(\mu_{\max}(N_u)-h_u\big)-s_D .
+\]
+Let $\eta_B$ and $e_B$ be real numbers. Then $D$ satisfies the \emph{frame bound with parameters
+$(\eta_B,e_B)$} if there are real numbers $\eta$ and $e$ with $0\leq\eta\leq\eta_B$ and
+$0\leq e\leq e_B$ such that for every $H>0$ with $s_D-\mu_{\min}(CC)\leq H$,
+\[
+ \mu(CC)\geq s_D-\log|\mathcal W|-\frac1{1-\delta}
+ \Big(4u_D\log\Big(1+\frac H{u_D}\Big)+(\eta+4\sqrt e)H\Big),
+\]
+where $u_D\log(1+H/u_D)$ means $0$ when $u_D=0$.
+\end{definition}
+\leanref{Formalism/SharpRestriction/GlobalSchurBounds/QuadraticLogDerivCongr.lean}{Formalism.MainNotions.Lnk.Frame_at}
+\leanref{Formalism/LocalRingCardinality/DataArith.lean}{Formalism.BasicNotions.sFrame}
+\leanref{Formalism/LocalRingCardinality/DataArith.lean}{Formalism.BasicNotions.uFrame}
+
+\begin{proposition}\label{hs-frame-at-glued-lattice}
+Let $D$ be a definite-side datum (Definition~\ref{th-definite-datum}), with ranks $m$ and $f$,
+set of words $\mathcal W$, real number $D^*>0$, spaces $M_u$ and division datum as in
+Definition~\ref{hs-frame-realisation}; put $CC=RR^\vee$. Let size data for $D$ be given
+(Definition~\ref{pd-size-data}), with scale $x>1$, exponent $\varepsilon$ and constant
+$C_\Gamma>0$, and put $\Gamma=\exp(C_\Gamma m^5fx^{\varepsilon})$.
+Let $C_0$, $C_H$, $\sigma$, $\delta_e$ and $e_B$ be real numbers with $C_0\geq1$,
+$\sigma=x^{-C_H}\leq1/20$ and $0\leq\delta_e\leq1/4$. Suppose that:
+\begin{enumerate}
+\item $D$ is frame-realised with parameters $(\sigma,\delta_e,e_B)$
+  (Definition~\ref{hs-frame-realisation});
+\item $C_0^{-1}\leq\dim M_u\,\Gamma^2/D^*\leq C_0$ for every word $u$;
+\item $C_0\Gamma^2x^{C_H}\leq|\mathcal W|$;
+\item each $N_u$ is finitely generated and spans $V_u$;
+\item for each word $u$, the rank $d_u$ of $N_u$ is positive and $\mu(N_u)\leq\mu_{\max}(N_u)$; and
+  $\mu_{\min}(CC)=-\mu_{\max}(RR)$.
+\end{enumerate}
+Then $D$ satisfies the frame bound with parameters $(5\sigma+3\sqrt{\delta_e},e_B)$
+(Definition~\ref{hs-frame-bound}).
+\end{proposition}
+\leanref{Formalism/SharpRestriction/GlobalSchurBounds/TopDensityNGeSixteen.lean}{Formalism.MainNotions.Lnk.frame_at_of}
+
+\begin{proof}
+Take $v$, the inner products, $\ell$, $\gamma_u$, $\eta_0,\eta_1,e_0$, $F_u$, $\nu_u$ and
+$\hat B_u$ as in Definition~\ref{hs-frame-realisation}, and put $\eta=5\sigma+3\sqrt{\delta_e}$
+and $e=2e_0$. Then $0\leq\eta\leq5\sigma+3\sqrt{\delta_e}$ and $0\leq e\leq e_B$. Note that
+$\sigma>0$ because $x>1$, and that $\mathcal W$ is nonempty because it contains the base word.
+Let $H>0$ with $s_D-\mu_{\min}(CC)\leq H$.
+
+First, $D^*/\sigma\leq\sum_u\dim M_u$. Indeed, hypothesis~(3) and $\sigma=x^{-C_H}$ give
+$C_0\Gamma^2/\sigma\leq|\mathcal W|$, and hypothesis~(2) gives
+$\dim M_u\geq D^*/(C_0\Gamma^2)$ for each $u$, so
+\[
+ \sum_u\dim M_u\geq|\mathcal W|\frac{D^*}{C_0\Gamma^2}\geq\frac{D^*}{\sigma}.
+\]
+
+The lattice $CC$ is nonzero, so the frame bound makes sense. Indeed, if $V_{RR}=0$, then
+Definition~\ref{hs-frame-realisation}(2) forces $\ell=0$, so every $\hat B_u$ is $0$, and
+condition (2) of near orthogonality gives $\dim M_u\leq e_0\dim M_u$ for every $u$; this is
+impossible, since $e_0\leq\sigma^2/4<1$ and $\sum_u\dim M_u\geq D^*/\sigma>0$.
+
+Next, the data form an instance of Situation~\ref{hs-frame-situation} with $K=L$,
+$W=V_{RR}^\vee$, $C=CC$, $I=\mathcal W$, $\tilde B_u=\hat B_u\nu_u$, the given $H$, and $s_D$ and
+$u_D$ in place of $s$ and $u$. By hypothesis~(4), $d_u=\operatorname{rk}N_u=\dim V_u$, so the first
+numerical condition of the situation holds with equality, and each $V_u$ is nonzero by
+hypothesis~(5). The second holds by the definition of $u_D$, and the third by the choice of $H$.
+The weights $d_u$ are positive and $\mu(N_u)\leq\mu_{\max}(N_u)$ by
+hypothesis~(5), so $s_D\leq\max_u(\mu_{\max}(N_u)-h_u)$, that is, $u_D\geq0$. The other
+conditions of the situation are Definition~\ref{hs-frame-realisation}(1) and~(3).
+Corollary~\ref{hs-frame-from-near-orthogonality}, whose remaining hypotheses are
+Definition~\ref{hs-frame-realisation}(2) and (4)--(6), with $\delta$ the row deficit, and the bound
+$D^*/\sigma\leq\sum_u\dim M_u$, gives
+\[
+ \mu(CC)\geq s_D-\log|\mathcal W|-\frac1{1-\delta}
+ \Big(4u_D\log\Big(1+\frac H{u_D}\Big)+\big(\eta+4\sqrt{2e_0}\big)H\Big),
+\]
+which is the frame bound with these $\eta$ and $e$.
+\end{proof}

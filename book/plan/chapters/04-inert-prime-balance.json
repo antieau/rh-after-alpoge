@@ -1,0 +1,331 @@
+{
+  "id": "inert-prime-balance",
+  "title": "The comparison inequality and the inert-prime balance",
+  "state": "drafted",
+  "summary": "This descendant of Stepanov's method compares two sizes of one auxiliary lattice. An exact identity, proved by orthogonality of characters of the Galois group of the host field, writes $\\mathrm{ASK}-\\mathrm{MAIN}$, where $\\mathrm{ASK}=\\sum_{p\\ \\mathrm{inert}}2\\log p\\sum_{i}(a/p^{i}-w)_+$ and $\\mathrm{MAIN}=a(\\log a-1-\\gamma+\\cdots)$, as a combination of the corrected Chebyshev sums $g_\\psi$ of host characters at scales $a/w$. The comparison inequality $\\mathrm{ASK}\\le\\mathrm{Main}+\\mathrm{Err}$ holds for abstract numerical data (slopes, heights, divisibility, sizes) whose hypotheses later chapters verify: the slope of the dual of the glued lattice is bounded below by the frame slope inequality and above by the division inequality, and cancels. Averaging the identity over Frobenius classes, with the host conditions of Chapter 3, gives the window bound $G_K(x)\\le x^{1/2+O(\\varepsilon)}$ required in Chapter 2.",
+  "timeline": [
+    1,
+    4,
+    5,
+    6
+  ],
+  "progress": "Completion pass done: rule 13 names (Galois datum, top classes, thick places, exponent epsilon, d_u); step-by-step proofs of the error estimate, the window bound on scales, condition (K3) and the Lipschitz bound for G.",
+  "statements": [
+    {
+      "lean": "Formalism.D5.PhiSet",
+      "file": "Formalism/ThickAverageLoss/PartnersToFactorsAt.lean",
+      "line": 29,
+      "role": "new",
+      "statement": "For a finite abelian group $H$, the host group $\\Gamma_H=(\\mathbf Z/2)^2\\times H$ with elements $(e_1,e_2,h)$, its split subgroup $\\Psi_H=\\{e_2=0\\}$ of index $2$, $\\sigma=(0,1,0)$, $c=(1,1,0)$, the bijection $\\pi_t(g)=g+c+(0,t)$ from $\\Gamma_H\\smallsetminus\\Psi_H$ onto $\\Psi_H$, and the character $\\chi_C=(-1)^{e_2}$ with kernel $\\Psi_H$.",
+      "reference": "",
+      "label": "ib-host-group"
+    },
+    {
+      "lean": "Formalism.HC.HostAx.galE_mem_Psi_iff",
+      "file": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ConjEMemHostFIff.lean",
+      "line": 209,
+      "role": "new",
+      "statement": "Remark: for a host field, $\\operatorname{Gal}(E/\\mathbf Q)=\\Gamma_A$ with $\\Psi_A=\\operatorname{Gal}(E/\\mathbf Q(\\sqrt{-d}))$, $c$ complex conjugation, $\\sigma=\\iota_d$ generating inertia at $d$, and $\\chi_C$ the quadratic character of $\\mathbf Q(\\sqrt{-d})$; inert primes are those inert in $\\mathbf Q(\\sqrt{-d})$.",
+      "reference": "",
+      "label": "ib-host-group-fields"
+    },
+    {
+      "lean": "Deduction.CH.HostFactsS",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "Arithmetic data for $\\Gamma_H$: integers $q_1,d$, a finite set $S$, inertia subgroups $I_p$ and Frobenius elements $\\mathrm{Fr}_p$ with $d$ prime, $2,q_1\\in S\\not\\ni d$, $I_p=0$ for $p\\notin S\\cup\\{d\\}$, $I_p,\\mathrm{Fr}_p\\subset\\Psi_H$ for $p\\in S$, and $I_d=\\{0,\\sigma\\}$. A prime is inert if $p\\notin\\{2,q_1,d\\}$ and $\\mathrm{Fr}_p\\notin\\Psi_H$; $\\psi(n)$ is the product over $p\\mid n$ of the means of $\\psi$ over $v_p(n)\\mathrm{Fr}_p+I_p$.",
+      "reference": "",
+      "label": "ib-arithmetic-data"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.characterSumData.GPsi",
+      "file": "Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean",
+      "line": 68,
+      "role": "new",
+      "statement": "The corrected Chebyshev sum of a host character: $g_1=G$ and $g_\\psi(y)=\\sum_{n\\leq y}\\Lambda(n)\\psi(n)(y/n-1)+y\\,\\ell(\\psi)$ for $\\psi\\neq1$, for any function $\\ell$ on characters.",
+      "reference": "",
+      "label": "ib-host-chebyshev"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.characterSumData.ASK",
+      "file": "Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean",
+      "line": 84,
+      "role": "new",
+      "statement": "$\\mathrm{ASK}_N(a,t,w)=\\sum_{p\\leq N\\text{ inert}}2\\log p\\sum_{i\\leq N,\\,i\\mathrm{Fr}_p\\notin\\Psi}(a/p^i-w(\\pi_t(i\\mathrm{Fr}_p)))_++\\log d\\sum_{i\\leq N}\\sum_{g\\notin\\Psi,\\,g-i\\mathrm{Fr}_d\\in I_d}(a/d^i-w(\\pi_t g))_+$; $\\mathrm{MAIN}(a,w)=a(\\log a-1-\\gamma+\\ell(\\chi_C)-|\\Psi|^{-1}\\sum_{\\rho\\in\\Psi}\\log w(\\rho))$; $\\mathrm{De}(a,t,w)=|\\Psi|^{-1}\\sum_{g\\notin\\Psi}\\sum_\\psi\\overline{\\psi(g)}w(\\pi_tg)g_\\psi(a/w(\\pi_tg))$.",
+      "reference": "",
+      "label": "ib-inert-sums"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.characterSumData.orthogonality_ramified",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean",
+      "line": 311,
+      "role": "new",
+      "statement": "$|\\Psi_H|^{-1}\\sum_\\psi\\overline{\\psi(g)}\\psi(p^i)$ equals $2/|I_p|$ if $g-i\\mathrm{Fr}_p\\in I_p$ and $0$ otherwise.",
+      "reference": "",
+      "label": "ib-prime-power-orthogonality"
+    },
+    {
+      "lean": "Deduction.CharacterBalance.askExp",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean",
+      "line": 122,
+      "role": "new",
+      "statement": "If $w>0$ and $a/w\\leq N$ on $\\Psi$, then $\\mathrm{ASK}_N(a,t,w)=|\\Psi|^{-1}\\sum_{g\\notin\\Psi}\\sum_\\psi\\overline{\\psi(g)}\\sum_{n\\leq N}\\Lambda(n)\\psi(n)(a/n-w(\\pi_tg))_+$.",
+      "reference": "",
+      "label": "ib-inert-expansion"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.characterSumData.inner_eq",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean",
+      "line": 655,
+      "role": "new",
+      "statement": "For $a,W>0$ and $a/W\\leq N$: $\\sum_{n\\leq N}\\Lambda(n)\\psi(n)(a/n-W)_+=Wg_\\psi(a/W)+R_\\psi$ with $R_1=a\\log a-a\\log W-(1+\\gamma)a$ and $R_\\psi=-a\\ell(\\psi)$ otherwise.",
+      "reference": "",
+      "label": "ib-truncation"
+    },
+    {
+      "lean": "Deduction.ch_balance",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean",
+      "line": 200,
+      "role": "new",
+      "statement": "Let $H$ have arithmetic data, $\\ell$ any function on characters, $a>0$, $t\\in H$, $w$ positive on $\\Psi_H$, and $N\\geq a/w(\\rho)$ for $\\rho\\in\\Psi_H$. Then $\\mathrm{ASK}_N(a,t,w)-\\mathrm{MAIN}(a,w)=\\mathrm{De}(a,t,w)$, an exact identity proved by orthogonality of characters.",
+      "reference": "",
+      "label": "ib-balance-identity"
+    },
+    {
+      "lean": "Formalism.RankGapBounds.WeightedMeanData.Data",
+      "file": "Formalism/RankGapBounds/MeanBoundSecondForm.lean",
+      "line": 37,
+      "role": "new",
+      "statement": "Comparison data: parameters, constants, exponents $a_\\tau$, weights $w_{u_0,j,\\rho}$, for each word $u$ a weight $r_u$, size $P_u$, slopes $\\mu_N,\\mu_N^+,\\mu_M,\\mu_M^+$, height $h_u$ and exponents $E_{u,j}$, and for each base point $u_0$ slopes $\\mu_C,\\mu_C^-$, shift $F$, gain $\\mathrm{Ga}$, quantity $\\mathrm{ASK}$, loss $\\kappa$, frame height $\\Delta$ and frame parameters.",
+      "reference": "",
+      "label": "ib-comparison-data"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.WeightedSlopeBounds.ErrX5at",
+      "file": "Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean",
+      "line": 45,
+      "role": "new",
+      "statement": "The derived quantities of comparison data: the weighted mean slope $s(u_0)$, $s^+(u_0)$, $\\mathcal L(u_0)$, $\\mathrm{Main}(u_0)=\\sum_j\\sum_\\tau a_\\tau(\\log a_\\tau-1-\\gamma_0+\\ell_0-f^{-1}\\sum_\\rho\\log w_{u_0,j,\\rho})$, the losses and the explicit error $\\mathrm{Err}(u_0)$.",
+      "reference": "",
+      "label": "ib-comparison-quantities"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.LChain.SizeData₂",
+      "file": "Formalism/SizeWindowBrackets/SChain.lean",
+      "line": 17,
+      "role": "new",
+      "statement": "The eleven comparison hypotheses (H1)-(H11): positivity, the division inequality, exponents, heights, sizes, slopes of $M$ and $N$, losses, the frame slope inequality, the frame height and the frame parameters.",
+      "reference": "",
+      "label": "ib-comparison-hypotheses"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.WeightedSlopeBounds.s_lower5",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean",
+      "line": 50,
+      "role": "new",
+      "statement": "Under (H1)-(H3), (H5)-(H7): $\\mathrm{Ga}+\\mu_C-K_5-\\langle\\mathrm{Lo}\\rangle\\leq s$.",
+      "reference": "",
+      "label": "ib-slope-of-n-lower"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.WeightedSlopeBounds.u_function_le_mean",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean",
+      "line": 81,
+      "role": "new",
+      "statement": "Under (H1), (H3)-(H7): $0\\leq s^+-s\\leq K_3+\\langle\\mathrm{Lo}\\rangle$.",
+      "reference": "",
+      "label": "ib-spread"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.WeightedSlopeBounds.each_unit_bound_statement",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean",
+      "line": 175,
+      "role": "new",
+      "statement": "If comparison data satisfy (H1)-(H11), then $\\mathrm{ASK}(u_0)\\leq\\mathrm{Main}(u_0)+\\mathrm{Err}(u_0)$ for every base point $u_0$. The slope of the dual of the glued lattice is bounded below by the frame inequality and above by the division inequality, and cancels.",
+      "reference": "",
+      "label": "ib-comparison-inequality"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.WeightedSlopeBounds.each_unit_bound_statement",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean",
+      "line": 175,
+      "role": "new",
+      "statement": "Remark: which hypotheses measure the glued lattice from below (frame inequality, gain) and from above (division inequality).",
+      "reference": "",
+      "label": "ib-two-measurements"
+    },
+    {
+      "lean": "Deduction.CH.SizesA",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean",
+      "line": 42,
+      "role": "new",
+      "statement": "Size windows (W1)-(W6) for weights near $b$ on thick classes and small elsewhere, thin scales $|g_\\psi(y)|\\leq\\theta y$ for $y\\geq X'/3$, cost windows and sizes; and the error bracket $\\beta$.",
+      "reference": "",
+      "label": "ib-size-windows"
+    },
+    {
+      "lean": "Deduction.CH.CharsA",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean",
+      "line": 56,
+      "role": "new",
+      "statement": "Kept characters (K1)-(K5), the weighted sum $g^{\\mathcal K}_c$, the remainder $\\Sigma^{\\mathcal K}$ and the gap $\\sum_{t,j}(\\mathrm{ASK}_N-\\operatorname{Re}\\mathrm{MAIN})$ at a class $u_0$.",
+      "reference": "",
+      "label": "ib-kept-characters"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.ThickSetMeanBounds.lipschitz_weight_all",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean",
+      "line": 957,
+      "role": "new",
+      "statement": "$|wg_\\psi(A/w)-w'g_\\psi(A/w')|\\leq3A|w-w'|/\\min(w,w')$, by Chebyshev's bound.",
+      "reference": "",
+      "label": "ib-weight-lipschitz"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.ThickSetMeanBounds.derivative_integral_all",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean",
+      "line": 966,
+      "role": "new",
+      "statement": "There is $C_d$ with $|g_\\psi(y)-g_\\psi(z)|\\leq|y-z|(\\log\\max(y,z)+C_d+|\\ell(\\psi)|)$ for $\\psi\\neq1$ and $|G(y)-G(z)|\\leq C_d|y-z|$, for $y,z\\geq1$, by Mertens' estimate.",
+      "reference": "",
+      "label": "ib-chebyshev-lipschitz"
+    },
+    {
+      "lean": "Deduction.CharacterBalanceMoves.th_le",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean",
+      "line": 75,
+      "role": "new",
+      "statement": "Replacing the weights by $b$ on thick classes and dropping thin classes changes the character side by at most $2|\\Psi|(3(x+1)(\\eta+1)+(x+1)b\\theta)$.",
+      "reference": "",
+      "label": "ib-thick-replacement"
+    },
+    {
+      "lean": "Deduction.CharacterBalanceMoves.one_char",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean",
+      "line": 202,
+      "role": "new",
+      "statement": "Summed over Frobenius classes, each character trivial on $A_0$ contributes at least $|T|(v(\\psi)-R)$, with $v(\\psi)=w_c(\\psi)\\operatorname{Re}g_\\psi(x)$ for kept $\\psi$ and $-|g_\\psi(x)|$ otherwise.",
+      "reference": "",
+      "label": "ib-kept-character-sum"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.ThickSetMeanBounds.proposition_size_bound",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean",
+      "line": 507,
+      "role": "new",
+      "statement": "Under the size conditions, $n_Tmb\\frac{n_2}{2n}(Z-4x^{1/2+\\varepsilon})\\leq x^{C\\varepsilon}\\beta+2n_Tmb/x$ implies $Z\\leq x^{1/2+(C+3)\\varepsilon}$.",
+      "reference": "",
+      "label": "ib-size-arithmetic"
+    },
+    {
+      "lean": "Deduction.ch_core",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean",
+      "line": 343,
+      "role": "new",
+      "statement": "Let $C\\geq0$, $\\varepsilon>0$, $|c|\\leq1$, $M,B_\\ell,C_E$. There is $x_1$ such that for $x\\geq x_1$, arithmetic data on $\\Gamma_H$, a subgroup $A_0$ and a set $\\mathcal K$ of characters: if $b>0$, $a_E\\geq0$, $k>0$, $m\\leq x^{1/2+\\varepsilon/2}$, $xm\\leq k$, $T_2\\subset A_0$, the size windows hold, $\\mathcal K$ is kept, and the gap at every $u_0\\in A_0$ is at most $x^{C\\varepsilon}\\beta$, then $g^{\\mathcal K}_c(x)\\leq x^{1/2+(C+3)\\varepsilon}+\\Sigma^{\\mathcal K}(x)$.",
+      "reference": "",
+      "label": "ib-core-window-bound"
+    },
+    {
+      "lean": "Deduction.ch_core",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean",
+      "line": 343,
+      "role": "new",
+      "statement": "Remark: averaged over $A_0$ and the Frobenius classes, the character side of the balance identity is approximately $|T|mb\\delta_2/2\\,(g^{\\mathcal K}_c(x)\\pm\\Sigma^{\\mathcal K}(x))$.",
+      "reference": "",
+      "label": "ib-window-bound-shape"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.hostFactsS",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/hostFactsS.lean",
+      "line": 127,
+      "role": "new",
+      "statement": "The Frobenius and inertia data of a host field, from its Artin map, are arithmetic data for $\\Gamma_A$ with $q_1=q$ and $S$ the primes dividing $Q_Sq$.",
+      "reference": "",
+      "label": "ib-host-arithmetic-data"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.prim_read",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/PrimRead.lean",
+      "line": 48,
+      "role": "new",
+      "statement": "For $\\ell$ compatible with the host ($\\ell(\\psi)=\\frac{L'}{L}(1,\\chi)$ when $\\chi$ has the values of $\\psi$): $\\ell(\\psi)=\\frac{L'}{L}(1,\\chi_\\psi)$ and $g_\\psi=g_{\\chi_\\psi}$ for the primitive Dirichlet character $\\chi_\\psi$ of $\\psi$.",
+      "reference": "",
+      "label": "ib-host-character-values"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.gmA_eq",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/GmAEq.lean",
+      "line": 61,
+      "role": "new",
+      "statement": "Let $K$ be a level with integer $o$, $E$ a host field satisfying the host conditions for $K$ at some $(x,\\varepsilon,C)$, and $\\ell$ compatible with $E$. Let $\\mathcal K_E$ be the host characters $\\psi$ with $\\chi_\\psi\\in K$. Then $\\sum_{\\psi\\in\\mathcal K_E}w_c(\\psi)\\operatorname{Re}g_\\psi(y)=G_K(y)$ for all $y$, where $c=(3o+1)^{-1}$ and $w_c(\\psi)=1$ for $\\psi$ trivial on $\\{0\\}\\times A$; the weights agree with those of $G_K$, which are $1$ for the exceptional character.",
+      "reference": "",
+      "label": "ib-level-sum-host-characters"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.charsA",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/charsA.lean",
+      "line": 80,
+      "role": "new",
+      "statement": "Under the host conditions, $\\mathcal K_E$ is kept with constants $((3o+1)^{-1},4o,\\sum_{\\chi\\in K}|\\frac{L'}{L}(1,\\chi)|,C)$, and $\\Sigma^{\\mathcal K_E}(x)\\leq4ox^{1/2+\\varepsilon}$.",
+      "reference": "",
+      "label": "ib-host-kept-characters"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.LErr.ErrWindows",
+      "file": "Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean",
+      "line": 43,
+      "role": "new",
+      "statement": "Error windows: size conditions on the parameters and constants of comparison data with constants $(e_K,K_0)$.",
+      "reference": "",
+      "label": "ib-error-windows"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.LChain.errX5at_le",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/PChain.lean",
+      "line": 613,
+      "role": "new",
+      "statement": "Under the error windows and $x$ large, $\\mathrm{Err}(u_0)\\leq x^{(e_{\\mathrm{Div}}+e_{\\mathrm{Loss}}+3)\\varepsilon}(n_{\\mathcal T}a(1+m^2/k)+m(B_0+N_c))$.",
+      "reference": "",
+      "label": "ib-error-size"
+    },
+    {
+      "lean": "Deduction.ch_top",
+      "file": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChTop.lean",
+      "line": 37,
+      "role": "new",
+      "statement": "When comparison data are identified with the inert-prime sums and satisfy (H1)-(H11), the error windows and bounds on $B_0,N_c$, the gap at each $\\mathrm{tr}(u)$ is at most $x^{(e_{\\mathrm{Div}}+e_{\\mathrm{Loss}}+3)\\varepsilon}\\beta$.",
+      "reference": "",
+      "label": "ib-gap-bound"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.CoreAtH",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/CoreAtH.lean",
+      "line": 29,
+      "role": "new",
+      "statement": "Core data for a host field and a set $T$ at a scale $x$: comparison data identified with the inert-prime sums of the host, satisfying (H1)-(H11), the error windows and the size windows, with exponents $(e_D,e_L)$.",
+      "reference": "",
+      "label": "ib-core-data"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.core_gm",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "Let $K$ be a level and $e_D,e_L,K_0,c_0,e_K,C$ real, $\\varepsilon>0$. There is $x_1$ such that for $x\\geq x_1$, every host field $E$ and finite $T$: if $E$ satisfies the host conditions for $K$ at $(x,\\varepsilon,C)$ and carries core data at $x$ with exponents $(e_D,e_L)$ and constants $(K_0,c_0,e_K)$, then $G_K(x)\\leq x^{1/2+(e_D+e_L+7)\\varepsilon}$.",
+      "reference": "",
+      "label": "ib-host-window-bound"
+    },
+    {
+      "lean": "UpperTheory.Comparison₂.level_gm_le_on_family_scales",
+      "file": "Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean",
+      "line": 28,
+      "role": "main",
+      "statement": "Let $K$ be a level, $e_D,e_L$ real and $\\varepsilon>0$. For every family of definite-side data that satisfies the host conditions for $K$ at all large scales and is tied (Definition asm-tied) with exponents $(e_D,e_L)$ at all large scales $x\\in W$, there is $x_1$ with $G_K(x)\\leq x^{1/2+(e_D+e_L+7)\\varepsilon}$ for all $x\\geq x_1$ in $W$. This is condition (a) of Theorem wl-level-from-windows.",
+      "reference": "",
+      "label": "ib-window-bound-on-scales"
+    }
+  ],
+  "updated": "2026-11-20T19:00:04+00:00"
+}

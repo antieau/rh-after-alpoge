@@ -1,0 +1,88 @@
+diff --git a/RESOLUTION.md b/RESOLUTION.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..24aef4e386f0e50432e4598e51bd0dd2a8aae870
+--- /dev/null
++++ b/RESOLUTION.md
+@@ -0,0 +1,19 @@
++# Resolution book development copy
++
++Upstream: https://github.com/gerby-project/plastex
++
++The `resolution-book` branch starts from upstream commit `a75473f890db3d21e3bf76430c5c1ffc0661a69a`.
++Tokenizer EOF handling, HTML escaping, and preservation of introductory prose in the Gerby renderer.
++
++This is a private standalone GitHub repository; upstream history is preserved.
++The original licenses continue to apply. 
++
++The book and its build entry point live in `lean/hironaka/book/` in the
++Resolution monorepo. That branch records this repository's exact commit and
++Git tree, and carries a binary-capable patch against the upstream revision.
++The build verifies the reconstructed tree, allowing CI and colleagues to build
++without separate credentials for this private repository. After updating this
++branch, refresh the book's patch and pin together with `tools/lock_renderer.py`.
++
++The website requires `GERBY_CONFIG_FILE` to point to the book's instance
++configuration. There is no deployment configured here.
+diff --git a/plasTeX/Renderers/Gerby/Math.jinja2s b/plasTeX/Renderers/Gerby/Math.jinja2s
+index 10b19957fc5aa7ba6dcf6d395bb2e2b39f343d9f..bc715ccac00ec0d66272d9730b8020ce96f05acc 100644
+--- a/plasTeX/Renderers/Gerby/Math.jinja2s
++++ b/plasTeX/Renderers/Gerby/Math.jinja2s
+@@ -1,10 +1,10 @@
+ name: math DeclareMathOperator
+-{{ obj.source }}
++{{ obj.source | e }}
+ 
+ name: ensuremath eqnarray* align* gather* flalign flalign* \
+       multline multline* alignat alignat* split displaymath equation*
+ <div class="equation">
+-  {{ obj.source }}
++  {{ obj.source | e }}
+ </div>
+ 
+ name: equation eqnarray align gather
+@@ -14,5 +14,5 @@ name: equation eqnarray align gather
+   {% else %}
+     <span class="equation-label">{{ obj.ref }}</span>
+   {% endif %}
+-  <div>{{ obj.source }}</div>
++  <div>{{ obj.source | e }}</div>
+ </div>
+diff --git a/plasTeX/Renderers/Gerby/Misc.jinja2s b/plasTeX/Renderers/Gerby/Misc.jinja2s
+index 69a6261d9ca8549bf264fd404dc6b42da7a41be9..5d2bccd03b933654f34f08f8c647fdd96abbc638 100644
+--- a/plasTeX/Renderers/Gerby/Misc.jinja2s
++++ b/plasTeX/Renderers/Gerby/Misc.jinja2s
+@@ -8,13 +8,18 @@ name: tableofcontents input @vobeyspaces @noligs def protect let \
+       global noindent include markboth setcounter refstepcounter \
+       bigskip medskip smallskip parindent indent setlength settowidth addtolength \
+       nopagebreak newwrite newcounter typeout sloppypar thispagestyle vfill \
+-      hypertarget newenvironment reversemarginpar phantomsection \
++      newenvironment reversemarginpar phantomsection \
+       vskip pagestyle centerline hyperref marginnote normalmarginpar \
+       bibliography bibliographystyle
+ 
+ name: texorpdfstring
+ {{ obj.argSources['tex'][1:-1] }}
+ 
++name: hypertarget
++{% if obj.id.startswith('context-') %}
++<div class="reading-context" data-for="{{ obj.id }}"><p>{{ obj }}</p></div>
++{% else %}{{ obj }}{% endif %}
++
+ name: href
+ <a href="{{ obj.argSources['url'][1:-1] }}">{{ obj }}</a>
+ 
+diff --git a/plasTeX/Tokenizer.py b/plasTeX/Tokenizer.py
+index d9d5c85c0c8c7cb47c3a1a16cb542d1873e1e07b..c7b43240097777ed73fb891b0328c5e657fc03b9 100644
+--- a/plasTeX/Tokenizer.py
++++ b/plasTeX/Tokenizer.py
+@@ -389,7 +389,9 @@ class Tokenizer(object):
+             try:
+                 token = next(charIter)
+             except StopIteration:
+-                raise EndInput
++                # A Tokenizer is also iterated directly by Context.newcommand.
++                # End the generator normally; TeX.itertokens handles StopIteration.
++                return
+ 
+             if token.nodeType == ELEMENT_NODE:
+                 raise ValueError('Expanded tokens should never make it here')

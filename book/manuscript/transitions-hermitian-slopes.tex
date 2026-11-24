@@ -1,0 +1,107 @@
+% before: hs-hermitian-lattice
+The auxiliary lattice of the argument is a module over the ring of integers of a CM field, with
+a Hermitian metric at each infinite place coming from Petersson inner products. Its size is
+measured by slopes, and the maps between such lattices by heights. Both depend only on the norms
+at the infinite places, one embedding for each place.
+
+% before: hs-slopes
+The slope is a normalized logarithm of the inverse covolume. Its extreme values over
+sublattices and quotients measure how far a lattice is from being semistable, and the
+Harder--Narasimhan slopes record the whole distribution. The frame inequality below controls
+the mean slope of one lattice through the distribution of the slopes of others.
+
+% before: hs-normalization
+Several normalizations of slopes are in use, and the comparison with Bost's inequality depends
+on which one is meant. The one chosen here gives the ring of integers slope zero and is twice the
+slope normalized by the degree of the field.
+
+% before: hs-hn-polygon
+The proof of the frame inequality works one threshold at a time: for each $\theta$ it compares
+the parts of the lattices whose slopes are at least $\theta$. It needs the maximality of these
+parts and the count of the slopes above $\theta$, which are standard properties of the
+Harder--Narasimhan filtration.
+
+% before: hs-bost-slope-inequality
+A map of height $h$ between Hermitian lattices lowers minimal slopes by at most $h$. This is the
+only arithmetic input of the frame inequality, which applies it to one map at a time.
+
+% before: hs-almost-tight-frame
+The many maps of the frame inequality are tested at a single infinite place, where they become
+linear maps between complex inner product spaces. Two numbers measure how close such a family
+is to a tight frame: one for the individual maps and one for the sum of their images.
+
+% before: hs-tight-frame-meaning
+The second condition of the definition is a reverse Cauchy--Schwarz inequality. Both conditions
+hold with $e=\eta=0$ for an exact tight frame, and the two parameters reappear in the losses of
+the frame inequality.
+
+% before: hs-frame-complement
+The linear algebra behind the frame inequality is a quantitative spanning statement. If each map
+is restricted to a subspace and the subspaces have small total codimension, an almost tight
+frame still fills almost all of the target, and the lemma bounds the part it misses.
+
+% before: hs-near-orthogonal
+In the application the frame is not given directly. Chapter~\ref{chapter-integral-structure}
+proves Hilbert--Schmidt bounds for the blocks of the Gram matrix between the columns attached
+to different words, and for the deviation of each diagonal block from the identity.
+
+% before: hs-near-orthogonal-frame
+Near orthogonality of many columns implies the two conditions of an almost tight frame. In the
+application the lattices have smaller rank than the spaces of columns, so the lemma also lets
+each map be restricted to a subspace, at a cost of $3\sqrt{\delta_e}$ in the tightness when the
+total codimension is at most a fraction $\delta_e$.
+
+% before: hs-share
+The proof of the frame inequality must bound the number of slopes of the source lattices that
+lie far below their mean. An upper bound for all of them and a lower bound for their mean
+suffice, by the following form of Markov's inequality.
+
+% before: hs-layer-cake
+The frame inequality bounds, for each depth $\tau$, the number of slopes of the target lattice
+below $s-\tau$. Integrating these counts over $\tau$ turns them into a lower bound for its mean
+slope.
+
+% before: hs-frame-situation
+The frame inequality and its variants share a long list of data: a target lattice, many source
+lattices with maps into it, bounds for their slopes and heights, and linear maps at one infinite
+place. The number $s$ is a lower bound for the weighted mean of the source slopes, $u$ bounds how
+far the largest of them lie above $s$, and $H$ bounds the depth of the slopes of the target below
+$s$.
+
+% before: hs-frame-slope-inequality-sharp
+With these data the slope of the target lattice is bounded below by the mean slope of the
+sources, up to losses controlled by the frame. The proof applies Bost's inequality to the
+Harder--Narasimhan steps of each source, counts dimensions at the place $v$, and integrates over
+the depth.
+
+% before: hs-frame-slope-inequality
+The application subtracts the logarithm of the number of maps as well. This weaker bound follows
+at once, and it is the form recorded in the frame bound for the glued lattice.
+
+% before: hs-comparison-with-bost
+Bost's inequality and the frame inequality both bound slopes of a target lattice below by slopes
+of sources and heights of maps. The comparison separates the part of the frame inequality that
+comes from Bost's inequality from the part that comes from the frame, and lists the losses.
+
+% before: hs-frame-from-near-orthogonality
+Combining the frame inequality with Lemma~\ref{hs-near-orthogonal-frame} expresses its frame
+hypotheses through near orthogonality, the form in which
+Chapter~\ref{chapter-integral-structure} proves them. The tightness parameter becomes
+$5\sigma+3\sqrt{\delta_e}$ and the isometry parameter becomes $2e_0$.
+
+% before: hs-frame-realisation
+For a definite-side datum the target is the dual $CC$ of the glued lattice $RR$, the sources
+are the lattices $N_u$ attached to the words, and the maps are those of the division datum. The
+datum is frame-realised when the frame data of Corollary~\ref{hs-frame-from-near-orthogonality}
+exist for these maps at some infinite place, with the given parameters.
+
+% before: hs-frame-bound
+The comparison inequality of Chapter~\ref{chapter-inert-prime-balance} and the assembly in
+Chapter~\ref{chapter-assembly} use the conclusion of the frame inequality for the glued lattice
+in a fixed form, with the losses expressed through two parameters. The frame bound is that
+conclusion, separated from the hypotheses that imply it.
+
+% before: hs-frame-at-glued-lattice
+The frame bound holds whenever the datum is frame-realised and the dimensions of the spaces
+$M_u$ satisfy the provisos chosen with the scale. The provisos give at least $D^*/\sigma$
+columns in total, which the near-orthogonality lemma needs.

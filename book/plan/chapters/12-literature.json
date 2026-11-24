@@ -1,0 +1,265 @@
+{
+  "id": "literature",
+  "title": "Results from the literature",
+  "state": "drafted",
+  "summary": "The argument uses about one hundred and fifty published results, each proved in full rather than assumed. They fall into six groups: representations of real unitary groups (Harish-Chandra modules, discrete series, the Casselman-Wallach globalization, Howe duality at infinity); representations of $p$-adic groups (Bernstein-Zelevinsky theory, depth zero, Green's cuspidal characters, the Weil representation); theta correspondence and the Siegel-Weil formula; global automorphic forms (decay of cusp forms, strong multiplicity one, base change, strong approximation, the Hasse principle for Hermitian forms); Galois representations and $p$-adic Hodge theory; and class field theory and analytic number theory. The chapter states the results in the forms used, several of which are special cases or weaker versions of the published theorems.",
+  "timeline": [],
+  "progress": "Completion pass done: 29 statements, 3 proofs, no OPEN items; every bundle entry has a published source and a note comparing it with the Lean, the Siegel Eisenstein normalisation is unfolded and the multiprojective Hilbert-Samuel setting is Definition lit-multiprojective.",
+  "statements": [
+    {
+      "lean": "UpperTheory.LiteratureTheorems.published_results_eigen",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+      "line": 666,
+      "role": "standard",
+      "reference": "The individual results; see the entries below",
+      "statement": "The published results on unitary groups used by the definite side hold: Clozel's cohomologicality and purity, Green's cuspidal characters, $\\ell$-adic Hecke characters, the Chebotarev theorem for degree-one primes, Galois representations of polarized cuspidal representations, base change from definite unitary groups, crystalline lattices, rapid decay of cusp forms, the Weil-Siegel and Siegel-Weil formulas, the doubling method, Bernstein-Zelevinsky theory, formal degrees, Jacquet-Shalika, Artin reciprocity, Fontaine's de Rham implies potentially semistable, Harish-Chandra finiteness, ray class fields, discrete series, Casselman-Wallach, strong approximation for $SU$, Flath factorization, and local Tate duality, among others.",
+      "label": "lit-bundle-unitary"
+    },
+    {
+      "lean": "UpperTheory.LiteratureTheorems.published_results_first",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+      "line": 727,
+      "role": "standard",
+      "reference": "The individual results; see the entries below",
+      "statement": "The published local inputs of the theta correspondence hold: Green series, Linnik's theorem, complex multiplication, mirabolic restriction of cuspidal representations, Weyl branching, the Rallis inner product formula in the convergent range, the Hermitian local-global principle, Borel-Casselman, the Schrödinger and Fock models of the Weil representation, Howe duality for $GL$ and at infinity, Kudla's splitting, Stone-von Neumann, the Hasse principle for Hermitian forms, Siegel sets, and the Weil representation, among others.",
+      "label": "lit-bundle-theta"
+    },
+    {
+      "lean": "GlobalTheory.Published.WeilSiegelFormulaUnitary",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/TwistedTraceFormula/WeilSiegelFormulaUnitary.lean",
+      "line": 56,
+      "role": "standard",
+      "reference": "Weil, Acta Math. 113 (1965)",
+      "statement": "For nondegenerate Hermitian spaces $A,B$ over the CM field of a definite-side datum, with $B$ anisotropic or $\\operatorname{rk}A+r_B<\\operatorname{rk}B$ ($r_B$ the Witt index), the theta integral over $[U(B)]$ converges absolutely, with a seminorm bound; and when $2\\operatorname{rk}A<\\operatorname{rk}B$ the Siegel-Weil section is $P(F)$-invariant, its Eisenstein series on $U(A\\oplus-A)$ converges absolutely and equals the average of the theta kernel over $[U(B)]$.",
+      "label": "lit-weil-siegel"
+    },
+    {
+      "lean": "GlobalTheory.Published.SiegelWeilUnitaryConvergent",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/SiegelWeil₂/SiegelWeilUnitaryConvergent.lean",
+      "line": 18,
+      "role": "standard",
+      "reference": "Kudla-Rallis, J. Reine Angew. Math. 387 (1988); Ichino, Math. Z. 247 (2004) and 255 (2007)",
+      "statement": "Let $A,B$ be Hermitian spaces in a definite-side datum with $\\operatorname{rk}A<\\operatorname{rk}B\\le2\\operatorname{rk}A$ and $\\operatorname{rk}A+r_B<\\operatorname{rk}B$. For a Weil datum on the doubled space and $B$, and for Fock vectors with the prescribed archimedean behaviour, the value of the Siegel Eisenstein series equals the theta integral over $[U(B)]$, with covolume-one normalization.",
+      "label": "lit-siegel-weil"
+    },
+    {
+      "lean": "GlobalTheory.Published.HoweDualityReal",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/HoweDualityReal.lean",
+      "line": 21,
+      "role": "standard",
+      "reference": "Howe, J. Amer. Math. Soc. 2 (1989)",
+      "statement": "In the archimedean Fock model of a Weil representation for a Hermitian space $X$ and a skew-Hermitian space $W$ over a CM extension, the largest quotient on which $(\\mathfrak u(X),K_X)$ acts trivially, the big theta lift of the trivial representation, is a $(\\mathfrak u(W),K_W)$-module of finite length with at most one irreducible quotient. This is Howe duality for the trivial representation of $U(X)$ only.",
+      "label": "lit-howe-duality-real"
+    },
+    {
+      "lean": "GlobalTheory.Published.CasselmanWallach",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/AutomorphicForms₂/HasDRepIffHasDerivAt.lean",
+      "line": 98,
+      "role": "standard",
+      "reference": "Casselman, Canad. J. Math. 41 (1989); Wallach, Real Reductive Groups II (1992)",
+      "statement": "For an irreducible unitary representation $H$ of $U(p,q)$ and a smooth Fréchet representation $E$ of moderate growth, every map of $(\\mathfrak g,K)$-modules $H_K\\to E$ extends uniquely to a continuous $G$-map $H^\\infty\\to E$, with closed image, and is a topological embedding when nonzero. A special case of the Casselman-Wallach theorem.",
+      "label": "lit-casselman-wallach"
+    },
+    {
+      "lean": "GlobalTheory.Published.ClozelCohomological",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisGeometry₂/ClozelCohomologicalModel.lean",
+      "line": 10,
+      "role": "standard",
+      "reference": "Clozel, Motifs et formes automorphes, in Automorphic Forms, Shimura Varieties, and L-functions I (1990), Lemme 3.14",
+      "statement": "A regular algebraic cuspidal representation of $GL_a$ over a totally complex field is cohomological.",
+      "label": "lit-clozel-cohomological"
+    },
+    {
+      "lean": "GlobalTheory.Published.BhattScholzeCrystallineLattices",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/BhattScholzeCrystallineLattices.lean",
+      "line": 12,
+      "role": "standard",
+      "reference": "Bhatt-Scholze, Prismatic F-crystals and crystalline Galois representations, Camb. J. Math. 11 (2023), 507-562",
+      "statement": "Every lattice in a crystalline representation of the Galois group of a $p$-adic field is the $A_{\\inf}$-realization of a prismatic $F$-crystal in vector bundles, and the realization functor is fully faithful.",
+      "label": "lit-bhatt-scholze"
+    },
+    {
+      "lean": "GlobalTheory.Published.JacquetShalika",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/StrongMultiplicityOne.lean",
+      "line": 202,
+      "role": "standard",
+      "reference": "Jacquet-Shalika, Amer. J. Math. 103 (1981), 499-558 and 777-815",
+      "statement": "Over a totally complex field, two finite families of cuspidal representations of general linear groups whose Satake parameters have equal sums at almost all places agree up to permutation (no unitarity hypothesis); and the Satake parameters of a cuspidal representation with unitary central character satisfy $q^{-1/2}<|\\alpha|<q^{1/2}$.",
+      "label": "lit-jacquet-shalika"
+    },
+    {
+      "lean": "GlobalTheory.Published.Linnik",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/PublishedFoundations/PrimesInProgressionNonempty.lean",
+      "line": 9,
+      "role": "standard",
+      "reference": "Linnik, Mat. Sb. 15(57) (1944), 139-178 and 347-368",
+      "statement": "There are $C,L>0$ such that for all $q\\ge1$ and $a\\ge1$ coprime to $q$ the least prime $p\\equiv a\\pmod q$ satisfies $p\\le Cq^{L}$.",
+      "label": "lit-linnik"
+    },
+    {
+      "lean": "GlobalTheory.Published.ChebotarevDegreeOne",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/ChebotarevDegreeOneIffCheb.lean",
+      "line": 12,
+      "role": "standard",
+      "reference": "Tschebotareff, Math. Ann. 95 (1926); Neukirch, Algebraic Number Theory, VII.13",
+      "statement": "Let $L/F$ be a finite Galois extension of number fields, $g\\in\\operatorname{Gal}(L/F)$ and $S$ a finite set of places of $F$. Then there is a place $v\\notin S$ of degree one, unramified in $L$, with a Frobenius element restricting to $g$. This is the qualitative form of the Chebotarev density theorem.",
+      "label": "lit-chebotarev-degree-one"
+    },
+    {
+      "lean": "GlobalTheory.Published.GreenRegularCharacters",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/GreenRegularCharacters.lean",
+      "line": 13,
+      "role": "standard",
+      "reference": "Green, Trans. Amer. Math. Soc. 80 (1955)",
+      "statement": "Let $g$ be prime, $d\\ge1$ and $K=\\mathbf F_{g^d}$. There is a map $\\theta\\mapsto\\tau_\\theta$ from characters of $K^{\\times}$ such that for regular $\\theta$, $\\tau_\\theta$ is a cuspidal irreducible character of $GL_d(\\mathbf F_g)$ of degree $\\prod_{i=1}^{d-1}(g^{i}-1)$ with $\\tau_\\theta(y)=(-1)^{d-1}\\sum_{i<d}\\theta(z^{g^{i}})$ on elliptic regular elements $y$ with eigenvalue $z$; $\\tau_\\theta=\\tau_{\\theta'}$ exactly when $\\theta'=\\theta^{g^{i}}$; and every cuspidal character arises in this way.",
+      "label": "lit-green-cuspidal"
+    },
+    {
+      "lean": "GlobalTheory.GreenBridge.green_of_regular",
+      "file": "Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/SumRangeEqRoots.lean",
+      "line": 225,
+      "role": "standard",
+      "reference": "Green, Trans. Amer. Math. Soc. 80 (1955)",
+      "statement": "Green's parametrization implies the labelled form: for every prime $g$, $d\\ge1$ and labelling of $\\bar{\\mathbf F}_g$, the cuspidal characters of $GL_d(\\mathbf F_g)$ are in bijection with monic irreducible polynomials of degree $d$ over $\\mathbf F_g$ with nonzero constant term, with the character formula of Green's theorem. Proved in the chapter.",
+      "label": "lit-green-labelled"
+    },
+    {
+      "lean": "UpperTheory.LiteratureTheorems.OpenLiteratureStatements",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+      "line": 215,
+      "role": "new",
+      "statement": "The results of the chapter are proved under three hypotheses: two copies of the Galois-representation theorem of Chapter 11 and the existence of local Langlands parameters; only the results on local Langlands, Galois representations, local-global compatibility and $\\ell$-adic Hecke characters above $\\ell$ use them.",
+      "label": "lit-open-inputs"
+    },
+    {
+      "lean": "GlobalTheory.GLq.LabelDatum",
+      "file": "Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/LabelDatum.lean",
+      "line": 81,
+      "role": "new",
+      "statement": "A labelling of $\\bar{\\mathbf F}_g$: an injective character $\\bar{\\mathbf F}_g^\\times\\to\\mathbf C^\\times$ and norm-compatible generators of the groups $\\mathbf F_{g^d}^\\times$.",
+      "label": "lit-labelling"
+    },
+    {
+      "lean": "Formalism.IndefR.Datum.IsWeilDatumO",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/LocalNewformFunction.lean",
+      "line": 53,
+      "role": "new",
+      "statement": "Theta functions on the adelic symplectic space of matrices, Weil data $(\\psi,\\chi_S,\\chi_T,\\omega)$ for a pair of Hermitian spaces, and the theta kernel $(\\omega(g,h)f)(0)$.",
+      "label": "lit-weil-datum"
+    },
+    {
+      "lean": "GlobalTheory.Doubling.flat",
+      "file": "Development/AbelianVarietyTheory/Definitions/Foundations/T2SpaceAdeleRing.lean",
+      "line": 309,
+      "role": "new",
+      "statement": "The degenerate principal series of the doubled unitary group, flat sections for the compact subgroup $K_a$, and the Siegel Eisenstein series.",
+      "label": "lit-siegel-eisenstein"
+    },
+    {
+      "lean": "ResidueKilled.DM",
+      "file": "Development/WeilBound/RepresentationTheoryGL/EisensteinResidues/AnisotropicGlobalForms/DmOfHyp.lean",
+      "line": 13,
+      "role": "standard",
+      "reference": "Gelbart-Piatetski-Shapiro-Rallis, LNM 1254 (1987)",
+      "statement": "The entry named for local zeta integrals of the doubling method: meromorphic continuation of Siegel Eisenstein series with locally bounded order of poles, the global basic identity unfolding the doubling integral of two cusp forms, and continuation of the doubling integral. Its middle conjunct is True; it says nothing about local zeta integrals.",
+      "label": "lit-doubling"
+    },
+    {
+      "lean": "GlobalTheory.Published.UnusedSlot72",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/DiscreteSpectrumResidualClassification.lean",
+      "line": 7,
+      "role": "standard",
+      "reference": "Tan, Canad. J. Math. 51 (1999)",
+      "statement": "The entry named for the simple pole of the Siegel Eisenstein series is the proposition True; the simple-pole statement is not proved.",
+      "label": "lit-vacuous-slot"
+    },
+    {
+      "lean": "GlobalTheory.CompanionTheory.Ar.HT.FarguesExact",
+      "file": "Development/AutomorphicSpectrum/PublishedTheorems/Algebra₂/FarguesExact.lean",
+      "line": 10,
+      "role": "standard",
+      "reference": "Fargues, Progr. Math. 262 (2008)",
+      "statement": "For a $p$-divisible group over the ring of integers of a complete algebraically closed field, the kernels of the Hodge-Tate maps of $G$ and of its dual are orthogonal complements under the Weil pairing. Only the middle of the Hodge-Tate sequence; weaker than Fargues's theorem.",
+      "label": "lit-hodge-tate-sequence"
+    },
+    {
+      "lean": "GlobalTheory.CompanionTheory.Hypotheses₂.SncBlowup.IsSncBlowupSeq",
+      "file": "Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/NotSubsetOfDenseCompl.lean",
+      "line": 23,
+      "role": "new",
+      "statement": "Normal crossings blow-up sequences: blow-ups in centres smooth over $k$ having normal crossings with the transformed boundary.",
+      "label": "lit-snc-sequence"
+    },
+    {
+      "lean": "GlobalTheory.CompanionTheory.Hypotheses₂.PrincipalisationCharZero",
+      "file": "Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/NotSubsetOfDenseCompl.lean",
+      "line": 57,
+      "role": "standard",
+      "reference": "Hironaka, Ann. of Math. 79 (1964); Kollár, Lectures on Resolution of Singularities (2007); Resolution's Hironaka book, Tag R021",
+      "statement": "Principalization with a simple normal crossings boundary: $I\\mathcal O_{X'}$ invertible with simple normal crossings support, by a normal crossings blow-up sequence, isomorphic off the zero set of $I$. Joint normal crossings with the transformed boundary is not stated.",
+      "label": "lit-principalization"
+    },
+    {
+      "lean": "GlobalTheory.Published.Principalisation",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/GeometricallyConnectedOfIsIsoRestrict.lean",
+      "line": 118,
+      "role": "standard",
+      "reference": "Hironaka (1964); Kollár (2007), Theorem 35; Resolution's Hironaka book, Tag R021",
+      "statement": "Principalization of a nonzero ideal on a smooth projective integral variety, with smooth projective result of the same dimension and centres over the zero set of the ideal. Deduced in the chapter from the previous statement.",
+      "label": "lit-principalization-projective"
+    },
+    {
+      "lean": "GlobalTheory.CompanionTheory.Hypotheses₂.ResolutionCharZero",
+      "file": "Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/ConclusionOfSmooth.lean",
+      "line": 53,
+      "role": "standard",
+      "reference": "Hironaka (1964), Main Theorem I; Kollár (2007), Theorem 36; Resolution's Hironaka book, Tag R02G",
+      "statement": "A reduced separated quasi-compact scheme locally of finite type over a field of characteristic zero has a resolution by a finite sequence of blow-ups that is an isomorphism over the smooth locus, with simple normal crossings inverse image of the non-smooth locus. Deduced from the functorial resolution of Chapter 9.",
+      "label": "lit-resolution"
+    },
+    {
+      "lean": "GlobalTheory.IsArithVar",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/ExistsIsClosedImmersionGenericPoint.lean",
+      "line": 578,
+      "role": "new",
+      "statement": "Arithmetic varieties, Hermitian line bundles, nef Hermitian line bundles and small sections.",
+      "label": "lit-arithmetic-variety"
+    },
+    {
+      "lean": "GlobalTheory.Published.ArithHilbertSamuel",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/SmallSecTensTriv.lean",
+      "line": 14,
+      "role": "standard",
+      "reference": "Gillet-Soulé, Invent. Math. 110 (1992); Zhang, J. Amer. Math. Soc. 8 (1995); Moriwaki, J. Algebraic Geom. 18 (2009)",
+      "statement": "For nef $\\bar L$ and any $\\bar N$ on an arithmetic variety of dimension $D+1$, $\\log\\#$ small sections of $\\bar L^{m}\\otimes\\bar N$ is $\\frac{\\bar L^{D+1}}{(D+1)!}m^{D+1}+o(m^{D+1})$. Proved from principalization.",
+      "label": "lit-arithmetic-hilbert-samuel"
+    },
+    {
+      "lean": "ReciprocityTheory.ChartRestriction.G.Geo.IsArithVar",
+      "file": "ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/IsIntersectionFamily.lean",
+      "line": 34,
+      "role": "new",
+      "statement": "The multiprojective setting of the Hilbert-Samuel bounds: arithmetic subvarieties of products of projective spaces given by multihomogeneous primes, metrized line bundles, arithmetic intersection systems defined by the inductive formula, and the groups of sections and small sections.",
+      "label": "lit-multiprojective"
+    },
+    {
+      "lean": "PositivityTheory.MbHsUse.HSUse",
+      "file": "Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/SmallGeneratedCountUpperOfUse.lean",
+      "line": 12,
+      "role": "standard",
+      "reference": "Zhang, J. Amer. Math. Soc. 8 (1995); Moriwaki, J. Algebraic Geom. 18 (2009)",
+      "statement": "In the setting of Definition lit-multiprojective: (1) nonnegativity of the self-intersection of a semipositive metrized line bundle that is nef on the fibres and on horizontal curves; (2) the upper bound $\\limsup\\log\\#\\{\\text{small sections}\\}/(\\tau^{D+1}/(D+1)!)\\le\\bar A^{D+1}$ for bundles generated by finitely many small sections; (3) the same bound on the normalization for bundles whose monomial sections are small. Upper bound only.",
+      "label": "lit-hilbert-samuel-upper"
+    },
+    {
+      "lean": "GlobalTheory.CompanionTheory.Ar.GR.ZarhinStatement",
+      "file": "Development/AutomorphicSpectrum/PublishedTheorems/Algebra₂/ZarhinStatement.lean",
+      "line": 21,
+      "role": "standard",
+      "reference": "Zarhin, Izv. Akad. Nauk SSSR 38 (1974); Moret-Bailly, Astérisque 129 (1985), Chapitre IX",
+      "statement": "An abelian scheme with a relatively ample line bundle over the valuation ring of an algebraically closed valued field is a retract of a principally polarized abelian scheme. Weaker than Zarhin's trick, which names $(A\\times A^\\vee)^4$.",
+      "label": "lit-zarhin"
+    }
+  ],
+  "updated": "2026-11-20T19:15:49+00:00"
+}

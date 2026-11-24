@@ -1,0 +1,46 @@
+% before: wl-corrected-sums
+Alpöge works with the Chebyshev sums $\sum_{n\leq y}\Lambda(n)\chi(n)(y/n-1)$, whose weight vanishes at $n=y$ and whose Mellin transforms carry the factor $1/(s(s-1))$. Subtracting the main term that comes from the pole at $s=1$ leaves a function whose Laplace transform is singular only at the zeros of $L(s,\chi)$ and possibly at $s=0$.
+% before: wl-character-family
+The Landau argument applies to any positive combination of corrected sums, so it is stated for finite families of characters with positive weights. Real parts are taken so that the combination is a real function, which can be bounded from above. The zero set records the zeros of each $L(s,\chi_i)$ together with their complex conjugates, since the real part of $g_\chi$ involves both $\chi$ and $\bar\chi$.
+% before: wl-level
+The families used in the proof come from finite sets of primitive characters attached to host fields. A level records such a set, an optional exceptional character and an integer $o$ that fixes the weights; the host conditions of Chapter~\ref{chapter-host-fields} tie $o$ to the host field.
+% before: wl-weighted-sum
+The weighted Chebyshev sum of a level is the function whose one-sided bound the later chapters prove. All of its weights are positive, which is what the Landau argument of this chapter needs; the value $(3o+1)^{-1}$ matches the average over the characters of a host field in Chapter~\ref{chapter-inert-prime-balance}.
+% before: wl-cyclic-level
+For the half-plane statement for one primitive character $\psi$, the proof uses the level built from the cyclic group that $\psi$ generates. Its integer $o$ is the order of $\psi$ and it has no exceptional character, so every nontrivial character in it has weight $(3o+1)^{-1}$.
+% before: wl-laplace-character
+Landau's method needs the Laplace transform of $g_\chi(e^u)$ as a meromorphic function on the right half-plane, with its poles and residues. The computation is the classical one for Chebyshev sums, and the correction terms make $s=1$ a regular point. The residue at a zero of order $m$ is $m$ times a factor that is positive when the zero is real and lies in $(0,1)$; this sign is the positivity used later.
+% before: wl-pole-data
+The quantitative Landau theorem uses only a few properties of the corrected sums and their Laplace transforms. Listing them in a definition separates the complex analysis of Section~\ref{section-wl-landau} from the arithmetic of $L$-functions.
+% before: wl-pole-data-family
+The Laplace transform of the weighted Chebyshev sum of a family is a positive combination of the transforms of Lemma~\ref{wl-laplace-character}, one for each character and one for its conjugate. Positive weights cannot cancel the residues at a common zero, so every point of the zero set is a pole. A real zero lies in $(0,1)$, and there the residue is positive.
+% before: wl-window-hypothesis
+After the substitution $y=e^u$, a bound $G_F(y)\leq Cy^\theta$ on $[Y,Y^{1+\delta}]$ becomes a bound for $G_F(e^u)$ on $[U,(1+\delta)U]$ with $U=\log Y$. The window hypothesis is the form of this that the proof uses: an upper bound by a nonnegative function whose weighted integral over the window grows more slowly than every exponential $e^{\eta U}$.
+% before: wl-kernel-tails
+The $k$-th Taylor coefficient of the Laplace transform at $\sigma$ is an integral of $g$ against $u^ke^{-\sigma u}/k!$, and the growth of $g$ turns this kernel into $u^ke^{-(\sigma-2)u}/k!$, which peaks at $u=k/(\sigma-2)$. A bound on $g$ known on one window controls the coefficient once the mass of this kernel outside the window is small. With $\sigma$ large and $k$ about $(1+\delta/2)\sigma U$, the peak lies inside $[U,(1+\delta)U]$ and the mass outside is at most a constant times $\sigma^{-k}$.
+% before: wl-coefficient-bound
+The one-sided bound on windows controls the Taylor coefficients at $\sigma+i\gamma$ only together with the real coefficient at $\sigma$. The reason is that $|g|+g$ is at most twice any nonnegative upper bound for $g$, while $|g|$ itself is not controlled. The estimate says that, along a sequence of $k$, these coefficients grow no faster than $(\sigma-\theta)^{-k}$ up to a factor $e^{\eta U}$ with $\eta$ arbitrarily small.
+% before: wl-nearest-pole
+A pole $\rho$ with $\operatorname{Re}\rho>\theta$ lies within $\sigma-\theta$ of a point on the vertical line through $\sigma$, and the Taylor coefficients there grow like inverse powers of the distance to the nearest pole. Two poles at the same distance could cancel each other. When some pole lies closer to the vertical line than every pole lies to $\sigma$, a small vertical move makes the nearest pole unique; otherwise the nearest pole to $\sigma$ is real and is used directly.
+% before: wl-pole-coefficients
+Near a simple pole, the Taylor coefficients of a function are those of its principal part, up to an error bounded by Cauchy's estimate on a larger circle. This gives the size of the coefficients in terms of the residue and the distance to the pole.
+% before: wl-landau-window
+The theorem compares the upper bound for the Taylor coefficients with their size near a pole. In the first case of Lemma~\ref{wl-nearest-pole} the pole is the unique nearest one to $\sigma+i\gamma$, and the bound on $|a_k(\sigma+i\gamma)|$ gives the contradiction. In the second case the pole is real and is reached from $\sigma$, where only the real coefficient is bounded, and from above; the positivity of the residue gives the contradiction.
+% before: wl-power-window
+The later chapters bound the weighted Chebyshev sum by a power of $y$ on windows $[Y,Y^{1+\delta}]$. Such a bound gives the window hypothesis with the upper bound $|C|e^{\theta u}$, whose weighted integral over the window grows only like $\log Y$.
+% before: wl-zero-free-family
+The pole data of a character family and the quantitative Landau theorem together give a zero-free half-plane for every $L$-function in the family. The half-plane is bounded by the exponent of the power bound, and the width $\delta$ of the windows does not enter the conclusion.
+% before: wl-windows
+The window bounds of the later chapters hold at scales $x$ in sets that contain intervals $[Y,Y^\lambda]$ for arbitrarily large $Y$, and these sets need not contain all large $x$. Theorem~\ref{wl-zero-free-family} needs no more than this, with $\lambda=1+\delta$.
+% before: wl-zero-free-level
+A level gives a character family with the same weighted Chebyshev sum, indexed by its characters. The theorem is Theorem~\ref{wl-zero-free-family} for this family, with windows of any exponent $\lambda>1$ and with $C=1$.
+% before: wl-families
+The window bounds are proved along families of definite-side data, one class of families for each exponent $\varepsilon$, under hypotheses that Chapter~\ref{chapter-assembly} calls tied. The deduction below uses only the set of scales of a family and the facts that it satisfies the host conditions and is tied, so the tied condition is left arbitrary here.
+% before: wl-family-conditions
+Two properties of a level connect it to the families. The first is the window bound, which Chapter~\ref{chapter-inert-prime-balance} proves at the large scales of every tied family that satisfies the host conditions. The second is the existence of such families whose sets of scales have windows.
+% before: wl-level-from-windows
+Given both properties, a tied family with small $\varepsilon$ gives the bound $G_K(x)\leq x^{1/2+O(\varepsilon)}$ on windows. The windowed Landau theorem for levels then excludes zeros to the right of $1/2+O(\varepsilon)$, and $\varepsilon$ can be taken as small as needed. The third hypothesis below holds for every level by Theorem~\ref{wl-zero-free-level}.
+% before: wl-zero-free-cyclic
+For a primitive character $\psi$ the theorem is applied to the cyclic level $K_\psi$, which contains $\psi$. In this form the half-plane statement for primitive characters is assembled in Chapter~\ref{chapter-assembly}.
+% before: wl-supply
+The hypotheses of the corollary come from different chapters. One of them holds for every level, and the other two are what the remaining chapters prove.

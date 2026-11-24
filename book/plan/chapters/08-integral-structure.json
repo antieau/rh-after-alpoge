@@ -1,0 +1,703 @@
+{
+  "id": "integral-structure",
+  "title": "Norms of lifts and the glued integral structure",
+  "state": "drafted",
+  "summary": "The chapter controls the size of the auxiliary lattice. Each theta lift multiplies Petersson metrics by explicit scalars bounded below, and at the twisted places the image lattices have bounded index; together these give an upper bound $\\mu(CC^{\\vee})+h_u\\le\\mathrm{MAIN}(u)+\\text{error}$ for the lattice $CC$ glued across tuples of Hecke characters, which is the upper half of the comparison in Chapter 4. The chapter also proves that the columns of the glued structure are nearly orthogonal, with Hilbert-Schmidt errors of size $\\exp(-x^{\\varepsilon/8})$, through the Siegel-Weil formula and bounds for Poincaré series, and, from Green's description of cuspidal characters of $GL_d(\\mathbf F_g)$, that the row space has full dimension up to a deficit $\\exp(-x^{\\varepsilon_z/7})$.",
+  "timeline": [
+    9,
+    14,
+    15,
+    16
+  ],
+  "progress": "Fix pass: Lemma is-unfolding-schur now takes the standing hypotheses and derives the difference of the u-parts as the Lean does; the vacuum definition precedes its uses, and the exponent k_j is defined in Proposition is-kernel-entry-bound; the proofs of the unkilled point, the norm-one determinant ideal, is-eigenvalue-numeric and is-places-prime-sums follow the Lean, with the shorter arguments as Remarks.",
+  "statements": [
+    {
+      "lean": "Formalism.L2.Indef.IndefData.L6",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefSide.lean",
+      "line": 325,
+      "role": "new",
+      "statement": "Let indefinite-side data be given for a chain of lifts, with scalars $\\lambda_{j,\\mu,p,v}>0$ by which the $j$-th lift multiplies the Petersson metric at the base tuple $\\mu_0$, prime $p$ and place $v$, and with numerical bounds $\\ell_6(j)$. The lower norm bound holds if $\\log\\lambda_{j,\\mu_0,p,v}\\ge\\ell_6(j)$ for all $j,p,v$.",
+      "reference": "",
+      "label": "is-lower-norm-bound"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefData.ON",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefSide.lean",
+      "line": 318,
+      "role": "new",
+      "statement": "Let indefinite-side data be given, with twisted places $w$, indices $I_w(j)$ of the image lattices of the $j$-th lift at $w$ and $\\bar w$, ramification indices $e_w$, residue characteristics $p_w$ and numerical bounds $F_0,J_0,E_1$. The surjectivity bound holds if, for every twisted place $w$, $\\sum_j(I_w(j)+I_{\\bar w}(j))\\le\\big(\\sum_j(2e_wF_0(w,j)+e_w\\,\\mathrm{err}_0(w,j))+2e_w/p_w^{2}\\big)D$ with $\\mathrm{err}_0\\ge0$, and for every $j$, $\\sum_w\\log Nw\\,(e_w\\mathrm{err}_0(w,j)+e_wJ_0(w,j))\\le E_1(j)$.",
+      "reference": "",
+      "label": "is-surjectivity-bound"
+    },
+    {
+      "lean": "GlobalTheory.Fc.S0.ontoX_and_lamLow_of_unitaryGroupHypotheses'",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SurjectiveAndLowWeightOfUnramifiedExponents.lean",
+      "line": 16,
+      "role": "new",
+      "statement": "Assume the published results on unitary groups of Chapter 12. Then (a) eventually along the standard families, every family satisfying the division bound at twisted places has $C_0\\ge0$ such that eventually, at every point satisfying the point and further conditions, the rows satisfy the surjectivity bound for all $C\\ge C_0$; and (b) eventually along the standard families, eventually at every point satisfying the point conditions, the columns satisfy the lower norm bound for every $C$. Part (a) uses Green's cuspidal characters, Clozel's purity, $\\ell$-adic Hecke characters, Chebotarev, the Galois representations of Chapter 11, base change from definite unitary groups, Bhatt-Scholze, depth-zero local Langlands, discrete series covers and Casselman-Wallach; part (b) uses rapid decay, the Weil-Siegel and Siegel-Weil formulas, the doubling method, Bernstein-Zelevinsky finiteness and formal degrees.",
+      "reference": "",
+      "label": "is-surjectivity-and-lower-norm"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefData.FUN",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefSide.lean",
+      "line": 331,
+      "role": "new",
+      "statement": "Let indefinite-side data be given, with glued lattice $RR$, constants $\\kappa$ and a numerical bound $hh$. The functional bound holds if $\\mu_{\\max}(RR)\\le hh-\\overline{\\log\\kappa}$, where $\\overline{\\log\\kappa}$ is the mean of $\\log\\kappa$.",
+      "reference": "",
+      "label": "is-functional-bound"
+    },
+    {
+      "lean": "GlobalTheory.Fc.StageZeroRow.row_rRows_stage0_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TupAllUsedAtPart.lean",
+      "line": 46,
+      "role": "new",
+      "statement": "Assume five published results (covering of discrete series, Harish-Chandra modules, rapid decay of cusp forms, Casselman-Wallach, classification of discrete series) and the surjectivity and lower norm bounds of Theorem is-surjectivity-and-lower-norm. For a slot and link data, if the primitivity, divisor, row-goodness, weak geometric compatibility, covolume, functional, multiplicity, $\\kappa$ and definite-side (defect) conditions hold along them, then eventually along designed families there is one constant $C$ with which the realizations of the selected bundles satisfy the covolume, surjectivity, lower norm and functional bounds, the smallness, isometry, multiplicity, passage and $\\kappa$ conditions, and the definite-side condition. The definite-side condition is a hypothesis that passes through; the theorem proves the surjectivity, lower norm and smallness parts.",
+      "reference": "",
+      "label": "is-definite-rows"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkDIV_at",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 77,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum at a scale with size data, and let $C,C_{abs},C_H$ be constants. The division link holds if: each lattice $N_u$ maps into the glued lattice $CC$ by one map $B_u$, with height $h(B_u)\\le h_u$; $s+\\mu_{\\max}(RR)\\le x^{C_H}b$; the local data vanish above the scale $X''$; the Bessel identity holds; $RR$ has full rank; for every word $u$, $\\mu(CC)+h_u-F_o\\le\\mathrm{MAIN}(u)+C|T|aL_a+Cm(B_0+N_c)x^{C_{abs}\\varepsilon}$; for every $u$ and lift $j$, $\\big|\\sum_w\\mathrm{sz}_w(E_{u,j}(w))-(\\sum_ta_t)\\log(g_0g_1)\\big|\\le CB_0$; and the normalized heights $h_u+(\\sum_ta_t)\\log T_u$ differ across words by at most $C(|T|aL_a+mB_0)$.",
+      "reference": "",
+      "label": "is-division-link"
+    },
+    {
+      "lean": "Formalism.L2.DIV.closed_linkDIVt_of_closed_bridge_kernel",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/DIVRecBridgeSel.lean",
+      "line": 197,
+      "role": "new",
+      "statement": "Let $\\mathcal D$ be a class of families and $C_{abs}$ a constant, and suppose every family in $\\mathcal D$ carries division-kernel data at all large scales. If, eventually along $\\mathcal D$, the division-kernel constant bounds hold whenever the size conditions on $T_u$ and on the stabilizer denominators hold, then eventually along $\\mathcal D$ the following holds under the same size conditions: if the support condition on twisted places and the division bound on twisted places hold, then the division link holds.",
+      "reference": "",
+      "label": "is-division-link-holds"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkS",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 152,
+      "role": "new",
+      "statement": "A family satisfies the orthogonality link with constant $C_0$ if eventually at every scale $x$ and member there are $\\eta_0,\\eta_1\\le e^{-x^{\\varepsilon/8}}$ and $e_0\\ge0$ with $\\sqrt{e_0}\\le e^{-x^{\\varepsilon/8}}$ such that, whenever $C_0^{-1}\\le d_u\\Gamma^2/D^{*}\\le C_0$ for all words $u$: $\\|K_{uu'}\\|_{HS}^2\\le(1+\\eta_0)d_ud_{u'}/D^{*}$ for $u\\ne u'$, $\\|K_{uu}-1\\|_{HS}^2\\le e_0d_u$, and $D_{\\mathrm{all}}\\le(1+\\eta_1)D^{*}$. Here $K_{uu'}$ is the Gram matrix between the columns of the integral structure attached to $u$ and $u'$, and $\\Gamma=\\exp(C_\\Gamma m^5fL)$.",
+      "reference": "",
+      "label": "is-orthogonality-link"
+    },
+    {
+      "lean": "GlobalTheory.Top.link_alt_alt_bis",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkAltAltBis.lean",
+      "line": 16,
+      "role": "new",
+      "statement": "Let $\\mathcal A$ be a class of families with a twist selection and a spectral selection. Assume the decay hypothesis for the archimedean Bessel functions $W_u$ under the gap hypothesis, finite dimensionality of rows, the auxiliary-prime condition, counting constants, positivity of row types, the row bound and main-term identity of the diagonal rows, the row bounds, the selected orthogonality bound $\\|K^0_{uu'}\\|^2\\le(1+b^{-6})d_ud_{u'}/D^*$, the point counts and the volume conditions. Then, eventually along the designed families of $\\mathcal A$, the size condition on $T_u$ implies the orthogonality link with constant $3$.",
+      "reference": "",
+      "label": "is-orthogonality-link-holds"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkIRR",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 55,
+      "role": "new",
+      "statement": "A family satisfies the irreducibility link if eventually, at every scale $x$ and member, the row deficit $\\delta$ of the integral structure satisfies $0\\le\\delta\\le\\exp(-x^{\\varepsilon_z/7})$, where the row space has dimension $(1-\\delta)D_{\\mathrm{all}}$.",
+      "reference": "",
+      "label": "is-irreducibility-link"
+    },
+    {
+      "lean": "GlobalTheory.Top.Irr.closed_linkIRR_of_join_count",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkIrr.lean",
+      "line": 22,
+      "role": "new",
+      "statement": "Assume Green's parametrization of the cuspidal characters of $GL_d(\\mathbf F_g)$ by monic irreducible polynomials of degree $d$ with nonzero constant term (Chapter 12). Let $\\mathcal A$ be a class of families with a twist selection and $c>0$, and suppose that eventually along the designed families of $\\mathcal A$ every member at large scales has a labelling of all rows that counts labels and is injective on good labels, joins all rows, and has the row count with constant $c$. Then, eventually along the designed families of $\\mathcal A$, the irreducibility link holds.",
+      "reference": "",
+      "label": "is-irreducibility-link-holds"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefData",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefSide.lean",
+      "line": 241,
+      "role": "new",
+      "reference": "",
+      "statement": "An indefinite-side datum over a number field $K$ with involution: base data (tuples with base tuple $\\mu_0$, parts, lifts), a definite side (Hermitian matrices, lattices $M_t$, maps $P_t$, metrics, lattices $T_{j,t}$) and indefinite data (tuple map $w\\mapsto\\mu_w$, twisted places, metrics, maps $\\iota_t$ and $\\theta_{j,t}$, lattices $M_j$, scalars $\\kappa_v,\\lambda_{j,t,p,v}$, error terms). Defines the index $I_w(j,t)$ of the image lattice and the glued lattice $RR$.",
+      "label": "is-indefinite-datum"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefNum",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefSide.lean",
+      "line": 182,
+      "role": "new",
+      "reference": "",
+      "statement": "Numerical bounds $F_0,J_0,E_1,\\ell_3,\\ell_6,h_N,\\ell_a,\\delta_e$; scale data and the bounds $N(C,C_H)$ with $E_1=CE_1^u$, $\\ell_3=\\ell_3^m+C\\ell_3^u$, $\\ell_6=\\ell_6^m-C\\ell_6^u$, $h_N=x^{C_H}b$; the covolume bound $\\operatorname{lcv}(M_j)/D\\le\\ell_3(j)$.",
+      "label": "is-numerical-bounds"
+    },
+    {
+      "lean": "Formalism.MainNotions.DIVinN",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 62,
+      "role": "new",
+      "reference": "",
+      "statement": "The division bound at twisted places: eventually $\\sum_{w\\in\\mathrm{supp},\\mu_w\\ne\\mu_0}\\ell_we_w\\eta_j(w)\\le CD_0x^{\\varepsilon}(B_0+N_c)$ for every lift $j$.",
+      "label": "is-twisted-division-bound"
+    },
+    {
+      "lean": "GlobalTheory.BigTop.PtAt",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/TupleReadBaseTupleEqFamily.lean",
+      "line": 145,
+      "role": "new",
+      "reference": "",
+      "statement": "A point of a family at a member: a realization of the definite-side datum by indefinite-side data $S_0$ (rows) and $S_1$ (columns) with scale data and numerical bounds $N_p(C,C_H)$; the point conditions and the further conditions.",
+      "label": "is-point"
+    },
+    {
+      "lean": "GlobalTheory.Fc.DefiniteSideCondition",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/DefiniteSideCondition.lean",
+      "line": 25,
+      "role": "new",
+      "reference": "",
+      "statement": "The definite-side condition: under the primitivity, covolume, surjectivity, isometry and record conditions, every word $u$ has a chain of lifts $K_1,\\dots,K_{m'}$ through which its base period factors, tied to the theta kernels, with $\\|P\\|_v^2\\le e^{h_P}$ and Cauchy-Binet bounds by the logarithmic sizes $\\mathrm{sz}(j,v)=\\sum_\\tau(\\sum_i\\phi(\\nu_{j,\\tau,i})-\\sum_i\\nu_{j,\\tau,i}\\log\\Omega_\\tau)+\\cdots$ of the lifts.",
+      "label": "is-definite-side-condition"
+    },
+    {
+      "lean": "GlobalTheory.T.weil_unitary_entries'",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/PointEvaluationSideStatement.lean",
+      "line": 14,
+      "role": "new",
+      "reference": "",
+      "statement": "For parameters $p$ of the construction of bundles, the definite-side condition holds along the slot of good base points of $p$ and its link data: for every class and selection, eventually along the designed families, for every $C\\ge0$ and eventually along each family, the definite-side condition holds for the selected bundle and $(C,C_H)$. This is hypothesis (9) of Theorem is-definite-rows, with $C_0=0$. The four published hypotheses of the Lean statement are not used.",
+      "label": "is-definite-side-condition-holds"
+    },
+    {
+      "lean": "Formalism.L2.DIV.HtNums",
+      "file": "Formalism/LocalToGlobal/Divisibility/Inputs.lean",
+      "line": 210,
+      "role": "new",
+      "reference": "",
+      "statement": "The record of a word, and three lists of numbers for it: kernel-side numbers with constant $C$ (bounds for $g_0(j)$, the error terms $M(j,v)$, the averages of $\\log\\Omega_\\tau(v)$ and $\\log\\theta_0(v)$, and logarithmic sizes, with the sizes $\\mathrm{sz}(j,v)$ of the lifts), last-side numbers with constants $C_T$ and $A$ (bounding $A$ by $-\\sum_\\tau n_\\tau\\log T_u+\\sum_\\tau(2\\log c_\\tau+\\log\\xi_\\tau)$ with the branching depths controlled by the windows), and height numbers with period exponent $h_P$, which combine both with seven constants and three inequalities on the size constant $c$.",
+      "label": "is-height-numbers"
+    },
+    {
+      "lean": "GlobalTheory.ColRows.exists_htNums_of_kerSide_lastSide",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExistsHtNumsOfKerSideLastSide.lean",
+      "line": 11,
+      "role": "new",
+      "reference": "",
+      "statement": "If $C,C_T\\ge0$ and $c\\ge\\max(2(16+C_T),6C+1+2C^2,4C(C_T+C))$, kernel-side numbers with constant $C$ and last-side numbers with constants $C_T$ and $A$ give height numbers with period exponent $A$ and the same sizes.",
+      "label": "is-height-numbers-from-sides"
+    },
+    {
+      "lean": "GlobalTheory.T.kerChain_matrices_with_norm_bounds",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/KerChainMatricesWithNormBoundsStatement.lean",
+      "line": 9,
+      "role": "new",
+      "reference": "",
+      "statement": "Given metrized spaces $F_0,\\dots,F_n,S$ with linear maps $s_i$, an isometric first column $f_0$, a factorization $\\mathrm{Pt}(\\varphi,F)=g(\\operatorname{col}f_0\\varphi)(F)$, a metric $X^0$, step bounds $\\langle s_iy,s_iy\\rangle_v\\le e^{t_i(v)}\\langle y,y\\rangle_v$ by sums of sizes of height numbers, and $|g(\\psi)(F)|_v^2\\le e^{h_P}\\langle\\psi,\\psi\\rangle_v|X^{0\\,-1}_vF|^2$, there are a chain of $n+1$ lifts tied to the $s_i$ and Cauchy-Binet data with one class giving conditions (1), (3), (4), (5) of the rows condition.",
+      "label": "is-chain-from-kernels"
+    },
+    {
+      "lean": "GlobalTheory.ColRows.KerTies",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/KerSizes.lean",
+      "line": 17,
+      "role": "new",
+      "reference": "",
+      "statement": "Kernel data of a realization and the kernel chain of a word; the kernel ties (host, weights, characters, analytic data, trivial base tuple, field of definition), the size conditions with constant $C_Y$, the kernel sizes with $(C_Y,C_T)$, the height conditions with constant $C_Y$, and the evaluation conditions of a bundle.",
+      "label": "is-kernel-ties"
+    },
+    {
+      "lean": "GlobalTheory.T.kernelHalf_chainNumbers_any_levelPrime",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/KernelHalfChainNumbersAnyLevelPrimeStatement.lean",
+      "line": 10,
+      "role": "new",
+      "reference": "",
+      "statement": "For every $C_Y$ there is $C\\ge0$ such that, for kernel data with the kernel ties and the sizes, and a word $u$ with the size conditions, the record of $u$ has kernel-side numbers with constant $C$ whose sizes bound the lifts of the kernel chain at the base tuple: $\\langle s_i\\varphi,s_i\\varphi\\rangle_v\\le e^{\\mathrm{sz}(i+1,v)}\\langle\\varphi,\\varphi\\rangle_v$ and the coupling by $e^{\\mathrm{sz}(m-1,v)+\\mathrm{sz}(m,v)}$. Proof from the Fock-norm bound for one kernel entry, counts of classes, Cauchy-Schwarz and the Chowla-Selberg average.",
+      "label": "is-kernel-step-bound"
+    },
+    {
+      "lean": "GlobalTheory.T.lastMapHalf_recNums_of_log_levelPrime_le",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/LastMapHalfRecNumsOfLogLevelPrimeLeStatement.lean",
+      "line": 10,
+      "role": "new",
+      "reference": "",
+      "statement": "For kernel data with the kernel ties and a word $u$: the top weights $\\lambda(\\tau)$ and $\\sigma(\\tau)$ interlace with the same determinant shift; the period at the top satisfies $|\\mathcal P(\\psi,F)|_v^2\\le e^{\\ell_u}\\langle\\psi,\\psi\\rangle_v\\langle F,F\\rangle_v$ with $\\ell_u=-(\\sum_\\tau n_\\tau)\\log T_u+\\log\\prod_\\tau c_\\tau^2\\kappa_\\tau$ from the norm of the branching map; and under the size conditions and $\\log T_u\\le C_Tmx^{\\varepsilon}$ the record has last-side numbers with constants $C_T$ and $\\ell_u$.",
+      "label": "is-top-period-bound"
+    },
+    {
+      "lean": "GlobalTheory.Fc.RL.DefSide.definiteSideCondition_of_nprimeDef_of_nuFull",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/PointEvaluationSide.lean",
+      "line": 49,
+      "role": "new",
+      "reference": "",
+      "statement": "For $C_Y$ and $C_T\\ge0$ there is $C_0$ such that for every bundle $b$ with constant $c\\ge C_0$ satisfying the evaluation conditions, at size data satisfying the height conditions with $C_Y$, $X'\\ge8$, $x\\ge2$, $4a<T_u$ and $\\log T_u\\le C_Tmx^{\\varepsilon}$, with $N_u=I_uN^\\circ_u$ finitely generated, spanning and of positive rank, the definite-side condition holds for $b$ and every $(C,C_H)$.",
+      "label": "is-definite-side-condition-at-bundle"
+    },
+    {
+      "lean": "GlobalTheory.Fc.Row",
+      "file": "Development/AbelianVarietyTheory/Definitions/GlobalTwisting/ValidForConstructedPointClassesEventuallyWorking.lean",
+      "line": 268,
+      "role": "new",
+      "reference": "",
+      "statement": "Slots, link data and selections; a property of classes and selections holds along $(Q,\\Lambda)$ if it holds for every selection built from $(Q,\\Lambda)$ with a valid choice of bundle conditions.",
+      "label": "is-slot-rows"
+    },
+    {
+      "lean": "Formalism.L2.DIV.DivisionKernelConstantBounds",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/DIVRecBridgeSel.lean",
+      "line": 166,
+      "role": "new",
+      "reference": "",
+      "statement": "The division kernel bounds: division packages, the multiplicity bound, cut tuples, the complements (comparison of heights across words, the degree-weight bound, the Bessel identity adm13), the bound on $s+\\mu_{\\max}(RR)$, rationality of Bessel pairings, fullness of $RR$ and $L_a\\ge0$.",
+      "label": "is-division-kernel-bounds"
+    },
+    {
+      "lean": "Formalism.L2.SG.Pf.WuDecayOfGap",
+      "file": "Formalism/LocalToGlobal/SiegelLatticeTheory/FlagStabilizerTensors/RootLatticeThresholds/WuDecayAll.lean",
+      "line": 25,
+      "role": "new",
+      "reference": "",
+      "statement": "The gap hypothesis ($r\\ge1801$, $b_{j+1}-b_j\\ge16r^{19}$) and the decay hypothesis for the archimedean Bessel functions $W_u$: reproduction by a compactly supported convolution and $\\int|W_u|\\nu_u^{N_1}d\\nu_Q<\\infty$. Proved from uniqueness of local Bessel maps.",
+      "label": "is-wu-decay"
+    },
+    {
+      "lean": "Formalism.MainNotions.ArithmeticCylinders.AllRows",
+      "file": "Formalism/SharpRestriction/LevelLetterCocycles/ArithmeticCylinders.lean",
+      "line": 244,
+      "role": "new",
+      "reference": "",
+      "statement": "A labelling of all rows by monic degree-$r$ polynomials over $\\mathbf F_{g_k}$ with nonzero constant term at the places over the level primes, and its three properties: counting labels and injective on good labels, joining all rows, and the row count with constant $c$.",
+      "label": "is-row-labelling"
+    },
+    {
+      "lean": "Formalism.L2.DIV.CBData",
+      "file": "Formalism/LocalToGlobal/Divisibility/Inputs.lean",
+      "line": 342,
+      "role": "new",
+      "statement": "Cauchy-Binet data for a chain of lifts: classes at each level with weights, decompositions of the metrics, and each step written as a weighted sum of operators between classes; the square factor of a step.",
+      "label": "is-cauchy-binet"
+    },
+    {
+      "lean": "Formalism.L2.DIV.nK_of_cb",
+      "file": "Formalism/LocalToGlobal/Divisibility/DivisionHeightBoundStatement.lean",
+      "line": 565,
+      "role": "new",
+      "statement": "Cauchy-Binet data bound the operator norm of each step of the chain by its square factor.",
+      "label": "is-cauchy-binet-bound"
+    },
+    {
+      "lean": "Formalism.DivisionValues.idx",
+      "file": "Formalism/QuotientMetricDivisors/Statement.lean",
+      "line": 86,
+      "role": "new",
+      "statement": "Local indices of lattices, local bases at a pair of conjugate places, Gram determinants, relative indices of a lattice and its dual, ratios of Gram determinants at infinite places.",
+      "label": "is-local-indices"
+    },
+    {
+      "lean": "Formalism.DivisionValues.index_change_formula",
+      "file": "Formalism/QuotientMetricDivisors/HermitianTwistDivisors/IdxChange.lean",
+      "line": 681,
+      "role": "new",
+      "statement": "Standard rules for covolumes of lattices over a CM field: additivity and base change of local indices, covolume through a basis, images, duals, the product formula, and the covolume of a rational Hermitian lattice.",
+      "label": "is-lattice-facts"
+    },
+    {
+      "lean": "Formalism.DivisionValues.lemmaRb_of",
+      "file": "Formalism/QuotientMetricDivisors/HermitianTwistDivisors/ReductionLemmaSecond.lean",
+      "line": 163,
+      "role": "new",
+      "statement": "The normalized log covolume of a lattice $PM$ in a quotient metric is at most the weighted sum of the valuations of the Gram determinants of its local bases.",
+      "label": "is-gram-covolume"
+    },
+    {
+      "lean": "Formalism.DivisionValues.ConjugateWeightGram.local_idW",
+      "file": "Formalism/QuotientMetricDivisors/HermitianTwistDivisors/ConjugateWeightLatticeOfGeneral.lean",
+      "line": 174,
+      "role": "new",
+      "statement": "The local identity at a finite place relating the index of the images of two lattices to Gram determinants and the indices of the image lattices of the lifts, given determinant identities at $v_0$.",
+      "label": "is-local-index-identity"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefCoreR",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/PairingConditionOfInverseMatrixIdentity.lean",
+      "line": 250,
+      "role": "new",
+      "statement": "A division package: rows and columns on well-formed definite sides with their conditions, column data factoring the period pairings through $B_u$, and the passage between the dual glued lattices.",
+      "label": "is-division-package"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefSide.boundsMu",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefUse.lean",
+      "line": 271,
+      "role": "new",
+      "statement": "The slope of the dual glued lattice of the rows is at most the mean of $\\log\\kappa$ plus the covolume bounds, twice the twisted losses $F_0$, and the error terms $L_G$, $E_1$, $E_2$, $E_3$.",
+      "label": "is-glued-covolume"
+    },
+    {
+      "lean": "Formalism.L2.DIV.complex_height_cast_at",
+      "file": "Formalism/LocalToGlobal/Divisibility/DivisionHeightBoundStatement.lean",
+      "line": 602,
+      "role": "new",
+      "statement": "The norm of a column map $B_u$ at an infinite place is bounded by the norms of the period map and the chain steps, divided by $\\kappa_v$ times the smallest product of the scalars $\\lambda$.",
+      "label": "is-column-height"
+    },
+    {
+      "lean": "Formalism.L2.Indef.IndefColsR.intoDual",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/PairingConditionOfInverseMatrixIdentity.lean",
+      "line": 393,
+      "role": "new",
+      "statement": "If the periods of $N$ have valuation at least $s(w)$, then the shifted lattice maps into $CC$, and its slope grows by $2\\sum_w\\ell_w\\lfloor s(w)\\rfloor$.",
+      "label": "is-shift-into-dual"
+    },
+    {
+      "lean": "Formalism.L2.DIV.RecNums",
+      "file": "Formalism/LocalToGlobal/Divisibility/Inputs.lean",
+      "line": 18,
+      "role": "new",
+      "statement": "Record numbers: the quantities of the size data entering the division inequality, with their inequalities, and the derived height $h^{\\mathrm{rec}}$, right side and error budget.",
+      "label": "is-record-numbers"
+    },
+    {
+      "lean": "Formalism.L2.DIV.HtNums.le_hu",
+      "file": "Formalism/LocalToGlobal/Divisibility/DivisionHeightBoundStatement.lean",
+      "line": 113,
+      "role": "new",
+      "statement": "Height numbers bound the period exponent plus the mean sizes of the lifts, minus the lower norm bounds, by the height of the record.",
+      "label": "is-record-height"
+    },
+    {
+      "lean": "Formalism.L2.DIV.RecNums.divIneq",
+      "file": "Formalism/LocalToGlobal/Divisibility/DivisionHeightBoundStatement.lean",
+      "line": 131,
+      "role": "new",
+      "statement": "The numerical division inequality: from bounds on the slopes, the passage term and the error, $\\mu_C+h^{\\mathrm{rec}}-2F_o\\le\\mathrm{rhs}$.",
+      "label": "is-record-division"
+    },
+    {
+      "lean": "Formalism.L2.DIV.DivInputsR",
+      "file": "Formalism/LocalToGlobal/Divisibility/ConstantGeTwentyEight.lean",
+      "line": 105,
+      "role": "new",
+      "statement": "The inputs of the division inequality at a word: lattice, metric, chain of lifts with height numbers and Cauchy-Binet data, the slope data of the rows, the error budget, the passage constants and the valuations of the periods.",
+      "label": "is-division-inputs"
+    },
+    {
+      "lean": "Formalism.L2.DIV.divClausesR_of",
+      "file": "Formalism/LocalToGlobal/Divisibility/ConstantGeTwentyEight.lean",
+      "line": 184,
+      "role": "new",
+      "statement": "The division inequality at a word: the shifted division lattice maps into $CC$, $h(B_u)\\le h^{\\mathrm{rec}}-\\overline{\\log\\kappa}$, $\\mu(CC)-\\overline{\\log\\kappa}+h^{\\mathrm{rec}}-2F_o\\le\\mathrm{rhs}$, and the slope of the shift.",
+      "label": "is-division-inequality"
+    },
+    {
+      "lean": "Formalism.IndefR.Cx.CxData",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/PartsOrth.lean",
+      "line": 55,
+      "role": "new",
+      "statement": "Complex data on a definite ambient: Hilbert spaces $F_t$, $F_{j,t}$, $E$, $W_j$ with theta lifts $\\Theta_t$, $\\theta'_{j,t}$, parts, levels, coordinate data and scalars; with a face they give the rows (level 0) and columns (level 1) as indefinite-side data.",
+      "label": "is-complex-data"
+    },
+    {
+      "lean": "Formalism.IndefR.Links.RealDat3",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/ZeroPartEigenvalueConvention.lean",
+      "line": 89,
+      "role": "new",
+      "statement": "A realization of a definite-side datum for a family of definite forms: level data, models of discrete series, Hecke modules, measures, Weil data with vacuum and test vectors, theta maps, rational structures, tuple map, twisted places, scalars and phases; with a face it gives complex data, rows $S_0(R,F)$, columns $S_1(R,F)$ and numerical bounds.",
+      "label": "is-realisation"
+    },
+    {
+      "lean": "Formalism.IndefR.FWT.OMDat",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/OneMapT.lean",
+      "line": 32,
+      "role": "new",
+      "statement": "One-map data: weight families, vectors $v_0$, weight and conjugation ties, and presentations of each lift as a single theta map, with pins and phases.",
+      "label": "is-one-map-data"
+    },
+    {
+      "lean": "Formalism.IndefR.IndefiniteRealisationBoundedRows",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/IndefRRealTB.lean",
+      "line": 39,
+      "role": "new",
+      "statement": "Bounded rows: extremal vectors pairing to the delta polynomial for every lift, and presentations of every lift as one map, pinned with the canonical constants and phase under the guard on the primes of the tuples.",
+      "label": "is-bounded-rows"
+    },
+    {
+      "lean": "Formalism.IndefR.Links.PrimRows3",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/BaseLiftsPackageOfPrimitiveLinks.lean",
+      "line": 199,
+      "role": "new",
+      "statement": "Primitive rows: rational adjoint Hecke operators, intertwining with eigenspace parts, unitary equivariant group action, blocks, rationality tests, surjectivity of the lifts, positivity, level types, the scalar identities $\\theta\\theta^*=\\lambda$ and $\\Theta\\Theta^*=\\kappa\\prod\\lambda$, orthogonal parts with equal dimensions, the unitary structure and the lattice and conjugate conditions.",
+      "label": "is-primitive-rows"
+    },
+    {
+      "lean": "Formalism.L2.Rows.RowSideFamily",
+      "file": "Formalism/LocalToGlobal/HilbertRowConditions/ColumnsFunctionAtSubspaces.lean",
+      "line": 43,
+      "role": "new",
+      "statement": "A row-side family: a family of definite forms with types and isotypic parts, subgroups with characters, rows $S_0$ and columns $S_1$, definite columns with periods and column data, modules $N^C_u$, and identifications with the lattices, words and spaces of the definite-side datum.",
+      "label": "is-row-side-family"
+    },
+    {
+      "lean": "Formalism.L2.DIV.DivRows3G",
+      "file": "Formalism/LocalToGlobal/Divisibility/TupUsed.lean",
+      "line": 112,
+      "role": "new",
+      "statement": "Division rows: the glued lattices of the columns and the rows agree with those of the datum and its base point; rational lifts span at used tuples; the theta tie; the numerical ties of indices, relative indices and local defects; the Bessel pairings agree with the column data.",
+      "label": "is-division-rows"
+    },
+    {
+      "lean": "Formalism.L2.SG.JoinSI.IndefiniteRealisationJoin",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ColJoinSOfSTiesR.lean",
+      "line": 67,
+      "role": "new",
+      "statement": "The join of an indefinite realization: a bijection of words with members and coordinates $c_\\varphi$, $c_F$, $e_R$ such that the chain of periods, the base vectors, the rows, the column norms and the pairings with Poincaré series are tied.",
+      "label": "is-realisation-join"
+    },
+    {
+      "lean": "Formalism.L2.Indef.Tree.OnObj",
+      "file": "Formalism/LocalToGlobal/IndefiniteForms/IndefiniteTree/ExampleSatisfiesConditionsAtFive.lean",
+      "line": 39,
+      "role": "new",
+      "statement": "Record objects at a point and a pair of runs: auxiliary lattices at the twisted places, representations of a finite group, maps and numerical parameters, with constants $c=(C,C_{b,1},C_{b,2})$.",
+      "label": "is-record-object"
+    },
+    {
+      "lean": "GlobalTheory.BigOn.canonical_error_real",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/OnOfOnWithCanonical.lean",
+      "line": 8,
+      "role": "new",
+      "statement": "Error terms satisfying the three conditions of the surjectivity bound with bound $E$ can be replaced by the canonical error terms with any bound $E'\\ge2E$.",
+      "label": "is-canonical-error"
+    },
+    {
+      "lean": "GlobalTheory.T.hookLogSum_sub_sizeTerm_le_lowerBound",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/HookLogSumSubSizeTermLeLowerBoundStatement.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "If $C_{sz}\\ge8$ and the lifts have the required sizes, then $\\sum_\\rho\\log\\mathrm{hook}_j(\\rho)-C_{sz}fn_V^2L_p\\le\\mathrm{low}(j)$.",
+      "label": "is-hook-lower-bound"
+    },
+    {
+      "lean": "GlobalTheory.BigOn.ontoX_of_hypotheses_alt_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OntoXOfPrints.lean",
+      "line": 28,
+      "role": "new",
+      "statement": "From the published results: runs and rationality, export at twisted places, and for record objects with large constants the page, geometric, rank, twist, share, bad-place and exponent estimates.",
+      "label": "is-onto-estimates"
+    },
+    {
+      "lean": "GlobalTheory.T.twistedPlacesBoundChain_twoRunChain",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/TwistedPlacesBoundChainTwoRunChainStatement.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "At a recorded object satisfying the estimates, the rows satisfy the three conditions of the surjectivity bound with some error terms and bound $C_EE_1^u$.",
+      "label": "is-twisted-places-chain"
+    },
+    {
+      "lean": "GlobalTheory.T.finiteness_inputs_real_data_three_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/FinitenessInputsRealDataThree.lean",
+      "line": 35,
+      "role": "new",
+      "statement": "Under seven published results, at a realization with primitive rows, the weak characterization, bounded rows and pinned one-map data, if $\\ell_6\\le\\ell_6^m\\le\\mathrm{low}$ then the columns satisfy the lower norm bound.",
+      "label": "is-lift-eigenvalue-bound"
+    },
+    {
+      "lean": "Formalism.L2.DIV.VV",
+      "file": "Formalism/LocalToGlobal/Divisibility/CoefMod.lean",
+      "line": 67,
+      "role": "new",
+      "statement": "The polynomial model: dominant weights, the dual Weyl modules $\\nabla(\\lambda)$ of polynomials in the entries of a matrix, extremal vectors, the Fock pairing, the spaces $V(\\lambda)$, the action $\\rho_\\lambda$ and the Hermitian pairings $\\langle\\,,\\rangle_{\\lambda,G}$.",
+      "label": "is-polynomial-model"
+    },
+    {
+      "lean": "Formalism.GradedWeylDivisibility.sSBasis",
+      "file": "Formalism/GradedWeylDivisibility/FinalD.lean",
+      "line": 18,
+      "role": "standard",
+      "statement": "The dual Weyl module has a basis of semistandard bideterminants with integer coefficients, and in characteristic 0 it equals the Weyl module generated by the extremal vector under the divided row operators.",
+      "reference": "[DEP80], [CL74]",
+      "label": "is-standard-basis"
+    },
+    {
+      "lean": "GlobalTheory.BranchNorm.pairK_eq",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/LastMapNorm.lean",
+      "line": 254,
+      "role": "new",
+      "statement": "Properties of the Fock pairing: multiplicativity on tensors, nondegeneracy, adjointness of the action, spanning by the orbit of the extremal vector, and positivity of the Hermitian pairings.",
+      "label": "is-fock-facts"
+    },
+    {
+      "lean": "Formalism.L2.Col.Br.brStd",
+      "file": "Formalism/LocalToGlobal/Columns/FiniteSumNonzeroLargeDepth.lean",
+      "line": 135,
+      "role": "new",
+      "statement": "Branching data for interlacing weights of lengths $n+1$ and $n$: the numbers $a_i,b_i,n_{\\lambda,\\sigma},c_{\\lambda,\\sigma}$, the branching vector $\\xi$ and $\\kappa_{\\lambda,\\sigma}$, the coefficient map and the branching maps $\\mathrm{br}$ and $\\mathrm{br}_t$.",
+      "label": "is-branching-data"
+    },
+    {
+      "lean": "GlobalTheory.BrCompare.capDet_dualWeyl",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/BranchingAdmissibleFacts.lean",
+      "line": 35,
+      "role": "standard",
+      "statement": "Capelli's column determinant C_n(u) commutes with the row operators E_ab, so the C_n(u) commute with each other; and it acts on the dual Weyl module of weight mu by prod_j (u+j-1-mu_j).",
+      "reference": "[Cap90], [HU91]",
+      "label": "is-capelli"
+    },
+    {
+      "lean": "Formalism.BranchingDeterminantCap.bm_eig",
+      "file": "Formalism/BranchSandwichDivisors/BranchIsometryProofs/BranchMap.lean",
+      "line": 1511,
+      "role": "new",
+      "statement": "The last-row component of a vector of the dual Weyl module of GL_{n+1} that is largest for omega has admissible index beta, is z^beta times a vector of the dual Weyl module of weight lambda-beta, and is an eigenvector of the Capelli operators.",
+      "label": "is-top-component"
+    },
+    {
+      "lean": "Formalism.BranchingDeterminantCap.bm_sep",
+      "file": "Formalism/BranchSandwichDivisors/BranchIsometryProofs/BranchMap.lean",
+      "line": 1301,
+      "role": "new",
+      "statement": "For interlacing lambda, sigma and admissible last-row indices beta: distinct admissible indices have distinct Capelli eigenvalue functions chi_{lambda-beta}; every admissible beta other than b = lambda - sigma has a zero of chi_{lambda-beta} in the list bmList of shifted points of the branching intervals; and the product of chi_sigma over that list is c_{lambda,sigma}.",
+      "label": "is-capelli-separation"
+    },
+    {
+      "lean": "GlobalTheory.BrCompare.rCap_kill",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/BranchingAdmissibleFacts.lean",
+      "line": 71,
+      "role": "new",
+      "statement": "The Capelli operators preserve the space W of dual Weyl vectors of last-row degree d and commute with the last-row components; the product of the Capelli operators over the list bmList kills every y in W whose component of index b vanishes.",
+      "label": "is-capelli-kill"
+    },
+    {
+      "lean": "GlobalTheory.BranchNorm.fock_xi_one",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/LastMapNorm.lean",
+      "line": 60,
+      "role": "new",
+      "statement": "The branching vector lies in $\\nabla(\\lambda)$ with coefficient $h_\\sigma$; $c\\ne0$, $\\kappa>0$; the Fock identity $\\langle x,\\xi\\rangle\\langle h_\\sigma,h_\\sigma\\rangle=\\langle\\xi,\\xi\\rangle\\langle C_b x,h_\\sigma\\rangle$; and the equivariance of the branching map under block diagonal matrices.",
+      "label": "is-branching-vector"
+    },
+    {
+      "lean": "GlobalTheory.BranchNorm.norm_le",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/LastMapNorm.lean",
+      "line": 220,
+      "role": "new",
+      "statement": "If $PA=k$ with $s(k)=\\kappa>0$ and $A$ adjoint to $P$ for positive Hermitian forms, then $\\|Pf\\|^2\\le\\kappa\\|f\\|^2$.",
+      "label": "is-abstract-coisometry"
+    },
+    {
+      "lean": "GlobalTheory.BranchNorm.brNorm",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/LastMapNorm.lean",
+      "line": 336,
+      "role": "new",
+      "statement": "For interlacing weights with the same shift and Gram matrices $\\operatorname{diag}(G',g)$ with $|s(t)|^2s(g)=T$, the map $\\mathrm{br}_t$ is a scaled coisometry with factor $\\beta=\\prod_\\tau T^{-n_\\tau}c_\\tau^2\\kappa_\\tau$, and $\\|\\mathrm{br}_tf\\|^2\\le\\beta\\|f\\|^2$ with equality for some $f\\ne0$.",
+      "label": "is-branching-norm"
+    },
+    {
+      "lean": "Formalism.L2.Ker.jetOp",
+      "file": "Formalism/LocalToGlobal/KernelLattices/ThDistC.lean",
+      "line": 37,
+      "role": "new",
+      "statement": "The Fock space $V_{a,b}$, jets of entire functions, jet maps and jet operators $V(\\lambda)\\to V(\\lambda')$, step weights, and the bound $t(b,\\nu,S,\\Omega)$.",
+      "label": "is-jet-operator"
+    },
+    {
+      "lean": "GlobalTheory.JetBlock.fock_subst_le",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/FockSubstLe.lean",
+      "line": 119,
+      "role": "new",
+      "statement": "Substituting $A$ into $f\\in\\nabla(\\nu)$ multiplies the Fock norm by at most $\\prod_it_i^{2\\nu_i}$, with $t_i$ the singular values of $A$.",
+      "label": "is-fock-substitution"
+    },
+    {
+      "lean": "Formalism.DimensionVariation.gaussianCoeffIntegral",
+      "file": "Formalism/ThetaSupremumBounds/GaussianShiftBounds/FockJet.lean",
+      "line": 318,
+      "role": "new",
+      "statement": "Taylor coefficients of an entire function of Gaussian growth as Gaussian integrals against conjugate monomials, and the Gaussian bound for products of singular values.",
+      "label": "is-gaussian-moments"
+    },
+    {
+      "lean": "GlobalTheory.JetBlock.scalar_block",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/NormFockLSqLe.lean",
+      "line": 198,
+      "role": "new",
+      "statement": "Cauchy's estimate in the Fock model: a functional bounded on substitutions pairs with the jet of a function of Gaussian growth with modulus squared at most $t(b,\\nu,S,\\Omega)$.",
+      "label": "is-fock-cauchy"
+    },
+    {
+      "lean": "GlobalTheory.JetBlock.blockBound",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/NormFockLSqLe.lean",
+      "line": 262,
+      "role": "new",
+      "statement": "For step weights and an entire function of Gaussian growth, the jet operator has squared norm at most $t(b,\\nu,S,\\Omega)$.",
+      "label": "is-block-bound"
+    },
+    {
+      "lean": "Formalism.L2.Ker.thDistC",
+      "file": "Formalism/LocalToGlobal/KernelLattices/ThDistC.lean",
+      "line": 137,
+      "role": "new",
+      "statement": "Lattices of a level with frames, the modules $H_S(N,N')$, coset theta functions and their theta coefficients, the theta distribution, the kernel entries $K_\\Xi(N,N')$ and the coupling sets.",
+      "label": "is-theta-kernel"
+    },
+    {
+      "lean": "GlobalTheory.Core.Ht2.KernelS.kernel_le_sharp",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ChainKernelBoundAtEmbeddingAnyLevelPrime.lean",
+      "line": 17,
+      "role": "new",
+      "statement": "A kernel entry of the $j$-th lift has squared operator norm at most $e^{k_j(\\rho)}$ at every conjugate embedding $\\rho$.",
+      "label": "is-kernel-entry-bound"
+    },
+    {
+      "lean": "GlobalTheory.ShortVectors.transference_rat",
+      "file": "Development/AbelianVarietyTheory/Proofs/CuspFormEvaluations/TraceHermNondegenerate.lean",
+      "line": 57,
+      "role": "standard",
+      "statement": "Transference: if every nonzero vector of the dual of a rational lattice of rank M has squared norm at least lambda^2, the lattice contains M independent vectors of squared norm at most (M^2/lambda)^2.",
+      "reference": "[Ban93, Theorem 2.1]",
+      "label": "is-transference"
+    },
+    {
+      "lean": "GlobalTheory.exists_finset_selfDual_classes_rootDiscr",
+      "file": "Development/AbelianVarietyTheory/Proofs/FoundationProofs/ExistsFinsetSelfDualClassesRootDiscr.lean",
+      "line": 92,
+      "role": "new",
+      "statement": "Self-dual Hermitian O_E-lattices of rank n fall into at most (3(2f)^2 n^4 r_E^2)^{6fn^2} unitary classes.",
+      "label": "is-selfdual-classes"
+    },
+    {
+      "lean": "GlobalTheory.ChainClassNumbersS.classNumbers_leS",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/CardOrbitsLeExp.lean",
+      "line": 82,
+      "role": "new",
+      "statement": "The numbers of lattice classes, of members of the chain and of cosets in the coupling sets are at most $e^{EU}$, $U=fm^2N_m^2\\log(g_0g_1T_u)$.",
+      "label": "is-class-counts"
+    },
+    {
+      "lean": "GlobalTheory.T.normalisedFamily_normBound_absoluteConstant",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/NormalisedFamilyNormBoundAbsoluteConstantStatement.lean",
+      "line": 6,
+      "role": "new",
+      "statement": "The mean over conjugate embeddings of the log squared norm of the vacuum vector of ranks $a,b$ is at most $C_tfabX$ for $X\\ge\\log(r_E/2)+|\\operatorname{Re}\\frac{L'}{L}(1,\\chi_d)|$.",
+      "label": "is-vacuum-norm-bound"
+    },
+    {
+      "lean": "Formalism.MainNotions.S.KOf",
+      "file": "Formalism/SharpRestriction/CuspSpanNormBounds/RelevantZeroGramTerms.lean",
+      "line": 349,
+      "role": "new",
+      "statement": "The unfolding of the Gram matrices into terms, the leading part $K''_{uu'}$, and the constants $\\eta_0=b^{-6}$, $x_K=\\exp(-kf\\log k)$, $\\Gamma$.",
+      "label": "is-gram-terms"
+    },
+    {
+      "lean": "Formalism.L2.SG.ThmSOwn.ClOff",
+      "file": "Formalism/LocalToGlobal/SiegelLatticeTheory/FlagStabilizerTensors/ThmSOwn.lean",
+      "line": 41,
+      "role": "new",
+      "statement": "Eventually along the designed families, at members satisfying the standing hypotheses: $K''_{uu'}=0$ for $u\\ne u'$, $\\|K''_{uu}\\|^2\\le\\dim M_u\\,x_K$, $\\|K_{uu'}-K''_{uu'}\\|^2\\le(1+\\eta_0)\\dim M_u\\dim M_{u'}/D^*$ and $\\|K_{uu}-K''_{uu}-1\\|^2\\le\\Gamma(\\dim M_u)^2/D^*$.",
+      "label": "is-gram-clauses"
+    },
+    {
+      "lean": "Formalism.MainNotions.S.linkS_concl",
+      "file": "Formalism/SharpRestriction/CuspSpanNormBounds/StandingHypothesesHoldFamily.lean",
+      "line": 186,
+      "role": "new",
+      "statement": "The four clauses and $D_{\\rm all}\\le(1+\\eta_1)D^*$ give the orthogonality bounds with $e_0=2C_0/\\Gamma+2x_K$ in the window, and the sizes make $\\eta_0,\\eta_1,\\sqrt{e_0}\\le e^{-y}$.",
+      "label": "is-gram-combination"
+    }
+  ],
+  "updated": "2026-11-20T23:50:31Z"
+}

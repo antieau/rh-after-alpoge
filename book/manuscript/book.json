@@ -1,0 +1,57 @@
+{
+  "title": "The Riemann Hypothesis after Alpöge",
+  "entries": [
+    {
+      "file": "main-theorems.tex",
+      "title": "The main theorems and their reduction to a half-plane"
+    },
+    {
+      "file": "windowed-landau.tex",
+      "title": "Zero-free half-planes from Chebyshev bounds on windows"
+    },
+    {
+      "file": "host-fields.tex",
+      "title": "Host fields, auxiliary primes and windows of scales"
+    },
+    {
+      "file": "inert-prime-balance.tex",
+      "title": "The comparison inequality and the inert-prime balance"
+    },
+    {
+      "file": "hermitian-slopes.tex",
+      "title": "Slopes of Hermitian lattices and a frame form of Bost's inequality"
+    },
+    {
+      "file": "unitary-theta.tex",
+      "title": "Definite unitary groups and iterated theta lifts"
+    },
+    {
+      "file": "period-divisibility.tex",
+      "title": "Divisibility of periods"
+    },
+    {
+      "file": "integral-structure.tex",
+      "title": "Norms of lifts and the glued integral structure"
+    },
+    {
+      "file": "covolumes.tex",
+      "title": "Masses, covolumes and an arithmetic volume estimate"
+    },
+    {
+      "file": "tate-shafarevich.tex",
+      "title": "A weakening of Vandiver's conjecture"
+    },
+    {
+      "file": "galois-representations.tex",
+      "title": "Galois representations and local Langlands"
+    },
+    {
+      "file": "literature.tex",
+      "title": "Results from the literature"
+    },
+    {
+      "file": "assembly.tex",
+      "title": "Assembly of the proof"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+/* The RH book's additions to the unchanged, pinned Tau Ceti Explorer stylesheet; adapted from KAFKA's atlas/field.css. */
+:root{--open:#f0a33a;--open-soft:#f0a33a22}
+.brand span{font-size:10px;letter-spacing:1.4px;font-weight:400;color:var(--muted);margin-left:8px}
+.edition{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-button{text-decoration:none}
+.filters{grid-template-columns:1fr;padding-bottom:10px}
+.corpus-strip{display:flex;justify-content:space-between;gap:12px;padding:8px 16px;border-bottom:1px solid var(--line-soft);font-size:11px;color:var(--ink-soft)}
+.status-label{font-size:10px;color:var(--muted);white-space:nowrap}
+.area-button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:8px;border-radius:4px;text-align:left;color:var(--ink-soft);font-size:12px}
+.area-button:hover,.area-button.active{background:var(--raised);color:var(--ink)}
+.area-button.active{box-shadow:inset 2px 0 var(--accent)}
+.area-button small{color:var(--muted);font-variant-numeric:tabular-nums;font-size:10px;white-space:nowrap}
+.detail-caption{font-size:10px;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin:0 0 10px}
+.detail-note{font-size:11px;color:var(--muted);line-height:1.6}
+.detail-meta{font:11px/1.7 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.detail-meta summary{cursor:pointer;font:11px var(--sans);padding:10px 0}
+.record-link{display:block;width:100%;padding:9px 0;border-bottom:1px solid var(--line-soft);text-align:left;color:var(--ink-soft);font-size:12px;text-decoration:none}
+.record-link:hover{color:var(--accent)}
+.record-link small{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.record-link code,.lean-link code{font:11px var(--mono);overflow-wrap:anywhere}
+.section-label{margin:22px 0 6px}
+.empty-state{padding:14px 8px;color:var(--muted);font-size:12px}
+.search-more{font-size:11px;padding:12px 8px;color:var(--muted)}
+.graph-footer{font-size:10px}
+.graph-footer .credit{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.graph-hint{background:#0b1016ba;padding:3px 6px;border-radius:3px}
+#about{max-width:min(660px,94vw)}
+/* Open steps: a fact of the manuscript, shown in one amber, outside Tau Ceti's progress ramp. */
+.has-open{box-shadow:inset 2px 0 var(--open)}
+.record-link.has-open,.search-hit.has-open{padding-left:8px}
+.open-badge{display:inline-block;margin-left:6px;padding:0 6px;border:1px solid var(--open);border-radius:8px;color:var(--open);font-size:10px;line-height:15px;white-space:nowrap}
+.open-steps{margin:14px 0;padding:10px 12px;border:1px dashed var(--open);border-radius:6px;background:var(--open-soft)}
+.open-steps h3{margin:0 0 6px;font-size:11px;font-weight:600;color:var(--open);letter-spacing:.6px;text-transform:uppercase}
+.open-steps p{margin:6px 0;font-size:12.5px;line-height:1.6;color:var(--ink-soft)}
+.lean-link{display:block;padding:7px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-soft);text-decoration:none;font-size:12px}
+.lean-link:hover code{color:var(--accent)}
+.lean-link small{display:block;font:10px var(--mono);color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
+.tau-graph .rh-open-ring{stroke:var(--open);pointer-events:none}
+.tau-graph .tau-star.rh-open .tau-star-core{stroke:var(--open)}
+.tau-graph .tau-constellation.rh-open .tau-beacon{stroke:var(--open)}
+/* Remarks have no planet counterpart in Tau Ceti and stay neutral; situations and notations are drawn as definitions. */
+.tau-planet:is([data-kind=remark],[data-kind=example]) .tau-planet-body{fill:#8795a3}
+.tau-planet:is([data-kind=remark],[data-kind=example],[data-kind=situation],[data-kind=notation]) .tau-planet-ring{display:none}
+.tau-planet:is([data-kind=situation],[data-kind=notation]) .tau-planet-body{fill:#6f9fcf}
+.rh-legend{top:auto;bottom:52px;left:12px;width:auto;max-width:250px;padding:9px 12px}
+.rh-legend[hidden]{display:none}
+.rh-key{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--ink-soft);line-height:1.9}
+.rh-key i{width:10px;height:10px;border-radius:50%;flex:none;box-sizing:border-box}
+.rh-key-definition{background:#6f9fcf}
+.rh-key-result{background:#d9c391;box-shadow:0 0 0 1.5px #0e141b,0 0 0 2.5px #ece0bf}
+.rh-key-remark{background:#8795a3;transform:scale(.7)}
+.rh-key-open{border:1.5px dashed var(--open)}
+.rh-legend p{margin:4px 0 0;font-size:10px;color:var(--muted)}
+#chart-guides[aria-pressed=true]{color:var(--accent);border-color:#dfc18655}
+@media(max-width:1050px){.edition{display:none}.status-label{display:none}}
+@media(max-width:760px){.app-header{padding:0 8px;gap:8px}.brand span{display:none}.header-actions{gap:0}.header-actions .quiet{font-size:11px;padding:6px}.graph-hint{display:none}.corpus-strip{font-size:10px}.graph-footer{padding:0 10px}.graph-footer>span:first-child{display:none}.context-bar{padding-left:10px}.breadcrumbs button{max-width:140px}.rh-legend{bottom:48px;max-width:200px}}
+@media(max-width:600px){.rh-legend{display:none}}

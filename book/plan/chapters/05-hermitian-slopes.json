@@ -1,0 +1,167 @@
+{
+  "id": "hermitian-slopes",
+  "title": "Slopes of Hermitian lattices and a frame form of Bost's inequality",
+  "state": "drafted",
+  "summary": "Arakelov slopes of Hermitian lattices over a CM field play the role of the determinant in Stepanov's method. The chapter recalls Bost's slope inequality and proves a version for many maps $B_i:N_i\\to CC$ into one lattice at once: if the maps nearly form a tight frame at one infinite place, the slope of $CC$ is at least the weighted mean slope of the $N_i$, corrected by their heights, up to an explicit loss. Applied to the lattices of lifted forms glued across tuples of Hecke characters, this gives the lower bound in the comparison inequality of Chapter 4.",
+  "timeline": [
+    13,
+    16
+  ],
+  "progress": "Completion pass done: d_u names the rank of N_u, and the two numerical inequalities in the proof of Lemma hs-near-orthogonal-frame are derived.",
+  "statements": [
+    {
+      "lean": "Formalism.BasicNotions.HLat",
+      "file": "Formalism/LocalRingCardinality/DataArith.lean",
+      "line": 61,
+      "role": "standard",
+      "reference": "Bost, Theta invariants of Euclidean lattices, Progress in Math. 334 (2020), §1",
+      "statement": "Definition. For a totally complex number field $K$ with $r$ infinite places: a Hermitian space is a finite-dimensional $K$-vector space with a positive definite Hermitian inner product on $V\\otimes_{K,\\sigma_v}\\mathbf C$ for each infinite place $v$; a Hermitian lattice is a finitely generated $\\mathcal O_K$-submodule, with rank, dual $A^\\vee=\\{f:f(A)\\subset\\mathcal O_K\\}$, saturated sublattices and quotients with quotient norms; the height of a nonzero linear map is $h(\\varphi)=\\frac1r\\sum_v\\log\\|\\varphi_v\\|^2$.",
+      "label": "hs-hermitian-lattice"
+    },
+    {
+      "lean": "Formalism.HN.muDef",
+      "file": "Formalism/HarderNarasimhan/StatementPl.lean",
+      "line": 64,
+      "role": "standard",
+      "reference": "Bost, Theta invariants of Euclidean lattices (2020), §1.3",
+      "statement": "Definition. For a nonzero Hermitian lattice $A$ of rank $n$: $\\widehat{\\deg}(A)=-\\log\\operatorname{covol}(A)-rn\\log2+\\frac n2\\log|d_K|$ and $\\mu(A)=\\widehat{\\deg}(A)/(rn)$, which is Bost's slope divided by $r$; $\\mu_{\\max}$ and $\\mu_{\\min}$ over sublattices and quotients; $A^{\\geq\\theta}$ the sum of the nonzero sublattices with $\\mu_{\\min}\\geq\\theta$; Harder-Narasimhan slopes $\\mu_j(A)=\\sup\\{\\theta:\\operatorname{rk}A^{\\geq\\theta}\\geq j\\}$.",
+      "label": "hs-slopes"
+    },
+    {
+      "lean": "Formalism.HN.hnStep_spec",
+      "file": "Formalism/HarderNarasimhan/ShiftInvariance.lean",
+      "line": 42,
+      "role": "standard",
+      "reference": "Stuhler, Arch. Math. 27 (1976) and 28 (1977); Grayson, Comment. Math. Helv. 59 (1984)",
+      "statement": "For a nonzero Hermitian lattice $A$ of rank $n$ and $\\theta\\in\\mathbf R$: $\\mu_{\\min}(A)\\le\\mu(A)\\le\\mu_{\\max}(A)$ with $\\mu_{\\max}$ attained by a saturated sublattice; $A^{\\geq\\theta}$ is saturated, has $\\mu_{\\min}\\geq\\theta$ when nonzero, and contains every nonzero sublattice with $\\mu_{\\min}\\geq\\theta$; the $\\mu_j(A)$ decrease, $\\#\\{j:\\mu_j(A)\\geq\\theta\\}=\\operatorname{rk}A^{\\geq\\theta}$, $\\sum_j\\mu_j(A)=n\\mu(A)$, $\\mu_1=\\mu_{\\max}$ and $\\mu_n=\\mu_{\\min}$.",
+      "label": "hs-hn-polygon"
+    },
+    {
+      "lean": "Formalism.HN.slope_inequality_mean",
+      "file": "Formalism/HarderNarasimhan/HarderNarasimhanProofs/SlopeIneqMean.lean",
+      "line": 249,
+      "role": "standard",
+      "reference": "Bost, Sém. Bourbaki 795, Astérisque 237 (1996); Bost, Publ. Math. IHÉS 93 (2001), Prop. 4.5; Bost, Theta invariants of Euclidean lattices (2020), Prop. 1.4.1",
+      "statement": "Let $K$ be totally complex, $V,W$ Hermitian spaces, $\\varphi:V\\to W$ $K$-linear and $A\\subset V$ a Hermitian lattice with $\\varphi(A)\\neq0$. Then $\\mu_{\\min}(A)-h(\\varphi)\\le\\mu_{\\min}(\\varphi(A))$; for every Hermitian lattice $B\\supset\\varphi(A)$, $\\mu_{\\min}(A)\\le\\mu_{\\max}(B)+h(\\varphi)$, and $\\mu_{\\max}(A)\\le\\mu_{\\max}(B)+h(\\varphi)$ if $\\varphi$ is injective on $A$. Slopes and heights are Bost's divided by the number $r$ of infinite places; only archimedean heights occur.",
+      "label": "hs-bost-slope-inequality"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.MatrixLatticeEstimates.FrameDeviationLinear",
+      "file": "Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean",
+      "line": 46,
+      "role": "new",
+      "reference": "",
+      "statement": "Definition. Linear maps $B_i:V_i\\to E$ of complex inner product spaces with weights $c_i\\ge0$ form an $(e,\\eta)$-almost tight frame if $\\sum_i\\|c_iB_i^*B_i-1\\|_{HS}^2\\le e\\sum_i\\dim V_i$ and $\\dim E\\cdot\\operatorname{tr}(Q^2)\\le(1+\\eta)(\\operatorname{tr}Q)^2$, where $Q=\\sum_ic_iB_iB_i^*$.",
+      "label": "hs-almost-tight-frame"
+    },
+    {
+      "lean": "Formalism.HN.frame_linear_algebra_first",
+      "file": "Formalism/HarderNarasimhan/HarderNarasimhanProofs/FrameLinearAlgebraFirst.lean",
+      "line": 77,
+      "role": "new",
+      "statement": "Let $E$ and $V_i$ ($i\\in I$ finite) be finite-dimensional complex inner product spaces with $\\sum_i\\dim V_i>0$, $B_i:V_i\\to E$ linear, $c_i>0$ and $U_i\\subset V_i$ subspaces. If $(B_i,c_i)$ is an $(e,\\eta)$-almost tight frame with $0\\le e\\le1/4$, $\\eta\\ge0$, and $\\sum_i(\\dim V_i-\\dim U_i)\\le\\varepsilon\\sum_i\\dim V_i$, then the orthogonal complement of $\\sum_iB_i(U_i)$ in $E$ has dimension at most $(\\eta+4\\varepsilon+4\\sqrt e)\\dim E$.",
+      "reference": "",
+      "label": "hs-frame-complement"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.MatrixLatticeEstimates.InputSG",
+      "file": "Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean",
+      "line": 30,
+      "role": "new",
+      "reference": "",
+      "statement": "Definition. Maps $\\hat B_i:F_i\\to E$ ($\\dim F_i=d_i$) with weights $\\gamma_i\\ge0$ are $(D^*,\\eta_0,\\eta_1,e_0)$-nearly orthogonal if $\\gamma_i\\gamma_j\\|\\hat B_i^*\\hat B_j\\|_{HS}^2\\le(1+\\eta_0)d_id_j/D^*$ for $i\\ne j$, $\\|\\gamma_i\\hat B_i^*\\hat B_i-1\\|_{HS}^2\\le e_0d_i$, and $\\dim E\\le(1+\\eta_1)D^*$.",
+      "label": "hs-near-orthogonal"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.MatrixLatticeEstimates.ramification_linear_case_holds",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/JointDModelAppliesUnitLattice.lean",
+      "line": 164,
+      "role": "new",
+      "reference": "",
+      "statement": "If $(\\hat B_i,\\gamma_i)$ is $(D^*,\\eta_0,\\eta_1,e_0)$-nearly orthogonal with $0<\\sigma\\le1/20$, $D^*/\\sigma\\le\\sum_id_i$, $-1\\le\\eta_0\\le\\sigma/2$, $\\eta_1\\le\\sigma/2$, $0\\le\\sqrt{e_0}\\le\\sigma/2$, and $\\nu_i:U_i\\to F_i$ are isometric embeddings with $\\sum_i(d_i-\\dim U_i)\\le\\delta_e\\sum_id_i$, $0\\le\\delta_e\\le1/4$, then $(\\hat B_i\\nu_i,\\gamma_i)$ is a $(2e_0,5\\sigma+3\\sqrt{\\delta_e})$-almost tight frame, $2e_0\\le1/4$ and $\\sum_i\\dim U_i>0$.",
+      "label": "hs-near-orthogonal-frame"
+    },
+    {
+      "lean": "Formalism.HN.thmF_share",
+      "file": "Formalism/HarderNarasimhan/HarderNarasimhanProofs/TheoremFSharp.lean",
+      "line": 11,
+      "role": "new",
+      "reference": "",
+      "statement": "Markov's inequality: if real numbers $x_j$ ($j\\in J$ finite) have mean at least $s$ and are all at most $s+u$, with $u,\\tau\\ge0$, then at most $|J|u/(u+\\tau)$ of them are less than $s-\\tau$ (read as $0$ if $u=\\tau=0$).",
+      "label": "hs-share"
+    },
+    {
+      "lean": "Formalism.CorankShareLayerCake.FR.layer_cake_formula",
+      "file": "Formalism/CorankShare/CorankShareProofs/LayerCakeFormula.lean",
+      "line": 57,
+      "role": "new",
+      "reference": "",
+      "statement": "Layer cake: if $x_1,\\dots,x_n\\ge a-H$ ($H\\ge0$) and $\\#\\{j:x_j<a-\\tau\\}\\le w(\\tau)n$ for $0\\le\\tau\\le H$, then $\\frac1n\\sum_jx_j\\ge a-\\int_0^H\\min(1,w(\\tau))\\,d\\tau$.",
+      "label": "hs-layer-cake"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.MatrixLatticeEstimates.LatGeom",
+      "file": "Formalism/SizeWindowBrackets/FrameTraceRatioFinEquiv.lean",
+      "line": 59,
+      "role": "new",
+      "reference": "",
+      "statement": "Situation. A full lattice $C$ in a Hermitian space $W$; for $i$ in a nonempty finite set $I$, full lattices $N_i$ in nonzero Hermitian spaces $V_i$ of dimension $d_i$ and maps $B_i$ with $B_i(N_i)\\subset C$ and $h(B_i)\\le h_i$ when $B_i\\ne0$; reals $u,H\\ge0$ and $s$ with $s\\sum d_i\\le\\sum d_i(\\mu(N_i)-h_i)$, $\\mu_{\\max}(N_i)-h_i\\le s+u$ and $s-\\mu_{\\min}(C)\\le H$; an infinite place $v$, arbitrary inner products on $V_{i,v}$ and $W_v$, and maps $\\tilde B_i:V_{i,v}\\to W_v\\oplus\\mathbf C^\\ell$ with $W_v$-component $B_{i,v}$.",
+      "label": "hs-frame-situation"
+    },
+    {
+      "lean": "Formalism.HN.theoremFSharp",
+      "file": "Formalism/HarderNarasimhan/ShiftInvariance.lean",
+      "line": 60,
+      "role": "new",
+      "reference": "",
+      "statement": "In the frame situation, if $0\\le\\delta<1$, $(1-\\delta)(\\dim W+\\ell)\\le\\dim W$, $\\gamma_i>0$, and $(\\tilde B_i,\\gamma_i)$ is an $(e,\\eta)$-almost tight frame with $0\\le e\\le1/4$, $\\eta\\ge0$, then $\\mu(C)\\ge s-(1-\\delta)^{-1}\\big(4u\\log(1+H/u)+(\\eta+4\\sqrt e)H\\big)$. The only arithmetic input is Bost's inequality, applied to each map and each Harder-Narasimhan step.",
+      "label": "hs-frame-slope-inequality-sharp"
+    },
+    {
+      "lean": "Formalism.HN.theoremF",
+      "file": "Formalism/HarderNarasimhan/ShiftInvariance.lean",
+      "line": 61,
+      "role": "new",
+      "statement": "Under the hypotheses of the sharp form, $\\mu(C)\\ge s-\\log|I|-(1-\\delta)^{-1}\\big(4u\\log(1+H/u)+(\\eta+4\\sqrt e)H\\big)$; the term $\\log|I|\\ge0$ is slack. Here $s-\\mu_{\\min}(C)\\le H$ with $H\\ge0$ (no lower bound on $s-\\mu_{\\min}(C)$), and the inner products at $v$ are arbitrary.",
+      "reference": "",
+      "label": "hs-frame-slope-inequality"
+    },
+    {
+      "lean": "Formalism.LFunctionChainParameters.MatrixLatticeEstimates.ramification_condition_holds",
+      "file": "Formalism/SizeWindowBrackets/ChainSlopeWindows/JointDModelAppliesUnitLattice.lean",
+      "line": 215,
+      "role": "new",
+      "reference": "",
+      "statement": "In the frame situation, if $\\tilde B_i=\\hat B_i\\nu_i$ with $\\nu_i:V_{i,v}\\to F_i$ isometric and $(\\hat B_i,\\gamma_i)$ $(D^*,\\eta_0,\\eta_1,e_0)$-nearly orthogonal with the parameter bounds of the compression lemma, then $\\mu(C)\\ge s-(1-\\delta)^{-1}\\big(4u\\log(1+H/u)+(5\\sigma+3\\sqrt{\\delta_e}+4\\sqrt{2e_0})H\\big)$, and the same with $-\\log|I|$.",
+      "label": "hs-frame-from-near-orthogonality"
+    },
+    {
+      "lean": "Formalism.MainNotions.Lnk.FrameReal_at",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/TopDensityNGeSixteen.lean",
+      "line": 519,
+      "role": "new",
+      "reference": "",
+      "statement": "Definition. A definite-side datum $D$ is frame-realised with parameters $(\\sigma,\\delta_e,e_B)$ if at some infinite place the maps $B_u$ of its division datum into $CC=RR^\\vee$ are the $(V_{RR}^\\vee)_v$-components of compressions $\\hat B_u\\nu_u$ of a $(D^*,\\eta_0,\\eta_1,e_0)$-nearly orthogonal family $\\hat B_u:F_u\\to(V_{RR}^\\vee)_v\\oplus\\mathbf C^\\ell$ with $\\dim F_u=\\dim M_u$, with the lattice conditions, $(1-\\delta)(\\dim V_{RR}+\\ell)\\le\\dim V_{RR}$, $\\sum_u(\\dim M_u-\\operatorname{rk}N_u)\\le\\delta_e\\sum_u\\dim M_u$ and the bounds on $\\eta_0,\\eta_1,e_0$.",
+      "label": "hs-frame-realisation"
+    },
+    {
+      "lean": "Formalism.MainNotions.Lnk.Frame_at",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/QuadraticLogDerivCongr.lean",
+      "line": 188,
+      "role": "new",
+      "reference": "",
+      "statement": "Definition. $D$ satisfies the frame bound with parameters $(\\eta_B,e_B)$ if for some $0\\le\\eta\\le\\eta_B$, $0\\le e\\le e_B$ and all $H>0$ with $s_D-\\mu_{\\min}(CC)\\le H$, $\\mu(CC)\\ge s_D-\\log|\\mathcal W|-(1-\\delta)^{-1}(4u_D\\log(1+H/u_D)+(\\eta+4\\sqrt e)H)$, where $s_D$ is the rank-weighted mean of $\\mu(N_u)-h_u$ and $u_D=\\max_u(\\mu_{\\max}(N_u)-h_u)-s_D$.",
+      "label": "hs-frame-bound"
+    },
+    {
+      "lean": "Formalism.MainNotions.Lnk.frame_at_of",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/TopDensityNGeSixteen.lean",
+      "line": 538,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum with size data at scale $x>1$, $\\Gamma=\\exp(C_\\Gamma m^5fx^{\\varepsilon})$, $C_0\\ge1$, $\\sigma=x^{-C_H}\\le1/20$, $0\\le\\delta_e\\le1/4$. If $D$ is frame-realised with parameters $(\\sigma,\\delta_e,e_B)$, $C_0^{-1}\\le\\dim M_u\\Gamma^2/D^*\\le C_0$ for all words, $C_0\\Gamma^2x^{C_H}\\le|\\mathcal W|$, each $N_u$ is finitely generated of positive rank spanning its space with $\\mu(N_u)\\le\\mu_{\\max}(N_u)$, and $\\mu_{\\min}(CC)=-\\mu_{\\max}(RR)$, then $D$ satisfies the frame bound with parameters $(5\\sigma+3\\sqrt{\\delta_e},e_B)$.",
+      "reference": "",
+      "label": "hs-frame-at-glued-lattice"
+    }
+  ],
+  "updated": "2026-11-20T19:00:04+00:00"
+}

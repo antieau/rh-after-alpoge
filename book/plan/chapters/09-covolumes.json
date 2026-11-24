@@ -1,0 +1,429 @@
+{
+  "id": "covolumes",
+  "title": "Masses, covolumes and an arithmetic volume estimate",
+  "state": "drafted",
+  "summary": "The chapter bounds above the normalized covolume of the lattice $M_j$ of $j$-th lifted forms on $U(W_j)$, of signature $(k+j-1,m-j)$, by $\\sum_\\rho(p_j-q_j)e_j(\\rho)\\log\\Omega$ plus an error of size $fm\\,e^{x^{\\varepsilon}}x^{\\varepsilon}\\log\\log x$, where $\\log\\Omega=\\gamma+\\log(2\\pi/\\operatorname{rd}_E)-\\frac{L'}{L}(1,\\chi_d)$. The proof compares lifted forms with integral automorphic forms on PEL unitary Shimura varieties, with norms controlled by the volumes of the level subgroups (through the identity between volumes and masses), and uses a slope descent, the degree of flat sections at CM points (the eta form of the Chowla-Selberg formula, resolution of singularities and GAGA), and a lower bound for arithmetic volumes of flag bundles over toroidal compactifications. The chapter also proves the definite-side counting results that use Siegel's mass formula (a class number formula and a lower bound for the growth of class counts along the chain); these, and the Rallis inner product formula, are not used in the covolume bound.",
+  "timeline": [
+    9,
+    13,
+    18
+  ],
+  "progress": "Fix pass done: V_j is all lifted forms in the point conditions, the nefness in the volume theorem follows the nef-positivity statement (new Lemma cv-nef-positivity), the models follow the semistable reduction route, and five citations that stood in for Lean arguments are now remarks, with the Lean's arguments outlined and marked as open steps.",
+  "statements": [
+    {
+      "label": "cv-siegel-mass-ratio",
+      "lean": "GlobalTheory.Mass.massRatio_all_unramified_cmFields",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/MassRatioAllUnramifiedCmFields.lean",
+      "line": 8,
+      "role": "standard",
+      "reference": "Gan-Hanke-Yu, Duke Math. J. 107 (2001), 103-133; Shimura, Euler products and Eisenstein series (1997)",
+      "statement": "Let $K$ be a CM field, unramified over its totally real subfield $F$ at every prime, and let $M\\ge3$. Then the mass of the standard unimodular Hermitian lattice of rank $M$ over $K$ divided by the mass in rank $M-1$ equals $\\big((M-1)!\\,(v/\\pi)^{M}\\big)^{[F:\\mathbf Q]}(2v)^{-[F:\\mathbf Q]/2}\\,L_\\eta(M)$, where $v$ is an invariant of $K$ and $L_\\eta(M)$ is a special value of the Hecke $L$-function of the quadratic character $\\eta$ of $K/F$."
+    },
+    {
+      "label": "cv-mass-bounds",
+      "lean": "GlobalTheory.mass_stdLat_le",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/HermitianMassUpperBound.lean",
+      "line": 72,
+      "role": "new",
+      "reference": "",
+      "statement": "For a CM field $E$ of degree $n$ and $M\\ge1$, $3^{-nM^2}\\le\\operatorname{mass}(I_M)\\le(3n^2M^4\\operatorname{rd}_E^2)^{3nM^2}$."
+    },
+    {
+      "label": "cv-volume-mass",
+      "lean": "MainStatements.Tam.vol",
+      "file": "Development/WeilBound/RepresentationTheoryGL/TubeMeasures/DisjointTubes/ProductMapEquality/PiCdEqMap.lean",
+      "line": 58,
+      "role": "standard",
+      "reference": "Gan-Hanke-Yu, Duke Math. J. 107 (2001); Prasad, Publ. Math. IHES 69 (1989)",
+      "statement": "For a Hermitian space $V$ over the host field with a self-dual lattice and signature $(P,Q)$ at every real place, $\\mu(\\mathcal F)\\prod_\\rho m(B_\\rho)=\\mu\\{h:h_f\\in K_V,h_\\infty\\in B\\}\\operatorname{vol}U(r)^f\\operatorname{mass}(I_r)$ for a fundamental domain $\\mathcal F$ of $U(V)(F)$ and standard archimedean measures $m$."
+    },
+    {
+      "label": "cv-level-volume",
+      "lean": "MainStatements.Tam.A.up_core",
+      "file": "Development/WeilBound/RepresentationTheoryGL/TubeMeasures/DisjointTubes/ExponentialThreeBound/LeExpThree.lean",
+      "line": 91,
+      "role": "new",
+      "reference": "",
+      "statement": "For a level subgroup $K\\subset K_V\\subset K_0$ of index at most $(g_0g_1)^{2fr^2}$ in $K_0$ and the Haar measure normalized by $K$, the volume of a fundamental domain satisfies $\\log\\mu(\\mathcal F)\\ge-3(fr^2(\\log(fr+3)+1)+\\log|d_E|)$ and, if $fr^2\\le e^t$, $\\log(g_0g_1)\\le30t$ and $\\log\\operatorname{rd}_E\\le2t$, $\\log\\mu(\\mathcal F)\\le fr^2\\log(r+3)+119fr^2t$."
+    },
+    {
+      "label": "cv-class-number-formula",
+      "lean": "Formalism.MainNotions.StandardLattice.ClassNumberFormula₂",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/StandardLattice.lean",
+      "line": 453,
+      "role": "new",
+      "statement": "Let $D$ be a definite datum in which some level prime satisfies $g_i>2fk+1$, the level primes $g_0,g_1$ split completely in $F$, and the auxiliary prime $T_u$ of a word $u$ splits completely in $F$. Then the number of lattice classes at the bottom of the chain of $u$ is $\\mathrm{mass}(I_k)\\cdot\\prod_i[GL_k(\\mathbf F_{g_i}):N_k(\\mathbf F_{g_i})]^f\\cdot(T_u^{k}-1)^{f}$. The formula is proved from the expression of the mass as a sum over double cosets and the triviality of the stabilizers at the level.",
+      "reference": ""
+    },
+    {
+      "label": "cv-chowla-selberg",
+      "lean": "GlobalTheory.T.classMean_log_norm_disc_chowlaSelberg",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/ClassMeanLogNormDiscChowlaSelbergStatement.lean",
+      "line": 9,
+      "role": "standard",
+      "reference": "Chowla-Selberg, J. Reine Angew. Math. 227 (1967)",
+      "statement": "Let $K$ be the imaginary quadratic field of discriminant $-d$ with $d>4$, and for each ideal class $c$ choose a representative fractional ideal $\\mathfrak a_c$ and its period lattice $L_c$. Then $\\frac1{h_K}\\sum_c\\log\\big(N\\mathfrak a_c^{6}\\,|\\Delta(L_c)|\\big)=12\\log2\\pi-6\\log d+6\\gamma-6\\frac{L'}{L}(1,\\chi_{-d})$."
+    },
+    {
+      "label": "cv-flat-degree",
+      "lean": "GlobalTheory.CovTop.FlatDegProof.flatDeg_alt_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FlatDegreeStatement.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "Let $E$ be an abelian CM host field with prime $d\\equiv7\\pmod{16}$ and Kronecker character $\\chi$ of $\\mathbf Q(\\sqrt{-d})$, and consider a PEL datum of signature $(p,q)$ over $E$, a level, its moduli scheme and coefficients, with uniformizations satisfying the compatibility laws. Then on every component flat sections of each type exist and each has Arakelov degree $\\frac{p-q}{2}\\log\\Omega+q(\\log d-\\log\\operatorname{rd}_E)$, where $\\log\\Omega=\\operatorname{Re}\\big(\\gamma+\\log(2\\pi/\\operatorname{rd}_E)-\\frac{L'}{L}(1,\\chi)\\big)$. The proof uses resolution of singularities, GAGA, and the Chowla-Selberg formula for the CM elliptic curves with multiplication by $\\mathbf Q(\\sqrt{-d})$.",
+      "reference": ""
+    },
+    {
+      "label": "cv-slope-descent",
+      "lean": "GlobalTheory.DescentFamily.descent",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/HtMapLeOfPoints.lean",
+      "line": 69,
+      "role": "new",
+      "statement": "Let $K$ be a totally complex number field, and let $A\\subset V$ and $B\\subset W$ be nonzero finitely generated $\\mathcal O_K$-submodules with Hermitian norms at the complex places. Let $\\varphi_1,\\dots,\\varphi_n:V\\to W$ be $K$-linear maps with $\\varphi_h(A)\\subset B$, jointly injective, and with $\\sum_h|\\varphi_h(f)|_\\sigma^2\\le e^{2P}|f|_\\sigma^2$ at every place $\\sigma$. Suppose $B$ is spanned over $K$ by vectors of $B$ of norm at most $e^{\\Lambda}$ at every place, $\\Lambda\\ge0$, $\\varepsilon\\ge0$, $n\\operatorname{rk}B\\le(1+\\varepsilon)\\operatorname{rk}A$, and $t\\le\\mu(A)-2P$. Then $t-\\varepsilon(|t|+2\\Lambda)\\le\\mu(B)$.",
+      "reference": ""
+    },
+    {
+      "label": "cv-functorial-resolution",
+      "lean": "FunctorialResolution.functorialResolutionCharZero",
+      "file": "Development/ResolutionOfSingularities/HasSimpleNormalCrossingsOfInStrictNormalCrossing.lean",
+      "line": 15,
+      "role": "standard",
+      "reference": "Hironaka, Ann. of Math. 79 (1964); Kollár, Lectures on Resolution of Singularities (2007), Theorem 3.36; the integral separated case in Resolution's Hironaka book, tags R02G and R022",
+      "statement": "Over fields of characteristic zero there is a resolution rule: it assigns to a reduced separated scheme of finite type a finite sequence of blow-ups that makes it smooth, is an isomorphism over the smooth locus and has exceptional set with simple normal crossings, and the rule commutes with smooth morphisms and with field extensions."
+    },
+    {
+      "label": "cv-moriwaki-bigness",
+      "lean": "PositivityTheory.Pf1.HilbertSamuelMoriwaki.moriwakiBig_outright",
+      "file": "Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/MoriwakiBigTheorem/Outright.lean",
+      "line": 9,
+      "role": "standard",
+      "reference": "Yuan, Invent. Math. 173 (2008), 603-649; Moriwaki, J. Algebraic Geom. 18 (2009), 407-457",
+      "statement": "For a nef Hermitian line bundle $\\bar A$ with semipositive metric on an arithmetic variety of dimension $D+1$, the arithmetic self-intersection is at most the arithmetic volume: $\\hat c_1(\\bar A)^{D+1}\\le\\widehat{\\mathrm{vol}}(\\bar A)$."
+    },
+    {
+      "label": "cv-volume-theorem",
+      "lean": "GlobalTheory.CompanionTheory.Ar.Top.VolumeTheoremX",
+      "file": "Development/AutomorphicSpectrum/Statements/TowerExistence/GoodTowerExistsX.lean",
+      "line": 28,
+      "role": "new",
+      "statement": "There is $C\\ge0$ with the following property. Let $E$ be an abelian CM field, let a PEL unitary datum of signature $(p,q)$ with $q\\ge1$ and $3q+1\\le p+q$ be given over $E$, with its moduli schemes, an integral model of a flag bundle, a tower of CM types whose bad set has at most $4|\\Phi|(p+q)^2$ elements, and a full arithmetic intersection system. Then the arithmetic volume of each tautological line bundle equals the limit of its self-intersections, the arithmetic intersection numbers of tautological monomials are given by an explicit main term up to $O(\\log B/B)$, and the average over components of the slopes of the arithmetic volumes of regular weights $u$ is at least $-C\\big((\\log(Br_E)+|\\frac{L'}{L}(1,\\chi)|)\\|u\\|_1+\\min(p,q)\\,\\mathrm{spread}(u)\\big)$.",
+      "reference": ""
+    },
+    {
+      "label": "cv-covolume-bound",
+      "lean": "GlobalTheory.CovTop.CovolumeBoundOfX",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LiftLambdaBound.lean",
+      "line": 60,
+      "role": "main",
+      "statement": "For the families of definite-side data and every sufficiently small $\\varepsilon$, there are constants such that eventually, at every point of every sufficiently large family satisfying the point conditions, for every $C\\ge C_0$ and every lift index $j$, $\\frac{1}{D}\\operatorname{lcv}(M_j)\\le\\sum_{\\rho}(p_j-q_j)\\,e_j(\\rho)\\log\\Omega+C\\,fm\\,e^{x^{\\varepsilon}}x^{\\varepsilon}\\log\\log x$. Here $M_j$ is the lattice of $j$-th lifted forms on $U(W_j)$ in its Petersson metric, $(p_j,q_j)=(k+j-1,m-j)$, $D$ is the rank of the glued lattice (equal to the rank of $M_j$ under the point conditions), $\\operatorname{lcv}$ is the normalized log-covolume, and $e_j(\\rho)$ are the weights of the Harish-Chandra parameter.",
+      "reference": ""
+    },
+    {
+      "label": "cv-covolume-bound-from-literature",
+      "lean": "SelfIntersectionVolumeEstimates.topCovolSlim2_use_alt_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean",
+      "line": 16,
+      "role": "main",
+      "statement": "Assume resolution of singularities and principalization in characteristic zero, the Poincaré-Lelong formula, the arithmetic Hilbert-Samuel upper bound, Moriwaki's bigness inequality, exactness of the Hodge-Tate sequence for $p$-divisible groups, Zarhin's trick, asymptotic Riemann-Roch for nef divisors, the integral toroidal compactifications of Siegel and unitary PEL moduli, seminegativity of the Lie algebra of semi-abelian schemes, two-point separation, the Arakelov degree formula, the published arithmetic results and Grothendieck-Messing deformation theory. Then the covolume bound of the previous statement holds.",
+      "reference": ""
+    },
+    {
+      "label": "cv-hermitian-norms",
+      "lean": "GlobalTheory.AllWt.slope_sq",
+      "file": "Development/AbelianVarietyTheory/Definitions/Foundations/IsProbabilityMeasureMuPart.lean",
+      "line": 32,
+      "role": "new",
+      "reference": "",
+      "statement": "Hermitian norm systems over a totally complex field, the normalized slope $\\mu$, $\\mu_{\\max}$, and the normalized log-covolume $\\operatorname{lcv}=-\\operatorname{rk}\\cdot\\mu$."
+    },
+    {
+      "label": "cv-rescaling",
+      "lean": "GlobalTheory.T.covolumePerRank_le_neg_slope_scaled",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/CovolumePerRankLeNegSlopeScaledStatement.lean",
+      "line": 10,
+      "role": "new",
+      "reference": "",
+      "statement": "If a lattice is written in coordinates whose metric is $s\\le1$ times the ambient metric, then its normalized log-covolume per rank is at most minus the slope of the ambient lattice."
+    },
+    {
+      "label": "cv-slope-base-change",
+      "lean": "GlobalTheory.SlopeExt.slope_sq_sub_le_slope_sq_span",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/SlopeSqSubLeSlopeSqSpan.lean",
+      "line": 250,
+      "role": "new",
+      "reference": "",
+      "statement": "If a semilinear map from a lattice over $K$ to a space over $K'\\supset K$ preserves linear independence and enlarges norms by at most $e^B$, the $\\mathcal O_{K'}$-span of the image has slope at least $\\mu(L)-2B$; if the norms agree up to factors $c$ with $|\\log c|\\le B$, the maximal slope grows by at most $2B$."
+    },
+    {
+      "label": "cv-cut",
+      "lean": "GlobalTheory.CutNum.slope_good_ge",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/MajAtAddRight.lean",
+      "line": 111,
+      "role": "new",
+      "reference": "",
+      "statement": "Cutting a lattice $L\\subset M$ by an orthogonal idempotent $e$ with $g\\,e(L)\\subset L$ loses at most $12\\delta Q$ of slope, when $\\operatorname{rk}(L\\cap\\ker e)\\le3\\delta\\operatorname{rk}L$, $\\delta\\le1/12$, $\\mu_{\\max}(M)\\le Q$, $-Q\\le\\mu(L)$ and $2\\log g\\le Q$."
+    },
+    {
+      "label": "cv-mass",
+      "lean": "Formalism.HermitianLatticesTheory.mass",
+      "file": "Formalism/HermitianLattices/StatementMass.lean",
+      "line": 11,
+      "role": "standard",
+      "reference": "",
+      "statement": "The genus and the mass of a Hermitian lattice over a CM field; the standard lattices $I_M$."
+    },
+    {
+      "label": "cv-where-mass-enters",
+      "lean": "GlobalTheory.EX.WinLow.window_lower",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/WindowLower.lean",
+      "line": 177,
+      "role": "new",
+      "reference": "",
+      "statement": "Remark: the mass ratio, the class number formula and the Rallis inner product formula are not used in the covolume bound, but the identity between volumes of unitary groups and masses is, through the volumes of the level subgroups; the mass ratio enters the definite side through a lower bound for the growth of class counts along the chain."
+    },
+    {
+      "label": "cv-log-omega",
+      "lean": "GlobalTheory.CM.logOm",
+      "file": "Development/AbelianVarietyTheory/Definitions/CMLattices/ExistsIsThetaDegOfIsLocalModel.lean",
+      "line": 23,
+      "role": "new",
+      "reference": "",
+      "statement": "$\\log\\Omega_E(\\chi)=\\gamma+\\log(2\\pi/\\operatorname{rd}_E)-\\frac{L'}{L}(1,\\chi)$."
+    },
+    {
+      "label": "cv-constant-sections",
+      "lean": "GlobalTheory.FlatLine.ConstSec",
+      "file": "Development/AbelianVarietyTheory/Definitions/Foundations/ExistsFlatSecRankZero.lean",
+      "line": 443,
+      "role": "new",
+      "reference": "",
+      "statement": "Constant sections of a weight and defect on a component (rational sections with constant norm at every complex embedding and constant valuation at the integral points over each finite place), their degree, and flat sections of type $\\tau$."
+    },
+    {
+      "label": "cv-constant-sections-proportional",
+      "lean": "GlobalTheory.FlatLine.ConstSec.deg_eq",
+      "file": "Development/AbelianVarietyTheory/Proofs/FoundationProofs/IsAlgebraicOfNormConst.lean",
+      "line": 139,
+      "role": "new",
+      "reference": "",
+      "statement": "Two constant sections of the same weight and defect on a component differ by a nonzero constant of the coefficient field, and have the same degree."
+    },
+    {
+      "label": "cv-where-chowla-selberg-enters",
+      "lean": "GlobalTheory.SqTop.betaArch_of_transport",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/BetaConjugateMeanLogAbsBoundOfTransport.lean",
+      "line": 43,
+      "role": "new",
+      "reference": "",
+      "statement": "Remark: the eta form of the Chowla-Selberg formula enters the covolume bound through the flat degree formula; the discriminant form enters the definite side through bounds for normalized CM values in the norms of theta lifts."
+    },
+    {
+      "label": "cv-point",
+      "lean": "GlobalTheory.BigTop.PtAt",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/TupleReadBaseTupleEqFamily.lean",
+      "line": 145,
+      "role": "new",
+      "reference": "",
+      "statement": "Situation: a point of a family of definite-side data, with the lattices $M_j$ of lifted forms, the main terms and the unit $u=fmbx^{\\varepsilon}\\log\\log x$."
+    },
+    {
+      "label": "cv-point-conditions",
+      "lean": "SelfIntersectionVolumeEstimates.topCovolG_alt_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolG.lean",
+      "line": 39,
+      "role": "new",
+      "reference": "",
+      "statement": "Six properties at each point: recursion to the separated lattice (the lattice cut by the idempotent of the separated characters), the cut data, the bad set bound, size bounds, comparison of lifted forms with integral automorphic forms on the Shimura variety of $U(W_j)$, and the lower bound for the slope of the latter."
+    },
+    {
+      "label": "cv-arithmetic-volume-step",
+      "lean": "GlobalTheory.CovTop.LowCover.low_of_cover_hypotheses",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LowOfCoverHypotheses.lean",
+      "line": 16,
+      "role": "new",
+      "reference": "",
+      "statement": "The slope of integral automorphic forms of weight $\\kappa_j$ on $U(W_j)$ is at least $-\\mathrm{main}_j-C_2u$: by CM points for $j=m$, and for $j<m$ by descent between weights on a deep cover, flat sections and the arithmetic volume estimate."
+    },
+    {
+      "label": "cv-bound-as-used",
+      "lean": "GlobalTheory.Fc.Ind.eventual_L3_of_covolume_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EventualL3OfCovolume.lean",
+      "line": 14,
+      "role": "new",
+      "reference": "",
+      "statement": "Remark: the covolume bound is applied at points where its hypotheses are proved; the inequality is not empty there, and its error is absorbed into the definite side's error budget."
+    },
+    {
+      "label": "cv-transference",
+      "lean": "ReciprocityTheory.ChartRestriction.G.T0.transference_dual",
+      "file": "ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/HeightTheory/Transference.lean",
+      "line": 168,
+      "role": "standard",
+      "reference": "Banaszczyk, Math. Ann. 296 (1993), 625-635 (a stronger bound)",
+      "statement": "If every nonzero vector of a lattice $\\Gamma\\subset\\mathbf R^N$ has length at least $\\lambda$, then the dual lattice contains $N$ linearly independent vectors of length at most $N^2/\\lambda$."
+    },
+    {
+      "label": "cv-short-basis",
+      "lean": "GlobalTheory.RootClassCount.exists_bounded_basis",
+      "file": "Development/AbelianVarietyTheory/Proofs/FoundationProofs/ExistsFinsetSelfDualClassesRootDiscr.lean",
+      "line": 41,
+      "role": "new",
+      "reference": "",
+      "statement": "A self-dual Hermitian $\\mathcal O_E$-lattice in $E^M$ has an $E$-basis whose Gram matrix has all conjugates of absolute value at most $4f^3M^4\\operatorname{rd}_E^2$, $f=[E:\\mathbf Q]/2$."
+    },
+    {
+      "label": "cv-class-count",
+      "lean": "GlobalTheory.ClassCount.exists_finset_classes",
+      "file": "Development/AbelianVarietyTheory/Proofs/CuspFormEvaluations/ExistsFinsetSelfDualClassesHerm.lean",
+      "line": 399,
+      "role": "new",
+      "reference": "",
+      "statement": "Lattices with integral Hermitian form and a basis with Gram matrix bounded by $B$ at every embedding fall into at most $((1+2B)MB)^{[E:\\mathbf Q]M^2}$ isometry classes."
+    },
+    {
+      "label": "cv-separated",
+      "lean": "Formalism.MainNotions.ArithmeticCylinders.goodAt",
+      "file": "Formalism/SharpRestriction/LevelLetterCocycles/ArithmeticCylinders.lean",
+      "line": 355,
+      "role": "new",
+      "reference": "",
+      "statement": "Labels of irreducible characters of $GL_r(\\mathbf F_g)$ (Green), series idempotents, weights for the Gelfand--Graev idempotent, separated tuples of labels at a level prime, separated characters of the level group and the separated idempotent."
+    },
+    {
+      "label": "cv-bad-part",
+      "lean": "GlobalTheory.BadCount.bad_part_le_locShare",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/BadPartDimLeSumLocalSharesWhittaker.lean",
+      "line": 12,
+      "role": "new",
+      "reference": "",
+      "statement": "If a representation of a split extension of the level group embeds in regular representations of the half-unipotent subgroups with a balance constant $c$, the Whittaker eigenspace meets the kernel of the separated idempotent in dimension at most $c$ times the sum of the shares of the non-separated tuples times its own dimension."
+    },
+    {
+      "label": "cv-property-w",
+      "lean": "Formalism.IrreducibleCountingLemmas.GaloisIrreducibility.PropW",
+      "file": "Formalism/PadicSubsetSums/CentralIdempotents/EigenbasisOfDistinctRoots.lean",
+      "line": 416,
+      "role": "new",
+      "reference": "",
+      "statement": "For random families of monic polynomials of degree $N$ over a finite field, weighted by Green's weights on squarefree polynomials, the probability that the family is not separated is at most an explicit sum of five terms."
+    },
+    {
+      "label": "cv-local-share",
+      "lean": "GlobalTheory.CovTop.LocShareNum.local_share_count_le_exp_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LocalShareCountLeExp.lean",
+      "line": 31,
+      "role": "new",
+      "reference": "",
+      "statement": "At the points of the families at large scale $x$, the shares of the non-separated tuples at $g_0$ and $g_1$ sum to at most $\\exp(-x^{\\varepsilon/(7J)})$."
+    },
+    {
+      "file": "Formalism/PadicSubsetSums/StableGradedCounts/LocalEstimateIVOfTypeSetWeight.lean",
+      "label": "cv-squarefree-mass",
+      "lean": "Formalism.IrreducibleCountingLemmas.GaloisIrreducibility.square_mass_lower_bound",
+      "line": 1243,
+      "reference": "Rosen, Number Theory in Function Fields, Proposition 2.3 (the count of squarefree polynomials)",
+      "role": "new",
+      "statement": "The weights $\\prod_{P\\mid f}(g^{\\deg P}-1)^{-1}$ of the monic squarefree polynomials of degree $N$ over $\\mathbf F_g$ with nonzero constant term sum to at least $1-2/g$."
+    },
+    {
+      "file": "Formalism/PadicSubsetSums/StableGradedCounts/SquareSetMemExceptionalUnion.lean",
+      "label": "cv-local-estimates",
+      "lean": "Formalism.IrreducibleCountingLemmas.GaloisIrreducibility.local_estimate_second",
+      "line": 429,
+      "reference": "",
+      "role": "new",
+      "statement": "Bounds for the weight of the squarefree polynomials that fail each condition of separation: two roots with the same prime-to-$\\ell$ part ($23\\log g/\\sqrt g$), a root with the prime-to-$\\ell$ part of a given $c$ ($\\frac1{4\\min(q_1,d)}+\\frac{1+\\log N}{g-1}$), a divisor of degree $a$ ($7/8$), and no factor of prime degree in $(N/2,N-3]$ ($1-\\frac1{5\\log N}$)."
+    },
+    {
+      "file": "Development/AutomorphicSpectrum/Proofs/GlobalProofs/GagaSections.lean",
+      "label": "cv-gaga",
+      "lean": "GlobalTheory.CompanionTheory.Gaga.gagaSections",
+      "line": 104,
+      "reference": "Serre, GAGA, Ann. Inst. Fourier 6 (1956); SGA 1, Exposé XII",
+      "role": "standard",
+      "statement": "On a proper smooth complex scheme, a family of local functions on the complex points that is holomorphic and compatible with the transition functions of a line bundle comes from a global algebraic section."
+    },
+    {
+      "file": "ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/BlowupProjections/BlowupProjStatement.lean",
+      "label": "cv-resolution-coordinates",
+      "lean": "ReciprocityTheory.ChartRestriction.G.Geo.ResK.ResKStatement",
+      "line": 66,
+      "reference": "Hironaka (1964); Res26, Tags R02G and R021",
+      "role": "new",
+      "statement": "A reduced closed subscheme of $\\mathbf P^M_K$ in characteristic zero with a dense open part smooth of relative dimension $D$ has a resolution in $\\mathbf P^M\\times\\mathbf P^r$, an isomorphism over that part, whose boundary is cut out by some of $D$ local coordinates."
+    },
+    {
+      "file": "Formalism/MeanHeightDescent/DivisionInequalityWithCovolume.lean",
+      "label": "cv-minkowski-slope",
+      "lean": "Formalism.ExtensionFiltration.muMaxMinkowski",
+      "line": 25,
+      "reference": "",
+      "role": "new",
+      "statement": "If every nonzero vector of a lattice $L$ over a totally complex field $K$ has mean log-norm at least $-\\lambda$, then $\\mu_{\\max}(L)\\le2\\lambda+\\log\\operatorname{rk}L+\\log|d_K|/[K:\\mathbf Q]$."
+    },
+    {
+      "file": "Development/AutomorphicSpectrum/Statements/MetricStatements/AgreementIffGuarded.lean",
+      "label": "cv-nef-positivity",
+      "lean": "GlobalTheory.CompanionTheory.Ar.PB.NefPol",
+      "line": 97,
+      "reference": "",
+      "role": "new",
+      "statement": "For a flag model realized bijectively on an analytic system, an integer combination of the realized bundles with nonnegative coefficients outside a set of indices with vanishing Chern forms has nonnegative degree on every curve of the generic fibre."
+    },
+    {
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/SemistableReduction₂/SemistableReductionSt.lean",
+      "label": "cv-semistable-reduction",
+      "lean": "GlobalTheory.Published.SemistableReductionSt",
+      "line": 15,
+      "reference": "Grothendieck, SGA 7 I, Exposé IX, Théorème 3.6",
+      "role": "standard",
+      "statement": "A polarized abelian variety over a finite extension of $\\mathbf Q_p$ extends to a semi-abelian scheme over the ring of integers of a finite extension."
+    },
+    {
+      "file": "",
+      "label": "cv-model-literature",
+      "lean": "",
+      "line": 0,
+      "reference": "Faltings–Chai (1990), Chapters II–V; Lan (2013); Mumford (1972)",
+      "role": "new",
+      "statement": "Remark comparing the models of Theorem cv-model-toroidal with toroidal compactifications."
+    },
+    {
+      "file": "",
+      "label": "cv-cut-index",
+      "lean": "",
+      "line": 0,
+      "reference": "",
+      "role": "new",
+      "statement": "Remark: the slope inequality in the proof of Lemma cv-cut by an index count."
+    },
+    {
+      "file": "",
+      "label": "cv-proportionality-literature",
+      "lean": "",
+      "line": 0,
+      "reference": "Mumford (1977)",
+      "role": "new",
+      "statement": "Remark comparing Theorem cv-proportionality-mumford with Mumford's proportionality theorem."
+    },
+    {
+      "file": "",
+      "label": "cv-deep-components-literature",
+      "lean": "",
+      "line": 0,
+      "reference": "Deligne (1979); Silverman (1994), Theorem II.5.6",
+      "role": "new",
+      "statement": "Remark relating Lemma cv-deep-components to Deligne's reciprocity law for connected components."
+    },
+    {
+      "file": "",
+      "label": "cv-volume-mass-literature",
+      "lean": "",
+      "line": 0,
+      "reference": "Gan–Hanke–Yu (2001); Prasad (1989)",
+      "role": "new",
+      "statement": "Remark relating Theorem cv-volume-mass to the mass formula of Gan, Hanke and Yu."
+    }
+  ],
+  "updated": "2026-11-20T23:53:09Z"
+}

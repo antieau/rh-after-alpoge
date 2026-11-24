@@ -1,0 +1,238 @@
+{
+  "id": "assembly",
+  "title": "Assembly of the proof",
+  "state": "drafted",
+  "summary": "The chapter puts the pieces together. A family of definite-side data at a set of scales is tied when, at each scale, its numerical invariants satisfy the hypotheses of the comparison inequality of Chapter 4. The links of Chapters 5 to 9 (divisibility, gains at inert primes, near-orthogonality, full row space, slope bounds) together with the bound on Tate-Shafarevich groups show that suitably designed families are tied at all large scales. The families exist with windows of exponent $3/2$ for every primitive character, by Chapter 3; Chapter 4 then gives the window bound, Chapter 2 the zero-free half-plane for primitive characters, and Chapter 1 the five main theorems.",
+  "timeline": [
+    20
+  ],
+  "progress": "Final round done: both OPEN blocks are gone. The raw selection's twist record, spectral condition and square-integrable columns are described, item (3)(c) cites Chapter 8's lift-distinct types, and the twist choices of a family are kept apart from the twist selection; open steps mark the derivations from the raw selection in asm-tied-from-green, the construction of asm-definite-side-exists, the estimates of asm-global-link, the proviso of asm-design-exists and the local bound at 2 and 3.",
+  "statements": [
+    {
+      "lean": "Formalism.MainNotions.ChainTied",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/TieGlobal.lean",
+      "line": 97,
+      "role": "new",
+      "statement": "Let a family of definite-side data be given and let $x$ be a scale with exponents $e_D,e_L$ and constants $K,c_{HH},e_K,C_L$. The family is tied at $x$ if some member at $x$ and a choice of base points, Frobenius data, the top classes $T$, exponents $a_t$, weights $w$ and a host compatibility function $\\ell$ give numerical data, in the sense of the comparison inequality of Chapter 4, that satisfy all of its hypotheses, together with the size windows and the matching of the inert-prime and main terms with the balance identity.",
+      "reference": "",
+      "label": "asm-tied"
+    },
+    {
+      "lean": "UpperTheory.Top.TopG",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "For every $\\lambda>1$ and every host requirement $G$: if hosts satisfying $G$ exist at the scales of a set with windows of exponent $\\lambda$, and every family whose members satisfy $G$ at all its scales satisfies the Tate-Shafarevich bound $\\sum_\\ell\\log\\ell\\sum_{1\\le k<t}\\operatorname{len}\\text{Ш}^1_\\ell(E,k)\\le\\sqrt{\\exp(x^{\\varepsilon})}$, then there are $e_D,e_L$ and $\\varepsilon_1>0$ such that for every $\\varepsilon\\in(0,\\varepsilon_1)$ some such family is tied at all large scales of its set of scales.",
+      "reference": "",
+      "label": "asm-tied-everywhere"
+    },
+    {
+      "lean": "GlobalTheory.Top.designExists_of_tuSize_aux4n_litThin",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkEx.lean",
+      "line": 15,
+      "role": "new",
+      "statement": "Let $\\mathcal A$ be a class of families with a twist selection and duty data, and suppose that Minkowski's bound on finite subgroups of $GL_n(\\mathbf Q)$ yields design choices in $\\mathcal A$, that the size condition on the auxiliary primes $T_u$ and the class number formula hold eventually along the class, and that the zero-density and zero-free-region estimates of Chapter 3 hold. Then for every sufficiently small $\\varepsilon$ and every largeness threshold there is a designed family in the class with the chosen constants, $b^{m/2}\\le T_u$, $\\log T_u\\le CmL$, and the size bounds on the stabilizer denominators.",
+      "reference": "Minkowski, J. reine angew. Math. 101 (1887), for the bound on finite subgroups of GL_n(Q).",
+      "label": "asm-design-exists"
+    },
+    {
+      "lean": "GlobalTheory.Top.link_gl",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LinkGl.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "Let $\\mathcal A$ be a class of families with duty data, satisfying the second-layer conditions at the real places eventually, and assume the mass ratio under volume and the genus mass formula for every datum. Then eventually along the class: the chosen constants force every division lattice $N_u$ to have full rank $d_u>0$; and, under the size conditions, the global link holds: the gain, orthogonality, irreducibility, division and slope links together imply that the family is tied with $C_{abs}=2$, $C_0=3$, $e_D=2$, $e_L=0$. The slope part uses the frame inequality of Chapter 5 and Bost's inequality for $\\mu_{\\max}(M_u)$.",
+      "reference": "",
+      "label": "asm-global-link"
+    },
+    {
+      "lean": "UpperTheory.Top.topDesWin",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/DesWin.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Let $\\mathcal C'\\subset\\mathcal C$ and $\\mathcal C'\\subset\\mathcal E$ be classes of families, every family in $\\mathcal E$ satisfying the Tate-Shafarevich bound. Suppose designed families exist in $\\mathcal C'$, and that eventually along designed families of $\\mathcal C$ the Tate-Shafarevich link, the support link, the irreducibility link, the rank equality at small level, the division link, the rank conditions, the gain link, the orthogonality link and the global link hold. Then there are $e_D,e_L,\\varepsilon_1$ such that for every $\\varepsilon\\in(0,\\varepsilon_1)$ some family in $\\mathcal E$ is tied at all large scales.",
+      "reference": "",
+      "label": "asm-tied-from-links"
+    },
+    {
+      "lean": "UpperTheory.Top.shape_closed_link_n_of_green",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean",
+      "line": 33,
+      "role": "new",
+      "statement": "Assume Green's parametrization of cuspidal characters of $GL_d(\\mathbf F_g)$. Then every collection of definite-side hypotheses (a class of families with selections, the division, period, size and orthogonality inputs, the class number formula, the zero-density input and the definite-side condition), together with the Tate-Shafarevich link along the class, implies the statement above: for every $\\lambda>1$ and host requirement $G$ with hosts at windows of exponent $\\lambda$ and the Tate-Shafarevich bound, suitable families are tied at all large scales.",
+      "reference": "",
+      "label": "asm-tied-from-green"
+    },
+    {
+      "lean": "UpperTheory.Lit.nonempty_hyps_definite_side_of_closed_bound",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean",
+      "line": 44,
+      "role": "main",
+      "statement": "Assume the published results on unitary groups and on the local theta correspondence (Chapter 12), the agreement of global and local theta integrals and the local matching, the covolume bound of Chapter 9 and the existence of maps satisfying the local Langlands laws (Chapter 11), and suppose that for every dependence constant the local bound at the twisted places above $2$ and $3$ holds along the linked families. Then a collection of definite-side hypotheses exists; the Tate-Shafarevich link of the collection is derived from the local bound at $2$ and $3$.",
+      "reference": "",
+      "label": "asm-definite-side-exists"
+    },
+    {
+      "lean": "UpperTheory.Top.zeroFreeAll_of_topG",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean",
+      "line": 26,
+      "role": "main",
+      "statement": "Let $\\lambda>1$. Suppose that the statement on tied families above holds, and that for every primitive Dirichlet character $\\psi$ hosts with windows of exponent $\\lambda$ exist that satisfy the host conditions of the cyclic level of $\\psi$ at $(x,\\varepsilon,4)$ and the Tate-Shafarevich bound. Then $L(s,\\psi)\\ne0$ for every primitive $\\psi$ and every $s$ with $\\operatorname{Re}s>1/2$.",
+      "reference": "",
+      "label": "asm-zero-free-primitive"
+    },
+    {
+      "lean": "UpperTheory.Top.every_character_of_green_v_win",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean",
+      "line": 16,
+      "role": "main",
+      "statement": "Assume Green's parametrization, the weakening of Vandiver's conjecture of Chapter 10, and the existence of a collection of definite-side hypotheses. Then for every Dirichlet character $\\chi$ and every $s$ with $\\operatorname{Re}s>1/2$, $L(s,\\chi)\\ne0$ unless $\\chi$ is trivial and $s=1$. The case $\\lambda=3/2$ of the previous statement gives primitive characters, and the Euler factors give the rest.",
+      "reference": "",
+      "label": "asm-every-character-green"
+    },
+    {
+      "lean": "UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+      "line": 810,
+      "role": "main",
+      "statement": "Assume the Galois representations of Chapter 11 (in the form stated there, used for both of its roles) and the local Langlands laws, and assume the Tate-Shafarevich bound of Chapter 10. Then the half-plane statement holds for every Dirichlet character. The proof feeds the published results of Chapter 12 and the covolume bound of Chapter 9, whose own hypotheses are proved results, into the previous statements.",
+      "reference": "",
+      "label": "asm-every-character-literature"
+    },
+    {
+      "lean": "UpperTheory.FinalTheorems.everyCharacter_of_row",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean",
+      "line": 7,
+      "role": "main",
+      "statement": "If the Galois representations of Chapter 11 exist with local-global compatibility relative to every map satisfying the local Langlands laws, then $L(s,\\chi)\\ne0$ for every Dirichlet character $\\chi$ and $\\operatorname{Re}s>1/2$, unless $\\chi$ is trivial and $s=1$. Since that existence is proved, this gives the half-plane statement of Chapter 1.",
+      "reference": "",
+      "label": "asm-every-character"
+    },
+    {
+      "lean": "Formalism.MainNotions.Des",
+      "file": "Formalism/SharpRestriction/SmoothDesignExistence/DesignExistsDes.lean",
+      "line": 10,
+      "role": "new",
+      "statement": "Let $\\mathcal C$ be a class of families and $C_0$ real. A family has chosen constants $(C_0,C_H)$ if eventually its top classes number between $\\delta_1n/2$ and $2\\delta_1n$, the bad tops are bounded, $|g_\\chi(x)|\\le x^{1/2+\\varepsilon}$ and $|\\frac{L'}{L}(1,\\chi)|\\le C_5\\log x$ for $\\chi_{-q},\\chi_{-d},\\chi_{-q}\\chi_{-d}$, host characters have $|g_\\chi(y)|\\le ye^{-c_6x^{\\varepsilon/8}}$ for $y\\ge X'/3$, $C_0^{-1}\\le\\dim M_u\\cdot\\Gamma^2/D^*\\le C_0$ and $C_0\\Gamma^2x^{C_H}\\le|W|$. The size conditions are $b^{m/2}\\le T_u\\le e^{C_{T_u}mL}$ and $\\log\\Gamma_u\\le CfN_m\\log(fN_m)$. Designed members of $\\mathcal C$ are those with smooth stabilizer denominators, the twist condition, chosen constants and both size conditions; designed families exist if for every small $\\varepsilon$ and every largeness threshold there is such a family; design choices are the same without the thin-scale bound and the proviso.",
+      "reference": "",
+      "label": "asm-designed"
+    },
+    {
+      "lean": "Formalism.L2.Top3.Duty",
+      "file": "Formalism/LocalToGlobal/ClassOfRecordOfChoice.lean",
+      "line": 77,
+      "role": "new",
+      "statement": "A family carries its duty data if its constants take fixed values ($C_t=401$, $c_{TO}=377$, $e_P=12$, $C_{YL}=9$, ...), its ranks are adapted to the scale, the first modulus is below $X'$, the tame data are distinct, the weight vectors have small shares, every tuple is used and the twist conditions hold.",
+      "reference": "",
+      "label": "asm-duty"
+    },
+    {
+      "lean": "UpperTheory.Top.HypV",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/DivinNOfHypV.lean",
+      "line": 10,
+      "role": "new",
+      "statement": "A family satisfies the Tate-Shafarevich bound if eventually every member, with host field $E$ and twist parameter $t$, satisfies the bound $(t,e^{x^{\\varepsilon}/2})$ of Chapter 10.",
+      "reference": "",
+      "label": "asm-sha-bound"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkN",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 45,
+      "role": "new",
+      "statement": "The Tate-Shafarevich link: eventually $\\eta_j\\le d_j\\big(C(fmbL^2+(\\log x)^2N_c)+\\sum_\\ell\\log\\ell\\sum_{1\\le k<t}\\operatorname{len}\\text{Ш}^1_\\ell(E,k)\\big)$ for the twisted defects $\\eta_j$; the rank equality $d_j=D_0$ at small level; and the rank conditions on the division lattices $N_u$.",
+      "reference": "",
+      "label": "asm-twisted-links"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkGLOBAL",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 162,
+      "role": "new",
+      "statement": "The slope link $|\\mu(N_u)-\\mu(N^\\circ_u)-\\sum_w\\mathrm{sz}_w(s(u,w))|\\le CX''(n)$; the global inputs (gain, orthogonality, irreducibility, division and slope links); and the global link: chosen constants and the global inputs imply that the family is tied at all large scales with exponents $e_D,e_L$.",
+      "reference": "",
+      "label": "asm-global-inputs"
+    },
+    {
+      "lean": "UpperTheory.Top.divinN_of_hypV",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/DivinNOfHypV.lean",
+      "line": 117,
+      "role": "new",
+      "statement": "The Tate-Shafarevich bound, the Tate-Shafarevich link and the rank equality at small level imply the division bound at twisted places, $\\eta_j\\le D_0\\,Cx^{\\varepsilon}(B_0+N_c)$, with $C=|C_1|+1$.",
+      "reference": "",
+      "label": "asm-division-from-sha"
+    },
+    {
+      "lean": "Formalism.MainNotions.J.linkMu",
+      "file": "Formalism/SharpRestriction/AdmissibleParameterJoins/SumLogPrimeFactorsLe.lean",
+      "line": 728,
+      "role": "new",
+      "statement": "If eventually the local data vanish above $X''(n)$ away from $T_u,g_0,g_1,d$ and the prime factors of $\\Gamma_u$, the lattices $N_u$ are finitely generated of positive rank, and $\\log T_u,\\log\\Gamma_u\\ll X''(n)$, then the slope link holds with constant $2(\\log4+3+C_T+C_G)$; the proof rounds local exponents and uses Chebyshev's bound $\\sum_{p\\le y}\\log p\\le y\\log4$.",
+      "reference": "",
+      "label": "asm-slope-link"
+    },
+    {
+      "lean": "UpperTheory.Top.FReq",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/Supply.lean",
+      "line": 10,
+      "role": "new",
+      "statement": "A host requirement is a property of a scale, a Galois datum, a host field, a set of top classes and the twist parameter; $\\mathcal C_G(\\lambda)$ is the class of families with windows of exponent $\\lambda$ meeting it at every member; hosts satisfying it exist on windows in the sense of Chapter 3; and $G_\\psi$ asks for the host conditions of the cyclic level of $\\psi$ at $(x,\\varepsilon,4)$ and the Tate-Shafarevich bound $e^{x^{\\varepsilon}/2}$.",
+      "reference": "",
+      "label": "asm-host-requirement"
+    },
+    {
+      "lean": "GlobalTheory.Fc.HypsAlt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/Hyps.lean",
+      "line": 22,
+      "role": "new",
+      "statement": "A collection of definite-side hypotheses: a class of families with a raw selection, a function $c_T$, counting constants and $c_I>0$, with the design property (from Minkowski's bound), duty data, selected rows, size and class-number properties, the analytic input of Chapter 3, the orthogonality, integrality and irreducibility inputs, the definite-side condition, surjective projections, the second-layer conditions at the real place with the mass formulas, and the Tate-Shafarevich link along the designed members.",
+      "reference": "",
+      "label": "asm-definite-side-hypotheses"
+    },
+    {
+      "lean": "UpperTheory.Lit.every_character_of_theta_integrals_local_matching",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean",
+      "line": 69,
+      "role": "new",
+      "statement": "Assume the published results on unitary groups and on the local theta correspondence, the agreement of theta integrals and the local matching, the covolume bound, local Langlands maps and the weakening of Vandiver's conjecture. Then the half-plane statement holds. Green's parametrization and the local bound at $2$ and $3$ come from the published results on unitary groups.",
+      "reference": "",
+      "label": "asm-every-character-theta"
+    },
+    {
+      "lean": "Formalism.MainNotions.Boxes_at",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/MainIn.lean",
+      "line": 15,
+      "role": "new",
+      "reference": "",
+      "statement": "The box condition at a scale $Y$ (zero-free boxes for the quadratic characters attached to the auxiliary primes $q,d$ and the real characters of the host field), the row condition at $Y$ (sizes and congruences of $q,d$), and distinct tame data at the level primes.",
+      "label": "asm-box-row-tame"
+    },
+    {
+      "lean": "Formalism.MainNotions.TwGood",
+      "file": "Formalism/SharpRestriction/LevelLetterCocycles/TwGood.lean",
+      "line": 231,
+      "role": "new",
+      "reference": "",
+      "statement": "The twist condition, in terms of the twisting data of Chapter 6: at every twisted place a twist choice (an index with $\\ell_i=p_w$, a sign, a set $Q$ of split places and a ray class character of $\\ell$-power order), compatible with complex conjugation, such that the selected theta elements span $V_0$ with a chosen basis, and the twisted theta lattices, Bloch-Kato lengths of the good signatures, theta values and tame valuations change by at most $\\ell^{-2}$; the strong form asks this for all powers of the character prime to $\\ell$.",
+      "label": "asm-twist-condition"
+    },
+    {
+      "lean": "Formalism.MainNotions.Lnk.Count_at",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/QuadraticLogDerivCongr.lean",
+      "line": 167,
+      "role": "new",
+      "reference": "",
+      "statement": "The nine per-member bounds that the global link combines: the count for $\\log T_u$, the slope bounds for $M_u$ and $N_u$, the lattice conditions, the frame bound, the loss bounds, the node bounds, the character conditions and the window conditions, and their versions at all large scales of a family.",
+      "label": "asm-member-bounds"
+    },
+    {
+      "lean": "Formalism.MainNotions.Lnk.linkCore",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/LossesSmallShares.lean",
+      "line": 38,
+      "role": "new",
+      "reference": "",
+      "statement": "A family that satisfies the nine per-member bounds, the bounds of the chosen constants on $|T|$, on the characters of $q,d$ and at thin scales, the irreducibility link and the division link is tied at all large scales with constants $(C_{abs},e_L,K,C_H,e_K,C_5)$.",
+      "label": "asm-tie-from-bounds"
+    }
+  ],
+  "updated": "2026-11-20T22:03:29Z"
+}

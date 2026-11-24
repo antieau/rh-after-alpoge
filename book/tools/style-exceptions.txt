@@ -1,0 +1,2 @@
+# Deliberate exceptions to tools/check_style.py, one per line:
+# file<TAB>rule<TAB>fragment of the flagged sentence<TAB>reason

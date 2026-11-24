@@ -1,0 +1,175 @@
+{
+  "id": "main-theorems",
+  "title": "The main theorems and their reduction to a half-plane",
+  "state": "drafted",
+  "summary": "The chapter states the Riemann Hypothesis and the Generalized Riemann Hypothesis for Dirichlet $L$-functions in the five forms proved, and reduces all of them to one statement: $L(s,\\chi)\\neq0$ for every Dirichlet character $\\chi$ and every $s$ with $\\operatorname{Re}s>1/2$, except at the pole. The reductions use only the functional equation, the Gamma factors and the Euler factors that separate an imprimitive character from the primitive character inducing it. The rest of the book proves the half-plane statement for primitive characters.",
+  "timeline": [
+    20
+  ],
+  "progress": "Completion pass done: the proof of Proposition mt-strip-of-half-plane now goes through the Euler factors and the functional equation step by step, as the Lean does.",
+  "updated": "2026-11-20T19:00:04+00:00",
+  "statements": [
+    {
+      "lean": "DirichletCharacter",
+      "label": "mt-dirichlet-character",
+      "file": "",
+      "line": null,
+      "role": "standard",
+      "reference": "Davenport, Multiplicative Number Theory, Chapter 5; Mathlib's DirichletCharacter, conductor, primitiveCharacter and IsPrimitive",
+      "statement": "Let $N\\geq1$. A Dirichlet character modulo $N$ is a multiplicative function $\\chi:\\mathbf Z/N\\mathbf Z\\to\\mathbf C$ with $\\chi(1)=1$ that vanishes off the units; for $N=1$ the only one is $\\mathbf 1_1$, with $\\mathbf 1_1(n)=1$ for all $n$. The definition also fixes the trivial character $\\mathbf 1_N$, the conjugate $\\bar\\chi$, parity $a_\\chi$, the character induced from a divisor $M\\mid N$, the conductor, the primitive character $\\chi^*$ attached to $\\chi$, and primitivity."
+    },
+    {
+      "lean": "DirichletCharacter.LFunction",
+      "label": "mt-l-function",
+      "file": "",
+      "line": null,
+      "role": "standard",
+      "reference": "Mathlib's DirichletCharacter.LFunction and riemannZeta; Davenport, Chapters 1 and 9",
+      "statement": "Let $\\chi$ be a Dirichlet character modulo $N\\geq1$. Then $L(s,\\chi)$ is the function on $\\mathbf C$ equal to $\\sum_{n\\geq1}\\chi(n)n^{-s}$ for $\\operatorname{Re}s>1$, holomorphic on $\\mathbf C$ if $\\chi\\neq\\mathbf 1_N$ and on $\\mathbf C\\setminus\\{1\\}$ if $\\chi=\\mathbf 1_N$, with a conventional value at the pole. The Riemann zeta function is $\\zeta(s)=L(s,\\mathbf 1_1)$, and Mathlib's value at the pole is $\\zeta(1)=(\\gamma-\\log4\\pi)/2\\neq0$."
+    },
+    {
+      "lean": "DirichletCharacter.LFunction_changeLevel",
+      "label": "mt-euler-factors",
+      "file": "",
+      "line": null,
+      "role": "standard",
+      "reference": "Davenport, Multiplicative Number Theory, Chapter 5",
+      "statement": "Let $M\\mid N$, let $\\psi$ be a Dirichlet character modulo $M$ and $\\chi$ the character modulo $N$ it induces, and let $s\\in\\mathbf C$ with $\\psi\\neq\\mathbf 1_M$ or $s\\neq1$. Then $L(s,\\chi)=L(s,\\psi)\\prod_{p\\mid N}(1-\\psi(p)p^{-s})$."
+    },
+    {
+      "lean": "riemannHypothesis",
+      "label": "mt-riemann-hypothesis",
+      "file": "Main.lean",
+      "line": 4,
+      "role": "main",
+      "reference": "",
+      "statement": "Let $s\\in\\mathbf C$ with $\\zeta(s)=0$. Suppose that $s\\neq-2(n+1)$ for every integer $n\\geq0$ and that $s\\neq1$. Then $\\operatorname{Re}s=1/2$."
+    },
+    {
+      "lean": "riemannZeta_eq_zero_re",
+      "label": "mt-riemann-hypothesis",
+      "file": "Main.lean",
+      "line": 6,
+      "role": "main",
+      "reference": "",
+      "statement": "Every zero $s$ of $\\zeta$ with $s\\notin\\{-2,-4,-6,\\dots\\}$ and $s\\neq1$ has $\\operatorname{Re}s=1/2$. This is the Riemann Hypothesis again, stated with the trivial zeros listed explicitly."
+    },
+    {
+      "lean": "LFunction_ne_zero_of_half_lt_re",
+      "label": "mt-half-plane",
+      "file": "Main.lean",
+      "line": 8,
+      "role": "main",
+      "reference": "",
+      "statement": "Let $N\\geq1$, let $\\chi$ be a Dirichlet character modulo $N$, and let $s\\in\\mathbf C$ with $\\operatorname{Re}s>1/2$. Suppose that $\\chi$ is not the trivial character modulo $N$ or that $s\\neq1$. Then $L(s,\\chi)\\neq0$, where $L(s,\\chi)$ is the analytic continuation of $\\sum_{n\\geq1}\\chi(n)n^{-s}$ (with the Euler factors at primes dividing $N$ removed when $\\chi$ is imprimitive)."
+    },
+    {
+      "lean": "UpperTheory.FinalTheorems.everyCharacter",
+      "label": "mt-half-plane",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean",
+      "line": 10,
+      "role": "main",
+      "reference": "",
+      "statement": "Let $N\\geq1$, let $\\chi$ be a Dirichlet character modulo $N$ and let $s\\in\\mathbf C$ with $\\operatorname{Re}s>1/2$. If $\\chi\\neq1$ or $s\\neq1$, then $L(s,\\chi)\\neq0$. All five statements above are deduced from this one."
+    },
+    {
+      "lean": "LFunction_eq_zero_re",
+      "label": "mt-strip",
+      "file": "Main.lean",
+      "line": 10,
+      "role": "main",
+      "reference": "",
+      "statement": "Let $N\\geq1$, let $\\chi$ be a Dirichlet character modulo $N$, and let $s\\in\\mathbf C$ with $0<\\operatorname{Re}s<1$ and $L(s,\\chi)=0$. Then $\\operatorname{Re}s=1/2$."
+    },
+    {
+      "lean": "LFunction_eq_zero_re_of_isPrimitive",
+      "label": "mt-strip-primitive",
+      "file": "Main.lean",
+      "line": 12,
+      "role": "main",
+      "reference": "",
+      "statement": "Let $N\\geq1$ and let $\\chi$ be a primitive Dirichlet character modulo $N$. If $0<\\operatorname{Re}s<1$ and $L(s,\\chi)=0$, then $\\operatorname{Re}s=1/2$."
+    },
+    {
+      "lean": "Claim.factor_ne_zero",
+      "label": "mt-euler-factor-nonzero",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean",
+      "line": 7,
+      "role": "standard",
+      "reference": "",
+      "statement": "Let $\\psi$ be a Dirichlet character modulo $M\\geq1$, $p$ a prime and $\\operatorname{Re}s>0$. Then $1-\\psi(p)p^{-s}\\neq0$, since $|\\psi(p)p^{-s}|\\leq p^{-\\operatorname{Re}s}<1$."
+    },
+    {
+      "lean": "UpperTheory.Top.imprimitive",
+      "label": "mt-imprimitive",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/Imprimitive.lean",
+      "line": 5,
+      "role": "standard",
+      "reference": "Davenport, Multiplicative Number Theory, Chapter 5",
+      "statement": "Suppose that $L(s,\\psi)\\neq0$ for every primitive Dirichlet character $\\psi$ and every $s$ with $\\operatorname{Re}s>1/2$. Let $\\chi$ be a Dirichlet character modulo $N$ and $\\operatorname{Re}s>1/2$, with $\\chi\\neq1$ or $s\\neq1$. Then $L(s,\\chi)\\neq0$. The proof writes $L(s,\\chi)=L(s,\\psi)\\prod_{p\\mid N}(1-\\psi(p)p^{-s})$ for the primitive $\\psi$ inducing $\\chi$; each factor is nonzero because $|\\psi(p)p^{-s}|<1$."
+    },
+    {
+      "lean": "DirichletCharacter.IsPrimitive.completedLFunction_one_sub",
+      "label": "mt-functional-equation",
+      "file": "",
+      "line": null,
+      "role": "standard",
+      "reference": "Riemann (1859); Davenport, Multiplicative Number Theory, Chapter 9",
+      "statement": "Let $\\chi$ be a primitive Dirichlet character modulo $N\\geq1$ with $\\chi(-1)=(-1)^a$, and $\\Lambda(s,\\chi)=\\pi^{-(s+a)/2}\\Gamma((s+a)/2)L(s,\\chi)$. Then $\\Lambda$ is holomorphic on $\\mathbf C\\setminus\\{0,1\\}$ (entire if $N>1$), and $\\Lambda(1-s,\\chi)=N^{s-1/2}\\varepsilon(\\chi)\\Lambda(s,\\bar\\chi)$ for $s\\neq0,1$, with $\\varepsilon(\\chi)=\\tau(\\chi)/(i^aN^{1/2})$."
+    },
+    {
+      "lean": "riemannZeta_one_sub",
+      "label": "mt-zeta-functional-equation",
+      "file": "",
+      "line": null,
+      "role": "standard",
+      "reference": "Riemann (1859); Titchmarsh, The Theory of the Riemann Zeta-Function, Chapter 2",
+      "statement": "For $s\\neq1$ and $s\\notin\\{0,-1,-2,\\dots\\}$, $\\zeta(1-s)=2(2\\pi)^{-s}\\Gamma(s)\\cos(\\pi s/2)\\zeta(s)$."
+    },
+    {
+      "lean": "Formalism.VW.critLine",
+      "label": "mt-strip-primitive-of-half-plane",
+      "file": "Formalism/GammaFactorNonvanishing/CritLine.lean",
+      "line": 11,
+      "role": "standard",
+      "reference": "Davenport, Multiplicative Number Theory, Chapter 9 (functional equation)",
+      "statement": "Assume the half-plane statement. Let $\\chi$ be a primitive Dirichlet character modulo $N$ and let $0<\\operatorname{Re}s<1$ with $L(s,\\chi)=0$. Then $\\operatorname{Re}s=1/2$. If $\\operatorname{Re}s<1/2$, the Gamma factor does not vanish at $s$, so the completed $L$-function vanishes at $s$, and the functional equation gives $L(1-s,\\bar\\chi)=0$ with $\\operatorname{Re}(1-s)>1/2$."
+    },
+    {
+      "lean": "Claim.strip",
+      "label": "mt-strip-of-half-plane",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean",
+      "line": 59,
+      "role": "standard",
+      "reference": "Davenport, Multiplicative Number Theory, Chapters 5 and 9",
+      "statement": "Assume the half-plane statement. Let $\\chi$ be any Dirichlet character modulo $N$ and $0<\\operatorname{Re}s<1$ with $L(s,\\chi)=0$. Then $\\operatorname{Re}s=1/2$. The zero is a zero of $L(s,\\psi)$ for the primitive character $\\psi$ inducing $\\chi$, since the extra Euler factors vanish only on $\\operatorname{Re}s=0$, and the functional equation for $\\psi$ reflects it."
+    },
+    {
+      "lean": "Formalism.VW.rh_of_right",
+      "label": "mt-riemann-of-half-plane",
+      "file": "Formalism/GammaFactorNonvanishing/RhOfRight.lean",
+      "line": 5,
+      "role": "standard",
+      "reference": "Riemann (1859)",
+      "statement": "Suppose that $\\zeta(w)\\neq0$ for every $w$ with $\\operatorname{Re}w>1/2$ and $w\\neq1$. Then every zero $s$ of $\\zeta$ with $s\\notin\\{-2,-4,\\dots\\}$ and $s\\neq1$ has $\\operatorname{Re}s=1/2$. A zero with $\\operatorname{Re}s<1/2$ is reflected by $\\zeta(s)=2(2\\pi)^{s-1}\\Gamma(1-s)\\cos(\\pi(1-s)/2)\\zeta(1-s)$, whose cosine factor vanishes only at $s=0,-2,-4,\\dots$."
+    },
+    {
+      "lean": "Formalism.VW.rh_of_every",
+      "label": "mt-riemann-of-half-plane",
+      "file": "Formalism/GammaFactorNonvanishing/CritLine.lean",
+      "line": 29,
+      "role": "standard",
+      "reference": "Riemann (1859)",
+      "statement": "Assume the half-plane statement for every Dirichlet character. Then the Riemann Hypothesis holds: the case $N=1$ of the hypothesis is the hypothesis of the previous statement, through $L(s,\\mathbf 1_1)=\\zeta(s)$."
+    },
+    {
+      "lean": "Claim.zeta",
+      "label": "mt-riemann-via-strip",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean",
+      "line": 75,
+      "role": "standard",
+      "reference": "Riemann (1859); Titchmarsh, The Theory of the Riemann Zeta-Function, Chapter 2",
+      "statement": "Assume the half-plane statement. Let $\\zeta(s)=0$ with $s\\notin\\{-2,-4,\\dots\\}$ and $s\\neq1$. Then $\\operatorname{Re}s=1/2$. For $0<\\operatorname{Re}s<1$ this is the previous statement for the character modulo $1$; $\\zeta$ has no zeros with $\\operatorname{Re}s\\geq1$, and a zero with $\\operatorname{Re}s\\leq0$ that is not trivial would give, by the functional equation, a zero of $\\zeta$ with $\\operatorname{Re}s\\geq1$."
+    }
+  ]
+}

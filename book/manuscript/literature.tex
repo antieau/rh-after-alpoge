@@ -1,0 +1,918 @@
+\chapter{Results from the literature}\label{chapter-literature}
+Alpöge's proof uses about one hundred and fifty published results, and each
+of them is proved in Alpöge's archive. Many are proved in the form of the
+published theorem; several are special cases or weaker statements that
+suffice where they are used, and one entry of the list is the true
+proposition. This chapter states in full the results that the other chapters
+quote, and the ones whose proved form differs from the published theorem in a
+way a reader should know about. The remaining results are listed, with their
+published sources, in Theorems~\ref{lit-bundle-unitary}
+and~\ref{lit-bundle-theta}.
+
+\section{How the results enter the proof}\label{section-lit-inputs}
+
+\begin{remark}\label{lit-open-inputs}
+The results of this chapter are proved under three hypotheses: two copies of
+the statement of Definition~\ref{gal-galois-representations}, and the statement
+of Theorem~\ref{gal-llc-exists}. The two copies carry the same statement under
+two names, one of which refers to Caraiani's local-global compatibility.
+Only the results concerning the local Langlands correspondence, the Galois
+representations attached to polarized cuspidal representations, local-global
+compatibility, and the $\ell$-adic characters attached to Hecke characters
+above $\ell$ use these hypotheses; all others are proved without them.
+Chapter~\ref{chapter-galois-representations} proves both hypotheses, in
+Theorems~\ref{gal-galois-representations-any-rc} and~\ref{gal-llc-exists},
+and Chapter~\ref{chapter-assembly} supplies them, so every result of this
+chapter holds unconditionally.
+\end{remark}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.OpenLiteratureStatements}
+
+\begin{theorem}\label{lit-bundle-unitary}
+Assume the property of Definition~\ref{gal-galois-representations}
+and the statement of Theorem~\ref{gal-llc-exists}. Then the following results
+hold. Those stated in this book are cited by their number; for the others the
+published source is cited.
+\begin{enumerate}
+\item Real unitary groups $U(p,q)$: Theorem~\ref{lit-casselman-wallach};
+  Harish-Chandra's finiteness theorem for automorphic forms on unitary groups
+  invariant under a given open subgroup of the finite adelic points, with
+  given $K_\infty$-types and infinitesimal character \cite{HC68}; the
+  description of the irreducible unitary representations of $U(p,q)$ by their
+  Harish-Chandra modules \cite{HC53}; analyticity of $K$-finite matrix
+  coefficients and density of the $(\mathfrak g,K)$-stable subspaces of
+  $K$-finite vectors \cite{HC53}; the existence of the discrete series of
+  $U(p,q)$, their classification by Harish-Chandra parameters, and their
+  covering by representations with prescribed lowest $K$-type, Casimir
+  eigenvalue and highest weights \cite{HC65,HC66,Sch75,HS75}; the formal degree of
+  a discrete series representation in terms of the compact dual
+  \cite{HC66,HII08}; and Schur orthogonality for square-integrable
+  representations of unimodular groups \cite[Chapter~14]{Dix77}.
+\item General linear groups over a nonarchimedean local field: the finiteness
+  theorems of Bernstein and Zelevinsky (irreducible smooth representations are
+  admissible, Jacquet modules and parabolic induction preserve finite length,
+  induction commutes with contragredients) \cite{BZ76,BZ77}; Zelevinsky's
+  isomorphism of the Grothendieck ring with a polynomial ring on segments
+  \cite[\S7]{Zel80}; Bernstein's theorem that a product of irreducible
+  unitarisable representations is irreducible \cite{Ber84}; the filtration of
+  the geometric lemma and the semisimplification of its pieces
+  \cite[2.12]{BZ77}; irreducibility of a product of two irreducible
+  representations whose cuspidal supports are not related by unramified
+  twists, or not by twists by $|\det|^j$ with $|j|\le1$ \cite{BZ77,Zel80};
+  injectivity, and bijectivity, of the map from depth-zero invariants to the
+  invariants of the Jacquet module, and the fact that depth zero passes to and
+  from the cuspidal support \cite{MP94,MP96};
+  Tadić's description of the generic unitary representations \cite{Tad86};
+  existence of the cosocle of a standard module \cite{Sil78,Zel80}; and Green's
+  description of the cuspidal characters of $GL_d(\mathbf F_g)$
+  (Theorem~\ref{lit-green-cuspidal} and
+  Corollary~\ref{lit-green-labelled}).
+\item Theta integrals and Siegel Eisenstein series:
+  Theorems~\ref{lit-weil-siegel}, \ref{lit-siegel-weil}
+  and~\ref{lit-doubling}; Siegel's formula expressing the mean of
+  representation numbers of a Hermitian form by a product of local densities
+  in the range of absolute convergence, with the finiteness of the volume of
+  the automorphic quotient \cite{Wei65,BHC62}; the Siegel-Weil formula of
+  Theorem~\ref{lit-siegel-weil} in the Schrödinger model \cite{Ich07}; the
+  meromorphic continuation of Siegel Eisenstein series, which is part~(1) of
+  Theorem~\ref{lit-doubling} \cite{Lan76,MW95}; the unramified computation of
+  the doubling integral for $GL_n$ \cite{GPSR87,LR05}; the existence of the
+  Weil representation of a unitary dual pair \cite{Kud94,HKS96}; and the entry
+  described in Remark~\ref{lit-vacuous-slot}.
+\item Automorphic forms: rapid decay of cusp forms on unitary groups
+  \cite{HC68,MW95}; the trace class property of the cuspidal spectrum
+  \cite{GGPS69}; the factorisation theorem of Dixmier and Malliavin
+  \cite{DM78}; Flath's factorisation of irreducible unitary representations of
+  adelic unitary groups \cite{Fla79}; strong approximation for special unitary
+  groups \cite{Kne65,PR94}; finite dimensionality of spaces of automorphic forms
+  on $GL_a$ over a totally complex field with given invariance under an open
+  subgroup, $K_\infty$-type and infinitesimal character \cite{HC68,BJ79};
+  Theorems~\ref{lit-jacquet-shalika} and~\ref{lit-clozel-cohomological};
+  Clozel's purity lemma for regular algebraic cuspidal representations
+  \cite[Lemme~4.9]{Clo90}; and base change from definite unitary groups
+  \cite{Lab11}, which is deduced from Theorem~\ref{gal-base-change-definite}.
+\item Galois representations and class field theory: global Artin reciprocity
+  and the existence of ray class fields and of the Artin characters attached
+  to ray class characters \cite[Chapter~VI]{Neu99}; the $\ell$-adic characters
+  attached to algebraic Hecke characters, with their Hodge-Tate weights and
+  Weil-Deligne parameters at places above $\ell$ \cite{Ser68,Fon94}; the
+  Galois representations attached to regular algebraic polarized cuspidal
+  representations and their local-global compatibility above $\ell$
+  \cite{CH13,BLGGT14,Car14}, deduced from the property of
+  Definition~\ref{gal-galois-representations} and Theorem~\ref{gal-llc-exists};
+  Berger's theorem that de Rham representations are potentially semistable
+  \cite{Ber02}; Theorem~\ref{lit-bhatt-scholze};
+  Theorem~\ref{lit-chebotarev-degree-one} and a second form of the
+  Chebotarev density theorem \cite{Che26,Neu99}; the existence, for each prime
+  $p\equiv3\pmod 4$ with $p>3$, of an elliptic curve with complex
+  multiplication by the integers of $\mathbf Q(\sqrt{-p})$, good reduction
+  outside $p$ and minimal discriminant $-p^3$ \cite{Gro80}; Weber's
+  description of ray class fields of imaginary quadratic fields
+  \cite[Theorem~II.5.6]{Sil94}; and local Tate duality, the finiteness of
+  local Galois cohomology and the local Euler characteristic formula
+  \cite[Chapter~VII]{NSW08}.
+\item Three further collections. The first contains: the local results of
+  item~(2), together with the characterization of essentially
+  square-integrable and of tempered representations by segments, the
+  Langlands classification by multisegments and Zelevinsky's description of
+  the generic representations \cite[\S9]{Zel80}; the local converse theorem
+  for cuspidal representations of $GL_n$ \cite{Hen93}; Brauer's theorem on
+  induced characters in degree zero \cite{Bra47}; Chevalley's theorem on
+  congruence subgroups of units \cite{Che51}; the statement of
+  Theorem~\ref{gal-llc-exists}; the global results of items~(4) and~(5),
+  together with the discreteness of the cuspidal spectrum of $GL_a$ and the
+  boundedness of its cusp forms \cite{GGPS69,MW95} and the description of the
+  contragredient of a cuspidal representation by the transpose inverse
+  \cite{GK75,JS81b}; the statement of
+  Definition~\ref{gal-galois-representations}; Poitou-Tate duality and the
+  global finiteness and Euler characteristic formulas
+  \cite[Chapter~VIII]{NSW08}; the orthogonality of unramified classes under
+  local duality \cite[Chapter~VII]{NSW08}; the formula of Greenberg and Wiles
+  \cite[Proposition~1.6]{Wil95}; the local results of Bloch and Kato
+  \cite[\S3]{BK90}; five statements of Alpöge's on lattices with complex
+  multiplication and on denominators and reflection identities of zeta and
+  $L$-values, related to \cite{Shi71,Dam70,DR80}; and the functional equation
+  of Hecke $L$-functions of CM type \cite{Hec20,Tat67}. The second contains
+  the Weil representation, the existence and classification of discrete
+  series, Harish-Chandra analyticity, the trace class property, the
+  factorisations of Dixmier-Malliavin and Flath,
+  Theorems~\ref{lit-weil-siegel} and~\ref{lit-doubling}, the unramified
+  doubling integral, the continuation of partial Hecke $L$-functions
+  \cite{Hec20,Tat67}, and the fact that a de Rham representation of dimension
+  $a$ has $a$ Hodge-Tate weights counted with multiplicity, for the
+  representations attached to the data of Definition~\ref{th-definite-datum}
+  \cite{Fon94}. The third contains Fontaine's theory of the ring
+  $B_{\mathrm{cris}}$ \cite{Fon94a}, global Artin reciprocity, the local
+  results of Bloch and Kato, local Tate duality, finiteness and Euler
+  characteristic over finite extensions of $\mathbf Q_\ell$, and the integral
+  form of the theorem of Bhatt and Scholze \cite{BS23}.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.published_results_eigen}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/BernsteinUnitaryProductIrreducible.lean}{GlobalTheory.Fc.S0.UnitaryGroupThirdPlaceHypotheses}
+
+\begin{theorem}\label{lit-bundle-theta}
+The following results hold. Those stated in this book are cited by their
+number; for the others the published source is cited.
+\begin{enumerate}
+\item Finite and $p$-adic groups: for each monic squarefree polynomial $f$ of
+  degree $N$ over $\mathbf F_g$ with nonzero constant term, an irreducible
+  generic character of $GL_N(\mathbf F_g)$ of degree
+  $\prod_{i=1}^N(g^i-1)/|T_f|$, where $T_f$ is the torus attached to $f$,
+  distinct for distinct $f$ \cite{Gre55}; the existence of cuspidal
+  representations of $GL_n$ over a finite field and the description of their
+  restriction to the mirabolic subgroup \cite{Gel70,Zel81}; Bernstein's
+  irreducibility theorem, Zelevinsky's polynomial ring and the finiteness
+  theorems of Bernstein and Zelevinsky, as in item~(2) of
+  Theorem~\ref{lit-bundle-unitary}; the theorem of Borel and Casselman that
+  the Iwahori invariants of an admissible representation of $GL_n$ map
+  bijectively to the invariants of its Jacquet module \cite{Bor76}; the local
+  classification of Hermitian forms over a quadratic extension of local
+  fields by their determinant \cite{Jac62}; Kudla's splitting of the Weil
+  representation for split unitary groups \cite{Kud94}; and the Stone-von
+  Neumann theorem \cite[Chapitre~2]{MVW87}.
+\item Real groups: Theorems~\ref{lit-casselman-wallach}
+  and~\ref{lit-howe-duality-real}; Weyl's branching law
+  \cite[Chapter~8]{GW09}; Howe duality for
+  $GL_n(\mathbf C)\times GL_{n'}(\mathbf C)$ and $U(n)\times U(n')$ acting on
+  polynomials \cite{How89b}; two forms of the real metaplectic representation
+  \cite{Wei64}; $K$-finite vectors of irreducible unitary representations of
+  $U(p,q)$ and the globalisation of $(\mathfrak g,K)$-modules \cite{HC53}; the
+  existence of the discrete series of $U(p,q)$, their lowest $K$-types,
+  uniqueness for a given Harish-Chandra parameter, and the lowest weight
+  description of the holomorphic discrete series
+  \cite{HC56,HC66,Sch75}; their formal degrees \cite{HC66,HII08};
+  Harish-Chandra modules \cite{HC53}; and Schur orthogonality
+  \cite[Chapter~14]{Dix77}.
+\item Global theory: Theorem~\ref{lit-linnik}; the main theorem of complex
+  multiplication for $j$-invariants of imaginary quadratic fields and the
+  transitivity of the Galois action on them \cite[Chapter~II]{Sil94}; quadratic
+  class field theory \cite[Chapter~VI]{Neu99}; the Hasse principle for
+  Hermitian forms and its local-global form \cite{Lan36,Jac62}; boundedness,
+  decay estimates and rapid decay of cusp forms \cite{HC68,MW95}; trace class
+  of the cuspidal spectrum \cite{GGPS69}; the factorisations of
+  Dixmier-Malliavin and Flath \cite{DM78,Fla79}; strong approximation for
+  special unitary groups \cite{Kne65,PR94}; Siegel sets for unitary groups
+  \cite{Bor69,BHC62}; Harish-Chandra's finiteness theorem \cite{HC68};
+  holomorphy of Hecke $L$-functions of unitary Hecke characters other than
+  powers of the norm, with nonvanishing on $\operatorname{Re}s\ge1$, also for
+  partial $L$-functions \cite{Hec20,Tat67,Lan94}; the bound
+  $\bigl|\frac{L'}{L}(1,\chi)-\sum_\rho\frac1{1-\rho}\bigr|\le C\log(3q)$ for
+  primitive Dirichlet characters $\chi$ of conductor $q>1$, the sum running
+  over the zeros $\rho$ of $L(s,\chi)$ with $0<\operatorname{Re}\rho<1$ and
+  $|\operatorname{Im}\rho|\le1$, counted with multiplicity
+  \cite[Chapter~16]{Dav00}; and Radford's theorem that the shuffle algebra over
+  a field of characteristic zero is the polynomial algebra on Lyndon words
+  \cite{Rad79}.
+\item Theta correspondence: Theorems~\ref{lit-weil-siegel}
+  and~\ref{lit-doubling}; the Rallis inner product formula in the convergent
+  range \cite{Ral84,Li92} (compare Theorem~\ref{th-rallis-inner-product}); the
+  unramified doubling integral for $GL_n$ \cite{GPSR87,LR05}; the invariance of
+  theta functions under rational points, in an explicit form \cite{Wei64}; and
+  two forms of the existence of the Weil representation of a unitary dual
+  pair \cite{Kud94,HKS96}.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.published_results_first}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/BernsteinUnitaryProductIrreducible.lean}{GlobalTheory.FunPr.ThetaLocalInputs}
+
+\section{Representations of real unitary groups}\label{section-lit-real}
+
+\begin{theorem}[Casselman, Wallach \cite{Cas89,Wal92}]\label{lit-casselman-wallach}
+Let $n\ge1$ and let $J$ be a diagonal $n\times n$ matrix with entries $\pm1$.
+Let $G=\{g\in GL_n(\mathbf C):g^*Jg=J\}$, let $K=G\cap U(n)$ and let
+$\mathfrak g=\{X\in M_n(\mathbf C):X^*J+JX=0\}$. For $g\in M_n(\mathbf C)$
+put $\|g\|^2=\sum_{a,b}|g_{ab}|^2$.
+
+Let $(\sigma,H)$ be an irreducible unitary representation of $G$ on a Hilbert
+space. Let $H_K\subset H$ be its space of $K$-finite vectors and
+$H^\infty\subset H$ its space of smooth vectors, and for a finite set $S$ of
+words $X_1\cdots X_k$ in elements of $\mathfrak g$ put
+$\|w\|_S=\sum_{X_1\cdots X_k\in S}\|d\sigma(X_1)\cdots d\sigma(X_k)w\|$.
+
+Let $E$ be a complete Hausdorff locally convex space whose topology is given
+by a sequence of seminorms $(p_i)_{i\ge0}$. Let $\pi$ be a representation of
+$G$ on $E$ by continuous operators such that $g\mapsto\pi(g)v$ is continuous
+for every $v$, and let $d\pi(X)$, $X\in\mathfrak g$, be continuous operators
+with $\frac1t(\pi(\exp tX)v-v)\to d\pi(X)v$ as $t\to0$ for every $v\in E$.
+Assume that $\pi$ has moderate growth: for every $i$ there are a continuous
+seminorm $q$ on $E$ and $N\ge0$ with
+$p_i(\pi(g)v)\le(1+\|g\|^2)^Nq(v)$ for all $g\in G$ and $v\in E$.
+
+Let $T_0:H_K\to E$ be a map of $(\mathfrak g,K)$-modules. Then:
+\begin{enumerate}
+\item there is a linear map $T:H^\infty\to E$ that extends $T_0$, commutes
+  with the action of $G$, and is continuous in the sense that for every $i$
+  there are a finite set $S$ and a constant $C$ with
+  $p_i(Tw)\le C\|w\|_S$ for all $w\in H^\infty$;
+\item any two maps with the properties of~(1) are equal;
+\item $T(H^\infty)$ is closed in $E$;
+\item if $T_0\neq0$, then for every finite set $S$ of words there is a
+  continuous seminorm $q$ on $E$ with $\|w\|_S\le q(Tw)$ for all
+  $w\in H^\infty$.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/AutomorphicForms₂/HasDRepIffHasDerivAt.lean}{GlobalTheory.Published.CasselmanWallach}
+\leanref{Development/WeilBound/CoreStatements/PublishedTheorems/CasselmanWallach/FinalB.lean}{PositivityTheory.CWB.casselmanWallach}
+
+\begin{theorem}[Howe \cite{How89}]\label{lit-howe-duality-real}
+Let $E/F$ be a CM extension of number fields with complex conjugation $c$, and
+let $\eta$ be the quadratic character of $\mathbf A_F^\times/F^\times$
+attached to it. Let $X$ be a nondegenerate Hermitian space of dimension $n$
+over $E$ and $W$ a nondegenerate skew-Hermitian space of dimension $d$ over
+$E$. Let $\psi$ be a standard additive character of $\mathbf A_F/F$. Let
+$\chi_X,\chi_W$ be Hecke characters of $\mathbf A_E^\times/E^\times$ with
+$\chi_X|_{\mathbf A_F^\times}=\eta^n$ and
+$\chi_W|_{\mathbf A_F^\times}=\eta^d$, and let $\omega$ be a Weil
+representation of $U(X)(\mathbf A_F)\times U(W)(\mathbf A_F)$ attached to
+$(\psi,\chi_X,\chi_W)$, realised on Schwartz functions on
+$\mathbf A_F^{n\times d}$.
+
+For each archimedean place $w$ of $F$ choose an embedding $\tau_w$ of $E$
+over $w$ and Cartan involutions $\theta^X_w$ of $X\otimes_{\tau_w}\mathbf C$
+and $\theta^W_w$ of $W\otimes_{\tau_w}\mathbf C$, the second for the
+Hermitian form $i$ times that of $W$. Let $K_X\subset U(X)(F_\infty)$ and
+$K_W\subset U(W)(F_\infty)$ be the subgroups commuting with these
+involutions, and let $\mathfrak u(X)$ and $\mathfrak u(W)$ be the Lie algebras
+of $U(X)(F_\infty)$ and $U(W)(F_\infty)$. Let $\mathcal P$ be the Fock space:
+the smallest space of Schwartz functions on $F_\infty^{n\times d}$ that
+contains the Gaussian vectors attached to the involutions and is stable under
+the derivatives of the archimedean Heisenberg action.
+
+Call a subspace $N\subset\mathcal P$ a \emph{theta subspace} if it is stable under
+$d\omega(\mathfrak u(W))$ and $\omega(K_W)$ and contains $d\omega(Y)f$ and
+$\omega(k)f-f$ for all $f\in\mathcal P$, $Y\in\mathfrak u(X)$ and
+$k\in K_X$. Then:
+\begin{enumerate}
+\item there is $L$ such that every strictly increasing chain of theta
+  subspaces has at most $L$ members;
+\item if $N,N'$ are theta subspaces different from $\mathcal P$, then
+  $N+N'\neq\mathcal P$.
+\end{enumerate}
+Equivalently, the largest quotient of $\mathcal P$ on which
+$(\mathfrak u(X),K_X)$ acts trivially is a $(\mathfrak u(W),K_W)$-module of
+finite length with at most one irreducible quotient.
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/HoweDualityReal.lean}{GlobalTheory.Published.HoweDualityReal}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/HoweDualityReal.lean}{GlobalTheory.Published.ThetaSubInf}
+\leanref{Development/AbelianVarietyTheory/Proofs/DivisorProofs/HoweDualityRealHolds.lean}{GlobalTheory.howeDualityReal_holds}
+
+\section{Cuspidal characters of finite general linear groups}\label{section-lit-green}
+
+\begin{theorem}[Green \cite{Gre55}]\label{lit-green-cuspidal}
+Let $g$ be a prime, let $d\ge1$, and let $K$ be a field extension of
+$\mathbf F_g$ of degree $d$. Call a character $\theta$ of $K^\times$ regular if
+the characters $\theta^{g^i}$, $0\le i<d$, are distinct. Call an irreducible
+character $\chi$ of $GL_d(\mathbf F_g)$ cuspidal if, for every
+$0<a<d$, the unipotent radical of the standard parabolic subgroup of type
+$(a,d-a)$ has no nonzero fixed vector in the representation with
+character $\chi$. Then there is a map $\theta\mapsto\tau_\theta$ from
+characters of $K^\times$ to class functions on $GL_d(\mathbf F_g)$ such that:
+\begin{enumerate}
+\item for regular $\theta$, $\tau_\theta$ is a cuspidal irreducible character
+  of degree $\prod_{i=1}^{d-1}(g^i-1)$, and
+  \[
+  \tau_\theta(y)=(-1)^{d-1}\sum_{i=0}^{d-1}\theta(z^{g^i})
+  \]
+  for every $y\in GL_d(\mathbf F_g)$ whose characteristic polynomial is
+  irreducible and every root $z\in K^\times$ of that polynomial;
+\item for regular $\theta,\theta'$, $\tau_\theta=\tau_{\theta'}$ if and only if
+  $\theta'=\theta^{g^i}$ for some $0\le i<d$;
+\item every cuspidal irreducible character of $GL_d(\mathbf F_g)$ is
+  $\tau_\theta$ for some regular $\theta$.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/GreenRegularCharacters.lean}{GlobalTheory.Published.GreenRegularCharacters}
+\leanref{Development/WeilBound/CoreStatements/StandardPublishedResults/StandardTheoremStatements/GreenRegularCharacters.lean}{PositivityTheory.Stage1.PM.greenRegularCharacters}
+
+\begin{definition}\label{lit-labelling}
+Let $g$ be a prime. A \emph{labelling} of $\bar{\mathbf F}_g$ consists of an
+injective homomorphism $t:\bar{\mathbf F}_g^\times\to\mathbf C^\times$ and, for
+each $d\ge1$, a generator $\gamma_d$ of $\mathbf F_{g^d}^\times$, such that
+$\gamma_{de}^{(g^{de}-1)/(g^d-1)}=\gamma_d$ for all $d,e\ge1$. For
+$x\in\bar{\mathbf F}_g^\times$ and $d\ge1$, let $\theta_{x,d}$ be the
+character of $\mathbf F_{g^d}^\times$ with $\theta_{x,d}(\gamma_d^m)=t(x)^m$.
+\end{definition}
+\leanref{Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/LabelDatum.lean}{GlobalTheory.GLq.LabelDatum}
+\leanref{Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/LabelDatum.lean}{GlobalTheory.GLq.thetaOf}
+
+\begin{corollary}\label{lit-green-labelled}
+Let $g$ be a prime, let $d\ge1$, and fix a labelling of $\bar{\mathbf F}_g$
+(Definition~\ref{lit-labelling}). Let $\mathcal P_d$ be the set of monic
+irreducible polynomials of degree $d$ over $\mathbf F_g$ with nonzero constant
+term. There is a map $P\mapsto\tau_P$ from $\mathcal P_d$ to class functions
+on $GL_d(\mathbf F_g)$ such that:
+\begin{enumerate}
+\item each $\tau_P$ is a cuspidal irreducible character of degree
+  $\prod_{i=1}^{d-1}(g^i-1)$, and
+  $\tau_P(y)=(-1)^{d-1}\sum_{i=0}^{d-1}\theta_{x,d}(z^{g^i})$ for every root
+  $x$ of $P$, every $y\in GL_d(\mathbf F_g)$ with irreducible characteristic
+  polynomial and every root $z$ of that polynomial;
+\item $P\mapsto\tau_P$ is injective;
+\item every cuspidal irreducible character of $GL_d(\mathbf F_g)$ is $\tau_P$
+  for some $P\in\mathcal P_d$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{lit-green-cuspidal} with $K=\mathbf F_{g^d}$. For
+$P\in\mathcal P_d$ choose a root $x_P$ and put
+$\tau_P=\tau_{\theta_{x_P,d}}$. The roots of $P$ are
+$x_P^{g^i}$, $0\le i<d$, and they are distinct. Since $t$ is injective,
+$\theta_{x,d}^{g^i}=\theta_{x^{g^i},d}$ and $\theta_{x,d}=\theta_{x',d}$ only
+when $x=x'$. So $\theta_{x_P,d}$ is regular, and
+Theorem~\ref{lit-green-cuspidal}(1) gives the degree and cuspidality.
+
+For the character formula, let $y$ have irreducible characteristic
+polynomial $f$ and let $z$ be a root of $f$ in $\bar{\mathbf F}_g$. Then $f$
+has degree $d$ and nonzero constant term, so $z\in\mathbf F_{g^d}^\times$ and
+the formula of Theorem~\ref{lit-green-cuspidal}(1) applies. Replacing $x_P$ by
+another root $x_P^{g^j}$ replaces $\theta$ by $\theta^{g^j}$, which permutes
+the terms $\theta(z^{g^i})$ cyclically, so the sum does not depend on the root.
+
+If $\tau_P=\tau_{P'}$, then by Theorem~\ref{lit-green-cuspidal}(2)
+$\theta_{x_{P'},d}=\theta_{x_P,d}^{g^i}=\theta_{x_P^{g^i},d}$ for some $i$, so
+$x_{P'}=x_P^{g^i}$ is a root of $P$ and $P'=P$. Finally, a cuspidal character
+is $\tau_\theta$ with $\theta$ regular by
+Theorem~\ref{lit-green-cuspidal}(3). Every character of the cyclic group
+$\mathbf F_{g^d}^\times$ is $\theta_{x,d}$ with $x=t^{-1}(\theta(\gamma_d))$,
+which exists because $t$ restricts to an isomorphism from the
+$(g^d-1)$-st roots of unity in $\bar{\mathbf F}_g$ onto those in $\mathbf C$.
+Regularity of $\theta$ says that $x,x^g,\ldots,x^{g^{d-1}}$ are distinct, so
+$x$ has degree $d$ over $\mathbf F_g$ and its minimal polynomial $P$ lies in
+$\mathcal P_d$, with $\tau_P=\tau_\theta$ by~(2).
+\end{proof}
+\leanref{Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/SumRangeEqRoots.lean}{GlobalTheory.GreenBridge.green_of_regular}
+\leanref{Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/LabelDatum.lean}{GlobalTheory.GLq.Green}
+
+\section{Theta integrals and Siegel Eisenstein series}\label{section-lit-theta}
+
+\begin{definition}\label{lit-weil-datum}
+Let $\mathcal D$ be a definite-side datum
+(Definition~\ref{th-definite-datum}), with CM field $E$, totally real
+subfield $F$ and quadratic character $\eta$ of $E/F$. Let $S$ and $T$ be
+nondegenerate Hermitian spaces over $E$ of dimensions $s$ and $t$, and let
+$\mathbb W_{S,T}$ be the space of $t\times s$ matrices over
+$\mathbf A_E=\mathbf A_F\otimes_FE$, with the symplectic $\mathbf A_F$-form
+built from the two Hermitian forms and the Heisenberg action
+$(w_0\cdot f)(w)=\psi(\tfrac12\langle w,w_0\rangle)f(w+w_0)$.
+\begin{enumerate}
+\item A \emph{theta function} on $\mathbb W_{S,T}$ is a continuous function
+  $f$ with $f(\gamma+w)=\psi(-\tfrac12\langle\gamma,w\rangle)f(w)$ for all
+  matrices $\gamma$ over $E$, that is fixed by the Heisenberg action of an
+  open subgroup of the finite part, and that is smooth along the archimedean
+  directions.
+\item A \emph{Weil datum} for $(S,T)$ consists of a continuous character
+  $\psi$ of $\mathbf A_F/F$ whose archimedean component is
+  $x\mapsto e^{-2\pi i\operatorname{tr}(x)}$, unitary Hecke characters
+  $\chi_S,\chi_T$ of $\mathbf A_E^\times/E^\times$ with
+  $\chi_S|_{\mathbf A_F^\times}=\eta^s$ and $\chi_T|_{\mathbf A_F^\times}=\eta^t$,
+  and a representation $\omega$ of $U(S)(\mathbf A_F)\times U(T)(\mathbf A_F)$
+  on functions on $\mathbb W_{S,T}$ that preserves theta functions, intertwines
+  the Heisenberg action with the linear action of the two groups, fixes the
+  value at $0$ under $U(S)(F)\times U(T)(F)$, is continuous, preserves the
+  $L^2$-norm over a fundamental domain for the rational points, and acts on the
+  split components through the characters $\chi_S,\chi_T$.
+\item The \emph{theta kernel} of a theta function $f$ is
+  $\theta(g,h;f)=(\omega(g,h)f)(0)$.
+\end{enumerate}
+For a Hermitian space $V$ of dimension $n$, $V^\square=V\oplus(-V)$ denotes
+the doubled space, $P\subset U(V^\square)$ the Siegel parabolic subgroup
+stabilising the diagonal, and $[U(T)]=U(T)(F)\backslash U(T)(\mathbf A_F)$.
+\end{definition}
+\leanref{Formalism/LocalToGlobal/IndefiniteReal/LocalNewformFunction.lean}{Formalism.IndefR.Datum.IsThetaFunO}
+\leanref{Formalism/LocalToGlobal/IndefiniteReal/LocalNewformFunction.lean}{Formalism.IndefR.Datum.IsWeilDatumO}
+\leanref{Formalism/LocalToGlobal/IndefiniteReal/LocalNewformFunction.lean}{Formalism.IndefR.Datum.thetaKO}
+
+\begin{definition}\label{lit-siegel-eisenstein}
+Let $\mathcal D$ and $E/F$ be as in Definition~\ref{lit-weil-datum}, let $V$
+be a nondegenerate Hermitian space over $E$ of dimension $n\ge1$ with a chosen
+basis, and let $P\subset U(V^\square)$ be the Siegel parabolic subgroup
+stabilising the diagonal $\{(v,v)\}$. For $p\in P(\mathbf A_F)$ let
+$a(p)\in GL_n(\mathbf A_E)$ be the matrix of its action on the diagonal, and
+for $x\in\mathbf A_E^\times$ put $|x|=|N_{E/F}(x)|_{\mathbf A_F}$, with the
+normalized absolute values at all places. Let $a$ be a majorant of $V$ and
+let $K_a\subset U(V^\square)(\mathbf A_F)$ be the compact subgroup attached to
+$a$ and the lattice of $V^\square$ spanned by the chosen basis twice. Assume
+that $U(V^\square)(\mathbf A_F)=P(\mathbf A_F)K_a$.
+\begin{enumerate}
+\item For a homomorphism $\mu:\mathbf A_E^\times\to\mathbf C^\times$ with
+  values of absolute value $1$ and for $s\in\mathbf C$, the
+  \emph{degenerate principal series} $I(s,\mu)$ is the space of continuous
+  functions $\Phi$ on $U(V^\square)(\mathbf A_F)$ whose right translates
+  under $K_a$ span a finite-dimensional space and which satisfy
+  \[
+  \Phi(pg)=\mu(\det a(p))\,|\det a(p)|^{s+n/2}\,\Phi(g)
+  \qquad(p\in P(\mathbf A_F),\ g\in U(V^\square)(\mathbf A_F)).
+  \]
+\item For $\varphi\in I(s_1,\mu)$ the \emph{flat section} through $\varphi$ is
+  the family $\Phi(s)\in I(s,\mu)$, $s\in\mathbf C$, defined by
+  $\Phi(s)(pk)=\varphi(pk)\,|\det a(p)|^{s-s_1}$ for $p\in P(\mathbf A_F)$
+  and $k\in K_a$. It agrees with $\varphi$ on $K_a$ and $\Phi(s_1)=\varphi$.
+\item The \emph{Siegel Eisenstein series} of a function $\Phi$ on
+  $U(V^\square)(\mathbf A_F)$ is
+  \[
+  E(g,\Phi)=\sum_{\gamma\in P(F)\backslash U(V^\square)(F)}\Phi(\gamma g),
+  \]
+  at those $g$ where $\Phi$ is invariant under $P(F)$ on the left and the sum
+  converges absolutely. For a flat section we write $E(g,\Phi(s))$.
+\end{enumerate}
+\end{definition}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/T2SpaceAdeleRing.lean}{GlobalTheory.Doubling.degPS}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/MemSiegelOfIffRightAct.lean}{GlobalTheory.Doubling.degPSOf}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/IsIwasawaOfIsCompact.lean}{GlobalTheory.Doubling.IndLaw}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/T2SpaceAdeleRing.lean}{GlobalTheory.Doubling.flat}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/IsIwasawaOfIsCompact.lean}{GlobalTheory.Doubling.flatSec}
+\leanref{Development/AbelianVarietyTheory/Definitions/Foundations/EisValueAtIffEisPoleLE.lean}{GlobalTheory.Eis.eis}
+
+\begin{theorem}[Weil \cite{Wei65}]\label{lit-weil-siegel}
+Let $\mathcal D$ be a definite-side datum (Definition~\ref{th-definite-datum})
+and let $A,B$ be nondegenerate Hermitian spaces over its CM field $E$, with
+$\operatorname{rk}A\ge1$. Let $r_B$ be the Witt index of $B$, and let $dh$ be
+a Haar measure on $U(B)(\mathbf A_F)$. Assume that $B$ is anisotropic or that
+$\operatorname{rk}A+r_B<\operatorname{rk}B$. Then:
+\begin{enumerate}
+\item for every basis of $E$ over $F$, identifying the space of
+  $\operatorname{rk}B\times\operatorname{rk}A$ matrices over $\mathbf A_E$ with
+  $\mathbf A_F^{r}$, $r=2\operatorname{rk}A\operatorname{rk}B$, there is a
+  seminorm $\nu$ on the Schwartz space of $\mathbf A_F^{r}$, continuous in the
+  archimedean component for each fixed finite component, with
+  \[
+  \int_{[U(B)]}\sum_{\xi}|\phi(h^{-1}\xi)|\,dh\le\nu(\phi)
+  \]
+  for every Schwartz function $\phi$, the sum running over the
+  $\operatorname{rk}B\times\operatorname{rk}A$ matrices $\xi$ over $E$;
+\item for every Weil datum $(\psi,1,\chi,\omega)$ for
+  $(A^\square,B)$ (Definition~\ref{lit-weil-datum}) and every theta function
+  $f$, the integral of $h\mapsto\theta(g,h;f)$ over $[U(B)]$ converges
+  absolutely for every $g$;
+\item if moreover $2\operatorname{rk}A<\operatorname{rk}B$, then for every Haar
+  measure of covolume one on $\operatorname{Hom}(A,B)(\mathbf A_F)$ with
+  fundamental domain $\mathcal G$ for the rational points, the Siegel-Weil
+  section $\Phi_f(g)=\int_{\mathcal G}(\omega(g,1)f)(y,-y)\,dy$, where
+  $(y,-y)$ is the $\operatorname{rk}B\times2\operatorname{rk}A$ matrix with
+  blocks $y$ and $-y$, is invariant
+  under $P(F)$, the series $\sum_{\gamma\in P(F)\backslash U(A^\square)(F)}
+  \Phi_f(\gamma g)$ converges absolutely, and its value is the average of
+  $\theta(g,\cdot\,;f)$ over $[U(B)]$ for the probability measure.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/TwistedTraceFormula/WeilSiegelFormulaUnitary.lean}{GlobalTheory.Published.WeilSiegelFormulaUnitary}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/FockModels/FockAnisoFree.lean}{UpperTheory.Lit.Sw47.weilUnitary}
+
+\begin{theorem}[Siegel-Weil formula in the convergent range \cite{KR88,Ich04,Ich07}]\label{lit-siegel-weil}
+Let $\mathcal D$ be a definite-side datum (Definition~\ref{th-definite-datum})
+and let $A,B$ be nondegenerate Hermitian spaces over its CM field $E$, with
+$\operatorname{rk}A<\operatorname{rk}B\le2\operatorname{rk}A$ and
+$\operatorname{rk}A+r_B<\operatorname{rk}B$, where $r_B$ is the Witt index of
+$B$. Let $(\psi,1,\chi_B,\omega)$ be a Weil datum for $(A^\square,B)$
+(Definition~\ref{lit-weil-datum}). Let $a$ be a majorant of $A$ as in
+Definition~\ref{lit-siegel-eisenstein}. Choose archimedean data for
+$\mathcal D$ and Cartan involutions $s_A$ of $A^\square$ and $s_B$ of $B$ at
+the archimedean places such that $s_A$ commutes with the archimedean part of
+$K_a$. Fix a Haar measure of covolume one on
+$\operatorname{Hom}(A,B)(\mathbf A_F)$ and a Haar measure on
+$U(B)(\mathbf A_F)$. Let $f$ be a Fock vector: a theta function annihilated
+by every product of $N$ archimedean annihilation operators attached to
+$(s_A,s_B)$, for some $N$. Put $s_0=(\operatorname{rk}B-\operatorname{rk}A)/2$
+and let $\Phi(s)$ be the flat section through the Siegel-Weil section
+$\Phi_f$ of Theorem~\ref{lit-weil-siegel}(3) at $s_0$. Then the integral
+of $h\mapsto\theta(g,h;f)$ over $[U(B)]$ converges absolutely for every $g$,
+and for every $g$ the function $s\mapsto E(g,\Phi(s))$ continues analytically
+to a neighbourhood of $s_0$ with value at $s_0$
+\[
+E(g,\Phi(s_0))=\int_{[U(B)]}\theta(g,h;f)\,dh,
+\]
+the integral taken for the probability measure.
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/SiegelWeil₂/SiegelWeilUnitaryConvergent.lean}{GlobalTheory.Published.SiegelWeilUnitaryConvergent}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/FockModels/FockAnisoFree.lean}{UpperTheory.Lit.Sw47.convergent}
+
+\begin{theorem}[Doubling method \cite{GPSR87}]\label{lit-doubling}
+Let $\mathcal D$, $V$, $n$, $a$ and $K_a$ be as in
+Definition~\ref{lit-siegel-eisenstein}. Let $\mu$ be a Hecke character of
+$\mathbf A_E^\times/E^\times$ with $\mu|_{\mathbf A_F^\times}=\eta^b$ for some
+$b\ge0$, let $s_1\in\mathbf C$, let $\varphi\in I(s_1,\mu)$, and let
+$\Phi(s)$ be the flat section through $\varphi$. Then:
+\begin{enumerate}
+\item for $\operatorname{Re}s>n/2$ the section $\Phi(s)$ is invariant under
+  $P(F)$ on the left and the series $E(g,\Phi(s))$ converges absolutely for
+  every $g$; for every $g$ the function $s\mapsto E(g,\Phi(s))$ continues
+  meromorphically to $\mathbf C$; and for every $s_0$ there are $k\ge0$ and
+  $r>0$ such that $(s-s_0)^kE(g,\Phi(s))$ extends to a function on the disc
+  $|s-s_0|<r$ that is holomorphic in $s$, jointly continuous in $(s,g)$, and
+  bounded by $C\,h(g)^N$ for some $C,N$ independent of $s$, where $h$ is
+  the height function on $U(V^\square)(\mathbf A_F)$;
+\item assume that the signature $(p_\tau,q_\tau)$ recorded with $V$ at each
+  archimedean place $\tau$ is that of its Hermitian form, choose archimedean
+  data for $\mathcal D$ and for each $\tau$ a matrix $A_\tau$ with
+  $A_\tau^*J_{p_\tau,q_\tau}A_\tau$ equal to the Gram matrix of $V$ at $\tau$,
+  where $J_{p,q}=\operatorname{diag}(1_p,-1_q)$, and let $f_1,f_2$ be cusp
+  forms on $U(V)$ that are finite under the maximal compact subgroup at
+  infinity determined by the $A_\tau$. Let $m$ be a Haar measure on $U(V)(\mathbf A_F)$. Then for
+  $\operatorname{Re}s>n/2$ the doubling integral
+  \[
+  Z(s)=\int_{[U(V)]\times[U(V)]}E\bigl((g_1,g_2),\Phi(s)\bigr)\,
+  \overline{f_1(g_1)}\,f_2(g_2)\,\mu(\det g_2)^{-1}\,dg_1\,dg_2
+  \]
+  converges absolutely, the integral
+  $\int_{U(V)(\mathbf A_F)}\Phi(s)\bigl((g,1)\bigr)\langle f_1(\cdot\,g),f_2\rangle\,dg$
+  converges absolutely, and the two are equal; and $Z(s)$ continues
+  meromorphically to $\mathbf C$.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/WeilBound/RepresentationTheoryGL/EisensteinResidues/AnisotropicGlobalForms/DmOfHyp.lean}{ResidueKilled.DM}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/DiscreteSpectrumResidualClassification.lean}{GlobalTheory.Published.DoublingMethodLocalZetaIntegrals}
+\leanref{Development/WeilBound/RepresentationTheoryGL/EisensteinResidues/AnisotropicGlobalForms/DmOfHyp.lean}{ResidueKilled.dm_of_two}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.doubling_method}
+
+\begin{remark}\label{lit-vacuous-slot}
+In the setting of Theorem~\ref{lit-doubling}, Alpöge also states a form of
+the doubling method with a third assertion: when $n<b$, the Eisenstein series
+$E(g,\Phi(s))$ has at most a simple pole at $s=(b-n)/2$, as in \cite{Tan99}.
+The list of Theorem~\ref{lit-bundle-unitary} has an entry named for this
+simple pole, and its content is the true proposition. The doubling entry of
+the same list is Theorem~\ref{lit-doubling}, in which the pole assertion is
+replaced by the true proposition as well. So the simple-pole statement is not
+proved, and the proof of the main theorems does not use it. Theorem~\ref{lit-doubling} is proved from rapid decay of
+cusp forms and the meromorphic continuation of Siegel Eisenstein series.
+\end{remark}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/DiscreteSpectrumResidualClassification.lean}{GlobalTheory.Published.UnusedSlot72}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.siegel_eisenstein_simple_pole}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/SiegelWeil₂/SiegelEisensteinSimplePoleOfDoublingMethod.lean}{GlobalTheory.Published.SiegelEisensteinSimplePole}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/TwistedTraceFormula/EisRegularAtOfEisPoleLE.lean}{GlobalTheory.Published.DoublingMethod}
+
+\section{Automorphic representations of general linear groups}\label{section-lit-gln}
+
+\begin{theorem}[Jacquet-Shalika \cite{JS81a,JS81b}]\label{lit-jacquet-shalika}
+Let $E$ be a totally complex number field.
+\begin{enumerate}
+\item Let $(\pi_i)_{i\in I}$ and $(\pi'_j)_{j\in J}$ be finite families of
+  cuspidal automorphic representations of $GL_{m_i}(\mathbf A_E)$ and
+  $GL_{m'_j}(\mathbf A_E)$, with all $m_i,m'_j\ge1$. Assume that for all but
+  finitely many finite places $w$ of $E$ every $\pi_i$ and every $\pi'_j$ has
+  Satake parameters at $w$, and the sum of the multisets of Satake parameters
+  of the $\pi_{i,w}$ equals that of the $\pi'_{j,w}$. Then there is a bijection
+  $s:I\to J$ with $m'_{s(i)}=m_i$ and $\pi'_{s(i)}\cong\pi_i$ for all $i$.
+\item Let $\pi$ be a cuspidal automorphic representation of
+  $GL_a(\mathbf A_E)$ with unitary central character, and let $w$ be a finite
+  place at which $\pi$ has Satake parameters, with $q_w$ the norm of $w$.
+  Then every Satake parameter $\alpha$ of $\pi_w$ satisfies
+  $q_w^{-1/2}<|\alpha|<q_w^{1/2}$.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/StrongMultiplicityOne.lean}{GlobalTheory.Published.JacquetShalika}
+\leanref{Development/WeilBound/CoreStatements/PublishedTheorems/JacquetShalikaRigidity/JacquetShalikaRigidity.lean}{PositivityTheory.AdelicQuotientData.jacquetShalika}
+
+\begin{theorem}[Clozel \cite{Clo90}]\label{lit-clozel-cohomological}
+Let $E$ be a totally complex number field, let $a\ge1$, and let $\pi$ be an
+irreducible cuspidal automorphic representation of $GL_a(\mathbf A_E)$. Assume
+that $\pi$ is regular algebraic: for every embedding $\tau:E\to\mathbf C$ the
+infinitesimal character of $\pi$ at $\tau$ consists of $a$ distinct numbers of
+the form $m+\frac{a-1}2$ with $m\in\mathbf Z$. Then $\pi$ is cohomological:
+there is an irreducible algebraic representation $\Xi$ of
+$GL_a(E\otimes_{\mathbf Q}\mathbf C)$ such that $\pi_\infty\otimes\Xi$ has
+nonzero $(\mathfrak g,K_\infty)$-cohomology.
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/GaloisGeometry₂/ClozelCohomologicalModel.lean}{GlobalTheory.Published.ClozelCohomological}
+\leanref{Development/WeilBound/RepresentationTheoryGL/CasimirAlgebra/KugaCoordinates/ClozelCohomological.lean}{PositivityTheory.Rg.Cz.clozelCohomological}
+
+\section{$p$-adic Hodge theory}\label{section-lit-hodge}
+
+\begin{theorem}[Bhatt-Scholze \cite{BS23}]\label{lit-bhatt-scholze}
+Let $\ell$ be a prime, let $K$ be a finite extension of $\mathbf Q_\ell$ with
+ring of integers $\mathcal O_K$, and identify the $A_{\inf}$-prism of
+$\mathcal O_K$ with $A_{\inf}$, compatibly with Frobenius, the ideal
+$\ker\theta$ and the map to $\mathcal O_{\mathbf C_\ell}$. For a prismatic
+$F$-crystal $\mathcal E$ in vector bundles on $\mathcal O_K$ and a
+$\mathbf Z_\ell$-module $T$ with an action of $G_K$, call a semilinear map
+$j:\mathcal E(A_{\inf})\to W(\mathbf C_\ell^\flat)\otimes_{\mathbf Z_\ell}T$ a
+realisation if it becomes an isomorphism after base change along
+$A_{\inf}\to W(\mathbf C_\ell^\flat)$ and is compatible with Frobenius and
+with the action of $G_K$. Then:
+\begin{enumerate}
+\item for every finite extension $L$ of $\mathbf Q_\ell$ and every
+  $G_K$-stable $\mathcal O_L$-lattice $T$ in a crystalline representation of
+  $G_K$ on a finite-dimensional $L$-vector space, there is a prismatic
+  $F$-crystal $\mathcal E$ in vector bundles with a realisation
+  $\mathcal E(A_{\inf})\to W(\mathbf C_\ell^\flat)\otimes T$;
+\item for realisations $j:\mathcal E(A_{\inf})\to W(\mathbf C_\ell^\flat)\otimes T$
+  and $j':\mathcal E'(A_{\inf})\to W(\mathbf C_\ell^\flat)\otimes T'$, every
+  $G_K$-equivariant $\mathbf Z_\ell$-linear map $f:T\to T'$ is induced by a
+  unique map of $F$-crystals $u:\mathcal E\to\mathcal E'$, in the sense that
+  $j'\circ u=(1\otimes f)\circ j$.
+\end{enumerate}
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/BhattScholzeCrystallineLattices.lean}{GlobalTheory.Published.BhattScholzeCrystallineLattices}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean}{UpperTheory.LiteratureTheorems.bhatt_scholze_crystalline_lattices_of_literature}
+
+\begin{theorem}[Fargues \cite{Far08}]\label{lit-hodge-tate-sequence}
+Let $p$ be a prime, let $C$ be an algebraically closed field of
+characteristic zero, complete for a rank-one valuation with $|p|<1$, and let
+$\mathcal O$ be its valuation ring. Let $G$ be a $p$-divisible group over
+$\mathcal O$ with dual $G^\vee$, Tate modules $T_pG$ and $T_pG^\vee$, and
+Hodge-Tate maps
+$\alpha_G:\mathcal O\otimes T_pG\to\omega_{G^\vee}$ and
+$\alpha_{G^\vee}:\mathcal O\otimes T_pG^\vee\to\omega_G$. Fix a compatible
+system of primitive $p$-power roots of unity, and let $B$ be the
+$\mathcal O$-bilinear form on $(\mathcal O\otimes T_pG)\times
+(\mathcal O\otimes T_pG^\vee)$ induced by the Weil pairing. Then for every
+$x\in\mathcal O\otimes T_pG$,
+\[
+\alpha_G(x)=0\iff B(x,y)=0\text{ for every }y\in\ker\alpha_{G^\vee}.
+\]
+\end{theorem}
+\leanref{Development/AutomorphicSpectrum/PublishedTheorems/Algebra₂/FarguesExact.lean}{GlobalTheory.CompanionTheory.Ar.HT.FarguesExact}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/PrismaticDieudonne/PrismaticDieudonneHodge.lean}{UpperTheory.Lit.farguesExact}
+
+\section{Analytic and algebraic number theory}\label{section-lit-number-theory}
+
+\begin{theorem}[Linnik \cite{Lin44}]\label{lit-linnik}
+There are constants $C,L>0$ such that for all integers $a,q\ge1$ with
+$\gcd(a,q)=1$ the least prime $p\equiv a\pmod q$ satisfies $p\le Cq^L$.
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/PublishedFoundations/PrimesInProgressionNonempty.lean}{GlobalTheory.Published.Linnik}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/PublishedFoundations/PrimesInProgressionNonempty.lean}{GlobalTheory.Published.linnik_iff_exists_prime}
+\leanref{Development/AutomorphicArithmetic/ThetaCorrespondence/Linnik.lean}{UpperTheory.Lit.linnik}
+
+\begin{theorem}[Chebotarev \cite{Che26,Neu99}]\label{lit-chebotarev-degree-one}
+Let $F$ be a number field, let $L/F$ be a finite Galois extension, let
+$g\in\operatorname{Gal}(L/F)$, and let $S$ be a finite set of finite places
+of $F$. Then there is a finite place $v\notin S$ of $F$ of absolute residue
+degree one, unramified in $L$, with a Frobenius element in
+$\operatorname{Gal}(\bar F/F)$ whose restriction to $L$ is $g$.
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/ChebotarevDegreeOneIffCheb.lean}{GlobalTheory.Published.ChebotarevDegreeOne}
+\leanref{Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/ChebotarevDegreeOne.lean}{GlobalTheory.Published.chebotarevDegreeOne'}
+
+\section{Resolution and arithmetic geometry}\label{section-lit-geometry}
+
+The covolume bound of Chapter~\ref{chapter-covolumes} uses resolution of
+singularities, principalization, an arithmetic Hilbert-Samuel estimate and
+two results on abelian schemes and $p$-divisible groups. A closed subset of a
+scheme is \emph{simple normal crossings} at a point $x$ if the local ring at
+$x$ is regular and, on an affine neighbourhood, the vanishing ideal of the
+subset is generated by a product of some members of a family of functions
+whose germs form a regular system of parameters at $x$.
+
+\begin{definition}\label{lit-snc-sequence}
+Let $k$ be a field, let $X$ be a smooth $k$-scheme and let $E\subset X$ be a
+closed subset. A \emph{normal crossings blow-up sequence} starting at $(X,E)$
+is a finite sequence $X_r\to\cdots\to X_0=X$ in which each $X_{i+1}\to X_i$ is
+the blow-up of a closed subscheme $Z_i\subset X_i$, together with closed
+subsets $E_0=E$ and $E_{i+1}=$ the inverse image of $E_i\cup Z_i$, such that
+each $X_i$ and each $Z_i$ is smooth over $k$, and $Z_i$ has normal crossings
+with $E_i$: at every point of $Z_i$ there is a regular system of parameters
+such that $E_i$ is cut out by a product of some of them and $Z_i$ by some of
+them.
+\end{definition}
+\leanref{Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/NotSubsetOfDenseCompl.lean}{GlobalTheory.CompanionTheory.Hypotheses₂.SncBlowup.IsSncBlowupSeq}
+\leanref{ReciprocityTheory/AnalyticForms/RegularLocalRings/FinalTheorems.lean}{ReciprocityTheory.AnForm.R.FinalTheorems.Snc}
+
+\begin{theorem}[Hironaka \cite{Hir64,Kol07}]\label{lit-principalization}
+Let $k$ be a field of characteristic zero and let $X$ be a quasi-compact
+separated scheme, smooth of relative dimension $d$ over $k$. Let
+$I\subset\mathcal O_X$ be an ideal sheaf whose zero set contains no
+irreducible component of $X$, and let $E\subset X$ be a closed subset that is
+simple normal crossings at each of its points. Then there is a normal
+crossings blow-up sequence $s:X'\to X$ starting at $(X,E)$
+(Definition~\ref{lit-snc-sequence}) such that $X'$ is smooth over $k$, the
+ideal $I\mathcal O_{X'}$ is invertible, the reduced zero set of
+$I\mathcal O_{X'}$ is a simple normal crossings divisor, and $s$ is an
+isomorphism over the complement of the zero set of $I$. For $E=\emptyset$ compare
+\cite[Tag R021]{Res26}.
+\end{theorem}
+\leanref{Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/NotSubsetOfDenseCompl.lean}{GlobalTheory.CompanionTheory.Hypotheses₂.PrincipalisationCharZero}
+\leanref{Development/WeilBound/CoreStatements/ResolutionCharZero/PrincipalisationCharZeroClosed.lean}{PositivityTheory.ResPlug.WeightsCompactStabilizer.principalisationCharZero_closed}
+
+\begin{corollary}\label{lit-principalization-projective}
+Let $k$ be a field of characteristic zero, let $Y$ be an integral scheme,
+smooth of relative dimension $d$ and projective over $k$, and let
+$I\subset\mathcal O_Y$ be a nonzero ideal sheaf. Then there is a finite
+sequence of blow-ups $s:Y'\to Y$ in centres smooth over $k$ lying over the
+zero set of $I$, such that $Y'$ is integral, smooth of relative dimension $d$
+and projective over $k$, $s$ is an isomorphism over the complement of the zero
+set of $I$, the ideal $I\mathcal O_{Y'}$ is invertible, and its reduced zero
+set is a simple normal crossings divisor.
+\end{corollary}
+\begin{proof}
+Since $Y$ is integral and $I\neq0$, the zero set of $I$ is a proper closed
+subset and contains no irreducible component. Apply
+Theorem~\ref{lit-principalization} with $E=\emptyset$, and write
+$Y'=X_r\to\cdots\to X_0=Y$ for the sequence, with centres $Z_i$ smooth over
+$k$. Projectivity over $k$ is preserved by each blow-up. The complement $U$ of
+the zero set of $I$ is nonempty and $s$ is an isomorphism over it, so $Y'$ is
+nonempty. Induction along the sequence, using that each $X_i$ is smooth and
+$Y'$ is nonempty, shows that every $X_i$ is integral. The inverse image of $U$
+is dense in $Y'$, because the complement of a simple normal crossings divisor
+is dense. Over it $Y'$ has relative dimension $d$, and $Y'$ is smooth and
+irreducible, so it has relative dimension $d$ everywhere.
+
+It remains to move the centres over the zero set of $I$. Every blow-up
+$X_{i+1}\to X_i$ is an isomorphism over the inverse image $U_i$ of $U$. On the
+smooth integral scheme $X_i$, the components of $Z_i$ of codimension one form
+an open and closed part of $Z_i$ along which $Z_i$ is a Cartier divisor.
+Removing them leaves a centre $Z'_i$, smooth over $k$, with the same blow-up,
+and $Z'_i$ is disjoint from $U_i$ because a blow-up in a smooth centre of
+codimension at least two is not an isomorphism over any point of the centre.
+\end{proof}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/GeometricallyConnectedOfIsIsoRestrict.lean}{GlobalTheory.Published.Principalisation}
+\leanref{Development/WeilBound/CoreStatements/ResolutionCharZero/PrincipalisationClosed.lean}{PositivityTheory.ResPlug.WeightsCompactStabilizer.principalisation_closed}
+
+\begin{corollary}\label{lit-resolution}
+Let $k$ be a field of characteristic zero and let $X$ be a reduced scheme,
+separated, quasi-compact and locally of finite type over $k$, with smooth locus
+$X_{\mathrm{sm}}$. Then there is a finite sequence of blow-ups $s:X'\to X$ such
+that $X'$ is smooth over $k$, $s$ is an isomorphism over $X_{\mathrm{sm}}$,
+and the reduced inverse image of $X\setminus X_{\mathrm{sm}}$ is a simple
+normal crossings divisor. This is a weak form of \cite[Main Theorem I]{Hir64}
+and \cite[Theorem 36]{Kol07}; compare \cite[Tag R02G]{Res26}.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{cv-functorial-resolution} assigns to $X$ a finite sequence of
+blow-ups with these three properties. The corollary keeps them and forgets
+the compatibility of the assignment with smooth morphisms and field
+extensions.
+\end{proof}
+\leanref{Development/AutomorphicSpectrum/PublishedTheorems/Geometry₂/ConclusionOfSmooth.lean}{GlobalTheory.CompanionTheory.Hypotheses₂.ResolutionCharZero}
+\leanref{Development/WeilBound/CoreStatements/ResolutionCharZero/ResolutionCharZeroOfTop.lean}{PositivityTheory.Resplug.ResolutionBlowup.resolutionCharZero_of_top}
+\leanref{Development/WeilBound/CoreStatements/ResolutionCharZero/ResolutionCharZero.lean}{PositivityTheory.Resplug.ResolutionBlowup.resolutionCharZero}
+
+\begin{definition}\label{lit-arithmetic-variety}
+An \emph{arithmetic variety} of dimension $D+1$ is an integral scheme $X$ with
+a projective flat morphism $X\to\operatorname{Spec}R$, where $R$ is a domain
+finite over $\mathbf Z$, such that $X$ has Krull dimension $D+1$. A
+\emph{Hermitian line bundle} $\bar L$ on $X$ is a line bundle with a smooth
+metric on $L_\sigma$ over $X_\sigma(\mathbf C)$ for each embedding
+$\sigma:R\to\mathbf C$, compatible with complex conjugation. It is \emph{nef}
+if its metrics are semipositive, its degree on every integral curve in a
+fibre over a closed point is nonnegative, and its arithmetic degree on every
+horizontal integral curve is nonnegative. A global section is \emph{small} if
+its pointwise norm is at most $1$ at every complex point.
+\end{definition}
+\leanref{Development/AbelianVarietyTheory/Definitions/Divisors/ExistsIsClosedImmersionGenericPoint.lean}{GlobalTheory.IsArithVar}
+\leanref{Development/AbelianVarietyTheory/Definitions/Divisors/ExistsIsClosedImmersionGenericPoint.lean}{GlobalTheory.HermLB}
+\leanref{Development/AbelianVarietyTheory/Definitions/Divisors/ExistsIsClosedImmersionGenericPoint.lean}{GlobalTheory.HermLB.IsNef}
+\leanref{Development/AbelianVarietyTheory/Definitions/Divisors/ExistsIsClosedImmersionGenericPoint.lean}{GlobalTheory.HermLB.smallSec}
+
+\begin{theorem}[Arithmetic Hilbert-Samuel formula \cite{GS92,Zha95,Mor09}]\label{lit-arithmetic-hilbert-samuel}
+Let $X$ be an arithmetic variety of dimension $D+1$
+(Definition~\ref{lit-arithmetic-variety}), let $\bar L$ and $\bar N$ be
+Hermitian line bundles on $X$ with $\bar L$ nef, and let $a$ be the arithmetic
+self-intersection number of $\bar L$. Then for all large $m$ the set of small
+sections of $\bar L^{\otimes m}\otimes\bar N$ is finite, and
+\[
+\log\#\{\text{small sections of }\bar L^{\otimes m}\otimes\bar N\}
+=\frac{a}{(D+1)!}\,m^{D+1}+o(m^{D+1})\qquad(m\to\infty).
+\]
+\end{theorem}
+\leanref{Development/AbelianVarietyTheory/PublishedTheorems/Divisors₂/SmallSecTensTriv.lean}{GlobalTheory.Published.ArithHilbertSamuel}
+\leanref{Development/AbelianVarietyTheory/Proofs/DivisorProofs/ArithHilbertSamuelOfPrincipalisation.lean}{GlobalTheory.arithHilbertSamuel_of_principalisation}
+
+\begin{definition}\label{lit-multiprojective}
+Let $K$ be a finite nonempty set, for each $k\in K$ let $I_k$ be a finite
+nonempty set, and let $R=\mathbf Z[x_{k,i}:k\in K,\ i\in I_k]$, graded by
+multidegree in $\mathbf Z^K$. Let $\hat C\subset\prod_k\mathbf C^{I_k}$ be the
+set of points $z=(z_{k,i})$ with $(z_{k,i})_{i\in I_k}\neq0$ for every $k$.
+\begin{enumerate}
+\item A multihomogeneous prime ideal $W\subset R$ is \emph{relevant} if for
+  each $k$ some $x_{k,i}$ is not in $W$. An \emph{arithmetic subvariety of
+  dimension $d$} is a relevant multihomogeneous prime $P$ with
+  $P\cap\mathbf Z=0$ and $\dim R/P=d+|K|$; it is an integral closed subscheme
+  $X$ of $\prod_k\mathbf P^{I_k}_{\mathbf Z}$, flat over $\mathbf Z$, of
+  dimension $d$, and we write $\hat X(\mathbf C)$ for the set of
+  $z\in\hat C$ at which every element of $P$ vanishes. A \emph{horizontal
+  curve} in $X$ is an arithmetic subvariety of dimension $1$ containing $P$; a
+  \emph{vertical curve} in $X$ is a relevant multihomogeneous prime
+  $W\supset P$ with $W\cap\mathbf Z\neq0$ and $\dim R/W=1+|K|$.
+\item A \emph{metrized line bundle} $\bar A=(a,h)$ consists of
+  $a\in\mathbf Z^K$ and a positive function $h$ on $\hat C$ with
+  $h(cz)=\prod_k|c_k|^{a_k}h(z)$ for $c\in(\mathbf C^\times)^K$ acting
+  blockwise. It is a metric on $\mathcal O(a)$: a multihomogeneous $m$ of
+  degree $a$ has norm $|m(z)|/h(z)$ at the point of $z$. The bundle $\bar A$ is
+  \emph{smooth} if $h$ is smooth, \emph{invariant under conjugation} if
+  $h(\bar z)=h(z)$, \emph{semipositive on $X$} if it is smooth and the Levi
+  form of $\log h$ at each $z\in\hat X(\mathbf C)$ is nonnegative on the
+  vectors $w$ with $\sum_{k,i}\frac{\partial f}{\partial x_{k,i}}(z)w_{k,i}=0$
+  for all $f\in P$, and \emph{nef on the fibres of $X$} if $\mathcal O(a)$ has
+  nonnegative degree on every vertical curve in $X$.
+\item An \emph{arithmetic intersection system} assigns to every such $K$, every
+  arithmetic subvariety $X$ of dimension $n$ and all smooth metrized line
+  bundles $\bar L_1,\ldots,\bar L_n$ a real number
+  $(\bar L_1\cdots\bar L_n\mid X)$ that is symmetric in the $\bar L_j$,
+  additive in each of them, and satisfies the following recursion: if
+  $s\in R\setminus P$ is multihomogeneous of degree $a$, where $\bar A=(a,h)$,
+  then $(\bar L_1\cdots\bar L_{n-1}\bar A\mid X)$ is the sum over the relevant
+  minimal primes $W$ of $P+(s)$, with the multiplicity of $W$ in $R/(P+(s))$,
+  of $(\bar L_1\cdots\bar L_{n-1}\mid W)$ if $W$ is horizontal and of
+  $\deg_{L_1\cdots L_{n-1}}(W)\log p$ if $W\cap\mathbf Z=p\mathbf Z$, minus the
+  integral of $\log(|s|/h)$ over $\hat X(\mathbf C)$ against the product of
+  the first Chern forms of $\bar L_1,\ldots,\bar L_{n-1}$.
+\item Let $\Omega$ be a field and $y\in\Omega^{\sqcup_kI_k}$, and let $P$ be the
+  kernel of $R\to\Omega[t_k:k\in K]$, $x_{k,i}\mapsto y_{k,i}t_k$. The field
+  $\Omega$ is the \emph{function field} of $P$ if every element of $\Omega$ is
+  $g(y)/h(y)$ with $g,h$ multihomogeneous of the same degree. For $\tau\ge0$ let
+  $H^0(X,\tau\bar A)$ be the group of $s\in\Omega$ such that
+  $s\prod_ky_{k,c_k}^{-\tau a_k}$ lies in
+  $\mathbf Z[y_{k,i}/y_{k,c_k}:k\in K,\ i\in I_k]$ for every choice of indices
+  $c_k\in I_k$ with all $y_{k,c_k}\neq0$, and let $\tilde H^0(X,\tau\bar A)$
+  be defined in the same way with the integral closures of these rings in
+  $\Omega$. An element $s\in\Omega$ is \emph{small} for $\tau\bar A$ if
+  $|g(z)|\le|h(z)|\,h_A(z)^\tau$ for all $z\in\hat X(\mathbf C)$ and all
+  multihomogeneous $g,h$ with $\deg g=\deg h+\tau a$ and $g(y)=s\,h(y)$, where
+  $h_A$ is the function of $\bar A$.
+\end{enumerate}
+\end{definition}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/IsIntersectionFamily.lean}{ReciprocityTheory.ChartRestriction.G.Geo.IsArithVar}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/IsIntersectionFamily.lean}{ReciprocityTheory.ChartRestriction.G.Geo.HermLine}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.IsSemipositiveRel}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.NefOnFibres}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/IsIntersectionFamily.lean}{ReciprocityTheory.ChartRestriction.G.Geo.IsIntersectionFamily}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/IsIntersectionFamily.lean}{ReciprocityTheory.ChartRestriction.G.Geo.recR}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.chartLat}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.chartLatNm}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.IsSmallH}
+
+\begin{proposition}[Zhang, Moriwaki \cite{Zha95,Mor09}]\label{lit-hilbert-samuel-upper}
+Let $K$, $(I_k)$ and $R$ be as in Definition~\ref{lit-multiprojective}, let
+$(\cdot\mid\cdot)$ be an arithmetic intersection system, let $D\ge0$, let $X$
+be an arithmetic subvariety of dimension $D+1$ defined by the prime $P$, and
+let $\bar A=(a,h_A)$ be a metrized line bundle that is semipositive on $X$ and
+invariant under conjugation. Write $\bar A^{D+1}$ for
+$(\bar A\cdots\bar A\mid X)$.
+\begin{enumerate}
+\item If $\bar A$ is nef on the fibres of $X$ and $(\bar A\mid W)\ge0$ for
+  every horizontal curve $W$ in $X$, then $\bar A^{D+1}\ge0$.
+\item Let $\Omega$ be a field of characteristic zero and $y\in\Omega^{\sqcup_kI_k}$
+  with kernel $P$ and function field $\Omega$. Assume that $D\ge1$, that
+  $\mathcal O(a)$ has positive degree on the generic fibre $X_{\mathbf Q}$, and
+  that there are finitely many small elements $w_1,\ldots,w_q$ of
+  $H^0(X,\bar A)$ that generate $\mathcal O(a)$ on $X$: on each chart of
+  Definition~\ref{lit-multiprojective}(4) the elements
+  $w_j\prod_ky_{k,c_k}^{-a_k}$ generate the unit ideal. Then
+  \[
+  \limsup_{\tau\to\infty}\frac{\log\#\{s\in H^0(X,\tau\bar A):s\text{ small for }\tau\bar A\}}
+  {\tau^{D+1}/(D+1)!}\le\bar A^{D+1}.
+  \]
+\item Let $\Omega$ be a field and $y\in\Omega^{\sqcup_kI_k}$ with kernel $P$ and
+  function field $\Omega$. Assume that $D\ge1$, that $a_k\ge0$ for all $k$, and
+  that $|m(z)|\le h_A(z)$ for every $z\in\hat X(\mathbf C)$ and every monomial
+  $m$ of multidegree $a$. Then
+  \[
+  \limsup_{\tau\to\infty}\frac{\log\#\{s\in\tilde H^0(X,\tau\bar A):s\text{ small for }\tau\bar A\}}
+  {\tau^{D+1}/(D+1)!}\le\bar A^{D+1}.
+  \]
+\end{enumerate}
+\end{proposition}
+\leanref{Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/SmallGeneratedCountUpperOfUse.lean}{PositivityTheory.MbHsUse.HSUse}
+\leanref{GroundTheory/HeightsAndTheta/Heights/HilbertSamuel/StatementsArithKleiman.lean}{GroundTheory.Heights₂.Heights.HilbertSamuel.ArithKleiman.Statement}
+\leanref{GroundTheory/HeightsAndTheta/Heights/HilbertSamuel/StatementsArith.lean}{GroundTheory.Heights₂.Heights.HilbertSamuel.G7.Statement}
+\leanref{ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/BirationalGeometry/ArithmeticHilbertSamuelLowerBound.lean}{ReciprocityTheory.ChartRestriction.G.Geo.ArithmeticHilbertSamuelUpperBound}
+\leanref{Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/MoriwakiBigTheorem/Outright.lean}{PositivityTheory.Pf1.HilbertSamuelMoriwaki.hsUse_outright}
+
+\begin{theorem}[Zarhin \cite{Zar74,MB85}]\label{lit-zarhin}
+Let $C$ be an algebraically closed field with a valuation, let $R$ be its
+valuation ring, and let $A$ be an abelian scheme over $R$ with a relatively
+ample line bundle. Then there are a principally polarized abelian scheme $P$
+over $R$ and homomorphisms $i:A\to P$ and $r:P\to A$ with $r\circ i=1_A$.
+\end{theorem}
+\leanref{Development/AutomorphicSpectrum/PublishedTheorems/Algebra₂/ZarhinStatement.lean}{GlobalTheory.CompanionTheory.Ar.GR.ZarhinStatement}
+\leanref{Development/WeilBound/CoreStatements/HodgeTatePoints/ZarTop.lean}{PositivityTheory.HtPt.Narrow.zarhin}

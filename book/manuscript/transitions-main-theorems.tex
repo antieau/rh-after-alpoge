@@ -1,0 +1,100 @@
+% before: mt-dirichlet-character
+The theorems concern Dirichlet characters of every modulus, the trivial and the imprimitive ones
+included. Their statements depend on the value of a character at integers that share a factor with
+the modulus, and on the primitive character that induces it. The definitions below fix these
+conventions, which agree with Davenport's.
+
+% before: mt-l-function
+Each theorem is a statement about one function of $s$ for each character, defined on the whole
+complex plane. Away from the pole of a trivial character it is the analytic continuation of the
+Dirichlet series. At the pole a value is still assigned, and the hypotheses of the theorems are
+arranged around that point.
+
+% before: mt-value-at-one
+Since $L(s,\chi)$ is defined at every point, a statement about its zeros either excludes the pole or
+says something about the value there. The value at $s=1$ of the Riemann zeta function enters the
+hypothesis of the reduction to primitive characters, and it explains the hypothesis $s\neq1$ in the
+statement of the Riemann Hypothesis below.
+
+% before: mt-euler-factors
+An imprimitive character and the primitive character inducing it have $L$-functions that differ by
+finitely many Euler factors. This comparison is the reduction to primitive characters in
+Section~\ref{section-mt-imprimitive}, and it also locates the extra zeros of an imprimitive
+$L$-function.
+
+% before: mt-imprimitive-zeros
+The $L$-function of an imprimitive character omits the Euler factors at the primes dividing its
+modulus. Its zeros therefore include those of the finitely many factors in the comparison above, and
+these decide on which regions a statement about all characters can be made.
+
+% before: mt-trivial-zeros
+The Riemann Hypothesis is a statement about the zeros of $\zeta$ other than its trivial zeros, so
+its statement lists them. For other characters the list depends on the parity of the character and,
+for an imprimitive character, on its Euler factors. The theorems for all characters are stated on a
+strip that contains none of these zeros.
+
+% before: mt-riemann-hypothesis
+The first theorem is the Riemann Hypothesis for the zeta function of
+Definition~\ref{mt-l-function}. Its hypotheses exclude the trivial zeros and the pole. Like the
+theorems after it, it is deduced from the half-plane statement of Theorem~\ref{mt-half-plane}.
+
+% before: mt-half-plane
+The half-plane statement is the theorem that the rest of the book proves. It covers every Dirichlet
+character, of every modulus, at every point to the right of the critical line except the pole of a
+trivial character. On the line $\operatorname{Re}s=1$ it contains the classical nonvanishing behind
+the prime number theorem in arithmetic progressions.
+
+% before: mt-strip
+The Generalized Riemann Hypothesis for Dirichlet $L$-functions is stated for all characters on the
+open strip $0<\operatorname{Re}s<1$. The strip contains no trivial zeros, and none of the zeros that
+the Euler factors of an imprimitive character contribute on the imaginary axis. So the statement has
+the same form for primitive and imprimitive characters.
+
+% before: mt-strip-primitive
+For a primitive character, the statement on the strip is the Generalized Riemann Hypothesis in its
+usual form, because the other zeros are the trivial ones. It is the case of
+Theorem~\ref{mt-strip} for primitive characters, and it follows from
+Theorem~\ref{mt-half-plane} by the functional equation alone.
+
+% before: mt-euler-factor-nonzero
+The Euler factors that separate an imprimitive character from its primitive character vanish only
+on the imaginary axis. To the right of that axis they are nonzero, so the comparison of
+Lemma~\ref{mt-euler-factors} transfers zeros and nonvanishing between the two $L$-functions.
+
+% before: mt-imprimitive
+The later chapters prove the half-plane statement for primitive characters. The comparison of Euler
+factors extends it to every character, with the pole of a trivial character excluded. The
+hypothesis includes the character modulo $1$ at $s=1$, where it is the statement $\zeta(1)\neq0$
+about the value of Remark~\ref{mt-value-at-one}.
+
+% before: mt-functional-equation
+A zero of a primitive $L$-function to the left of the critical line is reflected by the functional
+equation to a zero of the conjugate $L$-function to the right of it. The equation is stated for the
+completed function, and it includes the character modulo $1$, so that $\zeta$ needs no separate
+treatment in the strip.
+
+% before: mt-zeta-functional-equation
+For the zeros of $\zeta$ with $\operatorname{Re}s<1/2$, those to the left of the strip included, the
+reflection is used in a form that involves $\zeta$ itself. In this form the trivial zeros appear as
+zeros of the cosine factor.
+
+% before: mt-strip-primitive-of-half-plane
+The reflection argument for a primitive character comes first. In the strip the Gamma factor neither
+vanishes nor has a pole, so a zero of $L(s,\chi)$ is a zero of the completed function, and the
+functional equation moves it across the critical line.
+
+% before: mt-strip-of-half-plane
+For an imprimitive character, a zero in the strip is a zero of the $L$-function of the primitive
+character, because the Euler factors do not vanish there. The reflection argument then applies to
+that primitive character.
+
+% before: mt-riemann-of-half-plane
+The Riemann Hypothesis concerns all zeros of $\zeta$, those with $\operatorname{Re}s\leq0$
+included. The functional equation of Proposition~\ref{mt-zeta-functional-equation} reflects a zero
+with $\operatorname{Re}s<1/2$ to a zero with $\operatorname{Re}s>1/2$, unless the cosine factor
+vanishes, which happens only at the trivial zeros and at $s=0$. Only the half-plane statement for the character modulo $1$ is needed.
+
+% before: mt-riemann-via-strip
+A second deduction of the Riemann Hypothesis goes through the statement on the strip for $\zeta$.
+Outside the strip it uses the classical nonvanishing of $\zeta$ on $\operatorname{Re}s\geq1$ and
+the functional equation of the completed function.

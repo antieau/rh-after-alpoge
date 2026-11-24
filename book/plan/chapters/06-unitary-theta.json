@@ -1,0 +1,546 @@
+{
+  "id": "unitary-theta",
+  "title": "Definite unitary groups and iterated theta lifts",
+  "state": "drafted",
+  "summary": "Over the host CM field the chapter fixes totally definite Hermitian spaces $X_0\\subset X_1\\subset\\cdots\\subset X_m$ of ranks $k+j(t+1)$, with $k\\approx x^{9/2}$ and $m\\approx\\sqrt x$, indefinite companions $Y_j$, and Harish-Chandra parameters that interlace in the sense of Gan-Gross-Prasad. An algebraic modular form on $U(X_0)$ is lifted $m$ times by explicit theta kernels on classes of lattices, which realizes $\\pi\\mapsto\\pi\\boxplus\\mu_1[t+1]\\boxplus\\cdots\\boxplus\\mu_m[t+1]$ for tuples $\\mu$ of Hecke characters. The Rallis inner product formula shows that the first lifts do not vanish, a seesaw carries nonvanishing of periods up the tower, and the period of the iterated lift is identified, up to a nonzero constant, with a standard Bessel period.",
+  "timeline": [
+    7,
+    8,
+    12
+  ],
+  "progress": "Fix pass: the flat map and the unfolding functional integrate over all of U_rho(A_E); Lemma th-first-lift-unique has the Lean's hypotheses; the proof of th-first-lift-comparison follows the Lean's steps, with the shorter argument as Remark th-first-lift-comparison-short; the mixed-model formulas are proved to the depth floor through the new Lemma th-mixed-origin, with Remark th-mixed-model-literature.",
+  "statements": [
+    {
+      "lean": "Formalism.BasicNotions.Ranks",
+      "file": "Formalism/LocalRingCardinality/Params.lean",
+      "line": 6,
+      "role": "new",
+      "statement": "Ranks are integers $k,m,t$ and $n$ with $k$ and $m$ even, $t$ odd, $2\\le m$, $m+3\\le k$, $k+m+4\\le t$, $3m<t$, $m\\le2n\\le k$ and $m^2\\le k+m(t+1)$; put $f=2n$ and $N(j)=k+j(t+1)$. A rank datum also contains a Galois datum (hf-frame) whose group has order $n$. Here $n$ is the order of the $2$-power part of the Galois group of the host field, $f$ the number of complex embeddings used, $m$ the number of lifts, $t+1$ the rank added by each lift, and $k$ the rank of the first definite space.",
+      "reference": "",
+      "label": "th-ranks"
+    },
+    {
+      "lean": "Formalism.BasicNotions.HCParam",
+      "file": "Formalism/LocalRingCardinality/Params.lean",
+      "line": 50,
+      "role": "new",
+      "statement": "Let ranks be given. A Harish-Chandra parameter consists of $u\\in(\\tfrac12+\\mathbf Z)^{k}$, $v\\in\\mathbf Z^{k-1}$ and $b,e\\in\\mathbf Z^{m}$ with $u_1>v_1>u_2>\\cdots>v_{k-1}>u_k$, $-b_1<u_k$, $e_j-b_j\\ge(t+3)/2$ for all $j$ and $b_{j+1}-e_j\\ge(t+3)/2$ for $j<m$. (The weights on $U(X_j)$, $u$ followed by $j$ constant blocks of length $t+1$, are part of the definite-side datum.)",
+      "reference": "",
+      "label": "th-hc-parameter"
+    },
+    {
+      "lean": "Formalism.BasicNotions.Spaces",
+      "file": "Formalism/LocalRingCardinality/DataSpaces.lean",
+      "line": 77,
+      "role": "new",
+      "statement": "Hermitian spaces over $E/F$ with basis, signature and unimodular lattice; a system of spaces: definite $X_j$ of rank $N(j)$, $X'\\subset X_m$ of corank one with an anisotropic orthogonal vector, $Y_j$ of rank $r+jt$ containing $X_j$ ($j<m$), $Y_0=X_0\\oplus\\langle z_0\\rangle\\oplus H^{r_S}$ with $h(z_0,z_0)=-T$, $W_j$ of rank $r$ locally isometric to $Y_0$, $V_j$ of rank $r+t$ with orthonormal lattice.",
+      "reference": "",
+      "label": "th-spaces"
+    },
+    {
+      "lean": "Formalism.BasicNotions.ColumnChain",
+      "file": "Formalism/LocalRingCardinality/DataKernels.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "A column chain: finite sets of classes with finite stabilizers, frame sets $Y_i$ with nonvanishing functions $\\delta_i$, unit twists $\\rho_i,\\rho'_i$, arbitrary linear kernels $\\vartheta_i(c,c')$, and exponents $s_i=e_{i+1}-N(i+1)/2$, $s'_i=e_{i+1}-N(i)/2$.",
+      "reference": "",
+      "label": "th-column-chain"
+    },
+    {
+      "lean": "Formalism.BasicNotions.ColumnChain.col",
+      "file": "Formalism/LocalRingCardinality/DataKernels.lean",
+      "line": 70,
+      "role": "new",
+      "statement": "Let a chain of finite sets of lattice classes $\\mathrm{cls}_0,\\dots,\\mathrm{cls}_m$ in the definite spaces $X_0,\\dots,X_m$ be given, with finite stabilizers, determinant twists $\\rho,\\rho'$ and theta kernels $\\theta(L,L')$ for $L\\in\\mathrm{cls}_i$, $L'\\in\\mathrm{cls}_{i+1}$. The $i$-th lift sends a vector-valued function $\\varphi$ on $\\mathrm{cls}_i$ to $K_i\\varphi(L')=\\sum_{L\\in\\mathrm{cls}_i}|\\mathrm{Stab}\\,L|^{-1}\\rho(L)\\rho'(L')\\,\\big(\\Delta_{i}^{-1}\\circ\\theta(L,L')\\circ\\sharp_i\\big)\\varphi(L)$, where $\\sharp_i$ and $\\Delta_i$ multiply by fixed powers of the coordinate functions. The iterated lift is $K_{m-1}\\circ\\cdots\\circ K_0$, a map from algebraic modular forms on $U(X_0)$ to algebraic modular forms on $U(X_m)$.",
+      "reference": "",
+      "label": "th-iterated-lift"
+    },
+    {
+      "lean": "Formalism.BasicNotions.D7",
+      "file": "Formalism/LocalRingCardinality/RhoDetPrimeEqMuTildeMulChiPow.lean",
+      "line": 76,
+      "role": "new",
+      "statement": "A definite-side datum consists of: ranks; a host CM field $E/F$ with auxiliary and level primes; a system of spaces $X_j$ (definite, rank $N(j)$), $X'\\subset X_m$, $Y_j$, $W_j$, $V_j$; parameters $\\lambda(\\tau)$ for a set $\\mathcal T$ of $f$ embeddings and per-word parameters labelled injectively by binary words of length $k-2$; for each word a column chain, data at an auxiliary prime $T_u=\\pi\\bar\\pi$ with $\\pi\\equiv1$ and $T^*_u\\le T_u\\le(1+1/(fk))T^*_u$, and a period map; a Galois totally complex coefficient field $L$ with spaces of top forms and of forms, periods of the iterated lifts and Bessel pairings; determinant twists $\\rho,\\rho'$; lattices of forms with weights $u$ followed by constant blocks; Bessel-period data; and further data used in later chapters.",
+      "reference": "",
+      "label": "th-definite-datum"
+    },
+    {
+      "lean": "Formalism.BasicNotions.NTw",
+      "file": "Formalism/SharpRestriction/LevelLetterCocycles/DataN.lean",
+      "line": 256,
+      "role": "new",
+      "statement": "The twisting data of a definite-side datum (fields ntw and nexp): twisting indices with primes and coefficient rings, ray class groups with Artin maps, signatures with Galois representations and Hecke eigenvalues, theta values, spaces of forms with theta data; the space V_0, theta lattices and twisted theta lattices, good signatures, Bloch-Kato lengths, the bound nu_i and twisted theta values, as used by the twist condition of Chapter 13.",
+      "reference": "",
+      "label": "th-twisting-data"
+    },
+    {
+      "lean": "Formalism.MainNotions.GL3Theta.liftTie",
+      "file": "Formalism/SharpRestriction/GlobalSchurBounds/GL3Theta.lean",
+      "line": 575,
+      "role": "new",
+      "statement": "Remark: the kernels of the datum are abstract; where integrality is proved, each is required to be a constant-coefficient differential operator at the origin applied to a combination of translates of a theta function of the lattice pair $L+\\bar\\pi L^\\vee$.",
+      "reference": "",
+      "label": "th-lift-kernels"
+    },
+    {
+      "lean": "Formalism.IndefR.Datum.IsWeilDatumO",
+      "file": "Formalism/LocalToGlobal/IndefiniteReal/LocalNewformFunction.lean",
+      "line": 53,
+      "role": "new",
+      "statement": "Theta functions on $\\mathbb W=M(\\mathbf A_E)$ quasi-periodic under rational points; Weil data with characters $(\\chi_S,\\chi_T)$ given by axioms (Heisenberg equivariance, automorphy at $0$, unitarity, splitting at split places); theta kernel $\\omega(g,h)f(0)$ and theta lifts.",
+      "reference": "",
+      "label": "th-weil-datum"
+    },
+    {
+      "lean": "GlobalTheory.ChiGrid.GridData",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/BasePlaceNotMemChiGridBadPlaces.lean",
+      "line": 335,
+      "role": "new",
+      "statement": "Level systems (tuples $\\mu_{t,j}=\\mu^0_j\\xi_t$) and theta grids: spaces $V_{i,j}$ of rank $r+jt+i(r+6)$ with $V_{0,j}=Y_j$, core spaces $P_i$, definite top spaces $Q_j$, embeddings, characters $\\chi_i$, and Weil data on all grid pairs.",
+      "reference": "",
+      "label": "th-grid"
+    },
+    {
+      "lean": "GlobalTheory.RowTest.IsBottomTri",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/MemHalfCosetSelf.lean",
+      "line": 203,
+      "role": "new",
+      "statement": "Bottom triples $(A,A',W)$ with identity Gram matrices and ranks $a(i,j),a'(i,j),a+a'$, Weil data with characters built from $\\alpha_t,\\beta$, standard theta functions at the ramified places, and the theta integrals $I_t,I'_t$ of $1$.",
+      "reference": "",
+      "label": "th-bottom-triple"
+    },
+    {
+      "lean": "GlobalTheory.SqTop.GBig",
+      "file": "Development/AbelianVarietyTheory/Statements/PlaceShiftStatements/NormSmall.lean",
+      "line": 34,
+      "role": "new",
+      "statement": "Partial Hecke $L$-functions (entire, Euler product over unramified places) and the quantifier 'for all sufficiently large data'.",
+      "reference": "",
+      "label": "th-large-data"
+    },
+    {
+      "lean": "GlobalTheory.RallisBottom.big_theta_norm_eq_rallis_inner_product",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/BigThetaNormEqRallisInnerProduct.lean",
+      "line": 19,
+      "role": "standard",
+      "reference": "Rallis, Injectivity properties of liftings associated to Weil representations, Compositio Math. 52 (1984); Rallis, L-functions and the oscillator representation, LNM 1245 (1987); Harris-Kudla-Sweet, JAMS 9 (1996); Yamana, Invent. Math. 196 (2014); Gan-Qiu-Takeda, Invent. Math. 198 (2014)",
+      "statement": "Assume the local theta inputs of Chapter 12. For all sufficiently large data, every grid Weil datum, all $0\\le i,j<m$, every bottom triple $(A,A',W)$ of totally definite spaces with identity Gram matrices and ranks $a,a'$, $a+a'$, and every tuple $t$, there are a Fock polynomial $P$, a Haar measure $\\nu$, a fundamental domain $\\mathcal F$ and $c\\ne0$ such that $\\int_{\\mathcal F}|I_t(P,h)|^2\\,d\\nu(h)=c\\prod_{s=1-e_0}^{h_0}\\Lambda(s)$ for every entire $\\Lambda$ equal to the partial Euler product of $\\nu_{t,i,j}$ (unramified places, no Gamma factors) for $\\operatorname{Re}s>1$; here $I_t(P,\\cdot)$ is the theta lift of $1$ from $U(A)$ to $U(W)$ and $e_0=(a-a')/2$, $h_0=(a+a')/2$.",
+      "label": "th-rallis-inner-product"
+    },
+    {
+      "lean": "GlobalTheory.IndefiniteRowSideFullHecke.WeilTensorModels.ThetaIntegralsAgree",
+      "file": "Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean",
+      "line": 585,
+      "role": "new",
+      "statement": "The agreement of global and local theta integrals (convergence, a unique nonzero proportionality constant for matched vectors, its change along Witt towers) and the local matching; both proved from the Siegel-Weil literature.",
+      "reference": "",
+      "label": "th-theta-hypotheses"
+    },
+    {
+      "lean": "GlobalTheory.T.first_occurrence_theta_lift_ne_zero",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/FirstOccurrenceThetaLiftNeZero.lean",
+      "line": 58,
+      "role": "new",
+      "reference": "Rallis, Compositio Math. 52 (1984); Kudla-Rallis, Ann. of Math. 140 (1994)",
+      "statement": "Assume the local theta inputs, the agreement of global and local theta integrals, the local matching of Chapter 12, and the nonvanishing of the relevant Hecke $L$-values. Then for all sufficiently large definite-side data, every Weil datum, every bottom triple and every $t$, both theta integrals of the triple are nonzero for some Schwartz function and some point.",
+      "label": "th-first-lift-nonzero"
+    },
+    {
+      "lean": "GlobalTheory.TensorTargetRule.tensorTarget",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/ThetaTensorRuleTargetOrthogonalSum.lean",
+      "line": 75,
+      "role": "new",
+      "statement": "Tensor rules for orthogonal decompositions of either space of a pair: products and slices of theta functions are theta functions, and Weil data act factor by factor (proved for Weil data given by axioms).",
+      "reference": "Weil, Acta Math. 111 (1964)",
+      "label": "th-tensor-rule"
+    },
+    {
+      "lean": "GlobalTheory.T.weilRep_sourceLine_eq_opposite_targetLine",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/WeilRepSourceLineEqOppositeTargetLineStatement.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "For lines L, L' and tau: L' -> L multiplying the form by +-xi_0 xi_0bar, the map w -> (tau w)^* identifies theta functions for (L,S) and (S,L') (with complex conjugation for the sign +1) and intertwines the Weil data; every theta function for (S,L') arises this way.",
+      "reference": "",
+      "label": "th-line-comparison"
+    },
+    {
+      "lean": "GlobalTheory.T.lastSeeSaw_thetaIdentity",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/LastSeeSawThetaIdentityStatement.lean",
+      "line": 13,
+      "role": "new",
+      "reference": "Kudla, Seesaw dual reductive pairs (1984)",
+      "statement": "Let $D$ be a definite-side datum, and let $V_0=A\\oplus L$ and $X=T\\oplus L''$ be orthogonal decompositions of Hermitian spaces with $L,L''$ of rank one and $L''$ identified with a rescaling of $L$ by $-\\xi_0\\bar\\xi_0$. For compatible Weil data on the pairs $(V_0,S)$, $(A,S)$, $(L,S)$, $(S,X)$, $(S,T)$ and $(S,L'')$ and theta functions $\\Xi$ on $(V_0,S)$ and $\\Phi_2$ on $(S,T)$, the products of Weil-representation actions on the two sides of the seesaw agree pointwise; in particular the corresponding theta kernels coincide.",
+      "label": "th-seesaw-identity"
+    },
+    {
+      "lean": "GlobalTheory.T.rationalTranslateSum_bounded_rapidDecay",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/RationalTranslateSumBoundedRapidDecayStatement.lean",
+      "line": 18,
+      "role": "new",
+      "statement": "Matrix coefficients of theta functions: continuous and bounded, supported near a lattice in the finite directions, rapidly decreasing in the archimedean directions; their sums over rational translates are uniformly bounded.",
+      "reference": "",
+      "label": "th-matrix-coefficients"
+    },
+    {
+      "lean": "GlobalTheory.T.moyal_orthogonality_heisenberg_thetaFunctions",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/MoyalOrthogonalityHeisenbergThetaFunctionsStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Moyal orthogonality for theta functions; <f,f> != 0 for f != 0; translates of lattice vacua by the annihilator are lattice vacua, and other translates are orthogonal to all lattice vacua.",
+      "reference": "",
+      "label": "th-lattice-vacua"
+    },
+    {
+      "lean": "GlobalTheory.T.tame_functional_vacuum_irreducibility",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/TameFunctionalVacuumIrreducibilityStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "A tame functional vanishing on the annihilator translates of a nonzero lattice vacuum vanishes on all lattice vacua.",
+      "reference": "Weil, Acta Math. 111 (1964)",
+      "label": "th-vacuum-irreducibility"
+    },
+    {
+      "lean": "GlobalTheory.Grow.height",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/ExistsHeightLeTwoMulQuotHeight.lean",
+      "line": 303,
+      "role": "new",
+      "statement": "For a Hermitian space $V$ and $g\\in U(V)(\\mathbf A)$: the height $\\operatorname{ht}_0(g)=\\prod_v\\max(1,\\|g\\|_v,\\|g^{-1}\\|_v)$, the height on the quotient $\\operatorname{ht}(g)=\\inf_\\gamma\\operatorname{ht}_0(\\gamma g)$, the archimedean size $\\|a\\|_\\infty$, and the adelic size of a vector seen from $g$.",
+      "reference": "",
+      "label": "th-heights"
+    },
+    {
+      "lean": "GlobalTheory.Mem.LiftBound.om_growth",
+      "file": "Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/WeilRepThetaFunctionPolynomialGrowthRealPoints.lean",
+      "line": 65,
+      "role": "new",
+      "statement": "Polynomial growth of $(\\omega(xa,yb)f)(w)$ in $(1+\\|a\\|_\\infty)(1+\\|b\\|_\\infty)$ for $a,b$ of finite component $1$, through the oscillator representation in the Fock model.",
+      "reference": "",
+      "label": "th-archimedean-growth"
+    },
+    {
+      "lean": "GlobalTheory.SmoothForms.Sized",
+      "file": "Development/AbelianVarietyTheory/Proofs/HeightProofs/IsLieDataCircle.lean",
+      "line": 110,
+      "role": "new",
+      "statement": "An $(N,B)$-sized subgroup $\\Lambda$ of a Hermitian space over a CM field for a size function $\\nu$: stable under the integers, integral form, $N$ times the dual inside $\\Lambda$, $\\nu$ subadditive with $\\nu(ax)\\leq\\operatorname{house}(a)\\nu(x)$ and $\\operatorname{house}h(x,y)\\leq\\nu(x)\\nu(y)$, $B\\geq2$, and spanned by vectors with $\\nu\\leq B$.",
+      "reference": "",
+      "label": "th-sized-lattice"
+    },
+    {
+      "lean": "GlobalTheory.SmoothForms.frameSmall",
+      "file": "Development/AbelianVarietyTheory/Proofs/HeightProofs/OrthogonalAnisotropicFrameBoundedCM.lean",
+      "line": 157,
+      "role": "new",
+      "statement": "An $(N,B)$-sized lattice of rank $n$ contains an orthogonal basis with nonzero norms and sizes at most $B^k$, $k$ depending on $n$.",
+      "reference": "",
+      "label": "th-anisotropic-frame"
+    },
+    {
+      "lean": "GlobalTheory.SmoothForms.Short.shortSmall",
+      "file": "Development/AbelianVarietyTheory/Proofs/HeightProofs/ShortLatticeVectorBoundedSizeOfOrthogonalFrame.lean",
+      "line": 149,
+      "role": "new",
+      "statement": "An $(N,B)$-sized lattice of rank $n\\geq1$ contains a nonzero vector whose norm has house at most $C$ and whose size is at most $B^k$, by Minkowski's linear forms theorem on the trace form.",
+      "reference": "",
+      "label": "th-short-vector"
+    },
+    {
+      "lean": "GlobalTheory.AnisoSize.anisoSmall_of_shortSmall",
+      "file": "Development/AbelianVarietyTheory/Proofs/HeightProofs/AnisotropicFiniteLengthsOfShortLatticeVector.lean",
+      "line": 231,
+      "role": "new",
+      "statement": "An $(N,B)$-sized lattice of rank $n\\geq1$ contains a vector of size at most $B^k$ whose norm lies in a finite set $S\\subset E^\\times$ depending on $n$ and $N$.",
+      "reference": "",
+      "label": "th-anisotropic-vector"
+    },
+    {
+      "lean": "GlobalTheory.SmoothForms.orthoSmall_of_anisoSmall",
+      "file": "Development/AbelianVarietyTheory/Proofs/HeightProofs/OrthogonalFrameOfAnisotropicFiniteLengths.lean",
+      "line": 31,
+      "role": "new",
+      "statement": "An $(N,B)$-sized lattice of rank $n$ contains an orthogonal basis with norms in a finite set $S_0\\subset E^\\times$ and sizes at most $B^k$.",
+      "reference": "",
+      "label": "th-orthogonal-frame"
+    },
+    {
+      "lean": "GlobalTheory.Mem.LiftGrow.reduction_unif",
+      "file": "Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/AdelicHeightGrowthOfCosetGrowthUnitaryPair.lean",
+      "line": 15,
+      "role": "new",
+      "statement": "Reduction: every $g$ has $\\gamma g=xak$ with $\\gamma$ rational, $x$ in a finite set, $a$ archimedean with $1+\\|a\\|_\\infty\\leq C\\operatorname{ht}_0(g)^M$ and $k$ in a given open subgroup.",
+      "reference": "",
+      "label": "th-reduction"
+    },
+    {
+      "lean": "GlobalTheory.T.unitaryQuotientHeight_orthogonalSum_comparable",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/UnitaryQuotientHeightOrthogonalSumComparableStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Mahler-type bound by sizes of rational vectors, a lower bound for those sizes, and two-sided comparisons of heights on the quotient along orthogonal sums and Witt decompositions.",
+      "reference": "",
+      "label": "th-height-comparison"
+    },
+    {
+      "lean": "GlobalTheory.T.weilRepresentation_thetaFunction_sup_le_quotientHeight",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/WeilRepresentationThetaFunctionSupLeQuotientHeigStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Estimates for Weil operators on theta functions: action on translations, joint continuity, polynomial growth in the heights, commutation with integrals of translates; comparison of heights along decompositions.",
+      "reference": "",
+      "label": "th-weil-estimates"
+    },
+    {
+      "lean": "GlobalTheory.T.weilKernelFunctional_superposition_isTame",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/WeilKernelFunctionalSuperpositionIsTameStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "An integral of values of Weil operators against a weight decaying faster than any power of the heights is a tame map.",
+      "reference": "",
+      "label": "th-kernel-tame"
+    },
+    {
+      "lean": "GlobalTheory.T.lastSeesaw_periodNonvanishing",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/LastSeesawPeriodNonvanishingStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum, $\\iota_0\\colon W_0\\to W$ an isometry and $X=T\\oplus L''$ with $L''$ of rank one, with compatible lattices $\\Gamma,\\Gamma_L,\\Gamma_X$ and Weil data on $(W,T)$, $(W_0,X)$, $(W_0,-L'')$. Let $\\varphi$ on $U(W_0)$ and $u$ on $U(T)$ be rapidly decreasing. If $\\int_{[U(T)]}\\theta_\\Xi(\\varphi)(h,1)u(h)\\,dh\\ne0$ for a lattice vacuum $\\Xi$, then there are lattice vacua $\\Phi,\\Phi_0$ with $\\int_{[U(W_0)]}\\varphi(g)\\theta_\\Phi(u)(\\iota_0g)\\overline{\\theta_{\\omega_z}(g,1;\\Phi_0)}\\,dg\\ne0$, the depth-zero Fourier-Jacobi period.",
+      "reference": "",
+      "label": "th-seesaw-period-nonvanishing"
+    },
+    {
+      "lean": "GlobalTheory.MixPer.besPer",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/WittSmallGroupEmbeddingMemPointwiseStabilizerIso.lean",
+      "line": 179,
+      "role": "new",
+      "statement": "Bessel and Fourier-Jacobi periods for $V=V_0\\oplus H^\\rho$, and the top Bessel period of the grid.",
+      "reference": "",
+      "label": "th-periods"
+    },
+    {
+      "lean": "GlobalTheory.SepRows.IsColChain",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/OffQOfSizeRows.lean",
+      "line": 71,
+      "role": "new",
+      "statement": "Row data and partial row lifts along $V_{0,0}=Y_0\\to\\cdots\\to V_{m,0}$; column chains of core forms on $U(P_i)$, each the theta lift of the next.",
+      "reference": "",
+      "label": "th-core-chain"
+    },
+    {
+      "lean": "GlobalTheory.Unf.Step",
+      "file": "Development/AbelianVarietyTheory/Definitions/LatticeFrames/IsThetaFam.lean",
+      "line": 85,
+      "role": "new",
+      "statement": "Hyperbolic decompositions, Bessel data, Fourier-Jacobi data, steps between them (Weil data for the pair and for the anisotropic parts), and the flat map built from the mixed model.",
+      "reference": "",
+      "label": "th-step"
+    },
+    {
+      "lean": "GlobalTheory.Asc.Loc",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/TowerEx.lean",
+      "line": 93,
+      "role": "new",
+      "statement": "Local data (S, Gamma_0, K) for a step: theta functions stable under real and annihilator translations, flat maps lattice vacua, K-invariance, support condition, nonvanishing.",
+      "reference": "",
+      "label": "th-step-local"
+    },
+    {
+      "lean": "GlobalTheory.Asc.JacL.perAll",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/TowerEx.lean",
+      "line": 61,
+      "role": "new",
+      "statement": "The Fourier-Jacobi functional of all data l_{phi,G}(Xi) and the handed-down function phi_Xi.",
+      "reference": "",
+      "label": "th-step-periods"
+    },
+    {
+      "lean": "GlobalTheory.T.thetaLift_periods_isTameThetaFunctional",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/ThetaLiftPeriodsIsTameThetaFunctionalStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "The period functionals are tame; product formulas for l_{phi,G}(Xi_1 x Xi_2) and phi_{Xi_1 x Phi'}; the flat map commutes with Heisenberg translations.",
+      "reference": "",
+      "label": "th-step-functionals"
+    },
+    {
+      "lean": "GlobalTheory.T.mixedModelFormulasWittSource_proof",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/MixedModelFormulasWittSourceProofStatement.lean",
+      "line": 13,
+      "role": "standard",
+      "statement": "The mixed model $f_x$ of a theta function along a hyperbolic decomposition: Heisenberg laws, Fourier expansion over rational $x$, and the formulas for the target group, the core group, the Levi factor and the unipotent radical.",
+      "reference": "",
+      "label": "th-mixed-model"
+    },
+    {
+      "lean": "GlobalTheory.Unf.unfold_over_N_lift",
+      "file": "Development/AbelianVarietyTheory/Proofs/DecoratedLatticeProofs/UnfoldOverFlagUnipotentThetaLift.lean",
+      "line": 33,
+      "role": "new",
+      "statement": "Unfolding: the integral over the flag group of a theta lift against a weight with the character and transvection conditions equals the integral over a fundamental domain of U(W)(F) cap R_{x_0} of G times the flat-map functional.",
+      "reference": "",
+      "label": "th-unfolding"
+    },
+    {
+      "lean": "GlobalTheory.T.besselLevel_unfolding_character_and_flatMap",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/BesselLevelUnfoldingCharacterAndFlatMapStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "For a step from Bessel to Fourier-Jacobi data: the base point has Gram matrix $0$ and $R_{x_0}$ is the Jacobi group; the conjugate Bessel character satisfies the conditions of the unfolding lemma; and $\\ell_\\Theta(\\Psi)=\\Psi^\\flat(0)$.",
+      "reference": "",
+      "label": "th-bessel-unfolding"
+    },
+    {
+      "lean": "GlobalTheory.T.fourier_uniqueness_realComponents_adelicHom",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/FourierUniquenessRealComponentsAdelicHomStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Fourier uniqueness on the archimedean coordinates of the base points, and the description of strips $R(\\mathbf A)CU(W)(\\mathbf A)_f$ by a measurable set read on archimedean components.",
+      "reference": "",
+      "label": "th-fourier-strips"
+    },
+    {
+      "lean": "GlobalTheory.T.vanishing_descends_bessel_to_fourierJacobi",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/VanishingDescendsBesselToFourierJacobiStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "If the Bessel (resp. Fourier-Jacobi) period of the lift vanishes for all theta functions of the local data, the auxiliary functional vanishes at their flat maps (unfolding).",
+      "reference": "",
+      "label": "th-vanishing-descends"
+    },
+    {
+      "lean": "GlobalTheory.T.fourierJacobi_period_gives_bessel_period_of_lift",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/FourierJacobiPeriodGivesBesselPeriodOfLiftStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "One step of the tower: a nonzero Fourier-Jacobi period of a lift gives a nonzero Bessel period of a lift on the next space, and conversely.",
+      "reference": "",
+      "label": "th-step-nonvanishing"
+    },
+    {
+      "lean": "GlobalTheory.T.gridConjugation_weilData_inverseCharacter",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/GridConjugationWeilDataInverseCharacterStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Complex conjugation turns the grid Weil data of the row and core pairs into Weil data with inverse characters, and the column chain and partial row lifts into theta lifts; the partial row lift at i depends only on row data below i.",
+      "reference": "",
+      "label": "th-grid-conjugation"
+    },
+    {
+      "lean": "GlobalTheory.T.self_dual_lattice_pairing_dual",
+      "file": "Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/SelfDualLatticePairingDualStatement.lean",
+      "line": 8,
+      "role": "new",
+      "statement": "For the lattice $\\Lambda$ of a pair of self-dual lattices: $\\Lambda$ is its own annihilator, and each $u\\in\\Lambda$ acts on all lattice vacua for $\\Lambda$ by one sign.",
+      "reference": "",
+      "label": "th-lattice-signs"
+    },
+    {
+      "lean": "GlobalTheory.T.heisenbergCommutant_permutes_firstRowCosetVectors",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/HeisenbergCommutantPermutesFirstRowCosetVectorsStatement.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "Coset vectors are nonzero Fock vacua and lattice vacua for the depth lattice; translations by finite elements of the annihilator move a conjugate coset vector to a multiple of another.",
+      "reference": "",
+      "label": "th-coset-vectors"
+    },
+    {
+      "lean": "GlobalTheory.SplitHecke.exists_invariant_form'",
+      "file": "Development/AbelianVarietyTheory/Proofs/SatakeParameters/ExistsInvariantForm.lean",
+      "line": 129,
+      "role": "new",
+      "statement": "At a split place, for a subgroup $\\Lambda$ whose $\\bar e$-half detects the $e$-half outside $\\Lambda$ and a nonzero $f$ fixed by $\\Lambda$ in both halves: a linear form $\\kappa$ with $\\kappa(f)=1$ and $\\kappa(\\rho(y)f)\\geq0$ on the $e$-half, and a linear form $\\ell$ with $\\ell(f)\\neq0$ invariant under the $e$-half on theta functions.",
+      "reference": "",
+      "label": "th-invariant-form"
+    },
+    {
+      "lean": "GlobalTheory.DownLift.SplitSep.invForms_separate",
+      "file": "Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/SplitPlaceInvariantFormsSeparateThetaFunctions.lean",
+      "line": 189,
+      "role": "new",
+      "statement": "At a split place, a theta function killed by all functionals invariant under one half, after translations by the other half, is zero.",
+      "reference": "",
+      "label": "th-split-separation"
+    },
+    {
+      "lean": "GlobalTheory.T.weilDatum_fixes_vacuum_nonSplitPlace_unramified",
+      "file": "Development/AbelianVarietyTheory/Proofs/DivisorProofs/WeilDatumFixesVacuumNonSplitPlaceUnramifiedStatement.lean",
+      "line": 8,
+      "role": "new",
+      "statement": "At a nonsplit place where the characters are unramified, the lattice stabilizers fix theta functions invariant under the local lattice translations.",
+      "reference": "",
+      "label": "th-nonsplit-vacua"
+    },
+    {
+      "lean": "GlobalTheory.T.dependence_fixed",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/DependenceFixedStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Depth-type theta functions of the row and core pairs are fixed by the congruence subgroups; row data are of depth type; partial row lifts are right invariant under the congruence subgroups.",
+      "reference": "",
+      "label": "th-depth-fixed"
+    },
+    {
+      "lean": "GlobalTheory.T.tameFunctional_kills_fockVacuum_realTranslates",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/TameFunctionalKillsFockVacuumRealTranslatesStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "A tame map vanishing on the polynomials in the creation operators applied to a Fock vacuum vector vanishes on its archimedean translates.",
+      "reference": "",
+      "label": "th-fock-translates"
+    },
+    {
+      "lean": "GlobalTheory.T.fockConjugates_span_depth_data",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/FockConjugatesSpanDepthDataStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "A tame functional vanishing on the conjugated Fock vectors of all coset vectors vanishes on all lattice vacua of the row depth lattice.",
+      "reference": "",
+      "label": "th-fock-span"
+    },
+    {
+      "lean": "GlobalTheory.Asc.Frames",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/TowerEx.lean",
+      "line": 185,
+      "role": "new",
+      "statement": "Tower decompositions of the grid (Lean: Frames), fitting the ends, and good for line lattices Gamma_L.",
+      "reference": "",
+      "label": "th-tower-decomposition"
+    },
+    {
+      "lean": "GlobalTheory.T.existsGoodGridFrames_of_depthFixed",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/ExistsGoodGridFramesOfDepthFixedStatement.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "The standard tower decomposition built from the bases of the complements of the core spaces, scaled by powers of -xi_0, fits the ends and is good for explicit line lattices.",
+      "reference": "",
+      "label": "th-standard-tower"
+    },
+    {
+      "lean": "GlobalTheory.Asc.TowerEx",
+      "file": "Development/AbelianVarietyTheory/Definitions/TwistedInnerProducts/TowerEx.lean",
+      "line": 229,
+      "role": "new",
+      "statement": "Tower decompositions that fit the ends and are good exist; (J_0) follows from the base period; (J_k) implies (B_k); (B_k) implies (J_{k+1}).",
+      "reference": "",
+      "label": "th-tower-rungs"
+    },
+    {
+      "lean": "GlobalTheory.T.bessel_period_nonvanishing_ascent_of_depth_data",
+      "file": "Development/AbelianVarietyTheory/Proofs/TwistedOperators/BesselPeriodNonvanishingAscentOfDepthDataStatement.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "For every definite-side datum with $p_{de},p'_{de}$ prime to $Q_Sq$, every theta grid with Weil data, every column chain $\\Psi_0,\\dots,\\Psi_m$ of core forms (each the theta lift of the next) and every $u$ on $U(Y_0)$ with rapidly decreasing row lifts: if $\\int\\Psi_0(\\iota_0h)u(h)\\,dh\\ne0$, then the top Bessel period of $\\Psi_m$ against the $m$-fold row lift $\\theta^{(m)}(u)$ is nonzero for some row data. The hypothesis on depth data is proved, so the statement is unconditional.",
+      "reference": "",
+      "label": "th-bessel-ascent"
+    },
+    {
+      "lean": "Formalism.MainNotions.BesselId",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 65,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum. The Bessel identity for $D$ holds if the Bessel pairings of $D$ are rational and there is an isometry $V$ of the space of top forms such that for every word $u$ there are $a_u\\ne0$ and an isometry $U_u$ with $B_u(\\varphi,F)=a_u\\,\\mathcal B_u(U_u\\varphi,VF)$ for all $\\varphi,F$, where $\\mathcal B_u$ is the standard Bessel period. It is part of the division link of Chapter 8, where it identifies the period of the iterated lift with a Bessel period that does not depend on the tuple of Hecke characters.",
+      "reference": "",
+      "label": "th-bessel-identity"
+    }
+  ],
+  "updated": "2026-11-20T23:52:37Z"
+}

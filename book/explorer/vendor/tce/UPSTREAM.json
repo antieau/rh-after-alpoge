@@ -1,0 +1,44 @@
+{
+  "repository": "https://github.com/CBirkbeck/tauceti-explorer",
+  "commit": "e75bb6012af938d42b078da193d47aee722dbf28",
+  "retrieved": "2026-11-05",
+  "license": "Apache-2.0; D3 uses its included BSD license",
+  "files": [
+    {
+      "path": "src/universe.js",
+      "sha256": "3a147771b06c4b8307579eefd1d8ba0cc700fbceeeaf960f4864547275fd932d"
+    },
+    {
+      "path": "src/graph.js",
+      "sha256": "4150867338791a812065a3873913b8f8f62a89689620dcdb8ba5929946880021"
+    },
+    {
+      "path": "src/camera.js",
+      "sha256": "a3a15b51c943a8dcee0e2d7a922700c11ce4c6f1de545ddc5da8fdfd2150a460"
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "f9dc936b55357079214072d665afa247149b0e26cbffcda9cf102ca0b8809563"
+    },
+    {
+      "path": "vendor/d3.v5.15.0.min.js",
+      "sha256": "9b442622c05770e322113466a53dea836210fe2d2a6b3240da68821f33a64b56"
+    },
+    {
+      "path": "vendor/D3-LICENSE.txt",
+      "sha256": "7a3cb0e5055874e67db9aa2d5fe26de23204fa994ffbad198901ffe9c812a717"
+    },
+    {
+      "path": "vendor/KaTeX-LICENSE.txt",
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "a285b95d5adbf5c2bcc82db36e2a77b797f84a2c5cbb30292efd0bae17cc4f34"
+    }
+  ]
+}

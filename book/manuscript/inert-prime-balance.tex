@@ -1,0 +1,1424 @@
+\chapter{The comparison inequality and the inert-prime balance}\label{chapter-inert-prime-balance}
+
+This chapter proves the window bound $G_K(x)\leq x^{1/2+O(\varepsilon)}$ that
+Chapter~\ref{chapter-windowed-landau} needs, by a descendant of Stepanov's method
+\cite{Ste69}. An exact identity, proved by orthogonality of the characters of the
+Galois group of the host field, writes a combination of the corrected Chebyshev
+sums of these characters as the difference between a sum over inert primes and an
+archimedean main term (Theorem~\ref{ib-balance-identity}). The comparison
+inequality bounds the inert-prime sum by the main term up to an error
+(Theorem~\ref{ib-comparison-inequality}); its hypotheses are numerical, and they
+come from measuring the slope of one Hermitian lattice from below and from above,
+which Chapters~\ref{chapter-hermitian-slopes} to~\ref{chapter-covolumes} carry
+out. Averaging the identity over the top classes turns the two into the window
+bound (Theorems~\ref{ib-core-window-bound} and~\ref{ib-window-bound-on-scales}).
+
+\section{Host groups and their corrected Chebyshev sums}\label{section-ib-host-groups}
+
+\begin{definition}\label{ib-host-group}
+Let $H$ be a finite abelian group, written additively, and let
+$E_0=(\mathbf Z/2\mathbf Z)^2$. The \emph{host group} of $H$ is
+$\Gamma_H=E_0\times H$. We write its elements as $(e_1,e_2,h)$ with
+$e_1,e_2\in\mathbf Z/2\mathbf Z$ and $h\in H$, and $(0,h)$ for $(0,0,h)$. Its
+\emph{split subgroup} is
+\[
+ \Psi_H=\{(e_1,e_2,h)\in\Gamma_H:\ e_2=0\},
+\]
+of index $2$. Put
+\[
+ \sigma=(0,1,0),\qquad c=(1,1,0),\qquad
+ \pi_t(g)=g+c+(0,t)\quad(t\in H,\ g\in\Gamma_H),
+\]
+and let $\chi_C$ be the character $(e_1,e_2,h)\mapsto(-1)^{e_2}$ of $\Gamma_H$,
+whose kernel is $\Psi_H$. Write $\widehat\Gamma_H$ for the group of characters
+$\psi:\Gamma_H\to\mathbf C^\times$, with identity $1$. For each $t\in H$ the map
+$\pi_t$ is a bijection from $\Gamma_H\smallsetminus\Psi_H$ onto $\Psi_H$.
+\end{definition}
+\leanref{Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{Formalism.D5.E0}
+\leanref{Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{Formalism.D5.InPhi}
+\leanref{Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{Formalism.D5.PhiSet}
+\leanref{Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{Formalism.D5.cconj}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.sgc0}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.partner}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.chC}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean}{Formalism.LFunctionChainParameters.characterSumData.partner_bijection}
+
+\begin{remark}\label{ib-host-group-fields}
+In Section~\ref{section-ib-level}, $H$ is the group $A$ of a host field $E$ with
+auxiliary primes $q$ and $d$ (Chapter~\ref{chapter-host-fields}), whose Galois
+group over $\mathbf Q$ is $\{\pm1\}\times\{\pm1\}\times A$
+(Definition~\ref{hf-frame}), and $\operatorname{Gal}(E/\mathbf Q)$ is
+identified with $\Gamma_A$ by sending $(\epsilon_1,\epsilon_2,h)$ to
+$(e_1,e_2,h)$ with $(-1)^{e_i}=\epsilon_i$. The second sign is the sign by which
+an automorphism acts on $\sqrt{-d}$. So $\Psi_A$ is the subgroup $\Psi$ of
+Definition~\ref{hf-frame}, which is $\operatorname{Gal}(E/\mathbf Q(\sqrt{-d}))$;
+the element $c$ is $\iota$, complex conjugation; $\sigma$ is $\iota_d$, which
+generates the inertia group at $d$; and $\chi_C$ is the quadratic character of
+$\mathbf Q(\sqrt{-d})$. A prime not dividing the
+conductor of $E$ is inert in the sense of Definition~\ref{ib-arithmetic-data}
+exactly when it is inert in $\mathbf Q(\sqrt{-d})$
+(Lemma~\ref{ib-host-arithmetic-data}).
+\end{remark}
+\leanref{Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ConjEMemHostFIff.lean}{Formalism.HC.HostAx.galE_mem_Psi_iff}
+
+\begin{definition}\label{ib-arithmetic-data}
+Let $H$ be a finite abelian group, and let $\Gamma_H$, $\Psi_H$ and $\sigma$ be
+as in Definition~\ref{ib-host-group}. \emph{Arithmetic data} for $\Gamma_H$
+consist of natural numbers $q_1$ and $d$, a finite set $S$ of natural numbers,
+and for every natural number $n$ a subgroup $I_n\subset\Gamma_H$ and an element
+$\mathrm{Fr}_n\in\Gamma_H$, such that:
+\begin{enumerate}
+\item $d$ is prime, $2\in S$, $q_1\in S$ and $d\notin S$;
+\item $I_p=0$ for every prime $p\notin S$ with $p\neq d$;
+\item $I_p\subset\Psi_H$ and $\mathrm{Fr}_p\in\Psi_H$ for every prime $p\in S$;
+\item $I_d=\{0,\sigma\}$.
+\end{enumerate}
+A prime $p$ is \emph{inert} if $p\notin\{2,q_1,d\}$ and
+$\mathrm{Fr}_p\notin\Psi_H$. For $\psi\in\widehat\Gamma_H$ and an integer
+$n\geq1$ put
+\[
+ \psi(n)=\prod_{p\mid n}\frac1{|I_p|}\sum_{y\in I_p}
+ \psi\bigl(v_p(n)\mathrm{Fr}_p+y\bigr),
+\]
+the product over the primes dividing $n$. Thus $\psi(p^i)=\psi(\mathrm{Fr}_p)^i$
+if $\psi$ is trivial on $I_p$, and $\psi(p^i)=0$ otherwise; and $1(n)=1$ for
+every $n$.
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.ArithData}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.HostFactsS}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.IsInert}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.cosetMean}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.primVal}
+
+\begin{definition}\label{ib-host-chebyshev}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, define
+$\psi(n)$ as in Definition~\ref{ib-arithmetic-data}, and let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function. Let $G$ be the function of
+Definition~\ref{wl-corrected-sums}. The \emph{corrected Chebyshev sum} of
+$\psi\in\widehat\Gamma_H$ is the function $g_1=G$ if $\psi=1$, and
+\[
+ g_\psi(y)=\sum_{1\leq n\leq y}\Lambda(n)\psi(n)\Bigl(\frac yn-1\Bigr)+y\,\ell(\psi)
+ \qquad(y\in\mathbf R)
+\]
+if $\psi\neq1$. The value $\ell(1)$ is not used.
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.GPsi}
+\leanref{Formalism/StatementOC.lean}{Formalism.Gz}
+
+\section{The balance identity}\label{section-ib-balance}
+
+\begin{definition}\label{ib-inert-sums}
+Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$
+(Definition~\ref{ib-arithmetic-data}), write $\Psi=\Psi_H$, and let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function. Let $a$ be a real number,
+$t\in H$, $w:\Gamma_H\to\mathbf R$ a function and $N\geq0$ an integer, and write
+$u_+=\max(u,0)$. The \emph{inert-prime sum}, the \emph{main term} and the
+\emph{character side} are
+\begin{align*}
+ \mathrm{ASK}_N(a,t,w)&=\sum_{\substack{p\leq N\\ p\text{ inert}}}2\log p
+ \sum_{\substack{1\leq i\leq N\\ i\mathrm{Fr}_p\notin\Psi}}
+ \Bigl(\frac a{p^i}-w\bigl(\pi_t(i\mathrm{Fr}_p)\bigr)\Bigr)_+
+ +\log d\sum_{i=1}^N\ \sum_{\substack{g\notin\Psi\\ g-i\mathrm{Fr}_d\in I_d}}
+ \Bigl(\frac a{d^i}-w\bigl(\pi_t(g)\bigr)\Bigr)_+,\\
+ \mathrm{MAIN}(a,w)&=a\Bigl(\log a-1-\gamma+\ell(\chi_C)
+ -\frac1{|\Psi|}\sum_{\rho\in\Psi}\log w(\rho)\Bigr),\\
+ \mathrm{De}(a,t,w)&=\frac1{|\Psi|}\sum_{g\in\Gamma_H\smallsetminus\Psi}\
+ \sum_{\psi\in\widehat\Gamma_H}\overline{\psi(g)}\,w\bigl(\pi_t(g)\bigr)\,
+ g_\psi\Bigl(\frac a{w(\pi_t(g))}\Bigr),
+\end{align*}
+where $\gamma$ is Euler's constant, the first sum is over inert primes $p\leq N$,
+and $g_\psi$ is the corrected Chebyshev sum of Definition~\ref{ib-host-chebyshev}.
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.askP}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.askD}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.ASK}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.MAIN}
+\leanref{Formalism/SizeWindowBrackets/FirstPrimeNeSecondPrime.lean}{Formalism.LFunctionChainParameters.characterSumData.De}
+
+For an inert prime $p$ the element $i\mathrm{Fr}_p$ lies outside $\Psi$ exactly
+when $i$ is odd, since $\Psi$ has index $2$. So the contribution of $p$ to
+$\mathrm{ASK}$ is $2\log p$ times
+\[
+ \Bigl(\frac ap-w_1\Bigr)_++\Bigl(\frac a{p^3}-w_3\Bigr)_++\cdots,
+\]
+with $w_i=w(\pi_t(i\mathrm{Fr}_p))$, the shape $a/p+a/p^3+\cdots$ of the
+divisibility of periods in Chapter~\ref{chapter-period-divisibility}. In the
+term at $d$ the inner sum has one term for each $i$: since $I_d=\{0,\sigma\}$ and
+$\sigma\notin\Psi$, exactly one of $i\mathrm{Fr}_d$ and $i\mathrm{Fr}_d+\sigma$
+lies outside $\Psi$.
+
+\begin{lemma}\label{ib-prime-power-orthogonality}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, and define
+$\psi(n)$ as in Definition~\ref{ib-arithmetic-data}. Let $p$ be a prime, $i\geq1$
+an integer and $g\in\Gamma_H$. Then
+\[
+ \frac1{|\Psi_H|}\sum_{\psi\in\widehat\Gamma_H}\overline{\psi(g)}\,\psi(p^i)
+ =\begin{cases}2/|I_p|&\text{if }g-i\mathrm{Fr}_p\in I_p,\\
+ 0&\text{otherwise.}\end{cases}
+\]
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean}{Formalism.LFunctionChainParameters.characterSumData.orthogonality_ramified}
+\begin{proof}
+By definition $\psi(p^i)=|I_p|^{-1}\sum_{y\in I_p}\psi(i\mathrm{Fr}_p+y)$. By
+orthogonality of characters,
+$\sum_\psi\overline{\psi(g)}\psi(h)$ equals $|\Gamma_H|$ if $h=g$ and $0$
+otherwise. So the left side is $|\Gamma_H|/(|\Psi_H||I_p|)$ times the number of
+$y\in I_p$ with $i\mathrm{Fr}_p+y=g$, which is $1$ or $0$ according as
+$g-i\mathrm{Fr}_p\in I_p$ or not. Finally $|\Gamma_H|=2|\Psi_H|$.
+\end{proof}
+
+\begin{lemma}\label{ib-inert-expansion}
+Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$
+(Definition~\ref{ib-arithmetic-data}), and write $\Psi=\Psi_H$. Let $a$ be a
+real number, $t\in H$, $w:\Gamma_H\to\mathbf R$ a function and $N\geq0$ an
+integer, such that $w(\rho)>0$ and $a/w(\rho)\leq N$ for every $\rho\in\Psi$.
+Then
+\[
+ \mathrm{ASK}_N(a,t,w)=\frac1{|\Psi|}\sum_{g\notin\Psi}\ \sum_{\psi\in\widehat\Gamma_H}
+ \overline{\psi(g)}\sum_{n=1}^N\Lambda(n)\psi(n)
+ \Bigl(\frac an-w\bigl(\pi_t(g)\bigr)\Bigr)_+.
+\]
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean}{Deduction.CharacterBalance.askExp}
+\begin{proof}
+For $n\geq1$ and $g\in\Gamma_H$ put
+$k(n,g)=|\Psi|^{-1}\sum_\psi\overline{\psi(g)}\psi(n)$ and
+$F(n,g)=(a/n-w(\pi_t(g)))_+$. Exchanging the order of summation, the right side
+is $\sum_{n\leq N}\Lambda(n)\sum_{g\notin\Psi}k(n,g)F(n,g)$. For $g\notin\Psi$
+we have $\pi_t(g)\in\Psi$, so $F(p^i,g)=0$ when $p^i>N$, because then
+$a/p^i<a/N\leq w(\pi_t(g))$. Hence the right side is
+\[
+ \sum_{p\leq N}\log p\sum_{i=1}^N\sum_{g\notin\Psi}k(p^i,g)F(p^i,g),
+\]
+the sum over primes. Lemma~\ref{ib-prime-power-orthogonality} computes
+$k(p^i,g)$, and we treat the primes $p\leq N$ in turn.
+
+If $p\in S$, then $i\mathrm{Fr}_p+I_p\subset\Psi$ by condition~(3), so
+$k(p^i,g)=0$ for $g\notin\Psi$, and $p$ contributes nothing.
+
+If $p=d$, then $|I_d|=2$ by condition~(4), so $k(d^i,g)$ is $1$ if
+$g-i\mathrm{Fr}_d\in I_d$ and $0$ otherwise. The contribution of $d$ is the
+second term of $\mathrm{ASK}_N(a,t,w)$. If $d>N$, that term vanishes as well,
+since $(a/d^i-w(\pi_t(g)))_+=0$.
+
+If $p\notin S$ and $p\neq d$, then $I_p=0$ by condition~(2), so $k(p^i,g)$ is $2$
+if $g=i\mathrm{Fr}_p$ and $0$ otherwise. The contribution of $p$ is
+\[
+ 2\log p\sum_{\substack{1\leq i\leq N\\ i\mathrm{Fr}_p\notin\Psi}}
+ \Bigl(\frac a{p^i}-w\bigl(\pi_t(i\mathrm{Fr}_p)\bigr)\Bigr)_+ .
+\]
+If $\mathrm{Fr}_p\in\Psi$, then every $i\mathrm{Fr}_p$ lies in $\Psi$ and this
+vanishes. Otherwise $p$ is inert, because $2$ and $q_1$ lie in $S$ by
+condition~(1). Conversely an inert prime lies outside $S$ by condition~(3).
+Adding the contributions gives $\mathrm{ASK}_N(a,t,w)$.
+\end{proof}
+
+\begin{lemma}\label{ib-truncation}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, and let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, with $\psi(n)$ and $g_\psi$ as
+in Definitions~\ref{ib-arithmetic-data} and~\ref{ib-host-chebyshev}. Let
+$\psi\in\widehat\Gamma_H$, let $a>0$ and $W>0$ be real, and let $N$ be an integer
+with $a/W\leq N$. Then
+\[
+ \sum_{n=1}^N\Lambda(n)\psi(n)\Bigl(\frac an-W\Bigr)_+
+ =W\,g_\psi\Bigl(\frac aW\Bigr)+
+ \begin{cases}a\log a-a\log W-(1+\gamma)a&\text{if }\psi=1,\\
+ -a\,\ell(\psi)&\text{if }\psi\neq1.\end{cases}
+\]
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean}{Formalism.LFunctionChainParameters.characterSumData.sum_cut}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/StronglyIrreducible.lean}{Formalism.LFunctionChainParameters.characterSumData.inner_eq}
+\begin{proof}
+The term $(a/n-W)_+$ is $a/n-W$ for $n\leq a/W$ and $0$ for $n>a/W$, and
+$a/W\leq N$. So the left side is
+\[
+ \sum_{n\leq a/W}\Lambda(n)\psi(n)\Bigl(\frac an-W\Bigr)
+ =W\sum_{n\leq a/W}\Lambda(n)\psi(n)\Bigl(\frac{a/W}n-1\Bigr).
+\]
+If $\psi\neq1$, the last sum is $g_\psi(a/W)-(a/W)\ell(\psi)$. If $\psi=1$, then
+$\psi(n)=1$ for all $n$ and the last sum is
+$G(a/W)+(a/W)\log(a/W)-(1+\gamma)a/W$. Multiplying by $W$ gives the claim.
+\end{proof}
+
+\begin{theorem}\label{ib-balance-identity}
+Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$
+(Definition~\ref{ib-arithmetic-data}), write $\Psi=\Psi_H$, and let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function. Let $a>0$ be real, $t\in H$,
+$w:\Gamma_H\to\mathbf R$ a function with $w(\rho)>0$ for every $\rho\in\Psi$, and
+$N$ an integer with $a/w(\rho)\leq N$ for every $\rho\in\Psi$. Then, with the
+notation of Definition~\ref{ib-inert-sums},
+\[
+ \mathrm{ASK}_N(a,t,w)-\mathrm{MAIN}(a,w)=\mathrm{De}(a,t,w).
+\]
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChBalance.lean}{Deduction.ch_balance}
+\begin{proof}
+For $g\notin\Psi$ put $W_g=w(\pi_t(g))$. Then $W_g>0$ and $a/W_g\leq N$, since
+$\pi_t(g)\in\Psi$. By Lemmas~\ref{ib-inert-expansion} and~\ref{ib-truncation},
+\[
+ \mathrm{ASK}_N(a,t,w)=\frac1{|\Psi|}\sum_{g\notin\Psi}\sum_\psi\overline{\psi(g)}
+ \bigl(W_g\,g_\psi(a/W_g)+R_\psi(g)\bigr),
+\]
+where $R_1(g)=a\log a-a\log W_g-(1+\gamma)a$ and $R_\psi(g)=-a\ell(\psi)$ for
+$\psi\neq1$. The terms $W_g\,g_\psi(a/W_g)$ add up to $\mathrm{De}(a,t,w)$. It
+remains to show that the terms $R_\psi(g)$ add up to $\mathrm{MAIN}(a,w)$.
+
+For $\psi\in\widehat\Gamma_H$ we have
+\[
+ \sum_{g\notin\Psi}\overline{\psi(g)}=
+ \begin{cases}|\Psi|&\text{if }\psi=1,\\ -|\Psi|&\text{if }\psi=\chi_C,\\
+ 0&\text{otherwise,}\end{cases}
+\]
+because the indicator function of $\Gamma_H\smallsetminus\Psi$ is
+$(1-\chi_C)/2$, and by orthogonality of characters, with $|\Gamma_H|=2|\Psi|$.
+Since $\chi_C\neq1$, the nontrivial characters contribute
+\[
+ \frac1{|\Psi|}\sum_{\psi\neq1}\Bigl(\sum_{g\notin\Psi}\overline{\psi(g)}\Bigr)
+ \bigl(-a\ell(\psi)\bigr)=a\,\ell(\chi_C).
+\]
+The trivial character contributes
+\[
+ \frac1{|\Psi|}\sum_{g\notin\Psi}\bigl(a\log a-(1+\gamma)a-a\log W_g\bigr)
+ =a\log a-(1+\gamma)a-\frac a{|\Psi|}\sum_{\rho\in\Psi}\log w(\rho),
+\]
+because $\Gamma_H\smallsetminus\Psi$ has $|\Psi|$ elements and $\pi_t$ maps it
+bijectively onto $\Psi$. The two contributions add up to $\mathrm{MAIN}(a,w)$.
+\end{proof}
+
+\section{The comparison inequality}\label{section-ib-comparison}
+
+\begin{definition}\label{ib-comparison-data}
+Let $U_0$ and $\mathcal T$ be finite sets, for each $u_0\in U_0$ let $W(u_0)$ be
+a nonempty finite set, and let $m,f\geq0$ be integers. \emph{Comparison data} on
+$(U_0,W,\mathcal T,m,f)$ consist of the following real numbers:
+\begin{enumerate}
+\item a scale $x$, an exponent $\varepsilon$, and parameters
+  $a,b,b',k,L,L_a,B_0,N_c,\gamma_0,\ell_0,v,\lambda$ and $X''$;
+\item constants $c_{\mathrm{Div}},e_{\mathrm{Div}},c_E,c_H,c_{\mathrm{Ct}},
+  c_{\mathrm{Sl}},c'_{\mathrm{Sl}},c_{\mathrm{Loss}},e_{\mathrm{Loss}}$ and
+  $c_{HH}$;
+\item exponents $a_\tau$ for $\tau\in\mathcal T$, and weights
+  $w_{u_0,j,\rho}$ for $u_0\in U_0$, $1\leq j\leq m$ and $1\leq\rho\leq f$;
+\item for each $u_0\in U_0$ and each $u\in W(u_0)$: a weight $r_u$, a size
+  $P_u$, slopes $\mu_N(u)$, $\mu_N^+(u)$, $\mu_M(u)$ and $\mu_M^+(u)$, a height
+  $h_u$, and exponents $E_{u,j}$ for $1\leq j\leq m$;
+\item for each $u_0\in U_0$: slopes $\mu_C(u_0)$ and $\mu_C^-(u_0)$, a shift
+  $F(u_0)$, a gain $\mathrm{Ga}(u_0)$, an inert-prime quantity
+  $\mathrm{ASK}(u_0)$, a loss $\kappa(u_0)$, a frame height $\Delta(u_0)$ and
+  frame parameters $\delta(u_0)$, $\eta(u_0)$ and $e(u_0)$;
+\item bounds $\bar\delta$, $\bar\eta$ and $\bar e$ for the frame parameters.
+\end{enumerate}
+The elements of $W(u_0)$ are called \emph{words}.
+\end{definition}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Consts}
+
+The names record the roles these numbers play in
+Chapters~\ref{chapter-hermitian-slopes} to~\ref{chapter-covolumes}; the
+identifications are listed in Definition~\ref{asm-tied}. The $\mu$'s are slopes
+of Hermitian lattices: $\mu_N(u)$ and $\mu_N^+(u)$ of a division lattice $N_u$,
+$\mu_M(u)$ and $\mu_M^+(u)$ of the first lattice $M_u$ of a chain of lifts, and
+$\mu_C(u_0)$ and $\mu_C^-(u_0)$ of the dual $CC$ of the lattice glued across
+tuples of Hecke characters (Chapter~\ref{chapter-integral-structure}). The
+weight $r_u$ is the rank $d_u$ of $N_u$, and $P_u$ is the auxiliary prime of
+the word $u$. $\mathrm{Ga}(u_0)$ is the divisibility gained at inert primes
+(Chapter~\ref{chapter-period-divisibility}). In the application
+$\mathrm{ASK}(u_0)$ is a sum of inert-prime sums of
+Definition~\ref{ib-inert-sums}, $\gamma_0$ is Euler's constant and $\ell_0$ is
+the real part of $\ell(\chi_C)$ (Definition~\ref{ib-core-data}).
+
+\begin{definition}\label{ib-comparison-quantities}
+Let comparison data on $(U_0,W,\mathcal T,m,f)$ be given
+(Definition~\ref{ib-comparison-data}). Put
+$n_{\mathcal T}=|\mathcal T|$, $A=\sum_{\tau}a_\tau$,
+$\log\Omega=\gamma_0+\log(\pi/v)-\ell_0$ and $\phi(y)=y\log y-y$, with
+$0\log0=0$. The quantities that divide by $f$ or $k$ or take the logarithm of
+$v$, $w_{u_0,j,\rho}$ or $P_u$ are used only where these numbers are positive.
+For $u_0\in U_0$ and $u\in W(u_0)$ put $E_u=\sum_{j=1}^mE_{u,j}$ and
+\begin{align*}
+ s(u_0)&=\frac{\sum_{u\in W(u_0)}r_u\bigl(\mu_N(u)-h_u\bigr)}{\sum_{u\in W(u_0)}r_u},
+ \qquad s^+(u_0)=\max_{u\in W(u_0)}\bigl(\mu_N^+(u)-h_u\bigr),\\
+ \mathcal L(u_0)&=\frac1f\sum_{j=1}^m\sum_{\rho=1}^f\log\frac{w_{u_0,j,\rho}v}{\pi}
+ +m\lambda-c_{\mathrm{Ct}}\Bigl(L_a+\frac{m^2L_a}k\Bigr),\\
+ \mathrm{Main}(u_0)&=\sum_{j=1}^m\sum_{\tau\in\mathcal T}a_\tau\Bigl(\log a_\tau-1-\gamma_0+\ell_0
+ -\frac1f\sum_{\rho=1}^f\log w_{u_0,j,\rho}\Bigr),\\
+ \mathrm{Lo}(u_0,u)&=c'_{\mathrm{Sl}}\kappa(u_0)
+ +c'_{\mathrm{Sl}}n_{\mathcal T}m\Bigl(\frac ak+b'\Bigr)\log P_u+c'_{\mathrm{Sl}}X''+1,\\
+ \mathrm{Lo}_{\max}&=c_{\mathrm{Loss}}n_{\mathcal T}mb\,x^{e_{\mathrm{Loss}}\varepsilon},\qquad
+ E_{\mathrm{Div}}=c_{\mathrm{Div}}n_{\mathcal T}aL_a
+ +c_{\mathrm{Div}}m(B_0+N_c)x^{e_{\mathrm{Div}}\varepsilon},\\
+ V&=2mc_EB_0+c_H(n_{\mathcal T}aL_a+mB_0)+Ac_{\mathrm{Ct}}\log k,\\
+ \overline{\mathrm{Lo}}&=c'_{\mathrm{Sl}}\mathrm{Lo}_{\max}
+ +c'_{\mathrm{Sl}}c_{\mathrm{Ct}}n_{\mathcal T}m^2\Bigl(\frac ak+b'\Bigr)L
+ +c'_{\mathrm{Sl}}X''+1,\\
+ \bar U&=c_{\mathrm{Sl}}n_{\mathcal T}aL_a\Bigl(2+\frac mk\Bigr)+V
+ +c'_{\mathrm{Sl}}mB_0+\overline{\mathrm{Lo}},
+\end{align*}
+and define the \emph{error} at $u_0$ as
+\begin{align*}
+ \mathrm{Err}(u_0)={}&Ac_{\mathrm{Ct}}\Bigl(L_a+\frac{m^2L_a}k\Bigr)+E_{\mathrm{Div}}
+ +mc_EB_0+c_{\mathrm{Sl}}n_{\mathcal T}aL_a\Bigl(1+\frac mk\Bigr)
+ +\log|W(u_0)|+\mathrm{Lo}_{\max}+\overline{\mathrm{Lo}}\\
+ &+(1-\bar\delta)^{-1}\Bigl(4\log\bigl(1+x^{c_{HH}}\bigr)\bigl(\bar U+b\bigr)
+ +\bigl(\bar\eta+4\sqrt{\bar e}\bigr)x^{c_{HH}}b\Bigr).
+\end{align*}
+\end{definition}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.Main}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.s}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.uF}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.logOm}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.Vvar}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.LoP}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.Lam5}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.Lo5}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.MLo5}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.UBar5}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.ErrX5at}
+
+\begin{definition}\label{ib-comparison-hypotheses}
+Comparison data on $(U_0,W,\mathcal T,m,f)$ (Definition~\ref{ib-comparison-data})
+satisfy the \emph{comparison hypotheses} if the following hold for all
+$u_0\in U_0$ and all words $u,u'\in W(u_0)$, with the quantities of
+Definition~\ref{ib-comparison-quantities}.
+\begin{enumerate}
+\item[(H1)] (Positivity.) $x>0$, $b>0$, $a\geq0$, $b'\geq0$, $k>0$, $v>0$,
+  $f>0$, $c'_{\mathrm{Sl}}\geq0$, $\bar\delta<1$, $\bar\eta\geq0$,
+  $0\leq\bar e\leq1/4$; $a_\tau\geq0$ for all $\tau$; $w_{u_0,j,\rho}>0$ for all
+  $j,\rho$; and $r_u>0$, $P_u>0$ and $\mu_N(u)\leq\mu_N^+(u)$.
+\item[(H2)] (Division inequality.)
+  \[
+   \mu_C(u_0)+h_u-F(u_0)\leq\sum_{\tau\in\mathcal T}\Bigl(m\bigl(\phi(a_\tau)-a_\tau\log\Omega\bigr)
+   -a_\tau\log P_u\Bigr)+E_{\mathrm{Div}}.
+  \]
+\item[(H3)] (Exponents.) $|E_u-mA\lambda|\leq c_EmB_0$.
+\item[(H4)] (Heights.) $\bigl|(h_u+A\log P_u)-(h_{u'}+A\log P_{u'})\bigr|
+  \leq c_H(n_{\mathcal T}aL_a+mB_0)$.
+\item[(H5)] (Sizes.) $\mathcal L(u_0)\leq\log P_u\leq c_{\mathrm{Ct}}mL$ and
+  $|\log P_u-\log P_{u'}|\leq c_{\mathrm{Ct}}\log k$.
+\item[(H6)] (Slopes of $M$.) $-c_{\mathrm{Sl}}n_{\mathcal T}aL_a(1+m/k)\leq\mu_M(u)$
+  and $\mu_M^+(u)\leq c_{\mathrm{Sl}}n_{\mathcal T}aL_a$.
+\item[(H7)] (Slopes of $N$.)
+  $\mu_N^+(u)\leq\mu_M^+(u)+\mathrm{Ga}(u_0)+F(u_0)-E_u+c'_{\mathrm{Sl}}mB_0$ and
+  $\mu_M(u)+\mathrm{Ga}(u_0)+F(u_0)-E_u-\mathrm{Lo}(u_0,u)\leq\mu_N(u)$.
+\item[(H8)] (Losses.) $\mathrm{ASK}(u_0)-\mathrm{Ga}(u_0)\leq\mathrm{Lo}_{\max}$ and
+  $\kappa(u_0)\leq\mathrm{Lo}_{\max}$.
+\item[(H9)] (Frame slope inequality.) If $0\leq\delta(u_0)<1$, $\eta(u_0)\geq0$,
+  $0\leq e(u_0)\leq1/4$, $s(u_0)-\mu_C^-(u_0)\leq\Delta(u_0)$ and
+  $\Delta(u_0)>0$, then
+  \[
+   s-\log|W(u_0)|-\frac{4(s^+-s)\log\bigl(1+\Delta/(s^+-s)\bigr)
+   +\bigl(\eta+4\sqrt e\bigr)\Delta}{1-\delta}\leq\mu_C(u_0),
+  \]
+  where $s,s^+,\Delta,\delta,\eta,e$ are evaluated at $u_0$, and
+  $(s^+-s)\log(1+\Delta/(s^+-s))$ is read as $0$ when $s^+=s$.
+\item[(H10)] (Frame height.) $s(u_0)-\mu_C^-(u_0)\leq\Delta(u_0)$ and
+  $0<\Delta(u_0)\leq x^{c_{HH}}b$.
+\item[(H11)] (Frame parameters.) $0\leq\delta(u_0)\leq\bar\delta$,
+  $0\leq\eta(u_0)\leq\bar\eta$ and $0\leq e(u_0)\leq\bar e$.
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/SChain.lean}{Formalism.LFunctionChainParameters.LChain.SizeData₂}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.HidaSetting}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.DIV}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.EComp5}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.HComp}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.Count5}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.Slopes}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.QuotientSlopeBoundsWith}
+\leanref{Formalism/SizeWindowBrackets/QuotientSlopeBoundsWith.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.LossBounds}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.SlopeIneq}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.HHBound}
+\leanref{Formalism/RankGapBounds/MeanBoundSecondForm.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.FParams}
+
+\begin{lemma}\label{ib-slope-of-n-lower}
+Let comparison data on $(U_0,W,\mathcal T,m,f)$ satisfy conditions (H1), (H2),
+(H3), (H5), (H6) and (H7) of Definition~\ref{ib-comparison-hypotheses}, and let
+$u_0\in U_0$. Write $\langle\mathrm{Lo}\rangle(u_0)$ for the mean of
+$\mathrm{Lo}(u_0,u)$ over $u\in W(u_0)$ with weights $r_u$, and put
+\[
+ K_5(u_0)=c_{\mathrm{Sl}}n_{\mathcal T}aL_a\Bigl(1+\frac mk\Bigr)+m(A\lambda+c_EB_0)
+ +m\sum_\tau\bigl(\phi(a_\tau)-a_\tau\log\Omega\bigr)-A\mathcal L(u_0)+E_{\mathrm{Div}}.
+\]
+Then
+\[
+ \mathrm{Ga}(u_0)+\mu_C(u_0)-K_5(u_0)-\langle\mathrm{Lo}\rangle(u_0)\leq s(u_0).
+\]
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.s_lower5}
+\begin{proof}
+Let $u\in W(u_0)$; we drop $u_0$ from the notation. By the second inequality
+of (H7),
+$\mu_N(u)\geq\mu_M(u)+\mathrm{Ga}+F-E_u-\mathrm{Lo}(u_0,u)$. By (H6),
+$\mu_M(u)\geq-c_{\mathrm{Sl}}n_{\mathcal T}aL_a(1+m/k)$. By (H3),
+$E_u\leq m(A\lambda+c_EB_0)$. By (H2), and since
+$\sum_\tau a_\tau\log P_u=A\log P_u$,
+\[
+ -h_u\geq\mu_C-F-m\sum_\tau\bigl(\phi(a_\tau)-a_\tau\log\Omega\bigr)
+ +A\log P_u-E_{\mathrm{Div}}.
+\]
+By (H5) and $A\geq0$, which holds by (H1), $A\log P_u\geq A\mathcal L$. Adding
+these inequalities gives
+$\mu_N(u)-h_u\geq\mathrm{Ga}+\mu_C-K_5-\mathrm{Lo}(u_0,u)$. The weights $r_u$
+are positive by (H1), so taking the weighted mean over $u$ gives the claim.
+\end{proof}
+
+\begin{lemma}\label{ib-spread}
+Let comparison data on $(U_0,W,\mathcal T,m,f)$ satisfy conditions (H1), (H3),
+(H4), (H5), (H6) and (H7) of Definition~\ref{ib-comparison-hypotheses}, let
+$u_0\in U_0$, define $\langle\mathrm{Lo}\rangle(u_0)$ as in
+Lemma~\ref{ib-slope-of-n-lower}, and put
+\[
+ K_3=c_{\mathrm{Sl}}n_{\mathcal T}aL_a\Bigl(2+\frac mk\Bigr)+V+c'_{\mathrm{Sl}}mB_0.
+\]
+Then $0\leq s^+(u_0)-s(u_0)\leq K_3+\langle\mathrm{Lo}\rangle(u_0)$.
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.u_function_le_mean}
+\leanref{Formalism/RankGapBounds/RankGapProofs/WeightedMeanData.lean}{Formalism.RankGapBounds.WeightedMeanData.Data.uF_nonneg}
+\begin{proof}
+We drop $u_0$ from the notation. Since $\mu_N(u)\leq\mu_N^+(u)$ by (H1), each
+$\mu_N(u)-h_u$ is at most $s^+$, and so is their weighted mean $s$.
+
+Let $u,u'\in W(u_0)$. The first inequality of (H7) for $u$ and the second for
+$u'$ give
+\[
+ \bigl(\mu_N^+(u)-h_u\bigr)-\bigl(\mu_N(u')-h_{u'}\bigr)
+ \leq\bigl(\mu_M^+(u)-\mu_M(u')\bigr)+\bigl(E_{u'}+h_{u'}-E_u-h_u\bigr)
+ +c'_{\mathrm{Sl}}mB_0+\mathrm{Lo}(u_0,u').
+\]
+By (H6) the first bracket is at most $c_{\mathrm{Sl}}n_{\mathcal T}aL_a(2+m/k)$.
+By (H3), $E_{u'}-E_u\leq2mc_EB_0$. By (H4),
+$h_{u'}-h_u\leq c_H(n_{\mathcal T}aL_a+mB_0)+A(\log P_u-\log P_{u'})$, and the
+last term is at most $Ac_{\mathrm{Ct}}\log k$ by (H5) and $A\geq0$. So the second
+bracket is at most $V$, and
+$\mu_N^+(u)-h_u-K_3-\mathrm{Lo}(u_0,u')\leq\mu_N(u')-h_{u'}$. Taking the
+weighted mean over $u'$ gives $\mu_N^+(u)-h_u\leq K_3+\langle\mathrm{Lo}\rangle+s$,
+and taking the maximum over $u$ gives the upper bound.
+\end{proof}
+
+\begin{theorem}\label{ib-comparison-inequality}
+Let $U_0$ and $\mathcal T$ be finite sets, for each $u_0\in U_0$ let $W(u_0)$ be
+a nonempty finite set, and let $m,f\geq0$ be integers. Let comparison data on
+$(U_0,W,\mathcal T,m,f)$ (Definition~\ref{ib-comparison-data}) satisfy the
+comparison hypotheses (H1)--(H11) (Definition~\ref{ib-comparison-hypotheses}).
+Then for every $u_0\in U_0$,
+\[
+ \mathrm{ASK}(u_0)\leq\mathrm{Main}(u_0)+\mathrm{Err}(u_0),
+\]
+with $\mathrm{Main}$ and $\mathrm{Err}$ as in
+Definition~\ref{ib-comparison-quantities}.
+\end{theorem}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean}{Formalism.LFunctionChainParameters.WeightedSlopeBounds.each_unit_bound_statement}
+\begin{proof}
+Fix $u_0$ and drop it from the notation. Let $\langle\mathrm{Lo}\rangle$, $K_5$
+and $K_3$ be as in Lemmas~\ref{ib-slope-of-n-lower} and~\ref{ib-spread}.
+
+\emph{Step 1: the main term.} Expanding $\phi$, $\log\Omega$ and $\mathcal L$,
+and using $\log(w v/\pi)=\log w+\log v-\log\pi$ (all arguments are positive by
+(H1)), the terms in $\log v$ and $\log\pi$ cancel and
+\[
+ m\sum_\tau\bigl(\phi(a_\tau)-a_\tau\log\Omega\bigr)-A\mathcal L+mA\lambda
+ =\mathrm{Main}+Ac_{\mathrm{Ct}}\Bigl(L_a+\frac{m^2L_a}k\Bigr).
+\]
+Hence $K_5=\mathrm{Main}+K_0$ with
+$K_0=Ac_{\mathrm{Ct}}(L_a+m^2L_a/k)+E_{\mathrm{Div}}+mc_EB_0
++c_{\mathrm{Sl}}n_{\mathcal T}aL_a(1+m/k)$.
+
+\emph{Step 2: the slope of $C$ from below.} By (H1), (H10) and (H11), the
+hypotheses of (H9) hold, so
+\[
+ \mu_C\geq s-\log|W(u_0)|-(1-\delta)^{-1}\Bigl(4(s^+-s)\log\bigl(1+\Delta/(s^+-s)\bigr)
+ +(\eta+4\sqrt e)\Delta\Bigr).
+\]
+
+\emph{Step 3: an elementary bound.} Let $0\leq u\leq U$, $b>0$, $X>0$ and
+$0<\Delta\leq Xb$. Then $u\log(1+\Delta/u)\leq\log(1+X)(U+b)$. This is clear if
+$u=0$. If $u>0$, then $\log y\leq y-1$ applied to $y=(1+\Delta/u)/(1+X)$ gives
+\[
+ u\log(1+\Delta/u)\leq u\log(1+X)+\frac{\Delta-uX}{1+X}
+ \leq U\log(1+X)+\frac{bX}{1+X},
+\]
+and $X/(1+X)\leq\log(1+X)$.
+
+\emph{Step 4: the gain.} Apply Step 3 with $u=s^+-s$, $U=K_3+\langle\mathrm{Lo}\rangle$
+(Lemma~\ref{ib-spread}), $X=x^{c_{HH}}$ and the bound $\Delta\leq x^{c_{HH}}b$ of
+(H10). By (H11), $(1-\delta)^{-1}\leq(1-\bar\delta)^{-1}$ and
+$(\eta+4\sqrt e)\Delta\leq(\bar\eta+4\sqrt{\bar e})x^{c_{HH}}b$. So Step 2 gives
+\[
+ \mu_C\geq s-\log|W(u_0)|-(1-\bar\delta)^{-1}\Bigl(4\log\bigl(1+x^{c_{HH}}\bigr)
+ \bigl(K_3+\langle\mathrm{Lo}\rangle+b\bigr)+(\bar\eta+4\sqrt{\bar e})x^{c_{HH}}b\Bigr).
+\]
+Lemma~\ref{ib-slope-of-n-lower} bounds $s$ from below by
+$\mathrm{Ga}+\mu_C-K_5-\langle\mathrm{Lo}\rangle$. Combining the two bounds,
+$\mu_C$ cancels, and with Step 1
+\[
+ \mathrm{Ga}\leq\mathrm{Main}+K_0+\langle\mathrm{Lo}\rangle+\log|W(u_0)|
+ +(1-\bar\delta)^{-1}\Bigl(4\log\bigl(1+x^{c_{HH}}\bigr)\bigl(K_3+\langle\mathrm{Lo}\rangle+b\bigr)
+ +(\bar\eta+4\sqrt{\bar e})x^{c_{HH}}b\Bigr).
+\]
+
+\emph{Step 5: the losses.} By (H5), $\log P_u\leq c_{\mathrm{Ct}}mL$, and the
+coefficient $c'_{\mathrm{Sl}}n_{\mathcal T}m(a/k+b')$ of $\log P_u$ in
+$\mathrm{Lo}(u_0,u)$ is nonnegative by (H1); together with
+$\kappa\leq\mathrm{Lo}_{\max}$ from (H8) this gives
+$\langle\mathrm{Lo}\rangle\leq\overline{\mathrm{Lo}}$, and
+$K_3+\overline{\mathrm{Lo}}=\bar U$. Finally
+$\mathrm{ASK}\leq\mathrm{Ga}+\mathrm{Lo}_{\max}$ by (H8). Adding up gives
+$\mathrm{ASK}\leq\mathrm{Main}+\mathrm{Err}$.
+\end{proof}
+
+\begin{remark}\label{ib-two-measurements}
+The proof measures one number, the slope $\mu_C(u_0)$ of the dual $CC$ of the
+glued lattice, in two ways, and the slope itself cancels. From below: the frame slope
+inequality (H9), the frame form of Bost's inequality of
+Chapter~\ref{chapter-hermitian-slopes}, bounds $\mu_C$ below by the weighted mean
+$s$ of the slopes $\mu_N(u)-h_u$, up to the loss
+$\log|W(u_0)|+(1-\delta)^{-1}(\cdots)$; and (H7) says that the slope of $N_u$
+exceeds that of $M_u$ by the gain $\mathrm{Ga}(u_0)$, up to the shift $F$, the
+exponent $E_u$ and the loss $\mathrm{Lo}(u_0,u)$, which is how the divisibility
+of periods of Chapter~\ref{chapter-period-divisibility} raises the slope. So
+$\mu_C\gtrsim\mathrm{Ga}+F-h_u+(\text{archimedean terms})$. From above: the
+division inequality (H2), which comes from the norms of lifts and the covolumes
+of Chapters~\ref{chapter-integral-structure} and~\ref{chapter-covolumes}, bounds
+$\mu_C+h_u-F$ by the archimedean size
+$\sum_\tau(m(\phi(a_\tau)-a_\tau\log\Omega)-a_\tau\log P_u)$. Comparing the two
+bounds gives $\mathrm{Ga}\lesssim\mathrm{Main}$, by the identity of Step 1, and
+(H8), the lower bound for the gains at inert primes of
+Chapter~\ref{chapter-period-divisibility}, replaces $\mathrm{Ga}$ by
+$\mathrm{ASK}$. Every other hypothesis controls an error term.
+\end{remark}
+
+\section{From the comparison inequality to a window bound}\label{section-ib-window}
+
+\begin{definition}\label{ib-size-windows}
+Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$
+(Definition~\ref{ib-arithmetic-data}), let $\ell:\widehat\Gamma_H\to\mathbf C$ be
+a function, with corrected Chebyshev sums $g_\psi$ (Definition~\ref{ib-host-chebyshev}),
+and write $\Psi=\Psi_H$. Let $A_0\subset H$ be a subgroup, $T,T_2\subset H$ finite
+subsets, $m,N\geq0$ integers, $a:H\to\mathbf R$ and
+$w:H\times\{1,\ldots,m\}\times\Gamma_H\to\mathbf R$ functions, and
+$x,\varepsilon,b,b',k,a_E,\eta,X',\theta$ real numbers. An element
+$\rho\in\Gamma_H$ is \emph{thick} at $u_0\in H$ if $\rho=(1,0,s+u_0)$ for some
+$s\in T_2$; thick elements lie in $\Psi$. These data lie in the \emph{size
+windows} if:
+\begin{enumerate}
+\item[(W1)] $\eta\geq0$, $X'>0$, $b'>0$, $\theta\geq0$ and $b'X'\leq xb$;
+\item[(W2)] $|a(t)/b-x|\leq1$ for every $t\in T$;
+\item[(W3)] for all $u_0\in A_0$, $1\leq j\leq m$, $\rho\in\Psi$ and $t\in T$:
+  $w(u_0,j,\rho)>0$ and $a(t)/w(u_0,j,\rho)\leq N$; moreover
+  $b\leq w(u_0,j,\rho)\leq b+\eta+1$ if $\rho$ is thick at $u_0$, and
+  $w(u_0,j,\rho)\leq2b'$ if it is not;
+\item[(W4)] (thin scales) $|g_\psi(y)|\leq\theta y$ for every
+  $\psi\in\widehat\Gamma_H$ and every $y\geq X'/3$;
+\item[(W5)] (cost) $2|\Psi|(x+1)\theta\leq1/x$ and
+  $6|\Psi|(x+1)(\eta+1)\leq b/x$;
+\item[(W6)] (sizes) $a_E\leq2xb$, $x^{-\varepsilon/8}|H|/2\leq|T|$,
+  $x^{-\varepsilon}|H|\leq|T_2|$, $x^{1/2-\varepsilon}\leq m$ and
+  $k\leq|H|^2x^{1/2-\varepsilon}$.
+\end{enumerate}
+For integers $n>0$, $n_T,n_2,m\geq0$ and real $x>0$, $\varepsilon,b,k,a_E$ the
+\emph{error bracket} is
+\[
+ \beta(x,\varepsilon;n,n_T,n_2,m,b,k,a_E)=n_Ta_E\Bigl(1+\frac{m^2}k\Bigr)
+ +m\Bigl(2nmbx^{\varepsilon}+\frac{n_2kbx^{2\varepsilon}}{n^2}\Bigr).
+\]
+\end{definition}
+\leanref{Formalism/ThickAverageLoss/PartnersToFactorsAt.lean}{Formalism.D5.IsThickAt}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.SizesA}
+\leanref{Formalism/SizeWindowBrackets/GrowthBoundGivesRiemannHypothesis.lean}{Formalism.LFunctionChainParameters.ThickSetMeanBounds.ThinScales}
+\leanref{Formalism/SizeWindowBrackets/SChain.lean}{Formalism.LFunctionChainParameters.LChain.CostWindows}
+\leanref{Formalism/SizeWindowBrackets/SChain.lean}{Formalism.LFunctionChainParameters.LChain.RestSize}
+\leanref{Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{Formalism.LFunctionChainParameters.LErr.errorBracketSizeWindows}
+
+\begin{definition}\label{ib-kept-characters}
+Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$, let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, with corrected Chebyshev sums $g_\psi$,
+let $A_0\subset H$ be a subgroup and $T\subset H$ a finite subset. Let
+$\widehat\Gamma_H^{A_0}\subset\widehat\Gamma_H$ be the set of characters $\psi$ with
+$\psi(0,s)=1$ for all $s\in A_0$. For a subset
+$\mathcal K\subset\widehat\Gamma_H$ and a real number $c$ put $w_c(\psi)=1$ if
+$\psi(0,h)=1$ for all $h\in H$ and $w_c(\psi)=c$ otherwise, and
+\[
+ g^{\mathcal K}_c(y)=\sum_{\psi\in\mathcal K}w_c(\psi)\operatorname{Re}g_\psi(y),
+ \qquad
+ \Sigma^{\mathcal K}(y)=\sum_{\psi\in\widehat\Gamma_H^{A_0}\smallsetminus\mathcal K}|g_\psi(y)|.
+\]
+For real numbers $c,M,B_\ell,C_E,\varepsilon$ and $x>0$, the set $\mathcal K$ is
+\emph{kept} with constants $(c,M,B_\ell,C_E)$ at $(x,\varepsilon)$ if:
+\begin{enumerate}
+\item[(K1)] $1\in\mathcal K$, and $\psi\in\widehat\Gamma_H^{A_0}$ and $\psi(\sigma)=1$ for
+  every $\psi\in\mathcal K$;
+\item[(K2)] $|\widehat\Gamma_H^{A_0}|\leq M$;
+\item[(K3)] $\bigl|\sum_{t\in T}\psi(0,t)-c|T|\bigr|\leq Mx^{-1+\varepsilon}|T|$
+  for every $\psi\in\mathcal K$ with $\psi(0,h)\neq1$ for some $h\in H$;
+\item[(K4)] $|\ell(\psi)|\leq B_\ell$ for every $\psi\in\mathcal K$ with
+  $\psi\neq1$;
+\item[(K5)] $|\ell(\psi)|\leq C_E\log x$ for every
+  $\psi\in\widehat\Gamma_H^{A_0}\smallsetminus\mathcal K$.
+\end{enumerate}
+Finally, for an integer $N\geq0$, an integer $m\geq0$ and functions $a$ and $w$
+as in Definition~\ref{ib-size-windows}, the \emph{gap} at $u_0\in H$ is
+\[
+ \mathrm{gap}(u_0)=\sum_{t\in T}\sum_{j=1}^m\Bigl(\mathrm{ASK}_N\bigl(a(t),t,w(u_0,j,\cdot)\bigr)
+ -\operatorname{Re}\mathrm{MAIN}\bigl(a(t),w(u_0,j,\cdot)\bigr)\Bigr),
+\]
+with $\mathrm{ASK}_N$ and $\mathrm{MAIN}$ as in Definition~\ref{ib-inert-sums}.
+\end{definition}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.PsiA}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.wtA}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.GmA}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.SigA}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.CharsA}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.gapA}
+
+\begin{lemma}\label{ib-weight-lipschitz}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, and let $g_\psi$ be the
+corrected Chebyshev sums (Definition~\ref{ib-host-chebyshev}). Let
+$\psi\in\widehat\Gamma_H$ and let $A,w,w'>0$ be real. Then
+\[
+ \Bigl|w\,g_\psi\Bigl(\frac Aw\Bigr)-w'g_\psi\Bigl(\frac A{w'}\Bigr)\Bigr|
+ \leq\frac{3A}{\min(w,w')}\,|w-w'|.
+\]
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean}{Formalism.LFunctionChainParameters.ThickSetMeanBounds.lipschitz_weight_all}
+\begin{proof}
+Put $\mu=\min(w,w')$ and $M=\lfloor A/\mu\rfloor$. As in the proof of
+Lemma~\ref{ib-truncation}, $w\,g_\psi(A/w)=\sum_{n\leq M}\Lambda(n)\psi(n)(A/n-w)_+
++A\ell(\psi)$ if $\psi\neq1$, and the same holds for $w'$. The terms $A\ell(\psi)$
+cancel, $|\psi(n)|\leq1$, and $|(A/n-w)_+-(A/n-w')_+|\leq|w-w'|$. So the
+difference is at most $|w-w'|\sum_{n\leq A/\mu}\Lambda(n)$, which is at most
+$3(A/\mu)|w-w'|$ by Chebyshev's bound $\sum_{n\leq Y}\Lambda(n)\leq3Y$.
+
+If $\psi=1$, suppose $w\leq w'$. Then
+\[
+ w\,G\Bigl(\frac Aw\Bigr)-w'G\Bigl(\frac A{w'}\Bigr)
+ =\sum_{n\leq A/w}\Lambda(n)\Bigl(\Bigl(\frac An-w\Bigr)_+-\Bigl(\frac An-w'\Bigr)_+\Bigr)
+ -A\log\frac{w'}w.
+\]
+The sum lies between $0$ and $(3A/w)(w'-w)$ by Chebyshev's bound, and
+$0\leq A\log(w'/w)\leq A(w'/w-1)\leq(3A/w)(w'-w)$. So the difference has
+absolute value at most $(3A/w)(w'-w)$.
+\end{proof}
+
+\begin{lemma}\label{ib-chebyshev-lipschitz}
+There is a real number $C_d\geq0$ with the following property. Let $H$ be a
+finite abelian group, for every natural number $n$ let $I_n\subset\Gamma_H$ be a
+subgroup and $\mathrm{Fr}_n\in\Gamma_H$, let $\ell:\widehat\Gamma_H\to\mathbf C$
+be a function, and let $g_\psi$ be the corrected Chebyshev sums
+(Definition~\ref{ib-host-chebyshev}). Then for all real $y,z\geq1$:
+\begin{enumerate}
+\item $|g_\psi(y)-g_\psi(z)|\leq|y-z|\bigl(\log\max(y,z)+C_d+|\ell(\psi)|\bigr)$
+  for every $\psi\neq1$;
+\item $|G(y)-G(z)|\leq C_d|y-z|$.
+\end{enumerate}
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean}{Formalism.LFunctionChainParameters.ThickSetMeanBounds.derivative_integral_all}
+\begin{proof}
+For (1), put $M=\lfloor\max(y,z)\rfloor$. Then
+\[
+ g_\psi(y)-g_\psi(z)=\sum_{n\leq M}\Lambda(n)\psi(n)\Bigl(\Bigl(\frac yn-1\Bigr)_+
+ -\Bigl(\frac zn-1\Bigr)_+\Bigr)+(y-z)\ell(\psi),
+\]
+each bracket has absolute value at most $|y-z|/n$, and $|\psi(n)|\leq1$. Mertens'
+bound $\sum_{n\leq M}\Lambda(n)/n\leq\log M+\log4+4$, which follows from
+Chebyshev's bound $\sum_{n\leq M}\Lambda(n)\leq(\log4+4)M$ and
+$\log M!\leq M\log M$, gives (1) with any $C_d\geq\log4+4$.
+
+For (2), let $j\geq0$ be an integer and put $A_j=\sum_{n\leq j}\Lambda(n)/n$ and
+$S_j=\sum_{n\leq j}\Lambda(n)$. For $j\leq y\leq j+1$,
+\[
+ G(y)=P_j(y),\qquad P_j(y)=yA_j-S_j-y\log y+(1+\gamma)y,
+\]
+including at $y=j+1$, where the extra term $\Lambda(j+1)((j+1)/(j+1)-1)$ vanishes.
+The function $P_j$ is differentiable for $y>0$ with derivative
+$A_j-\log y+\gamma$. This derivative has absolute value at most $\log4+7$ for
+$\max(j,1/2)\leq y\leq j+1$. For $j=0$, $A_0=0$ and $-\log2\leq\log y\leq0$, and
+$1/2<\gamma<2/3$. For $j\geq1$, Mertens' bounds
+$\log j-1\leq A_j\leq\log j+\log4+4$ hold: the identity
+$\log j!=\sum_{n\leq j}\Lambda(n)\lfloor j/n\rfloor$, together with
+$j\log j-j\leq\log j!\leq j\log j$ and $S_j\leq(\log4+4)j$, gives them; and
+$\log j\leq\log y\leq\log2j$. By the mean value theorem,
+$|G(y)-G(z)|\leq(\log4+7)|y-z|$ for $y,z\in[\max(j,1/2),j+1]$. Splitting an
+interval at the integers it contains and adding, by induction on $j$, gives
+$|G(y)-G(z)|\leq(\log4+7)|y-z|$ for all $y,z\geq1/2$. So (2) holds with any
+$C_d\geq\log4+7$, and $C_d=2\log4+11+2|G(1/2)|$ works for both (1) and (2).
+\end{proof}
+
+\begin{lemma}\label{ib-thick-replacement}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, with corrected Chebyshev sums $g_\psi$,
+and write $\Psi=\Psi_H$. Let $T_2\subset H$ be finite and $u_0,t\in H$, and call
+$\rho$ thick at $u_0$ as in Definition~\ref{ib-size-windows}. Let
+$x\geq3$, $b>0$, $\eta\geq0$, $X'>0$, $b'>0$, $\theta\geq0$ and $A$ be real
+numbers with $b'X'\leq xb$ and $|A/b-x|\leq1$. Let $w:\Gamma_H\to\mathbf R$
+satisfy $w(\rho)>0$ for $\rho\in\Psi$, $b\leq w(\rho)\leq b+\eta+1$ for $\rho$
+thick at $u_0$, and $w(\rho)\leq2b'$ for $\rho\in\Psi$ not thick at $u_0$.
+Suppose $|g_\psi(y)|\leq\theta y$ for all $\psi\in\widehat\Gamma_H$ and
+$y\geq X'/3$. Put
+\[
+ \Theta(u_0,t)=\frac1{|\Psi|}\sum_{s\in T_2}\sum_{\psi\in\widehat\Gamma_H}
+ \psi\bigl(-\sigma-(0,s+u_0-t)\bigr)\,b\,g_\psi\Bigl(\frac Ab\Bigr).
+\]
+Then, with $\mathrm{De}$ as in Definition~\ref{ib-inert-sums},
+\[
+ \operatorname{Re}\Theta(u_0,t)\leq\operatorname{Re}\mathrm{De}(A,t,w)
+ +2|\Psi|\bigl(3(x+1)(\eta+1)+(x+1)b\theta\bigr).
+\]
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{Deduction.CharacterBalanceMoves.th_le}
+\begin{proof}
+From $|A/b-x|\leq1$ we get $(x-1)b\leq A\leq(x+1)b$, so $A>0$. For
+$g\notin\Psi$, the element $\pi_t(g)=g+c+(0,t)$ is thick at $u_0$ exactly when
+$g=\sigma+(0,s+u_0-t)$ for some $s\in T_2$, because $c+\sigma=(1,0,0)$; distinct
+$s$ give distinct $g$. Since $\overline{\psi(g)}=\psi(-g)$, this gives
+\[
+ \mathrm{De}(A,t,w)-\Theta(u_0,t)=\frac1{|\Psi|}\sum_{g\notin\Psi}\sum_\psi\psi(-g)\,D_\psi(g),
+\]
+where $D_\psi(g)=w(\rho)g_\psi(A/w(\rho))-b\,g_\psi(A/b)$ if $\rho=\pi_t(g)$ is
+thick at $u_0$, and $D_\psi(g)=w(\rho)g_\psi(A/w(\rho))$ otherwise.
+
+If $\rho$ is thick, Lemma~\ref{ib-weight-lipschitz} with $\min(w(\rho),b)=b$
+gives $|D_\psi(g)|\leq(3A/b)(w(\rho)-b)\leq3(x+1)(\eta+1)$. If $\rho$ is not
+thick, then $w(\rho)\leq2b'$, so
+$(X'/3)w(\rho)\leq2b'X'/3\leq2xb/3\leq(x-1)b\leq A$, using $x\geq3$; hence
+$A/w(\rho)\geq X'/3$ and $|D_\psi(g)|\leq w(\rho)\theta A/w(\rho)\leq(x+1)b\theta$.
+There are $|\Psi|$ elements $g\notin\Psi$ and $|\Gamma_H|=2|\Psi|$ characters, so
+$|\mathrm{De}(A,t,w)-\Theta(u_0,t)|\leq2|\Psi|\bigl(3(x+1)(\eta+1)+(x+1)b\theta\bigr)$.
+Taking real parts gives the claim.
+\end{proof}
+
+\begin{lemma}\label{ib-kept-character-sum}
+Let $H$ be a finite abelian group, for every natural number $n$ let
+$I_n\subset\Gamma_H$ be a subgroup and $\mathrm{Fr}_n\in\Gamma_H$, let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, with corrected Chebyshev sums $g_\psi$,
+let $A_0\subset H$ be a subgroup, $T\subset H$ finite, $\mathcal K\subset\widehat\Gamma_H$
+and $c$ real, and let $w_c$ and $\widehat\Gamma_H^{A_0}$ be as in
+Definition~\ref{ib-kept-characters}. Let $x\geq3$ and $C_d\geq0$ be real numbers
+such that the conclusions of Lemma~\ref{ib-chebyshev-lipschitz} hold for
+$C_d$, let $y_t$ $(t\in T)$ be real numbers with $|y_t-x|\leq1$, and let
+$\varrho\geq0$, $B_\ell\geq0$, $L_E$ and $R$ be real numbers. Suppose that
+$1\in\mathcal K$; that $\psi(\sigma)=1$ and, if $\psi\neq1$,
+$|\ell(\psi)|\leq B_\ell$ for every $\psi\in\mathcal K$; that
+$|\sum_{t\in T}\psi(0,t)-c|T||\leq\varrho|T|$ for every $\psi\in\mathcal K$
+nontrivial on $\{0\}\times H$; that $|\ell(\psi)|\leq L_E$ for every
+$\psi\in\widehat\Gamma_H^{A_0}\smallsetminus\mathcal K$; and that
+\[
+ C_d\leq R,\qquad \log(x+1)+C_d+B_\ell+\varrho x(\log x+C_d+B_\ell)\leq R,\qquad
+ \log(x+1)+C_d+L_E\leq R.
+\]
+For $\psi\in\widehat\Gamma_H^{A_0}$ let $v(\psi)=w_c(\psi)\operatorname{Re}g_\psi(x)$ if
+$\psi\in\mathcal K$ and $v(\psi)=-|g_\psi(x)|$ otherwise. Then for every
+$\psi\in\widehat\Gamma_H^{A_0}$,
+\[
+ |T|\bigl(v(\psi)-R\bigr)\leq\sum_{t\in T}\operatorname{Re}
+ \Bigl(\psi\bigl(\sigma+(0,t)\bigr)\,g_\psi(y_t)\Bigr).
+\]
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{Deduction.CharacterBalanceMoves.one_char}
+\begin{proof}
+For $\psi\neq1$ and $|y-x|\leq1$, Lemma~\ref{ib-chebyshev-lipschitz}(1) gives
+$|g_\psi(y)-g_\psi(x)|\leq\log(x+1)+C_d+|\ell(\psi)|$, and comparing $x$ with
+$1$, where $g_\psi(1)=\ell(\psi)$, gives $|g_\psi(x)|\leq x(\log x+C_d+|\ell(\psi)|)$.
+
+If $\psi=1$, then $\psi(\sigma+(0,t))=1$, $w_c(1)=1$, and
+$G(y_t)\geq G(x)-C_d\geq v(1)-R$ by Lemma~\ref{ib-chebyshev-lipschitz}(2).
+
+If $\psi\in\mathcal K$ and $\psi\neq1$, then $\psi(\sigma+(0,t))=\psi(0,t)$ since
+$\psi(\sigma)=1$. Let $c'=w_c(\psi)$. Then
+\[
+ \sum_t\psi(0,t)g_\psi(y_t)-c'|T|g_\psi(x)
+ =\sum_t\psi(0,t)\bigl(g_\psi(y_t)-g_\psi(x)\bigr)
+ +\Bigl(\sum_t\psi(0,t)-c'|T|\Bigr)g_\psi(x).
+\]
+The first sum has absolute value at most $|T|(\log(x+1)+C_d+B_\ell)$. If $\psi$ is
+trivial on $\{0\}\times H$, then $c'=1$ and the last term vanishes; otherwise
+$c'=c$ and it is at most $\varrho|T|x(\log x+C_d+B_\ell)$ in absolute value.
+Since $c'$ is real, taking real parts gives the claim.
+
+If $\psi\notin\mathcal K$, then $\psi\neq1$ and
+$|\psi(\sigma+(0,t))g_\psi(y_t)|\leq|g_\psi(x)|+\log(x+1)+C_d+L_E
+\leq-v(\psi)+R$, which gives the claim term by term.
+\end{proof}
+
+\begin{lemma}\label{ib-size-arithmetic}
+Let $C\geq0$, $\varepsilon>0$ and $x\geq3$ be real numbers with
+$x^{3\varepsilon/8}\geq26$, let $n>0$ and $n_T,n_2,m\geq0$ be integers, and let
+$b>0$, $k$, $a_E$, $\mathrm{Err}$ and $Z$ be real numbers. Suppose that
+$0\leq a_E\leq2xb$, $x^{-\varepsilon/8}n/2\leq n_T$,
+$x^{-\varepsilon}n\leq n_2\leq n$,
+$x^{1/2-\varepsilon}\leq m\leq x^{1/2+\varepsilon/2}$,
+$xm\leq k\leq n^2x^{1/2-\varepsilon}$,
+$\mathrm{Err}\leq x^{C\varepsilon}\beta(x,\varepsilon;n,n_T,n_2,m,b,k,a_E)$
+(Definition~\ref{ib-size-windows}), and
+\[
+ n_Tmb\,\frac{n_2}{2n}\bigl(Z-4x^{1/2+\varepsilon}\bigr)\leq\mathrm{Err}+\frac{2n_Tmb}x.
+\]
+Then $Z\leq x^{1/2+(C+3)\varepsilon}$.
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/LipschitzWeightAndMinimum.lean}{Formalism.LFunctionChainParameters.ThickSetMeanBounds.proposition_size_bound}
+\begin{proof}
+Put $Q=n_Tmb$ and $Y=x^{1/2+13\varepsilon/8}$. The four terms of $\beta$ are each
+a bounded multiple of $YQ$: $n_Ta_E\leq2xbn_T\leq2YQ$ because
+$x\leq x^{1/2+\varepsilon}m$; $n_Ta_Em^2/k\leq2bmn_T\leq2YQ$ because $xm\leq k$;
+$2nm^2bx^\varepsilon\leq4YQ$ because $n\leq2x^{\varepsilon/8}n_T$ and
+$m\leq x^{1/2+\varepsilon/2}$; and $mn_2kbx^{2\varepsilon}/n^2\leq2YQ$ because
+$n_2\leq n$, $k\leq n^2x^{1/2-\varepsilon}$ and $n\leq2x^{\varepsilon/8}n_T$. So
+$\mathrm{Err}\leq10PYQ$ with $P=x^{C\varepsilon}\geq1$. Dividing the hypothesis
+by $Q/2$ gives $(n_2/n)(Z-4x^{1/2+\varepsilon})\leq20PY+4/x\leq22PY$. If
+$Z>4x^{1/2+\varepsilon}$, then $n_2/n\geq x^{-\varepsilon}$ gives
+$Z-4x^{1/2+\varepsilon}\leq22PYx^\varepsilon=22x^{1/2+(C+21/8)\varepsilon}$. In
+either case $Z\leq26x^{1/2+(C+21/8)\varepsilon}\leq x^{1/2+(C+3)\varepsilon}$,
+using $x^{3\varepsilon/8}\geq26$.
+\end{proof}
+
+\begin{theorem}\label{ib-core-window-bound}
+Let $C\geq0$, $\varepsilon>0$ and $c,M,B_\ell,C_E$ be real numbers with
+$|c|\leq1$. There is $x_1$ such that the following holds for every real
+$x\geq x_1$. Let $H$ be a finite abelian group with arithmetic data for
+$\Gamma_H$ (Definition~\ref{ib-arithmetic-data}), let
+$\ell:\widehat\Gamma_H\to\mathbf C$ be a function, $A_0\subset H$ a subgroup and
+$\mathcal K\subset\widehat\Gamma_H$ a subset, and let
+$T,T_2,m,N,a,w,b,b',k,a_E,\eta,X',\theta$ be as in
+Definition~\ref{ib-size-windows}. Suppose that:
+\begin{enumerate}
+\item $b>0$, $a_E\geq0$, $k>0$, $m\leq x^{1/2+\varepsilon/2}$, $xm\leq k$ and
+  $T_2\subset A_0$;
+\item the data lie in the size windows (Definition~\ref{ib-size-windows});
+\item $\mathcal K$ is kept with constants $(c,M,B_\ell,C_E)$ at $(x,\varepsilon)$
+  (Definition~\ref{ib-kept-characters});
+\item $\mathrm{gap}(u_0)\leq x^{C\varepsilon}\beta(x,\varepsilon;|H|,|T|,|T_2|,m,b,k,a_E)$
+  for every $u_0\in A_0$.
+\end{enumerate}
+Then
+\[
+ g^{\mathcal K}_c(x)\leq x^{1/2+(C+3)\varepsilon}+\Sigma^{\mathcal K}(x).
+\]
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean}{Deduction.ch_core}
+\begin{proof}
+Let $C_d$ be the constant of Lemma~\ref{ib-chebyshev-lipschitz}, put
+$A_1=5+C_d+|B_\ell|+|M|(4+C_d+|B_\ell|)+4|C_E|$, and choose $x_1\geq3$ such that
+$x^{3\varepsilon/8}\geq26$ and $x^{1/4}\geq|M|A_1$ for $x\geq x_1$. Let $x\geq x_1$
+and let the data be as in the statement. Write $\Psi=\Psi_H$,
+$\Xi=\widehat\Gamma_H^{A_0}$, $\delta_2=|T_2|/|H|$ and $Z=g^{\mathcal K}_c(x)-\Sigma^{\mathcal K}(x)$.
+
+\emph{Step 1: the kept characters.} Apply Lemma~\ref{ib-kept-character-sum} with
+$y_t=a(t)/b$, which satisfies $|y_t-x|\leq1$ by (W2), with $\varrho=|M|x^{-1+\varepsilon}$,
+$B_\ell$ replaced by $|B_\ell|$, $L_E=|C_E|\log x$ and $R=A_1x^{1/4+\varepsilon}$.
+Its hypotheses hold by (K1)--(K5), using $\log x\leq4x^{1/4}$ and
+$\log(x+1)\leq5x^{1/4}$. Sum the conclusion over $\psi\in\Xi$. Since
+$\mathcal K\subset\Xi$ by (K1), $\sum_{\psi\in\Xi}v(\psi)=Z$; and
+$|\Xi|R\leq|M|A_1x^{1/4+\varepsilon}\leq x^{1/2+\varepsilon}$ by (K2) and the
+choice of $x_1$. Hence
+\[
+ |T|\bigl(Z-4x^{1/2+\varepsilon}\bigr)\leq\sum_{t\in T}\operatorname{Re}\sum_{\psi\in\Xi}
+ \psi\bigl(\sigma+(0,t)\bigr)g_\psi\Bigl(\frac{a(t)}b\Bigr).\tag{1}
+\]
+
+\emph{Step 2: the gap at each class.} Let $u_0\in A_0$, $t\in T$ and
+$1\leq j\leq m$, and define $\Theta(u_0,t)$ as in
+Lemma~\ref{ib-thick-replacement} with $A=a(t)$. By (W2) and $x\geq3$, $a(t)>0$.
+By (W3), Theorem~\ref{ib-balance-identity} applies to $a(t)$, $t$ and
+$w(u_0,j,\cdot)$, and gives
+$\operatorname{Re}\mathrm{De}=\mathrm{ASK}_N-\operatorname{Re}\mathrm{MAIN}$.
+Lemma~\ref{ib-thick-replacement}, whose hypotheses hold by (W1), (W3) and (W4),
+and the cost condition (W5) give
+\[
+ \operatorname{Re}\Theta(u_0,t)\leq\mathrm{ASK}_N\bigl(a(t),t,w(u_0,j,\cdot)\bigr)
+ -\operatorname{Re}\mathrm{MAIN}\bigl(a(t),w(u_0,j,\cdot)\bigr)+\frac{2b}x,
+\]
+because $2|\Psi|(3(x+1)(\eta+1)+(x+1)b\theta)\leq b/x+b/x$. Summing over $t$ and
+$j$ and using hypothesis (4),
+\[
+ m\sum_{t\in T}\operatorname{Re}\Theta(u_0,t)\leq\mathrm{Err}+\frac{2|T|mb}x,
+ \qquad\mathrm{Err}=x^{C\varepsilon}\beta(x,\varepsilon;|H|,|T|,|T_2|,m,b,k,a_E).\tag{2}
+\]
+
+\emph{Step 3: averaging over $A_0$.} For $s\in T_2\subset A_0$ and $t\in H$ we
+have $-\sigma-(0,s+u-t)=\sigma+(0,t)+(0,-s)+(0,-u)$, so by orthogonality of
+characters on $A_0$
+\[
+ \sum_{u\in A_0}\psi\bigl(-\sigma-(0,s+u-t)\bigr)=
+ \begin{cases}|A_0|\,\psi(\sigma+(0,t))&\text{if }\psi\in\Xi,\\0&\text{otherwise.}\end{cases}
+\]
+With $|\Psi|=2|H|$ this gives
+\[
+ \sum_{u\in A_0}\Theta(u,t)=|A_0|\,b\,\frac{\delta_2}2\sum_{\psi\in\Xi}
+ \psi\bigl(\sigma+(0,t)\bigr)g_\psi\Bigl(\frac{a(t)}b\Bigr).
+\]
+Summing (2) over $u_0\in A_0$ and dividing by $|A_0|$, then using (1) and
+$mb\delta_2/2\geq0$,
+\[
+ |T|mb\,\frac{\delta_2}2\bigl(Z-4x^{1/2+\varepsilon}\bigr)\leq\mathrm{Err}+\frac{2|T|mb}x.
+\]
+
+\emph{Step 4: the sizes.} Lemma~\ref{ib-size-arithmetic} with $n=|H|$,
+$n_T=|T|$ and $n_2=|T_2|$, whose hypotheses hold by hypothesis (1), (W6) and
+the choice of $x_1$, gives $Z\leq x^{1/2+(C+3)\varepsilon}$.
+\end{proof}
+
+\begin{remark}\label{ib-window-bound-shape}
+Steps 2 and 3 of the proof show how the balance identity becomes a statement
+about a weighted sum of corrected Chebyshev sums. Averaged over $u_0\in A_0$ and summed over
+$t\in T$ and $1\leq j\leq m$, the character sides of
+Theorem~\ref{ib-balance-identity} equal, up to the errors of
+Lemma~\ref{ib-thick-replacement},
+\[
+ mb\,\frac{\delta_2}2\sum_{t\in T}\sum_{\psi\in\widehat\Gamma_H^{A_0}}
+ \psi\bigl(\sigma+(0,t)\bigr)g_\psi\Bigl(\frac{a(t)}b\Bigr),
+\]
+where $a(t)/b$ lies within $1$ of $x$. In this double sum the kept characters
+contribute $|T|g^{\mathcal K}_c(x)$ up to errors, the weights $w_c$ coming from
+the equidistribution (K3) of $T$, and the other characters contribute at most
+$|T|\Sigma^{\mathcal K}(x)$ up to errors. So an upper bound for the gaps is an
+upper bound for $g^{\mathcal K}_c(x)-\Sigma^{\mathcal K}(x)$.
+\end{remark}
+
+\section{The window bound for a level}\label{section-ib-level}
+
+\begin{lemma}\label{ib-host-arithmetic-data}
+Let $E$ be a host field on a Galois datum with group $A$
+(Definition~\ref{hf-framed-host-field}), with auxiliary primes $q$ and $d$,
+conductor $Q_Sqd$, Galois group
+$\{\pm1\}\times\{\pm1\}\times A$ (Definition~\ref{hf-frame}) and Artin map
+$(\mathbf Z/Q_Sqd\mathbf Z)^\times\to\operatorname{Gal}(E/\mathbf Q)$, and
+identify $\operatorname{Gal}(E/\mathbf Q)$ with $\Gamma_A$ by sending
+$(\epsilon_1,\epsilon_2,h)$ to $(e_1,e_2,h)$ with $(-1)^{e_i}=\epsilon_i$
+(Remark~\ref{ib-host-group-fields}). For a prime $p$ let $N_p$ be the largest
+divisor of $Q_Sqd$ prime to $p$, let $I_p$ be the image under the Artin map of the units congruent to $1$
+modulo $N_p$, and let $\mathrm{Fr}_p$ be the image of a unit congruent to $p$
+modulo $N_p$ and to $1$ modulo $Q_Sqd/N_p$. Then $q$, $d$, the set $S$ of primes
+dividing $Q_Sq$, and the $I_p$ and $\mathrm{Fr}_p$ are arithmetic data for
+$\Gamma_A$ (Definition~\ref{ib-arithmetic-data}).
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/hostFactsS.lean}{UpperTheory.Comparison₂.hostFactsS}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/RecH.lean}{UpperTheory.Comparison₂.arith}
+\leanref{Formalism/SizeWindowBrackets/GaloisToProductIsIso.lean}{Formalism.LFunctionChainParameters.LHost.cftData}
+\begin{proof}
+The prime $d$ does not divide $Q_Sq$, and $2$ divides $Q_S$. The second sign
+of the Artin image of a unit $u$ is the Jacobi symbol $(u/d)$
+(Proposition~\ref{hf-host-field-properties}). If $p\nmid Q_Sqd$, then $N_p=Q_Sqd$ and
+$I_p=0$. If $p\mid Q_Sq$, then $d\mid N_p$, so the elements of $I_p$ and
+$\mathrm{Fr}_p$ are Artin images of units congruent to $1$ and to $p$ modulo $d$;
+since $(1/d)=1$ and $(p/d)=1$, they lie in $\Psi_A$. Here $(2/d)=1$ because
+$d\equiv7\pmod{16}$. For odd $p\mid Q_Sq$ we have $(-d/p)=1$ by
+Definition~\ref{hf-framed-host-field}, and quadratic reciprocity with
+$d\equiv3\pmod4$ gives $(p/d)=1$. Finally the units congruent to $1$ modulo
+$Q_Sq$ map to $1$ or to $\iota_d=\sigma$ by Definition~\ref{hf-framed-host-field},
+and a
+unit congruent to $1$ modulo $Q_Sq$ and to $-1$ modulo $d$ maps to $\sigma$,
+since $(-1/d)=-1$. So $I_d=\{0,\sigma\}$.
+\end{proof}
+
+\begin{lemma}\label{ib-host-character-values}
+Let $E$ be a host field on a Galois datum with group $A$, with the arithmetic data of
+Lemma~\ref{ib-host-arithmetic-data}. For $\psi\in\widehat\Gamma_A$ let
+$\chi_\psi$ be the primitive Dirichlet character that induces
+$u\mapsto\psi(\operatorname{art}(u))$ modulo $Q_Sqd$; this is the character
+$\chi_\theta$ of $E$ (Definition~\ref{hf-framed-host-field}) for the character
+$\theta$ of $\operatorname{Gal}(E/\mathbf Q)$ corresponding to $\psi$. Let
+$\ell:\widehat\Gamma_A\to\mathbf C$ be \emph{compatible} with $E$: for every
+$\psi\neq1$ and every primitive Dirichlet character $\chi$ with $\chi(n)=\psi(n)$
+for all $n\geq1$, $\ell(\psi)=\frac{L'}{L}(1,\chi)$. Then for every
+$\psi\in\widehat\Gamma_A$: $\chi_\psi(n)=\psi(n)$ for all $n\geq1$;
+$\chi_\psi=1$ exactly when $\psi=1$; $\ell(\psi)=\frac{L'}{L}(1,\chi_\psi)$ if
+$\psi\neq1$; and $g_\psi(y)=g_{\chi_\psi}(y)$ for all real $y$, with
+$g_{\chi_\psi}$ as in Definition~\ref{wl-corrected-sums}.
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/PrimRead.lean}{UpperTheory.Comparison₂.prim_read}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/CoreAtH.lean}{UpperTheory.Comparison₂.HostAddCharCompatible}
+\begin{proof}
+At a prime $p$, the value $\psi(p^i)$ of Definition~\ref{ib-arithmetic-data} is
+the mean of $\psi$ over the coset $i\mathrm{Fr}_p+I_p$. It is $0$ if $\psi$ is
+nontrivial on the image $I_p$ of the units congruent to $1$ modulo $N_p$, that is,
+if $p$ divides the conductor of $\chi_\psi$; otherwise it is
+$\psi(\mathrm{Fr}_p)^i=\chi_\psi(p)^i$. So $\chi_\psi(n)=\psi(n)$ for all $n\geq1$.
+The Artin map is surjective (Proposition~\ref{hf-host-field-properties}), so
+$\chi_\psi$ is trivial exactly when $\psi$ is.
+Compatibility then gives $\ell(\psi)=\frac{L'}{L}(1,\chi_\psi)$ for $\psi\neq1$,
+and $g_\psi=g_{\chi_\psi}$ follows by comparing
+Definitions~\ref{ib-host-chebyshev} and~\ref{wl-corrected-sums}.
+\end{proof}
+
+\begin{proposition}\label{ib-level-sum-host-characters}
+Let $K$ be a level with integer $o$ and weighted Chebyshev sum $G_K$
+(Definitions~\ref{wl-level} and~\ref{wl-weighted-sum}). Let $E$ be a host field
+on a Galois datum with group $A$ (Definition~\ref{hf-framed-host-field}) that
+satisfies the host conditions for $K$ at $(x,\varepsilon,C)$ for some finite
+$T\subset A$ and real $x,\varepsilon,C$
+(Definition~\ref{hf-host-conditions}), and let $\ell:\widehat\Gamma_A\to\mathbf C$
+be compatible with $E$ (Lemma~\ref{ib-host-character-values}). Let
+$\mathcal K_E\subset\widehat\Gamma_A$ be the set of $\psi$ with $\chi_\psi\in K$.
+Then for every real $y$, with $c=(3o+1)^{-1}$ and the notation of
+Definition~\ref{ib-kept-characters},
+\[
+ g^{\mathcal K_E}_c(y)=\sum_{\psi\in\mathcal K_E}w_c(\psi)\operatorname{Re}g_\psi(y)=G_K(y).
+\]
+\end{proposition}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/GmAEq.lean}{UpperTheory.Comparison₂.gmA_eq}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/CoreAtH.lean}{UpperTheory.Comparison₂.keptA}
+\begin{proof}
+The map $\psi\mapsto\chi_\psi$ is injective, because the Artin map is surjective
+(Proposition~\ref{hf-host-field-properties}).
+Let $X^\pm$ be the sets of characters of $\Gamma_A$ trivial on $\{0\}\times A_0$
+with $\psi(\sigma)=\pm1$; under the identification of
+Remark~\ref{ib-host-group-fields} they are the sets $X^\pm_\Phi$ of
+Definition~\ref{hf-frame}. The host conditions say that every $\chi\in K$ is
+$\chi_\psi$ for some $\psi\in X^+$.
+So $\psi\mapsto\chi_\psi$ is a bijection from $\mathcal K_E$ onto $K$, and
+$\mathcal K_E\subset X^+$.
+
+A character in $X^+$ that is trivial on $\{0\}\times A$ is determined by its value
+$\pm1$ at $(1,0,0)$, so it is $1$ or the character
+$\psi_C:(e_1,e_2,h)\mapsto(-1)^{e_1}$, which is the first sign $\theta_q$ of
+Definition~\ref{hf-frame}. We compare the weights $w_c(\psi)$ with the
+weights $w_{\chi_\psi}$ of Definition~\ref{wl-weighted-sum}, taking $w_1=1$. For
+$\psi=1$ both are $1$. If $\psi_C\in\mathcal K_E$, the host condition on the
+exceptional character shows that $K$ has an exceptional character $\psi_K$ and
+$\chi_{\psi_C}=\psi_K$, so both weights are $1$. If $\psi\in\mathcal K_E$ is
+nontrivial on $\{0\}\times A$, then $w_c(\psi)=(3o+1)^{-1}$; and
+$\chi_\psi\neq\psi_K$, since otherwise $\chi_\psi=\chi_{\psi_C}$ and
+$\psi=\psi_C$; so $w_{\chi_\psi}=(3o+1)^{-1}$ as well.
+
+By Lemma~\ref{ib-host-character-values}, $g_\psi=g_{\chi_\psi}$. Reindexing the
+sum by $\chi=\chi_\psi\in K$ gives $\sum_{\chi\in K}w_\chi\operatorname{Re}g_\chi(y)$,
+which is $G_K(y)$ because $g_1=G$.
+\end{proof}
+
+\begin{lemma}\label{ib-host-kept-characters}
+Let $K$ be a level with integer $o$, and let $E$ be a host field on a Galois datum with
+group $A$ and subgroup $A_0$ that satisfies the host conditions for $K$ at
+$(x,\varepsilon,C)$ with a finite set $T\subset A$, where $x>0$
+(Definition~\ref{hf-host-conditions}). Let $\ell$ be compatible with $E$ and
+let $\mathcal K_E$ be as in Proposition~\ref{ib-level-sum-host-characters}. Then:
+\begin{enumerate}
+\item $\mathcal K_E$ is kept with constants
+  $\bigl((3o+1)^{-1},\,4o,\,\sum_{\chi\in K}|\tfrac{L'}{L}(1,\chi)|,\,C\bigr)$ at
+  $(x,\varepsilon)$ (Definition~\ref{ib-kept-characters});
+\item $\Sigma^{\mathcal K_E}(x)\leq4o\,x^{1/2+\varepsilon}$.
+\end{enumerate}
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/charsA.lean}{UpperTheory.Comparison₂.charsA}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/SigALe.lean}{UpperTheory.Comparison₂.sigA_le}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/CardPsiA.lean}{UpperTheory.Comparison₂.card_PsiA}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/TopsSum.lean}{UpperTheory.Comparison₂.tops_sum}
+\begin{proof}
+The characters in $\widehat\Gamma_A^{A_0}$ are those of $\Gamma_A/(\{0\}\times A_0)$, so
+$|\widehat\Gamma_A^{A_0}|=4[A:A_0]=4o$, using the host condition that the integer attached to
+$A_0$ is $o$. This gives (K2). Condition (K1) holds because $1\in\mathcal K_E$ and
+$\mathcal K_E\subset X^+$ (proof of
+Proposition~\ref{ib-level-sum-host-characters}). For (K3), let
+$\psi\in\mathcal K_E$ be nontrivial on $\{0\}\times A$, and let $\theta(t)=\psi(0,t)$
+for $t\in A$. Then $\theta$ is a nontrivial character of $A$ trivial on $A_0$, so
+it is constant on each of the $o$ cosets $\gamma'+A_0$, and
+$\sum_{\gamma'+A_0}\theta(\gamma')=0$, the sum over the cosets. For a coset
+$\gamma'+A_0$ put $n_{\gamma'}=\#\{t\in T:t-\gamma'\in A_0\}$. The host condition on the
+distribution of the top classes among the cosets of $A_0$
+(Definition~\ref{hf-host-conditions}) gives
+$n_{\gamma'}=\lambda_{\gamma'}|T|+r_{\gamma'}$ with $|r_{\gamma'}|\leq x^{-1+\varepsilon}|T|$,
+where $\lambda_{\gamma'}=4/(3o+1)$ on $A_0$ and $3/(3o+1)$ on the other cosets.
+Hence
+\[
+ \sum_{t\in T}\theta(t)=\sum_{\gamma'+A_0}\theta(\gamma')n_{\gamma'}
+ =\frac{|T|}{3o+1}\Bigl(1+3\sum_{\gamma'+A_0}\theta(\gamma')\Bigr)
+ +\sum_{\gamma'+A_0}\theta(\gamma')r_{\gamma'}
+ =\frac{|T|}{3o+1}+\sum_{\gamma'+A_0}\theta(\gamma')r_{\gamma'},
+\]
+and the last sum has absolute value at most $o\,x^{-1+\varepsilon}|T|$, which is at
+most $4o\,x^{-1+\varepsilon}|T|$. For (K4),
+$|\ell(\psi)|=|\frac{L'}{L}(1,\chi_\psi)|$ with $\chi_\psi\in K$.
+
+Let $\psi\in\widehat\Gamma_A^{A_0}\smallsetminus\mathcal K_E$. Then $\psi(\sigma)=\pm1$, and
+$\psi$ lies either in $X^+$ with $\chi_\psi\notin K$ or in $X^-$, with $X^\pm$ as
+in the proof of Proposition~\ref{ib-level-sum-host-characters}. For such
+characters the host conditions give $|\frac{L'}{L}(1,\chi_\psi)|\leq C\log x$,
+which is (K5), and $|g_{\chi_\psi}(x)|\leq x^{1/2+\varepsilon}$. By
+Lemma~\ref{ib-host-character-values}, $|g_\psi(x)|\leq x^{1/2+\varepsilon}$, and
+there are at most $|\widehat\Gamma_A^{A_0}|=4o$ such $\psi$, which gives (2).
+\end{proof}
+
+\begin{definition}\label{ib-error-windows}
+Let comparison data on $(U_0,W,\mathcal T,m,f)$ be given
+(Definition~\ref{ib-comparison-data}), and let $e_K$ and $K_0$ be real numbers.
+The data satisfy the \emph{error windows} with constants $(e_K,K_0)$ if:
+\begin{enumerate}
+\item $1\leq x$, $0<\varepsilon\leq1$, $1\leq b$, $xb\leq a$ and
+  $n_{\mathcal T}\geq1$;
+\item $m\leq x^{1/2+\varepsilon/2}$, $xm\leq k$, $e_K\geq0$, $1\leq k$,
+  $k\leq x^{e_K}$ and $k\leq a$;
+\item $0\leq L\leq2x^\varepsilon$, $0\leq L_a\leq2x^\varepsilon$, $b'\geq0$,
+  $kb'\leq a$, $0\leq X''\leq a$, $0\leq a_\tau\leq2a$ for every $\tau$,
+  $B_0\geq0$ and $N_c\geq0$;
+\item $\log|W(u_0)|\leq(k-3)\log2$ for every $u_0\in U_0$;
+\item $\bar\delta\leq1/2$, $\bar\eta\geq0$ and $\bar e\geq0$;
+\item $c_{\mathrm{Div}},c_E,c_H,c_{\mathrm{Ct}},c_{\mathrm{Sl}},c'_{\mathrm{Sl}}$
+  and $c_{\mathrm{Loss}}$ lie in $[0,K_0]$, and $e_{\mathrm{Div}}$,
+  $e_{\mathrm{Loss}}$ and $c_{HH}$ are nonnegative;
+\item $(\bar\eta+4\sqrt{\bar e})x^{c_{HH}}b\leq K_0x^\varepsilon n_{\mathcal T}a$.
+\end{enumerate}
+\end{definition}
+\leanref{Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{Formalism.LFunctionChainParameters.LErr.ErrWindows}
+\leanref{Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{Formalism.LFunctionChainParameters.LErr.ErrWindows0}
+\leanref{Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{Formalism.LFunctionChainParameters.LErr.ConstsBound}
+
+\begin{lemma}\label{ib-error-size}
+Let comparison data on $(U_0,W,\mathcal T,m,f)$ satisfy the error windows with
+constants $(e_K,K_0)$ (Definition~\ref{ib-error-windows}), and suppose that
+$\log x\leq x^\varepsilon$ and $200(1+K_0)^2(1+c_{HH})(1+e_K)\leq x^\varepsilon$.
+Then for every $u_0\in U_0$,
+\[
+ \mathrm{Err}(u_0)\leq x^{(e_{\mathrm{Div}}+e_{\mathrm{Loss}}+3)\varepsilon}
+ \Bigl(n_{\mathcal T}a\Bigl(1+\frac{m^2}k\Bigr)+m(B_0+N_c)\Bigr).
+\]
+\end{lemma}
+\leanref{Formalism/SizeWindowBrackets/ChainSlopeWindows/PChain.lean}{Formalism.LFunctionChainParameters.LChain.errX5at_le}
+\leanref{Formalism/SizeWindowBrackets/ErrorFormsWeakWindowsFalse.lean}{Formalism.LFunctionChainParameters.LErr.LargeX}
+\begin{proof}
+Write $K=K_0$, $y=x^\varepsilon$, $y_D=x^{e_{\mathrm{Div}}\varepsilon}$ and
+$y_L=x^{e_{\mathrm{Loss}}\varepsilon}$; these are at least $1$, since $x\geq1$,
+$\varepsilon>0$ and $e_{\mathrm{Div}},e_{\mathrm{Loss}}\geq0$. Put $h=1+c_{HH}$ and
+$g=1+e_K$, both at least $1$. Put
+\[
+ A_1=n_{\mathcal T}a,\qquad
+ E=A_1\Bigl(1+\frac{m^2}k\Bigr)+mB_0+mN_c,\qquad Y=y_Dy_Ly,\qquad P=YE .
+\]
+The claim is $\mathrm{Err}(u_0)\leq y_Dy_Ly^3E=y^2P$.
+
+\emph{Step 1: consequences of the error windows.} From (1), $b\leq xb\leq a$ and
+$a\geq b\geq1$. From (2) and $\varepsilon\leq1$, $m\leq x^{1/2+\varepsilon/2}\leq x$,
+so $m\leq xm\leq k$ and $mb\leq xb\leq a$; also $m^2/k\geq0$ and $m/k\leq1$. From
+(3), $0\leq A\leq2n_{\mathcal T}a$, and $b'\leq a/k$ because $kb'\leq a$. From (4),
+$\log|W(u_0)|\leq(k-3)\log2\leq k\leq a$, using $\log2\leq1$. Since
+$k\leq x^{e_K}$ and $\log x\leq y$, we have $\log k\leq e_K\log x\leq gy$, and
+$\log k\geq0$ because $k\geq1$. Since $\log2\leq1\leq y$,
+$\log(1+x^{c_{HH}})\leq\log(2x^{c_{HH}})=\log2+c_{HH}\log x\leq hy$. From (5),
+$0\leq(1-\bar\delta)^{-1}\leq2$. From (6), every constant $c_{\mathrm{Div}},c_E,c_H,
+c_{\mathrm{Ct}},c_{\mathrm{Sl}},c'_{\mathrm{Sl}},c_{\mathrm{Loss}}$ lies in $[0,K]$.
+Finally $A_1\geq a\geq1$ by (1), so $1\leq a\leq A_1\leq E\leq P$, and
+$y,y_D,y_L\leq Y$, so $L,L_a\leq2y\leq2Y$ by (3).
+
+\emph{Step 2: the terms of $\mathrm{Err}(u_0)$ outside the last bracket.} Using
+$A(1+m^2/k)\leq2E$, $A_1\leq E$, $mB_0\leq E$, $m(B_0+N_c)\leq E$ and the bounds of
+Step~1:
+\begin{align*}
+ Ac_{\mathrm{Ct}}\Bigl(L_a+\frac{m^2L_a}k\Bigr)&\leq2E\cdot K\cdot2Y=4KP,\\
+ E_{\mathrm{Div}}=c_{\mathrm{Div}}A_1L_a+c_{\mathrm{Div}}m(B_0+N_c)y_D
+ &\leq K\cdot E\cdot2Y+K\cdot E\cdot Y=3KP,\\
+ mc_EB_0&\leq KP,\\
+ c_{\mathrm{Sl}}A_1L_a\Bigl(1+\frac mk\Bigr)&\leq K\cdot E\cdot2Y\cdot2=4KP,\\
+ \log|W(u_0)|&\leq a\leq P,\\
+ \mathrm{Lo}_{\max}=c_{\mathrm{Loss}}n_{\mathcal T}(mb)y_L&\leq KA_1Y\leq KP.
+\end{align*}
+For $\overline{\mathrm{Lo}}$: $c'_{\mathrm{Sl}}\mathrm{Lo}_{\max}\leq K^2P$; since
+$a/k+b'\leq2a/k$, $n_{\mathcal T}m^2(a/k+b')\leq2A_1m^2/k\leq2E$, so
+$c'_{\mathrm{Sl}}c_{\mathrm{Ct}}n_{\mathcal T}m^2(a/k+b')L\leq K^2\cdot2E\cdot2Y=4K^2P$;
+$c'_{\mathrm{Sl}}X''\leq Ka\leq KP$; and $1\leq P$. Hence
+$\overline{\mathrm{Lo}}\leq(5K^2+K+1)P$, and the six terms above together with
+$\overline{\mathrm{Lo}}$ add up to at most $(5K^2+14K+2)P$.
+
+\emph{Step 3: the last bracket.} The terms of $\bar U+b$ satisfy
+\[
+ c_{\mathrm{Sl}}A_1L_a\Bigl(2+\frac mk\Bigr)\leq6KP,\qquad
+ 2mc_EB_0\leq2KP,\qquad c_H(A_1L_a+mB_0)\leq K(2YE+P)=3KP,
+\]
+\[
+ Ac_{\mathrm{Ct}}\log k\leq2E\cdot K\cdot gY=2KgP,\qquad
+ c'_{\mathrm{Sl}}mB_0\leq KP,\qquad \overline{\mathrm{Lo}}\leq(5K^2+K+1)P,\qquad
+ b\leq a\leq P,
+\]
+so $\bar U+b\leq uP$ with $u=5K^2+13K+2Kg+2$. By (7),
+$(\bar\eta+4\sqrt{\bar e})x^{c_{HH}}b\leq KyA_1\leq KP$. With
+$\log(1+x^{c_{HH}})\leq hy$ and $(1-\bar\delta)^{-1}\leq2$ the last term of
+$\mathrm{Err}(u_0)$ is at most $2(4hy\cdot uP+KP)$.
+
+\emph{Step 4: the sum.} By Steps~2 and~3, and $P\leq yP$,
+\[
+ \mathrm{Err}(u_0)\leq(5K^2+16K+2)P+8hyuP\leq\bigl((5K^2+16K+2)+8hu\bigr)yP.
+\]
+Since $g\geq1$, $u\leq(5K^2+15K+2)g$, and since $hg\geq1$,
+\[
+ (5K^2+16K+2)+8hu\leq(5K^2+16K+2)hg+8(5K^2+15K+2)hg=(45K^2+136K+18)hg
+ \leq200(1+K)^2hg.
+\]
+The last expression is at most $y$ by hypothesis, so
+$\mathrm{Err}(u_0)\leq y\cdot yP$, which is the claim.
+\end{proof}
+
+\begin{lemma}\label{ib-gap-bound}
+Let $U_0$ and $\mathcal T$ be finite sets, $W(u_0)$ nonempty finite sets and
+$m,f\geq0$ integers, and let comparison data on $(U_0,W,\mathcal T,m,f)$ be
+given. Let $H$ be a finite abelian group with arithmetic data for $\Gamma_H$,
+$\ell:\widehat\Gamma_H\to\mathbf C$ a function, $N\geq0$ an integer,
+$T,T_2\subset H$ finite subsets, $a:H\to\mathbf R$ and
+$w:H\times\{1,\ldots,m\}\times\Gamma_H\to\mathbf R$ functions, $\mathrm{tr}:U_0\to H$
+a map, and $\tau\mapsto t_\tau$ and $\rho\mapsto\tilde\rho$ bijections from
+$\mathcal T$ onto $T$ and from $\{1,\ldots,f\}$ onto $\Psi_H$. Let $e_K$ and $K_0$
+be real numbers. Suppose that:
+\begin{enumerate}
+\item $a_\tau=a(t_\tau)$, $w_{u,j,\rho}=w(\mathrm{tr}(u),j,\tilde\rho)$,
+  $\gamma_0=\gamma$, $\ell_0=\operatorname{Re}\ell(\chi_C)$, and
+  $\mathrm{ASK}(u)=\sum_{t\in T}\sum_{j=1}^m\mathrm{ASK}_N(a(t),t,w(\mathrm{tr}(u),j,\cdot))$
+  for all $\tau,u,j,\rho$;
+\item the comparison hypotheses (H1)--(H11) hold
+  (Definition~\ref{ib-comparison-hypotheses});
+\item the error windows hold with constants $(e_K,K_0)$
+  (Definition~\ref{ib-error-windows});
+\item $B_0\leq2|H|mbx^\varepsilon$ and $N_c\leq|T_2|kbx^{2\varepsilon}/|H|^2$;
+\item $\log x\leq x^\varepsilon$ and
+  $200(1+K_0)^2(1+c_{HH})(1+e_K)\leq x^\varepsilon$.
+\end{enumerate}
+Then for every $u\in U_0$,
+\[
+ \mathrm{gap}(\mathrm{tr}(u))\leq x^{(e_{\mathrm{Div}}+e_{\mathrm{Loss}}+3)\varepsilon}
+ \beta(x,\varepsilon;|H|,|T|,|T_2|,m,b,k,a),
+\]
+with $\mathrm{gap}$ and $\beta$ as in Definitions~\ref{ib-kept-characters}
+and~\ref{ib-size-windows}.
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChTop.lean}{Deduction.ch_top}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.IdentU}
+\leanref{Development/AutomorphicArithmetic/DedekindLFunctions/SplitInertia.lean}{Deduction.CH.BNBoundsU}
+\begin{proof}
+The bijections give $f=|\Psi_H|$ and $n_{\mathcal T}=|T|$. By (1), comparing
+Definitions~\ref{ib-comparison-quantities} and~\ref{ib-inert-sums},
+$\mathrm{Main}(u)=\sum_{t\in T}\sum_j\operatorname{Re}\mathrm{MAIN}(a(t),w(\mathrm{tr}(u),j,\cdot))$,
+so $\mathrm{gap}(\mathrm{tr}(u))=\mathrm{ASK}(u)-\mathrm{Main}(u)$. This is at most
+$\mathrm{Err}(u)$ by Theorem~\ref{ib-comparison-inequality}, which is at most
+$x^{(e_{\mathrm{Div}}+e_{\mathrm{Loss}}+3)\varepsilon}(|T|a(1+m^2/k)+m(B_0+N_c))$
+by Lemma~\ref{ib-error-size}. By (4) the last factor is at most
+$\beta(x,\varepsilon;|H|,|T|,|T_2|,m,b,k,a)$.
+\end{proof}
+
+\begin{definition}\label{ib-core-data}
+Let $E$ be a host field on a Galois datum with group $A$ and subgroup $A_0$
+(Definition~\ref{hf-framed-host-field}), with the arithmetic data of
+Lemma~\ref{ib-host-arithmetic-data}, let $T\subset A$ be finite, and let
+$x,\varepsilon,e_D,e_L,K_0,c_0,e_K$ be real numbers. \emph{Core data} for $(E,T)$
+at $x$ with exponents $(e_D,e_L)$ and constants $(K_0,c_0,e_K)$ consist of
+finite sets $U_0$ and $\mathcal T$, nonempty finite sets $W(u_0)$, integers
+$m,f\geq0$, comparison data on $(U_0,W,\mathcal T,m,f)$, and $\ell$, $N$, $T_2$,
+$a$, $w$, $\mathrm{tr}$, $\tau\mapsto t_\tau$, $\rho\mapsto\tilde\rho$ as in
+Lemma~\ref{ib-gap-bound} with $H=A$, together with real numbers $\eta,X',\theta$,
+such that:
+\begin{enumerate}
+\item $\ell$ is compatible with $E$ (Lemma~\ref{ib-host-character-values});
+\item the comparison data have scale $x$ and exponent $\varepsilon$, and
+  $e_{\mathrm{Div}}\leq e_D$, $e_{\mathrm{Loss}}\leq e_L$ and $c_{HH}\leq c_0$;
+\item every element of $A_0$ is $\mathrm{tr}(u)$ for some $u\in U_0$;
+\item conditions (1)--(4) of Lemma~\ref{ib-gap-bound} hold, with constants
+  $(e_K,K_0)$;
+\item the data $A_0$, $T$, $T_2$, $m$, $N$, $a$, $w$, $x$, $\varepsilon$, $b$,
+  $b'$, $k$, $a_E=a$, $\eta$, $X'$, $\theta$ lie in the size windows
+  (Definition~\ref{ib-size-windows}), where $b,b',k,a$ are the parameters of the
+  comparison data;
+\item $T_2\subset A_0$.
+\end{enumerate}
+\end{definition}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/CoreAtH.lean}{UpperTheory.Comparison₂.CoreAtH}
+
+\begin{theorem}\label{ib-host-window-bound}
+Let $K$ be a level with weighted Chebyshev sum $G_K$
+(Definition~\ref{wl-weighted-sum}), let $e_D,e_L,K_0,c_0,e_K,C$ be real numbers
+and let $\varepsilon>0$. There is $x_1$ such that for every $x\geq x_1$, every
+host field $E$ on a Galois datum with group $A$ and every finite $T\subset A$ the
+following holds:
+if $E$ satisfies the host conditions for $K$ at $(x,\varepsilon,C)$ with $T$
+(Definition~\ref{hf-host-conditions}), and there are core data for $(E,T)$ at
+$x$ with exponents $(e_D,e_L)$ and constants $(K_0,c_0,e_K)$
+(Definition~\ref{ib-core-data}), then
+\[
+ G_K(x)\leq x^{1/2+(e_D+e_L+7)\varepsilon}.
+\]
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean}{UpperTheory.Comparison₂.core_gm}
+\begin{proof}
+Let $o$ be the integer of $K$, put $c=(3o+1)^{-1}$, $M=4o$ and
+$B_\ell=\sum_{\chi\in K}|\frac{L'}{L}(1,\chi)|$, and let $x_1'$ be given by
+Theorem~\ref{ib-core-window-bound} for $\max(e_D+e_L,0)+3$, $\varepsilon$, $c$,
+$M$, $B_\ell$ and $C_E=C$. Choose $x_1\geq x_1'$ such that for every
+$x\geq x_1$: $\log x\leq x^\varepsilon$,
+$200(1+K_0)^2(1+c_0)(1+e_K)\leq x^\varepsilon$, and $x^\varepsilon\geq1+4o$.
+
+Let $x\geq x_1$, and let $E$, $T$ and the core data be as in the statement. By
+Lemma~\ref{ib-host-arithmetic-data} the Frobenius and inertia data of $E$ are
+arithmetic data for $\Gamma_A$. By Lemma~\ref{ib-host-kept-characters},
+$\mathcal K_E$ is kept with constants $(c,M,B_\ell,C)$. The error windows give
+$e_{\mathrm{Div}},e_{\mathrm{Loss}}\geq0$, hence $e_D+e_L\geq0$, and also $x\geq1$,
+$b\geq1$, $a\geq0$, $k\geq1$, $m\leq x^{1/2+\varepsilon/2}$ and $xm\leq k$.
+Since $c_{HH}\leq c_0$, condition (5) of Lemma~\ref{ib-gap-bound} holds. For
+$s\in A_0$ write $s=\mathrm{tr}(u)$; Lemma~\ref{ib-gap-bound} gives
+\[
+ \mathrm{gap}(s)\leq x^{(e_{\mathrm{Div}}+e_{\mathrm{Loss}}+3)\varepsilon}\beta
+ \leq x^{(e_D+e_L+3)\varepsilon}\beta,
+\]
+with $\beta=\beta(x,\varepsilon;|A|,|T|,|T_2|,m,b,k,a)\geq0$. With the size
+windows and $T_2\subset A_0$ from the core data, Theorem~\ref{ib-core-window-bound}
+applies with $a_E=a$ and gives
+\[
+ g^{\mathcal K_E}_c(x)\leq x^{1/2+(e_D+e_L+6)\varepsilon}+\Sigma^{\mathcal K_E}(x).
+\]
+By Proposition~\ref{ib-level-sum-host-characters} the left side is $G_K(x)$, and
+by Lemma~\ref{ib-host-kept-characters},
+$\Sigma^{\mathcal K_E}(x)\leq4o\,x^{1/2+\varepsilon}\leq4o\,x^{1/2+(e_D+e_L+6)\varepsilon}$.
+Hence $G_K(x)\leq(1+4o)x^{1/2+(e_D+e_L+6)\varepsilon}\leq x^{1/2+(e_D+e_L+7)\varepsilon}$.
+\end{proof}
+
+\begin{theorem}\label{ib-window-bound-on-scales}
+Let $K$ be a level with weighted Chebyshev sum $G_K$
+(Definition~\ref{wl-weighted-sum}). Let $e_D,e_L$ be real numbers and
+$\varepsilon>0$, and let $F$ be a family of definite-side data of exponent
+$\varepsilon$ with set of scales $W_F$ (Situation~\ref{wl-families} and
+Chapter~\ref{chapter-assembly}). Suppose that:
+\begin{enumerate}
+\item there are $C$ and $x_0$ such that every member of $F$ at every scale
+  $x\geq x_0$, with its host field and its top classes $T$,
+  satisfies the host conditions for $K$ at $(x,\varepsilon,C)$
+  (Definition~\ref{hf-host-conditions});
+\item there are $K_0,c_0,e_K,C_L$ and $x_0'$ such that $F$ is tied at every
+  scale $x\geq x_0'$ in $W_F$ with exponents $(e_D,e_L)$ and constants
+  $(K_0,c_0,e_K,C_L)$ (Definition~\ref{asm-tied}).
+\end{enumerate}
+Then there is $x_1$ such that $G_K(x)\leq x^{1/2+(e_D+e_L+7)\varepsilon}$ for
+every $x\geq x_1$ in $W_F$. Thus every level has the Chebyshev bound along tied
+families of definite-side data (Definition~\ref{wl-family-conditions}).
+\end{theorem}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean}{UpperTheory.Comparison₂.level_gm_le_on_family_scales}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean}{UpperTheory.Comparison₂.tiedCore_of_chainTied}
+\leanref{Development/AutomorphicArithmetic/PrimitiveCosets/WindowInequalityOfArtinInputs.lean}{UpperTheory.Comparison₂.windowInequality_of_artinInputs}
+\begin{proof}
+Let $x_1'$ be given by Theorem~\ref{ib-host-window-bound} for $K$,
+$e_D,e_L,K_0,c_0,e_K$, the constant $C$ of (1) and $\varepsilon$, and put
+$x_1=\max(x_1',x_0,x_0')$. Let $x\geq x_1$ lie in $W_F$. By (2), $F$ is tied at
+$x$ with exponents $(e_D,e_L)$ and constants $(K_0,c_0,e_K,C_L)$. Let the member
+$i_0$, the map $\mathrm{pt}$, the comparison data, $\ell$, $N$, $T$, $T_2$, $a$,
+$w$, the two bijections and $\eta,X',\theta$ be as in Definition~\ref{asm-tied},
+and let $E$ be the host field of the member $i_0$, on a Galois datum with group
+$A$ and cyclic subgroup $A_0$ generated by $a_0$.
+
+These are core data for $(E,T)$ at $x$ with exponents $(e_D,e_L)$ and constants
+$(K_0,c_0,e_K)$ (Definition~\ref{ib-core-data}), with $U_0=A$, with $W(u_0)$ the
+set of words of the member $\mathrm{pt}(u_0)$, and with $\mathrm{tr}$ the identity
+of $A$. Indeed:
+\begin{itemize}
+\item the set $T$ of Definition~\ref{asm-tied} is the set of top classes of the
+  host of $i_0$;
+\item $\ell$ is compatible with $E$ by Definition~\ref{asm-tied}, which is
+  condition~(1) of core data;
+\item conditions~(2), (4) and~(5) of core data, that is, the scale, exponent and
+  constants of the comparison data, conditions (1)--(4) of
+  Lemma~\ref{ib-gap-bound} with $H=A$, and the size windows, are conditions of
+  Definition~\ref{asm-tied};
+\item condition~(3) holds because $\mathrm{tr}$ is the identity of $A$;
+\item for condition~(6), every element of $T_2$ is $sa_0$ for an element $s$ of
+  the set $T_2$ of the host, so it lies in $A_0$.
+\end{itemize}
+By (1), the member $i_0$ satisfies the host conditions for $K$ at
+$(x,\varepsilon,C)$ with its top classes $T$. Since $x\geq x_1'$,
+Theorem~\ref{ib-host-window-bound} applied to $E$, $T$ and these core data gives
+$G_K(x)\leq x^{1/2+(e_D+e_L+7)\varepsilon}$.
+\end{proof}

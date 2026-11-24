@@ -1,0 +1,243 @@
+% before: hf-frame
+The host fields of this chapter are abelian, and their Galois groups all have the same shape: two
+signs, one for each of the quadratic fields $\mathbf Q(\sqrt{-q})$ and $\mathbf Q(\sqrt{-d})$, and
+a finite abelian group that maps onto the Galois group of a layer of the $2$-power cyclotomic tower.
+Fixing this shape in advance lets the later chapters index places, characters and Frobenius classes
+by elements of one explicit group.
+
+% before: hf-host-field-of-character
+The bound on Tate-Shafarevich groups in Chapter~\ref{chapter-tate-shafarevich} is proved for a
+field described by Galois theory alone, as a subfield of a cyclotomic field. That description uses
+only $\psi$, the exponent $e$ and the two primes, which is all that is fixed when the bound is
+proved.
+
+% before: hf-framed-host-field
+The constructions on the definite side need more than the field: an identification of its Galois
+group with the group of a Galois datum, and an Artin map from residues modulo the conductor that is
+compatible with that identification. The conditions on the Artin map say which signs and which
+part of the $2$-power tower each residue class controls.
+
+% before: hf-host-field-properties
+The data of a host field determine its arithmetic. The CM structure, the Frobenius elements and the
+ramification at $d$ and in $E/F$ are read off from the cyclotomic field that contains $E$. The
+ideal $\mathfrak b$, a square root of the relative different of $E/K$, makes $\mathfrak b^{-1}$
+self-dual for the form $\operatorname{Tr}_{E/K}(y\bar y')$, which the Hermitian lattices of
+Chapter~\ref{chapter-unitary-theta} use.
+
+% before: hf-kernel-host-field
+A host field built from $\psi$ is specified by the kernel of its Artin map. When that kernel is the
+one cut out by $\psi$, the $2$-power tower and the two quadratic characters, the field is a host
+field of $(\psi,e,q,d)$ in the sense used for the Tate-Shafarevich bound.
+
+% before: hf-host-field-rows
+A few further arithmetic conditions on a host field are needed for the definite side and for the
+choice of auxiliary primes. They concern the quadratic subfield $\mathbf Q(\sqrt{-q})$, the
+minimality of $Q_S$, and the splitting in $\mathbf Q(\sqrt{-d})$ of all small odd primes.
+
+% before: hf-host-field-exists
+For a fixed primitive character $\psi$ the host fields form an explicit family indexed by the
+exponent $e$ and the pair $(q,d)$. The degree grows like $2^e$ with a constant factor that depends
+only on $\psi$, which is what allows the degree to be matched to the scale $x$.
+
+% before: hf-admissible-pair
+The auxiliary primes have size $\exp(Y^{\varepsilon/5})$ and $\exp(Y^{\varepsilon/5}\log^2Y)$. The
+congruence conditions make every small odd prime split in $\mathbf Q(\sqrt{-d})$ and fix the
+behaviour of $2$, $q$ and $d$ in the quadratic fields involved.
+
+% before: hf-good-pair
+The characters of a host field built from $\psi$ are products of a power of $\psi$ with the two
+quadratic characters attached to $q$ and $d$. Those that involve $q$ or $d$ must have square-root
+cancellation at the scales of the window, and the real ones must have no zeros near $1$; this
+definition states both requirements for every modulus $M$ at once.
+
+% before: hf-zero-density-box
+Most primes $q$ must give twisted characters without zeros near $s=1$. The zero-density estimate
+bounds the number of exceptions, because a character with conductor $fq$ and $f$ bounded
+determines $q$.
+
+% before: hf-zero-density-regions
+The definite side uses the classical zero-free regions together with a count of the zeros near
+$s=1$ with multiplicity. They are stated here with the other analytic input on Dirichlet
+$L$-functions and applied in Chapter~\ref{chapter-assembly}.
+
+% before: hf-primes-progressions
+The mean-square bound for twisted sums rests on the distribution of primes in progressions to
+moduli that grow with $Y$. Only one real character can have a zero very close to $1$ among all the
+moduli involved, and the count of primes in a progression depends on that zero through one explicit
+term.
+
+% before: hf-twisted-prime-sums
+Expanding the square of a twisted sum leads to sums of Jacobi symbols $\left(\frac qs\right)$ over
+the primes $q$ of a progression. These cancel for every modulus $s$ except possibly one, the one
+attached to an exceptional zero, and the cancellation is by an arbitrary power of $Y$.
+
+% before: hf-prime-power-sums
+The diagonal terms of the expanded square are sums of the weights $\Lambda(n)\min(1,y/n)$ over
+prime powers. Their size is that of a single sum of length about $y$, up to a logarithm, and this
+gives the factor $y\log y$ in the mean square.
+
+% before: hf-mean-square
+Square-root cancellation for most twists comes from a mean value over the primes $q$ of a
+progression. The twisted sums are truncated at a large power of $Y$, and the mean square is of the
+size $y\log y$ that square-root cancellation predicts for each term.
+
+% before: hf-log-derivative-box
+A zero-free box near $s=1$ bounds the logarithmic derivative of $L(s,\chi)$ by $\log Q$ on a
+slightly smaller box. This bound is used on the horizontal sides and on the left side of the contour
+in the next lemma.
+
+% before: hf-box-tail
+The tail of the series $\sum_n\Lambda(n)\chi(n)/n$ beyond a large power of $Y$ is controlled by a
+difference of two smoothed sums. Shifting the contour of Perron's formula into the zero-free box
+bounds that difference, with a loss of only $z^{-1/400+\delta}$ relative to its trivial size.
+
+% before: hf-chebyshev-from-twisted-sum
+The mean-square bound controls truncated sums, while the window bound needs the corrected Chebyshev
+sum $g_\chi$. A zero-free box near $s=1$ controls the tail of the series and the value
+$\frac{L'}{L}(1,\chi)$, so a small truncated sum gives a small $g_\chi$.
+
+% before: hf-most-primes-good
+The two primes are chosen one after the other, $q$ first and then $d$ subject to congruences
+modulo $q$ and the small odd primes. In both steps all but a small proportion of the primes in the
+progression are good.
+
+% before: hf-good-pairs-exist
+Choosing $q$ and then $d$ among the good primes gives a pair that is good for every character
+modulo $M$ at once. Here $M$ is the conductor of $\psi$ when the pair is used.
+
+% before: hf-bounded-characters
+In a host field built from $\psi$, a character whose primitive character is not a power of $\psi$
+involves $q$ or $d$. A good pair therefore gives the bounds required for all these characters,
+which are condition (e) of the host conditions.
+
+% before: hf-windows
+The window bound of Chapter~\ref{chapter-inert-prime-balance} is proved at scales $x$, and the
+windowed form of Landau's theorem in Chapter~\ref{chapter-windowed-landau} needs it on a set of
+scales that contains long intervals $[Y,Y^\lambda]$ arbitrarily far out. Each scale carries the
+parameter $\varepsilon$ and an exponent $J$ that bounds how small $Y$ may be relative to $x$.
+
+% before: hf-windows-exist
+The bound on Tate-Shafarevich groups holds only on windows $[W,W^2]$ that depend on the pair
+$(q,d)$, and the pair must be chosen before the window is known. Shrinking each such window to
+exponent $3/2$ leaves room to rescale $x$ by the constant that relates $n$ to $2^e$.
+
+% before: hf-no-short-relations
+The thick places of a host are indexed by a set of integers placed along the cyclic subgroup $A_0$.
+A Frobenius orbit of places moves along an arithmetic progression in $A$, and the condition below
+prevents such a progression from passing through three thick places in a short stretch.
+
+% before: hf-behrend-set
+Behrend's construction gives sets without three-term progressions of density
+$\exp(-C\sqrt{\log n})$. The same construction, read in a base large compared with $L$, excludes all
+short linear relations at the cost of a factor depending on $L$.
+
+% before: hf-behrend-set-at-scale
+At a scale $x$ the set must be large compared with $x^{-\varepsilon}n$ while the length $L$ grows
+like $\log x$. Behrend's bound loses only $\exp(O(\sqrt{\log x\log\log x}))$, which is smaller than any
+power of $x$.
+
+% before: hf-thick-orbits
+The no-relation property is used through the following consequence. Along the orbit of a place
+under the powers of a Frobenius element, the thick places occur at most twice in every stretch of length $L$ when the
+orbit is long, and at most once when it is short.
+
+% before: hf-adapted-ranks
+The ranks of the unitary groups of Chapter~\ref{chapter-unitary-theta} are tied to the scale. The
+order $n$ of the $2$-power part of the Galois group is about $x^{2+8\varepsilon}$, the number $m$
+of theta lifts about $\sqrt x$, and the first rank $k$ about $x^{9/2+10\varepsilon}$; the twist
+parameter $t$ is then determined by one equation.
+
+% before: hf-adapted-ranks-exist
+Ranks adapted to a scale exist for every Galois datum of the right order, and the twist parameter is
+bounded by $x^{400}$. The second fact is why the Tate-Shafarevich bound is needed for twists up to a
+fixed power of $x$.
+
+% before: hf-host
+A host collects the host field and the further choices used on the definite side: level primes at
+which the theta kernels are twisted, a set of top classes and a Behrend set of thick places. The
+conditions here are those that hold for every host; the estimates that depend on the scale come in
+the definition of a good host.
+
+% before: hf-host-extension
+The data of a host other than the host field can be chosen freely subject to their stated
+conditions. So a host is built by first constructing the host field and then choosing primes and
+sets.
+
+% before: hf-host-conditions
+The comparison inequality of Chapter~\ref{chapter-inert-prime-balance} rewrites the weighted
+Chebyshev sum of a level in terms of the characters of a host field. Its error terms are controlled
+when the level's characters appear in $X^+$, the top classes are equidistributed over the cosets of
+$A_0$ with the right weights, and all other characters have square-root cancellation at $x$.
+
+% before: hf-good-orbit
+The divisibility estimates of Chapter~\ref{chapter-period-divisibility} follow the top classes along
+the orbits of Frobenius elements of inert primes. They need the positions of the top classes along
+such an orbit to be sparse in every window, and every stretch of about $\log x$ consecutive tiles to
+contain a tile in which single even positions alternate with empty cells.
+
+% before: hf-good-host
+The definite side uses many quantitative properties of a host at a given scale. They concern the
+sizes of the auxiliary primes, analytic bounds for the quadratic characters and the real characters
+of the host field, the norm primes $g_i$ and the other level primes, and the distribution of the top
+classes and of the thick places.
+
+% before: hf-norm-primes-short
+The level primes $g_0,g_1$ must be norms of elements $\pi\equiv1$ of $\mathbf Q(\sqrt{-d})$ in a
+dyadic interval. The number of such primes is bounded below in terms of the discriminant and the
+modulus, with polynomial dependence on both.
+
+% before: hf-exceptional-primes
+Two norm primes are needed whose sets of exceptional primes are disjoint. A fixed prime is
+exceptional for few integers of a dyadic interval, because it must divide $g^i-1$ to a high power, so
+most pairs of norm primes have this property.
+
+% before: hf-norm-primes
+The level primes $g_0,g_1$ are norms of elements $\pi\equiv1$ from $\mathbf Q(\sqrt{-d})$, of size
+about $(kb)^8$, with disjoint sets of exceptional primes. The other level primes are small primes
+congruent to $1$ modulo the conductor of the host field.
+
+% before: hf-pnt-character
+At the scales $y\geq\exp(x^{\varepsilon/3})$ every character of a host field needs a Chebyshev
+bound with a saving $\exp(-cx^{\varepsilon/8})$. The classical form of the prime number theorem for
+a primitive character gives this saving once a real zero near $1$ is excluded.
+
+% before: hf-chebyshev-integral
+The corrected Chebyshev sum $g_\chi$ is an integral of the error term in the prime number theorem
+for $\chi$. This identity transfers bounds for $\psi(u,\chi)-\delta_\chi u$ at all $u\geq y$ to a
+bound for $g_\chi(y)$.
+
+% before: hf-host-chebyshev
+Every character of a host field, including the trivial one, must satisfy a Chebyshev bound at the
+very large scales $y\geq\exp(x^{\varepsilon/3})$. At such scales the classical zero-free region
+suffices once exceptional zeros are excluded.
+
+% before: hf-orbit-failure
+The top classes are chosen at random, and their positions along a long Frobenius orbit then form a
+random set with independent entries. Each of the three conditions of a tiled set of positions fails
+with probability at most a constant times $x^{-2}$.
+
+% before: hf-random-selection
+A random choice must satisfy two conditions at once: the distribution over the cosets of $A_0$,
+controlled by second moments, and the weighted count of bad orbits, controlled by first moments. The
+first fails with probability at most $1/2$ and the second with probability at most $1/4$, so some
+choice satisfies both.
+
+% before: hf-top-classes
+The top classes must be equidistributed over the cosets of $A_0$ and must meet the Frobenius orbits
+of the inert primes in a controlled way. A random choice with the right densities does both.
+
+% before: hf-good-host-exists
+Given a host field with a large splitting bound and a good pair at a scale, the remaining choices
+of a good host can be made one at a time. The level primes, the Behrend set and the top classes are
+chosen by the preceding lemmas, and the analytic conditions come from the good pair.
+
+% before: hf-hosts-on-windows-def
+Chapters~\ref{chapter-windowed-landau} and~\ref{chapter-assembly} need hosts at every large scale of
+a set with long windows, with constants that depend only on $\varepsilon$. The definition allows an
+extra requirement on each host, which for a primitive character $\psi$ is the host conditions of its
+cyclic level and a bound on Tate-Shafarevich groups.
+
+% before: hf-hosts-on-windows
+For a primitive character $\psi$ that satisfies the Tate-Shafarevich bound, the host fields built
+from $\psi$, with good pairs chosen on the windows where that bound holds, extend to good hosts.
+These are the hosts that Chapter~\ref{chapter-assembly} requires for the cyclic level of $\psi$.

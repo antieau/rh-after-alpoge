@@ -1,0 +1,742 @@
+% before: th-ranks
+The auxiliary lattice of the argument is built from a chain of $m$ theta lifts
+between definite unitary groups, and every later estimate depends on a handful
+of integers. The first of them is the Galois datum of
+Chapter~\ref{chapter-host-fields}, on which the host field is built; the others
+fix the size of the starting group, the number of lifts and the rank added by
+each lift. The inequalities among them are the ones the later chapters need,
+for instance that each block is longer than the number of lifts.
+
+% before: th-hc-parameter
+The forms that are lifted have prescribed archimedean types. These are recorded
+by half-integral and integral sequences, one for the starting group and one
+pair of integers for each lift. Interlacing of the first two sequences is the
+condition under which the relevant Gan-Gross-Prasad period can be nonzero.
+
+% before: th-spaces
+The groups of the tower are unitary groups of Hermitian spaces over the host
+field. Each space carries a basis, a signature and a unimodular lattice, since
+the later arguments count lattice classes and compute archimedean
+representations. The definite spaces $X_j$ come with indefinite companions
+$Y_j$, which receive them isometrically and on which the indefinite side of
+the argument works.
+
+% before: th-column-chain
+An algebraic modular form on a definite unitary group is a function on the
+finite set of classes of lattices in its genus. The lift from one space of the
+tower to the next is a finite sum over pairs of classes, weighted by the
+inverse orders of the stabilizers. The following data are what such a sum
+needs, together with exponents of determinants that shift the archimedean
+weight by the right amount at each step.
+
+% before: th-iterated-lift
+With the data of a column chain the lifts can be written down. Each lift
+multiplies by a power of the determinants $\delta_i$, applies the kernel of a
+pair of classes, and divides by another power of the determinants. Composing
+$m$ of them gives the map whose periods are measured in the rest of the
+argument.
+
+% before: th-definite-datum
+The argument works with one structure that holds the field, the spaces, a
+column chain for each word, the periods of the iterated lifts and the further
+data used to measure them. Collecting these in one place lets every later
+statement quantify over a single kind of object. The weights in part (7) make
+visible the block shape of the iterated lift.
+
+% before: th-twisting-data
+At the places of the coefficient field where the tuple of Hecke characters
+differs from the base tuple, the argument of Chapter~\ref{chapter-assembly}
+twists the forms by characters of ray class groups. The datum carries, for each
+such twist, the Galois representations, theta elements and theta values whose
+behaviour under the twist is controlled there. Their lattices, Bloch-Kato
+lengths and theta values are defined here so that the twist condition can be
+stated.
+
+% before: th-lift-kernels
+Nothing in the datum itself says that the kernels are theta kernels. That
+identification matters only where the integrality of the lifted forms is
+proved. There each kernel is required to be a differential operator applied at
+the origin to a combination of theta functions of the pair of lattices.
+
+% before: th-weil-datum
+Theta lifts between unitary groups are defined through the Weil
+representation. The model used here consists of functions on the whole adelic
+symplectic space that are quasi-periodic under its rational points, so that
+the theta kernel is evaluation at the origin. The Weil representation is
+specified by its properties, which is what the seesaw arguments below use.
+
+% before: th-grid-places
+The theta grid defined below carries Hecke characters that may ramify only at
+a few places of $F$: a base place above an auxiliary prime $q_0$ and the places
+above the level primes. At each of these places the grid chooses a place of $E$
+that is not conjugate to itself, so that the local idempotents exist. The
+choices must agree with the places of the level data and with the ramification
+of the characters of the level system.
+
+% before: th-grid-centres
+At the archimedean places the characters of a theta grid are fixed by integers
+built from the Harish-Chandra parameter: the midpoints between consecutive
+terms of an arithmetic progression above $v_1(\tau)$. The step of the
+progression is large compared with the ranks of the grid, which makes the
+archimedean exponents of the characters of each square of the grid large
+compared with the ranks of its spaces.
+
+% before: th-grid
+The norms of the lifts are computed on the indefinite side, where the definite
+spaces sit inside a grid of Hermitian spaces of growing rank. Moving along a
+row of the grid lifts forms by one block of the tower; moving along a column
+lifts by a fixed amount that does not depend on the tuple of characters. The
+level system and the grid carry the Hecke characters that enter the $L$-values
+below.
+
+% before: th-bottom-triple
+The first lifts in the grid are lifts of the trivial representation from
+totally definite groups. At the bottom of each square of the grid these take
+place between three spaces with identity Gram matrices, and the theta
+functions are fixed at the places where the characters ramify. Their theta
+integrals are the objects whose norms and nonvanishing are needed.
+
+% before: th-large-data
+The statements about bottom triples hold only once the scale is large, and the
+largeness is uniform in the remaining data. The same quantifier pattern occurs
+several times, so it is stated once. The $L$-functions that appear are partial
+Hecke $L$-functions, assumed entire.
+
+% before: th-rallis-inner-product
+The covolume bound of Chapter~\ref{chapter-covolumes} needs the norms of the
+first theta lifts. The Rallis inner product formula expresses such a norm as a
+product of Hecke $L$-values at consecutive integers. It is used here for the
+lift of the trivial representation of a definite group.
+
+% before: th-theta-hypotheses
+The nonvanishing of the first lifts uses two global facts about theta integrals
+beyond the published local inputs. They compare theta integrals of the two
+halves of a square and track how the comparison changes along a Witt tower.
+Both are stated in the form in which they enter.
+
+% before: th-first-lift-matching
+The second half of the nonvanishing theorem compares the theta integrals of
+the two halves of a bottom triple. Both halves map onto one space of
+coinvariants of the Weil representation, on which the unitary group of the
+large space acts irreducibly. A matching records this space with the two maps
+onto it, and a square triple records the conditions on ranks, signatures and
+characters under which matchings exist.
+
+% before: th-square-fock-operators
+On the vectors $f\otimes P$ with a fixed archimedean vacuum $f$, the Lie
+algebras of the two unitary groups act through the polynomial $P$. They act by
+quadratic expressions in raising and lowering operators, shifted by the
+archimedean exponents of the characters. Howe duality at the real places is a
+finiteness statement about the subspaces that are stable under one Lie algebra
+and contain the coinvariants of the other, and the radical is the sum of the
+proper ones.
+
+% before: th-square-fock-derivatives
+A Weil datum differentiates along the one-parameter subgroups at a complex
+place into the operators just defined. The finite adelic points of the larger
+group act on a vector $f\otimes P$ through its vacuum $f$ alone, since they
+commute with the archimedean Heisenberg action.
+
+% before: th-square-fock-maps
+With the vacuum fixed, a map of a matching becomes a linear map on the
+polynomial space. The conditions of a matching make it equivariant for the
+Lie algebra of the larger group and make it vanish on the coinvariants of the
+smaller group, and the finite adelic points carry one such map to another.
+
+% before: th-square-howe-model
+To apply Howe duality at the real places, the polynomial space has to be
+identified with the Fock space of the published theorem. Under the
+identification, subspaces stable under the Lie algebra of the larger group
+become stable under its Lie algebra and maximal compact subgroup there, and
+the coinvariants contain the image of the action of the smaller group.
+
+% before: th-square-howe-condition
+The identification turns subspaces of the polynomial space that are stable and
+contain the coinvariants into theta subspaces. Since it is injective and onto,
+the two conclusions of Howe duality at the real places become the two halves of
+the Howe condition.
+
+% before: th-square-radical
+The archimedean factor of a matching is the quotient of the polynomial space by
+the radical. Four facts of linear algebra produce it: the radical is the
+largest proper admissible subspace, a space spanned by images of intertwiners
+and irreducible under a larger family is semisimple, the radical lies in the
+kernel of every intertwiner, and two such quotients that map onto the same
+irreducible module are isomorphic.
+
+% before: th-darboux-model
+The local matching and the agreement of theta integrals are statements about
+Schwartz-Bruhat functions on a Lagrangian half of the symplectic space, in
+Darboux coordinates. A function there gives a theta function on the whole
+space by summing its Heisenberg translates over the rational points, and the
+algebraic functions are the pure tensors with a Fock vector at the
+archimedean places and the vacuum at almost all finite places.
+
+% before: th-darboux-reading
+A square triple and its Weil data have to be read as a triple over $E/F$
+before the hypotheses on theta integrals apply to them. The base data come
+from the ramification of the characters, the spaces keep their Gram matrices
+up to sign and transposition, and the Weil representations of the model are
+transported from the Weil data along the theta-sum map.
+
+% before: th-kernel-theta-subspace
+The kernel of a matching and the kernel of the matched local maps are both
+subspaces of the algebraic functions that are stable under the larger group
+and contain the coinvariants of the smaller one. The images of algebraic
+functions under the matched local maps are formed factor by factor, over a
+finite set of places outside which the functions are the vacua.
+
+% before: th-kernel-dictionary
+The conditions of a matching concern the finite adelic points and the
+derivatives along one-parameter subgroups at the complex places. Through the
+theta-sum map they become conditions on the algebraic functions of the model,
+for the compact subgroups and one-parameter subgroups of the unitary groups
+of the model, and the conditions on matched local maps become conditions on
+the images of expressions.
+
+% before: th-kernel-matching
+Since the space of a matching has no proper stable subspaces, the kernel of a
+matching, read on algebraic functions, cannot be enlarged to another proper
+theta subspace. This maximality is what lets Howe duality identify it with the
+kernel of the matched local maps.
+
+% before: th-howe-finite
+At the real places Howe duality is Theorem~\ref{lit-howe-duality-real}. At the
+finite places the comparison of kernels needs a local statement about the
+theta lift of the trivial representation of the smaller group: either it is
+irreducible, or it is generated by one vector whose stabilizer averages every
+vector into the line of that vector.
+
+% before: th-howe-radical
+For the comparison of kernels, each finite place enters through the kernel of
+its matched local map. This kernel is the largest proper stable subspace, and
+the local form of Howe duality gives a generating vector and averaging
+operators that fix it and carry finitely many vectors of the kernel into the
+coinvariants.
+
+% before: th-howe-archimedean
+At the real places the factor is the archimedean Fock space, and Howe duality
+at the real places bounds the chains of its theta subspaces. Together with the
+irreducibility of the space of the matched maps there, it puts every proper
+theta subspace into the kernel of the real matched map.
+
+% before: th-howe-tensor
+Algebraic functions supported at a finite set of places form a tensor product
+of the archimedean Fock space with local Schwartz-Bruhat spaces. A subspace of
+it that is stable under the factorwise operators and contains the factorwise
+relations is either everything or lies in the kernel of the tensor product of
+the local maps; finite length gives this at the real places, and the radical
+condition of the finite places replaces finite length there.
+
+% before: th-kernel-howe
+The tensor product statement applies to every finite set of places at once.
+A proper theta subspace that contained a function with nonzero image would
+contain all algebraic functions supported at every larger finite set of
+places, which is all of them.
+
+% before: th-kernel-graph
+Once the kernels agree, the pairs of images of functions with agreeing images
+under the matched local maps form a subspace of the square of the space of a
+matching that is the graph of an intertwining map. Countable dimension and
+irreducibility make this map a scalar.
+
+% before: th-assemble-matching
+Matched local maps for a triple give a space of coinvariants: the tensor
+product of their spaces at the real places with the restricted tensor product
+of the local spaces. The theta-sum map identifies the algebraic functions of
+the model with the functions of a matching, and each condition of a matching
+is a condition on matched local maps read factor by factor.
+
+% before: th-square-model
+The local matching and the agreement of theta integrals concern Alpöge's model
+of a triple over $E/F$, built on Schwartz-Bruhat functions in Darboux
+coordinates. A square triple and its Weil data are read in this model through
+the theta-sum map. The lemma lists what the reading gives: the Weil data, the
+algebraic functions, the theta integrals, and the comparison of a matching
+with matched local maps.
+
+% before: th-bottom-square-facts
+The bottom triples of the grid are definite and carry the standard archimedean
+data. Their ranks, the archimedean exponents of their characters and the
+ramification of these characters are fixed by the construction of the grid and
+the level system. These facts make a bottom triple a square triple and
+describe its places of ramification.
+
+% before: th-bottom-split-reading
+To compare $f_t$ and $f'_t$ through matched local maps, the bottom triple is
+read in Alpöge's model with its own lattices, so that its Fock vacuum vectors
+are theta sums of pure tensors of the local vacua of the model. The embeddings at the
+places below $S_t$ are chosen to define the places of $S_t$. The finite set of
+places of the resulting triple is then the set of places of $F$ below $S_t$.
+
+% before: th-bottom-split-assembly
+The matching assembled from matched local maps is computed on theta sums of
+pure tensors, whose images are tensor products of local images. The
+computation uses of the triple only the properties of
+Lemma~\ref{th-square-model}(2), so it applies to the triple read with the
+lattices of the bottom triple.
+
+% before: th-bottom-split-zeta
+At a place below $S_t$ the matched local maps are compared through zeta
+functions on general linear groups. The local components of $f_t$ and $f'_t$
+there are standard functions built from the conductor of the character of the
+square. Their zeta functions agree after a change of rows and columns and a
+nonzero scalar, by a local computation.
+
+% before: th-bottom-split-situation
+The next two lemmas concern one bottom triple, its reading in Alpöge's model
+and local maps matched to it. At the places below $S_t$ they use linear models
+of the Schrödinger models, in which half of the Heisenberg group acts by
+translations and the other half by characters. The conditions on matched local
+maps that the argument uses are listed with the setup.
+
+% before: th-bottom-split-local
+At a place below $S_t$, the zeta matching of the local maps turns the local
+computation of Lemma~\ref{th-bottom-split-zeta} into an equality of local
+images. The changes of rows and columns compare the split bases of the model
+with the frames of the bottom triple, so the local functions obtained are the
+components of $f_t$ and $f'_t$ at that place, read in linear models.
+
+% before: th-bottom-split-pure
+The vectors $f_t\otimes P$ are built from a Fock vacuum vector by replacing
+one finite component and applying creation operators, and the images under the
+assembled matching are known on theta sums of pure tensors. The lemma writes
+$f_t\otimes P$ and $f'_t\otimes P'$ as such theta sums, with the local
+functions of Lemma~\ref{th-bottom-split-local} as components below $S_t$. The
+argument extends the vacuum place by place, using the irreducibility of the
+Schrödinger representation, and then applies the creation operators.
+
+% before: th-bottom-split-matching
+At the places of $S_t$ the functions $f_t$ and $f'_t$ have standard
+components built from the conductor of the character of the square. Reading
+the bottom triple in Alpöge's model with these components gives a matching in
+which either every image of a Fock vector of $f_t$ vanishes, or one of them is
+a multiple of an image of a Fock vector of $f'_t$.
+
+% before: th-first-lift-inputs
+The two hypotheses on theta integrals are stated for Alpöge's model of a
+triple over $E/F$, which does not refer to the spaces of the grid. Carrying
+them to square triples, and computing the bottom triples at the split places
+where their characters ramify, gives the following six facts. The rest of the
+argument for the second lift uses them together with linear algebra and
+integration over compact quotients.
+
+% before: th-first-lift-dixmier
+The archimedean factor of the coinvariants has countable dimension and is
+irreducible under the Lie algebra alone. By Dixmier's form of Schur's lemma
+its commutant is then the scalars, and this is what splits the coinvariants
+as a tensor product.
+
+% before: th-first-lift-product
+A space spanned by the images of intertwiners from an irreducible module with
+scalar commutant is the tensor product of that module with the space of
+intertwiners. Applied to both halves of a square triple, this gives one
+multiplicity space for the two halves.
+
+% before: th-first-lift-factor
+The archimedean factor and the product form together give the factorization
+(F1) used in the nonvanishing theorem. The archimedean factor depends only on
+the spaces and the archimedean exponents, so for a bottom triple it is the
+same for every tuple. A matching with given Weil data comes from any matching,
+since Weil data with the same characters agree on theta functions.
+
+% before: th-first-lift-compact
+At an archimedean place the compact subgroup acts on the Fock vectors through
+a linear change of the variables of the polynomials, twisted by powers of
+determinants. In particular it does not raise the degree.
+
+% before: th-first-lift-relations
+For a definite group the theta integrals converge, and they vanish on the
+relations by which coinvariants for the finite adelic group are formed. The
+finiteness of the archimedean orbits for a definite target group is the third
+analytic fact that the irreducibility argument needs.
+
+% before: th-first-lift-comparison
+The agreement of theta integrals compares the two halves of a square triple
+only after the second function is changed by a relation. The relations lie in
+the kernel of the coinvariant map and the theta integral vanishes on them, so
+the comparison holds for all pairs of functions with the same image.
+
+% before: th-first-lift-comparison-short
+The proof above follows Alpöge's order, in which the vanishing for functions
+with zero image is proved on its own. The comparison itself already contains
+it, because the theta integral of the zero function is zero.
+
+% before: th-first-lift-irreducible
+The functions whose theta integral vanishes map to a subspace of the
+coinvariants that is stable under the finite adelic group and the Lie
+algebra. Irreducibility leaves two cases, which give the dichotomy (F3).
+
+% before: th-first-lift-unique
+Two matchings with the same Weil data have the same kernels, so on each half
+they differ by an isomorphism of the spaces of coinvariants. The two
+isomorphisms differ by an operator that commutes with an irreducible action,
+hence by a scalar.
+
+% before: th-first-lift-finite
+At the finite places the test functions of a bottom triple are explicit, and
+for one matching the images of the two standard vectors are proportional. The
+uniqueness of matchings carries this to every matching and every
+factorization, which gives (F4).
+
+% before: th-first-lift-nonzero
+A period of the iterated lift can only be nonzero if the lifts themselves are
+nonzero. For the lifts of the trivial representation at the bottom of the grid
+this follows from the inner product formula, once the $L$-values in it are
+known not to vanish, by the criterion of Rallis and of Kudla and Rallis
+\cite{Ral84,KR94}. The statement covers both halves of every square.
+
+% before: th-tensor-rule
+The seesaw arguments split theta functions along orthogonal decompositions of
+either space of a pair. A theta function for an orthogonal sum can be built
+from theta functions for the summands, and the Weil representation of the sum
+acts factor by factor. For Weil data given by their properties this needs a
+proof: the two actions can differ only by a character, which the conditions on
+Weil data force to be trivial.
+
+% before: th-line-comparison
+The seesaw for one step of the tower matches a line in one space of a pair with
+a line in the other space of another pair. A linear map between the lines with
+the right norm identifies the corresponding symplectic spaces up to sign. Under
+this identification theta functions and the actions of the Weil data on them
+correspond, with a complex conjugation when the sign requires it.
+
+% before: th-seesaw-identity
+The periods of the iterated lift are compared with Bessel periods through
+seesaws, one for each step of the tower. The basic identity is an equality of
+products of theta kernels for two pairs of spaces that share a line. It holds
+pointwise, for arbitrary Weil data whose characters fit together as stated.
+
+% before: th-matrix-coefficients
+The orthogonality relation below integrates the coefficients
+$\langle f,\rho(w)f_0\rangle$ of two theta functions over the whole of
+$\mathbb W$. That integral converges because the coefficients are supported, in
+the finite directions, near a lattice, and decay rapidly in the archimedean
+directions. Summing them over the rational translates of a point then gives a
+bound that does not depend on the point.
+
+% before: th-lattice-vacua
+Vanishing statements for functionals on theta functions are proved by expanding
+a theta function in translates of a fixed one. The expansion is an
+orthogonality relation for the translations of the Heisenberg group. On lattice
+vacua it reduces to the translations by the annihilator of the lattice, since
+the other translates are orthogonal to all lattice vacua.
+
+% before: th-vacuum-irreducibility
+The seesaw arguments end by showing that a linear functional on theta
+functions vanishes identically. The space of lattice vacua is irreducible for
+the translations by the annihilator of the lattice, so it suffices to check the
+vanishing on the translates of one nonzero vector. Tameness supplies the
+continuity and the interchange of integrals that this needs.
+
+% before: th-heights
+The growth of Weil operators is measured by heights on the adelic unitary
+groups. The height of an element bounds its entries and those of its inverse at
+every place, and the height on the quotient takes the best rational translate.
+Sizes of rational vectors seen from a group element give a second measure,
+which reduction theory compares with the height.
+
+% before: th-archimedean-growth
+At the archimedean places a Weil datum is the oscillator representation up to a
+scalar of absolute value one. In the Fock model the oscillator representation
+is an integral of translates against the vacuum projection, whose size is a
+determinant. This gives polynomial growth of theta functions under elements
+with finite component one.
+
+% before: th-sized-lattice
+The reduction of the next lemmas moves the lattice of an adelic element to a
+fixed lattice by a rational isometry. This needs an orthogonal basis of the
+lattice with norms in a fixed finite set and sizes bounded by a power of the
+size of a spanning set. The hypotheses on the lattice used in the construction
+are collected here.
+
+% before: th-anisotropic-frame
+The first step finds an orthogonal basis with nonzero norms and polynomially
+bounded sizes, by Gram-Schmidt within the lattice. Nothing yet controls the
+norms themselves, which may be large.
+
+% before: th-short-vector
+To control the norms, a Minkowski argument on the trace form finds a nonzero
+lattice vector whose norm has bounded conjugates. The orthogonal basis of the
+previous lemma makes the trace form diagonal over the real subfield, which is
+what bounds the size of this vector.
+
+% before: th-anisotropic-vector
+A short vector may be isotropic. In that case it is completed to a hyperbolic
+pair inside the lattice, and a vector of the pair adjusted by a multiple of the
+other has its norm in a fixed finite set of residues.
+
+% before: th-orthogonal-frame
+Passing to orthogonal complements, the anisotropic vectors of the previous
+lemma build an orthogonal basis with norms in a fixed finite set. The
+complement of such a vector inherits the hypotheses with a controlled change of
+constants.
+
+% before: th-reduction
+To pass from the archimedean places to the whole adelic group, every element is
+moved by a rational element into a fixed finite set of cosets of an open
+subgroup, times an archimedean element. The archimedean part must be bounded
+polynomially in the height, so that the growth of the previous lemma survives.
+
+% before: th-height-comparison
+The tameness of the periods along the tower requires the heights of embedded
+elements to be comparable with the heights in the smaller groups. Both
+directions are proved through the sizes of rational vectors: a lower bound for
+these sizes bounds the height on the quotient, and embedding the vectors
+transports such bounds.
+
+% before: th-weil-estimates
+The functionals to which the irreducibility lemma is applied are periods of
+theta kernels, integrated against rapidly decreasing functions. Checking that
+they are tame needs four properties of the Weil operators on theta functions:
+how they move translations, joint continuity, polynomial growth in the
+heights, and commutation with integrals of translates. Heights must also be
+compared along the embeddings of the decompositions used in the tower.
+
+% before: th-kernel-tame
+Every period in the rest of the chapter is an integral, over a space of
+parameters, of values of Weil operators applied to a theta function. One
+criterion covers all of them: the weight must decay faster than any power of
+the heights of the group elements. The tameness of each period then reduces to
+an estimate of its weight.
+
+% before: th-seesaw-period-nonvanishing
+The ascent of nonvanishing starts at the bottom of the tower. There a period
+of a theta lift restricted to a smaller unitary group is turned into a
+Fourier-Jacobi period of depth zero. The proof combines the seesaw with the
+irreducibility of lattice vacua.
+
+% before: th-periods
+Above the bottom step the periods that occur are Bessel and Fourier-Jacobi
+periods, the two kinds of Gan-Gross-Prasad periods. They integrate a pair of
+forms over a smaller unitary group and a unipotent group, against a character
+or a theta function.
+
+% before: th-core-chain
+The ascent concerns two families of forms on the grid. One is a chain of forms
+on the core spaces, each obtained from the next by a theta lift. The other is
+the sequence of lifts of one form along the bottom row.
+
+% before: th-step
+Above the bottom of the tower each step compares a Bessel period on one space
+with a Fourier-Jacobi period on the next, or the reverse. The comparison runs
+through a Weil datum for the pair of spaces and one for the pair of their
+anisotropic parts. A theta function for the large pair is carried to one for the
+small pair by partial Fourier transforms along the hyperbolic parts followed by
+an average over a unipotent group.
+
+% before: th-step-local
+The comparison of the two periods is an unfolding computation, which needs a
+supply of theta functions closed under the right translations. These are local
+conditions at the finite places: invariance under a compact open subgroup, a
+support condition, and a lattice for which the transformed functions are
+vacua.
+
+% before: th-step-periods
+Unfolding a Bessel period of a theta lift does not produce a Fourier-Jacobi
+period directly. It produces a functional of the transformed theta function in
+which the lift from the smaller unitary group is still unevaluated. The two
+functionals below play this role for the two kinds of steps.
+
+% before: th-step-functionals
+The vanishing arguments apply Lemma~\ref{th-vacuum-irreducibility} to the
+period functionals, which requires them to be tame. On products of theta
+functions the auxiliary functionals reduce to the periods of the next step, by
+the tensor rule. The transformed theta functions also commute with the
+Heisenberg translations of the small pair.
+
+% before: th-mixed-model
+The unfolding expands a theta function along the isotropic part of a
+hyperbolic decomposition. In this mixed model the elements of the parabolic
+subgroup act by explicit formulas: the Levi factor by a change of variables
+with a character, the unipotent elements by Heisenberg translations and a
+central character. The terms of the theta series are the values of the mixed
+model at rational points.
+
+% before: th-mixed-model-literature
+The formulas of the mixed model are familiar from the local theory of the Weil
+representation. Here they hold for any Weil datum, because the proof uses only
+the conditions that define one.
+
+% before: th-mixed-origin
+Moving the point of the mixed model to the origin reduces the formulas to the
+value of the mixed model at $0$. There the operators of the parabolic subgroup
+and of the unitary group of $W$ act through the Weil datum of the smaller pair,
+up to characters. The characters are pinned down at the rational points and at
+the split places.
+
+% before: th-unfolding
+The steps of the tower compare a period of a theta lift with a period of the
+flat maps of the theta functions. The comparison is an unfolding: the
+integral over the flag group picks out, in the expansion of the theta kernel,
+the terms indexed by one orbit of rational points, and that orbit unfolds the
+integral over $U(W)(F)\backslash U(W)(\mathbf A)$. The same computation serves
+the Bessel and the Fourier-Jacobi periods, so it is stated for a general weight
+on the flag group.
+
+% before: th-bessel-unfolding
+The unfolding lemma needs a weight on the flag group with three properties,
+and for the Bessel period this weight is the conjugate of the Bessel
+character. Its central values are trivial because the base point has Gram
+matrix zero, and transvections provide the nontrivial values for the dependent
+terms. The unfolded functional is then the flat map evaluated at zero.
+
+% before: th-fourier-strips
+The vanishing of a Bessel period for all translates of a theta function by
+archimedean elements gives the vanishing of the unfolded integrand against all
+characters of the archimedean coordinates. Fourier uniqueness turns this into
+vanishing on sets defined by those coordinates, and strips of the Jacobi group
+are such sets.
+
+% before: th-vanishing-descends
+Each step rests on an unfolding computation. If the period of the lift
+vanishes for all theta functions of the local data, the unfolded integrals
+vanish on strips, and a continuity argument gives the vanishing of the
+auxiliary functional at the transformed theta functions.
+
+% before: th-step-nonvanishing
+Combining the unfolding with the irreducibility of lattice vacua turns the
+vanishing on the transformed theta functions into vanishing on all lattice
+vacua. The product formulas then identify one of these values with the period
+of the next step. Read contrapositively, this carries nonvanishing from one
+step to the next.
+
+% before: th-grid-conjugation
+The theta grid is set up with the first space of each pair negated, while the
+steps of the tower use the spaces themselves. Complex conjugation passes from
+one convention to the other. It inverts the characters, and it turns the
+column chain and the partial row lifts into theta lifts for the conjugated Weil
+data.
+
+% before: th-lattice-signs
+Translations by elements of a self-dual lattice act on its lattice vacua. The
+places of the base field over two split in the host field, so every lattice
+element is a sum of elements in split halves and of twice a lattice element,
+and on lattice vacua each such translation acts by a sign.
+
+% before: th-coset-vectors
+The row data are built from coset vectors, and the ascent needs to know how
+translations act on them. Coset vectors are lattice vacua for the depth
+lattice, and a translation by an element of its annihilator moves a coset
+vector to a multiple of another one. These two facts let a functional that
+vanishes on coset vectors vanish on all lattice vacua.
+
+% before: th-invariant-form
+At a split place, linear forms invariant under one half of the symplectic space
+are the only information the Weil datum gives. To show that they detect a
+theta function, one must construct such forms that do not vanish on a given
+function, and this lemma does so by a positivity argument.
+
+% before: th-split-separation
+At a split place the Weil datum is known only through its action on
+functionals invariant under one half of the symplectic space. A theta function
+on which all these functionals vanish, after translations by the other half,
+is zero, so this knowledge determines the action on theta functions.
+
+% before: th-nonsplit-vacua
+At a nonsplit place the axioms of a Weil datum do not describe the action of
+the lattice stabilizers directly. A Weil datum built from an unramified
+character has the unramified property, and any Weil datum with characters
+unramified at the place differs from a twist of it by characters that are
+trivial on the relevant determinants.
+
+% before: th-depth-fixed
+The local data of a step require the function lifted along a row to be
+invariant under a compact open subgroup. The theta functions of the row data
+are vacua for the depth lattices of the grid, and such vacua are fixed by the
+congruence subgroups. So each partial row lift is right invariant under them.
+
+% before: th-fock-translates
+A functional that vanishes on the polynomials in the creation operators
+applied to a Fock vacuum vector should vanish on its archimedean translates.
+The proof is the reproducing property of the Fock model, in which the
+translates of the vacuum are Gaussians times entire functions whose Taylor
+coefficients are these polynomials. Tameness is what allows the functional to
+be moved inside the reproducing integral.
+
+% before: th-fock-span
+The steps produce some lattice vacuum for which the next period is nonzero,
+while the row data allow only Fock vectors built on coset vectors. A tame
+functional that vanishes on all of these vanishes on every lattice vacuum. So a
+nonzero value on a lattice vacuum gives a nonzero value on some row datum.
+
+% before: th-tower-decomposition
+To run the steps along the row of the grid, the spaces $V_{i,0}$ must be
+decomposed compatibly with the core spaces. These decompositions are chosen
+once for all positions in the tower. Their conditions at the two ends of the tower
+and the local data of every step are stated together.
+
+% before: th-standard-pieces
+The local data of a step are built from five groups of coordinates: two in the
+hyperbolic part of each space and one in the anisotropic parts. Translations by
+these groups act on the mixed models by characters, so conditions imposed on a
+theta function through them pass to its flat map. The unfolding conditions
+record what the nonvanishing of the flat map forces on an element of the second
+unitary group.
+
+% before: th-standard-class
+Admissible pieces give the conditions of local data that concern single theta
+functions. Each of them reduces to the commutation of translations or to a
+computation in the two mixed models. The nonvanishing of the flat map comes from
+a theta function built in the mixed models, whose flat map is an integral with
+positive real part.
+
+% before: th-standard-local-data
+Once the pieces are admissible and split the lattice, the remaining conditions
+of local data concern the compact group $K$. They follow from the invariance of
+lattice vacua under $K$ and from a statement on the cosets of $R_x$ and $K$.
+
+% before: th-standard-pieces-grid
+For the tower decomposition of Lemma~\ref{th-standard-tower} the pieces are cut
+out by the depth lattice of the row pair and by a second lattice, in which the
+lattice of the second space is scaled by $\mathfrak m\bar{\mathfrak m}^{-1}$. That
+ideal has norm $1$, so the second lattice is self-dual, and the pieces along the
+hyperbolic part of the second space are each other's annihilators.
+
+% before: th-standard-one-coset
+The condition of local data on the support of the flat map is a statement about
+cosets in an adelic unitary group. It is proved place by place. Outside the
+distinguished places it follows from the Iwasawa decomposition and the
+self-duality of the lattices; at the distinguished places, which split in $E$,
+it is a computation in a general linear group.
+
+% before: th-standard-lattices
+The last conditions of a tower decomposition are statements about lattices. The
+anisotropic piece of each step splits along the decomposition of $V'_\rho$ into a
+core space and a line, which reduces its vacua to vacua for the depth lattice of
+a core pair and for $\Gamma_L(\rho)$.
+
+% before: th-standard-tower
+The induction along the tower needs one tower decomposition that fits both
+ends and carries local data at every step. It is built from the bases of the
+complements of the core spaces given by the grid, scaled by powers of
+$-\xi_0$ so that the vectors $\zeta_\rho$ are linked as
+Definition~\ref{th-tower-decomposition} requires.
+
+% before: th-tower-rungs
+The ascent alternates between Fourier-Jacobi and Bessel periods as the position
+in the tower increases by one. Each alternation is one step of
+Proposition~\ref{th-step-nonvanishing}, applied to the column chain and to the
+row lifts, followed by a choice of row datum. The first step uses the seesaw of
+Theorem~\ref{th-seesaw-period-nonvanishing} instead.
+
+% before: th-bessel-ascent
+Combining the steps gives the statement used in the argument. A nonzero period
+at the bottom of the tower produces a nonzero Bessel period at the top, for the
+$m$-fold lift along the bottom row. In the timeline of Alpöge's announcement
+it belongs to the seesaw step, in which the period of the iterated lift is
+related to a Bessel period.
+
+% before: th-bessel-identity
+The division argument of Chapter~\ref{chapter-integral-structure} needs more
+than nonvanishing. It needs the period of the iterated lift to be a fixed
+multiple of a standard Bessel period that does not depend on the tuple of Hecke
+characters, and its values on the division lattices to be rational. These two
+requirements are the following condition on a datum.
+
+% before: th-scope
+The four parts of this chapter are established with different generality.
+Some statements hold for all Hermitian spaces and Weil data over the host
+field, others only for the data supplied in Chapter~\ref{chapter-assembly}.
+One part of the expected picture, the global parameter of the iterated lift,
+is not stated at all.

@@ -1,0 +1,581 @@
+{
+  "id": "tate-shafarevich",
+  "title": "A weakening of Vandiver's conjecture",
+  "state": "drafted",
+  "summary": "The host fields of Chapter 3 must have small Tate-Shafarevich groups of Tate twists: for most windows of scales, $\\sum_\\ell\\log\\ell\\sum_{1\\le k<x^{401}}\\operatorname{len}\\text{Ш}^1_\\ell(E,k)\\le e^{x^{\\varepsilon}/2}$. The chapter splits the sum by eigenspaces of complex conjugation. The minus part is bounded by generalized Bernoulli numbers through an Euler system of Gauss sums. The plus part, which Vandiver's conjecture predicts to vanish, is bounded polynomially in the conductor and the twist by Eisenstein congruences on residually reducible deformation rings for $U(3)$ and $GSp_4$ that are shown to be automorphic. The prime $2$ and finitely many bad primes are handled by the Ferrero-Washington theorem, Iwasawa theory in the $2$-power cyclotomic tower with a pigeonhole over windows, and a bound of Soulé type for $H^2(\\mathcal O_L[1/\\ell],\\mathbf Z_\\ell(k+1))$.",
+  "timeline": [
+    11,
+    17
+  ],
+  "progress": "Fix pass: stable points need irreducibility only on ker eta, with the step to open subgroups proved; Kato's theorem checked to cover the use; Lemmas sha-lifts-points (b), (f), (g) and sha-lifts-presentation (c) follow the Lean; the cohomology bound follows the Lean with Borel-Serre for the stabilizers; integrality outlined with an open step.",
+  "statements": [
+    {
+      "lean": "UpperTheory.Top.VWin",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+      "line": 49,
+      "role": "main",
+      "statement": "For a number field $E$, a prime $\\ell$ and $k\\ge1$, $\\text{Ш}^1_\\ell(E,k)$ denotes the kernel of $H^1(G_{E,S_\\ell},\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))\\to\\prod_{v\\mid\\ell}H^1(G_{E_v},\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))$, where $G_{E,S_\\ell}$ is the Galois group of the maximal extension unramified outside $\\ell$ and the archimedean places; $\\text{Ш}^{\\pm}$ are its eigenspaces for complex conjugation. Let $\\psi$ be a primitive Dirichlet character, let $0<\\varepsilon<1/52$, and let $e:\\mathbf R\\to\\mathbf N$ satisfy $x^{2+8\\varepsilon}\\le2^{e(x)}\\le2x^{2+8\\varepsilon}$ for $x\\ge1$. Then there are $J\\ge1$ and $X_0$ such that for every $X\\ge X_0$ and every pair of primes $(q,d)$ admissible at $X^{1/J}$ there is $Y$ with $X^{1/J}\\le Y$ and $Y^2\\le X$ such that for every $x\\in[Y,Y^2]$ and every host field $E$ of $(\\psi,e(x),q,d)$: all $\\text{Ш}^1_\\ell(E,k)$ with $1\\le k<\\lfloor x^{401}\\rfloor$ have finite length, and $\\sum_{\\ell\\in S}\\log\\ell\\sum_{1\\le k<\\lfloor x^{401}\\rfloor}\\operatorname{len}_{\\mathbf Z_\\ell}\\text{Ш}^1_\\ell(E,k)\\le\\sqrt{\\exp(x^{\\varepsilon})}$ for every finite set $S$ of primes.",
+      "reference": "",
+      "label": "sha-vandiver-weakening"
+    },
+    {
+      "lean": "UpperTheory.One.vwin_of_row",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean",
+      "line": 4,
+      "role": "main",
+      "statement": "Assume the existence of the Galois representations of Chapter 11 attached to regular algebraic polarized cuspidal representations of $GL_a$ over CM fields. Then the bound of the previous statement holds for every primitive Dirichlet character, with exponent $401$.",
+      "reference": "",
+      "label": "sha-weakening-from-galois-representations"
+    },
+    {
+      "lean": "UpperTheory.V.Odd.PsiBound",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/ZeroMemUnrHom.lean",
+      "line": 97,
+      "role": "standard",
+      "reference": "Rubin, appendix to Lang, Cyclotomic Fields I and II (1990); Kolyvagin, Euler systems (1990); Mazur-Wiles, Invent. Math. 76 (1984)",
+      "statement": "Let $E$ be an abelian CM field with Galois action of $(\\mathbf Z/N)^{\\times}$, let $\\ell\\ne2$ be a prime not dividing $[E:\\mathbf Q]$, let $\\mathcal O$ be a finite extension of $\\mathbf Z_\\ell$ that is a discrete valuation ring, let $k\\ge1$, and let $\\psi$ be an $\\mathcal O^{\\times}$-valued character of $\\operatorname{Gal}(E/\\mathbf Q)$ whose Dirichlet character $\\chi_\\psi$ satisfies $\\chi_\\psi(-1)=(-1)^{k+1}$. Then the length of the $\\psi$-part of $\\text{Ш}^1_\\ell(E,k)$ is at most the valuation of $\\alpha_{k+1}(\\chi_\\psi)$, an explicit multiple of the generalized Bernoulli number $B_{k+1,\\chi_\\psi}$.",
+      "label": "sha-bernoulli-bound"
+    },
+    {
+      "lean": "UpperTheory.V.ThmBcFree",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/PrimeSetBoundDataOfPrimitiveChar.lean",
+      "line": 64,
+      "role": "new",
+      "statement": "There is $C$ such that for every abelian field $M$ of degree $o$, all integers $e,t\\ge2$, every admissible prime pair $(q,d)$ for $M$, and every CM field $E$ that is the compositum of $M$, $\\mathbf Q(\\zeta_{2^{e+2}})^{+}$ and $\\mathbf Q(\\sqrt{-q},\\sqrt{-d})$, of degree $n$ and conductor $N$: the minus parts $\\text{Ш}^-_\\ell(E,k)$ for odd $\\ell$ and $1\\le k<t$ have finite length and $\\sum_{\\ell\\ \\mathrm{odd}}\\log\\ell\\sum_{k<t}\\operatorname{len}\\text{Ш}^-_\\ell(E,k)\\le3nt^2\\log(tN)+C\\sum_{\\ell\\mid o,\\ \\ell\\ \\mathrm{odd}}\\ell n^2t^2\\log(t\\ell N)^2$.",
+      "reference": "",
+      "label": "sha-minus-part"
+    },
+    {
+      "lean": "UpperTheory.V.Pr.GdEndAlt",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/AutEnd3AltAlt.lean",
+      "line": 35,
+      "role": "new",
+      "statement": "Assume the Galois representations of Chapter 11. Let $(\\ell,k,\\psi,K)$ be an Eisenstein datum, with $K$ imaginary quadratic and $\\Psi=\\chi_{\\mathrm{cyc}}^k\\psi$. There is $g_1\\in G_K$ with $\\Psi(g_1)^2-1$ a unit such that the ordinary normalized deformations of $\\Psi\\oplus1\\oplus\\Psi^{-1}$ (valued in $\\mathcal G_3$) satisfy: finiteness in characteristic $\\ell$ (characteristic polynomials constant on a finite-index subgroup); every point irreducible on open subgroups of $G_K$ is, after twisting by $\\chi_{\\mathrm{cyc}}^{-1}$, attached to a regular algebraic conjugate self-dual cuspidal representation of $GL_3(\\mathbf A_K)$ and windowed; every endoscopic point $W|_{G_K}\\oplus1$ has $W\\otimes\\chi_{\\mathrm{cyc}}^{-k}$ attached to a newform of weight $2k+1$.",
+      "reference": "",
+      "label": "sha-residually-reducible-automorphy"
+    },
+    {
+      "lean": "UpperTheory.V.ThmHV",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/PrimeSetBoundDataOfPrimitiveChar.lean",
+      "line": 79,
+      "role": "new",
+      "statement": "Assume the Galois representations of Chapter 11. For every window constant $K$, $C_t>0$ and primitive $\\psi$ there are $C$ and primes $r_1,r_2$ such that for every $0<\\varepsilon<1/52$ there is $X_0$: for admitted $(e,t)$, $X\\ge X_0$, prime pairs $(q,d)$ with $q,d>2X^{C_t}+1$, larger than $N_\\psi,o_\\psi,p_K,h^*,p_1,r_1,r_2$ and $\\log(qd)\\le X^{\\varepsilon/(4J_\\psi)}$, every good window $Y$ and $x\\in[Y,Y^2]$, every CM host field $E$ of $(\\psi,e(x),q,d)$ satisfies the plus bound $(t(x),(N_Et(x))^{C}+Ce^{x^{4\\varepsilon/5}})$.",
+      "reference": "",
+      "label": "sha-plus-part"
+    },
+    {
+      "lean": "UpperTheory.V.Base.control",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/GaloisLibrary/SelmerTransport/Control.lean",
+      "line": 82,
+      "role": "new",
+      "reference": "",
+      "statement": "For $\\ell$ odd, a twist $\\psi\\chi_{\\mathrm{cyc}}^n$ with $n\\ne0$ and $U$ open normal with $\\psi|_U=1$, restriction from $U$ to $U\\cap\\ker\\chi_{\\mathrm{cyc}}$ is injective on $H^1$.",
+      "label": "sha-control"
+    },
+    {
+      "lean": "UpperTheory.V.X.propZ",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LevelCohomology/PropZ.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Let $\\ell\\ge5$ be prime and $k\\ge2$ even with $\\ell-1\\mid2k$. Then the Tate-Shafarevich group of $\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k)$ over $\\mathbf Q$ attached to the trivial character, $\\text{Ш}^1(\\mathbf Z[1/\\ell],\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))$, vanishes. The proof treats $\\ell-1\\mid k$ directly and the remaining case through the real quadratic field $\\mathbf Q(\\sqrt\\ell)$, using $h(\\mathbf Q(\\sqrt\\ell))<\\ell$.",
+      "reference": "",
+      "label": "sha-trivial-character"
+    },
+    {
+      "lean": "UpperTheory.V.FW.ferreroWashington",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/GaloisLibrary/FerreroWashingtonIndex/FerreroWashington.lean",
+      "line": 104,
+      "role": "standard",
+      "reference": "Ferrero-Washington, Ann. of Math. 109 (1979)",
+      "statement": "Let $\\ell$ be a prime and $K$ an abelian number field containing a primitive $\\ell$-th root of unity (a primitive fourth root of unity if $\\ell=2$). Then there is $r$ such that for every $n$ the $\\ell$-rank of the class group of $K(\\zeta_{\\ell^{n}})$ is at most $r$; that is, the Iwasawa $\\mu$-invariant of the cyclotomic $\\mathbf Z_\\ell$-extension of $K$ vanishes.",
+      "label": "sha-ferrero-washington"
+    },
+    {
+      "lean": "UpperTheory.V.Win.window",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/Window.lean",
+      "line": 7,
+      "role": "new",
+      "statement": "Let $R\\ge0$, $0<\\eta\\le C_t$, $X>1$, and let $\\mathrm{Exc}$ be a set of at most $R$ positive integers. Then there is $Y$ with $X^{1/J}\\le Y$ and $Y^2\\le X$, where $J=2^{R+2}(C_t/\\eta)^{R}$, such that for every $x\\in[Y,Y^2]$ each $k\\in\\mathrm{Exc}$ with $k\\le x^{C_t}$ satisfies $k\\le x^{\\eta}$. Applied to the at most $R$ exceptional twists of the Iwasawa module of a $2$-power cyclotomic tower, this finds windows of scales on which every exceptional twist is small.",
+      "reference": "",
+      "label": "sha-window-pigeonhole"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.Few",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 117,
+      "role": "new",
+      "reference": "",
+      "statement": "Kummer layers of type $(\\ell,c,\\nu)$, the groups $\\operatorname{Hom}_a(F,q)$ of twisted homomorphisms on class groups, twisted norms, the property of few twisted norms, $\\operatorname{gen}(L)$ and the torsion orders $t(L,N,m)$ of $H_m(GL_N(\\mathcal O_L),\\mathbf Z)$.",
+      "label": "sha-kummer-layers"
+    },
+    {
+      "lean": "UpperTheory.V.LemmaK",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/GeneratorCountTuples/LemmaK.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "There is a constant $C_K$ with the following property. Let $\\ell$ be prime, let $L$ be a totally complex number field containing $\\mu_\\ell$ (and $\\mu_4$ if $\\ell=2$), and let $k\\ge1$. Then $H^2(\\mathcal O_L[1/\\ell],\\mathbf Z_\\ell(k+1))$ is finite and $\\log\\#H^2(\\mathcal O_L[1/\\ell],\\mathbf Z_\\ell(k+1))\\le\\exp\\big((2k[L:\\mathbf Q])^{C_K}\\log(2|d_L|)\\big)$. The proof follows Soulé's method: Kummer theory, cycles in the homology of $GL_N(\\mathcal O_L)$, well-rounded lattices and Borel's rank bound.",
+      "reference": "",
+      "label": "sha-soule-bound"
+    },
+    {
+      "lean": "Formalism.GaloisCohomology.Sha",
+      "file": "Formalism/GaloisCohomology/Statement.lean",
+      "line": 75,
+      "role": "standard",
+      "statement": "For a number field $E$, a prime $\\ell$ and an integer $k$, $\\text{Ш}^1_\\ell(E,k)$ is the kernel of $H^1(G_{E,S_\\ell},\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))\\to\\prod_{v\\mid\\ell}H^1(G_{E_v},\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))$, where $G_{E,S_\\ell}$ is the Galois group of the maximal extension unramified at finite places outside $\\ell$; its length is in $\\mathbf N\\cup\\{\\infty\\}$.",
+      "reference": "Neukirch-Schmidt-Wingberg, Cohomology of Number Fields (2008)",
+      "label": "sha-tate-shafarevich-group"
+    },
+    {
+      "lean": "UpperTheory.V.ShaPlus",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean",
+      "line": 68,
+      "role": "standard",
+      "statement": "For a CM field $E$ and $k\\ge0$, complex conjugation acts on $\\text{Ш}^1_\\ell(E,k)$ by an involution; $\\text{Ш}^+$ and $\\text{Ш}^-$ are its $(-1)^k$- and $(-1)^{k+1}$-eigenspaces.",
+      "reference": "",
+      "label": "sha-plus-minus"
+    },
+    {
+      "lean": "UpperTheory.V.shaLen_eq_add",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean",
+      "line": 88,
+      "role": "new",
+      "statement": "For a CM field $E$ and odd $\\ell$, $\\operatorname{len}\\text{Ш}^1_\\ell(E,k)=\\operatorname{len}\\text{Ш}^+_\\ell(E,k)+\\operatorname{len}\\text{Ш}^-_\\ell(E,k)$.",
+      "reference": "",
+      "label": "sha-plus-minus-length"
+    },
+    {
+      "lean": "UpperTheory.Top.VVle",
+      "file": "Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "A number field $E$ satisfies the Tate-Shafarevich bound $(t,B)$ if all $\\text{Ш}^1_\\ell(E,k)$, $0<k<t$, are finite and $\\sum_{\\ell\\in S}\\log\\ell\\sum_{k<t}\\operatorname{len}\\text{Ш}^1_\\ell(E,k)\\le B$ for all finite $S$; similarly the $\\ell$-bound for one prime, and the plus and minus bounds over odd primes for CM fields.",
+      "reference": "",
+      "label": "sha-bounded-field"
+    },
+    {
+      "lean": "UpperTheory.V.vvle_of_parts",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LengthEqAddEigen.lean",
+      "line": 127,
+      "role": "new",
+      "statement": "A CM field with the $2$-bound $(t,B_2)$, the minus bound $(t,B_-)$ and the plus bound $(t,B_+)$ satisfies the Tate-Shafarevich bound $(t,B_2\\log2+B_-+B_+)$.",
+      "reference": "",
+      "label": "sha-bound-from-parts"
+    },
+    {
+      "lean": "UpperTheory.V.AbF",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/StmtFields.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "Abelian field data $(m,H)$ with $H\\subset(\\mathbf Z/m)^\\times$, their fields and degrees; containing $\\mu_\\ell$; prime pairs $(q,d)$ with $q\\equiv3\\pmod8$, $d\\equiv7\\pmod{16}$, $qd$ prime to $m$; composita of $(M,e,q,d)$ cut out by $a\\equiv\\pm1\\pmod{2^{e+2}}$, $a\\in H$, $(a/q)=(a/d)=1$; the conductor $N_E$.",
+      "reference": "",
+      "label": "sha-abelian-field"
+    },
+    {
+      "lean": "UpperTheory.V.isCompField_ofChar",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/StmtFields.lean",
+      "line": 91,
+      "role": "new",
+      "statement": "Host fields of $(\\psi,e,q,d)$ are the composita of $(M_\\psi,e,q,d)$; for $q\\equiv3\\pmod4$ they are CM with $N_E\\le2^{e+2}N_\\psi qd$ and $[E:\\mathbf Q]\\le N_E$; odd primes dividing the degree of a compositum divide $\\deg M$.",
+      "reference": "",
+      "label": "sha-composita"
+    },
+    {
+      "lean": "UpperTheory.V.Odd.PrimeBound",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/ZeroMemUnrHom.lean",
+      "line": 105,
+      "role": "new",
+      "statement": "For a CM field $E\\subset\\mathbf Q(\\zeta_N)$ and $k\\ge1$: $\\sum_{\\ell}\\log\\ell\\cdot\\operatorname{len}\\text{Ш}^-_\\ell(E,k)\\le[E:\\mathbf Q]\\log(16N^{k+2}(k+1)!)$, the sum over odd $\\ell\\nmid[E:\\mathbf Q]$; from the Bernoulli bound and the integrality of the product of Bernoulli numbers.",
+      "reference": "",
+      "label": "sha-minus-prime-to-degree"
+    },
+    {
+      "lean": "UpperTheory.V.B4.yEl",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/StickelbergerElements/CoefMapSingle.lean",
+      "line": 42,
+      "role": "new",
+      "reference": "",
+      "statement": "The higher Stickelberger element $y_k(a)=(1-a^k\\sigma_a)\\theta_k$, $\\theta_k=-\\sum_b M^{k-1}B_k(\\langle b\\rangle/M)/k\\,\\sigma_b$, and the twisted Stickelberger element $\\tilde y_e(a)=\\sum_b\\langle b\\rangle^e(\\lfloor a\\langle a^{-1}b\\rangle/M\\rfloor-\\frac{a-1}2)\\sigma_b$ of level $M$.",
+      "label": "sha-stickelberger-elements"
+    },
+    {
+      "lean": "UpperTheory.V.Odd.zKill",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/ZKill.lean",
+      "line": 9,
+      "role": "new",
+      "reference": "",
+      "statement": "For $E\\subset\\mathbf Q(\\zeta_N)$ with $\\ell\\mid N$ ($\\ell$ odd or $\\chi_{\\mathrm{cyc}}\\equiv1\\bmod4$ on $G_E$), $k\\ge1$ and $a$ odd prime to $N$: $y_{k+1}(a)$ is $\\ell$-integral and its image $z$ satisfies $z\\cdot\\varphi(N)x=0$ for $x\\in\\text{Ш}^1_\\ell(E,k)$; by Stickelberger's theorem and a Kummer congruence.",
+      "label": "sha-stickelberger-annihilator"
+    },
+    {
+      "lean": "UpperTheory.V.B5.higherStickelberger_det_exists_int_bounded",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/StickelbergerCharacterEval/Detint.lean",
+      "line": 9,
+      "role": "new",
+      "reference": "",
+      "statement": "The determinant $\\det_{c,\\varepsilon}(w)$ of multiplication by $w$ on $A[\\Gamma]/(c-\\varepsilon)$ lies in the ideal $(c-\\varepsilon,w)$ and is the product of $\\chi(w)$ over the characters with $\\chi(c)=\\varepsilon$; for $y_{k+1}(a)$ and $\\varepsilon=(-1)^{k+1}$, $d^{|\\Gamma|/2}\\det$ is a nonzero integer of size at most $(ds)^{|\\Gamma|/2}$.",
+      "label": "sha-stickelberger-determinant"
+    },
+    {
+      "lean": "UpperTheory.V.Odd.gen",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/Imports.lean",
+      "line": 11,
+      "role": "new",
+      "reference": "",
+      "statement": "For $E\\subset\\mathbf Q(\\zeta_N)$, the $\\ell$-torsion of $H^1(G_{E,S_\\ell},\\mathbf Q_\\ell/\\mathbf Z_\\ell(-k))$ has length at most $8\\ell[E:\\mathbf Q]\\log(\\ell N)$, by Kummer theory over $E(\\mu_\\ell)$ and a class number bound.",
+      "label": "sha-torsion-length"
+    },
+    {
+      "lean": "UpperTheory.V.Odd.StickBound",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/OddResidueBounds/ZeroMemUnrHom.lean",
+      "line": 91,
+      "role": "new",
+      "statement": "For a CM field $E\\subset\\mathbf Q(\\zeta_N)$, a prime $\\ell$ (odd, or with $\\mu_4\\subset E$) and $k\\ge1$: $\\operatorname{len}\\text{Ш}^-_\\ell(E,k)\\log\\ell\\le240\\,\\ell[E:\\mathbf Q]^2(k+1)\\log(k\\ell N)^2$, from the determinant of the Stickelberger annihilator on the minus part and the bound on $\\ell$-torsion.",
+      "reference": "",
+      "label": "sha-minus-exponent"
+    },
+    {
+      "lean": "UpperTheory.V.Win.ABound",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/SecondBound.lean",
+      "line": 19,
+      "role": "new",
+      "statement": "Layers of the $\\ell$-cyclotomic tower; a tower bound with $R$ generators for $L_0$ (outside $R'\\le R$ exceptional $\\ell$-adic numbers $s_i$, $\\operatorname{len}\\text{Ш}^1_\\ell(L_1,k)\\le R'(\\max(m,j_0)+c+B)$; for all $k$, $\\operatorname{len}\\text{Ш}^1_\\ell(L_1,k)\\le\\operatorname{len}H^2(G_{L_2,S},\\mathbf Z_\\ell(k+1))+R(m-j_0)$); $2$-bases for $(M,q,d)$.",
+      "reference": "",
+      "label": "sha-tower-data"
+    },
+    {
+      "lean": "UpperTheory.V.Tower.XP",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/NumberFieldTowers/XTwApplyApply.lean",
+      "line": 116,
+      "role": "standard",
+      "reference": "Washington, Introduction to Cyclotomic Fields (1997), Chapter 13",
+      "statement": "The Iwasawa module $X'_\\infty(L)$: the Pontryagin dual of the homomorphisms $\\operatorname{Gal}(\\bar L/L(\\mu_{\\ell^\\infty}))\\to\\mathbf Q_\\ell/\\mathbf Z_\\ell$ unramified everywhere and trivial at the places above $\\ell$, with its action of $\\operatorname{Gal}(\\bar L/L)$.",
+      "label": "sha-iwasawa-module"
+    },
+    {
+      "lean": "UpperTheory.V.PropA.descends",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/Descends.lean",
+      "line": 8,
+      "role": "new",
+      "reference": "",
+      "statement": "For a layer $L_1$ of degree $\\ell^m$ and $k\\ge1$, $\\operatorname{len}\\text{Ш}^1_\\ell(L_1,k)$ is the length of the cokernel of $(u^k\\gamma)^{\\ell^m}-1$ on $X'_\\infty(L)$.",
+      "label": "sha-iwasawa-descent"
+    },
+    {
+      "lean": "UpperTheory.V.PropA.growth",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/Growth.lean",
+      "line": 11,
+      "role": "new",
+      "reference": "",
+      "statement": "For a $\\mathbf Z_\\ell$-module with $R$ generators and $g$ unipotent modulo $\\ell$, $\\operatorname{len}\\operatorname{coker}(g^{\\ell^m}-1)\\le\\operatorname{len}\\operatorname{coker}(g^{\\ell^{j_0}}-1)+R\\max(m-j_0,0)$.",
+      "label": "sha-cokernel-growth"
+    },
+    {
+      "lean": "UpperTheory.V.PropA.exists_centres_level",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/ExistsCentresLevel.lean",
+      "line": 23,
+      "role": "new",
+      "reference": "",
+      "statement": "There are $s_1,\\dots,s_R\\in\\mathbf Z_\\ell$ with $\\operatorname{len}\\operatorname{coker}((u^k\\gamma)^{\\ell^j}-1)\\le\\sum_i(j+c+v_\\ell(s_i-k))$ for all $k$.",
+      "label": "sha-exceptional-centres"
+    },
+    {
+      "lean": "UpperTheory.V.PropA.aBound_of_isTower",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/AdditiveValuationNorms/ABoundOfIsTower.lean",
+      "line": 7,
+      "role": "new",
+      "reference": "",
+      "statement": "A totally complex field containing $\\mu_\\ell$ (and $\\mu_4$ if $\\ell=2$) whose module $X'_\\infty$ has $R$ generators has a tower bound with $R$ generators.",
+      "label": "sha-tower-from-module"
+    },
+    {
+      "lean": "UpperTheory.V.Win.FixedIn",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/SecondBound.lean",
+      "line": 32,
+      "role": "new",
+      "statement": "Fields of abelian data containing $\\mu_\\ell$, $\\ell$ odd, have tower bounds with a number of generators depending only on the datum; for every $M$ there is $R$ such that every prime pair $(q,d)$ has a $2$-base, a field of $M\\vee\\mathbf Q(i)\\vee\\mathbf Q(\\sqrt{-q})\\vee\\mathbf Q(\\sqrt{-d})$, with a tower bound with $R=4(g+6\\deg M)$ generators. From Ferrero-Washington and Lemma sha-tower-from-module.",
+      "reference": "",
+      "label": "sha-tower-bounds"
+    },
+    {
+      "lean": "UpperTheory.V.IsBWindow",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/PrimeSetBoundDataOfPrimitiveChar.lean",
+      "line": 40,
+      "role": "new",
+      "statement": "Window constants $(R_0,R_\\ell,C_K)$ and $J=2^{R+2}(2C_KC_t/\\varepsilon)^R$; admitted exponent functions $(e,t)$; controlled windows $Y$, on which the composita satisfy the $2$-bound and fixed layers at the bad primes the $\\ell$-bound $(t(x),\\exp(x^{4\\varepsilon/5}))$.",
+      "reference": "",
+      "label": "sha-window-constants"
+    },
+    {
+      "lean": "UpperTheory.V.ThmBab",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/PrimeSetBoundDataOfPrimitiveChar.lean",
+      "line": 49,
+      "role": "new",
+      "statement": "There is a window constant $K$ such that for $C_t\\ge1$, all abelian data and bad primes, $0<\\varepsilon<1/52$: for large $X$ and prime pairs with $\\log(qd)\\le X^{\\varepsilon/(4J)}$ there is a good window $Y\\in[X^{1/J},X^{1/2}]$. Proof by tower bounds, the bound of Soulé type and the window pigeonhole.",
+      "reference": "",
+      "label": "sha-prime-two"
+    },
+    {
+      "lean": "UpperTheory.V.Chr.VS",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/CharacterLevelBounds/ShaFamMono.lean",
+      "line": 30,
+      "role": "new",
+      "statement": "For a character $\\theta$ of $G_{\\mathbf Q}$ with values in $\\mathcal O$, $V_{\\ell,n}(k,\\theta)$ is the length of the classes in $H^1(G_{\\mathbf Q},\\mathcal O\\otimes\\mathbf Q_\\ell/\\mathbf Z_\\ell(\\theta^{-1}\\chi_{\\mathrm{cyc}}^{-k}))$ unramified everywhere and locally trivial at primes dividing $n$; $V'_\\ell(k,\\psi)=V_{\\ell,\\ell N}(k,\\psi)$ for Dirichlet characters modulo $N$.",
+      "reference": "",
+      "label": "sha-character-parts"
+    },
+    {
+      "lean": "UpperTheory.V.HV.redPrime",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/RedPrime.lean",
+      "line": 11,
+      "role": "new",
+      "statement": "For a CM field $E$ cut out by $H\\subset(\\mathbf Z/N)^\\times$ and odd $\\ell$: $e_{\\mathcal O}\\operatorname{len}\\text{Ш}^+_\\ell(E,k)\\le\\sum_{\\psi}V'_\\ell(k,\\psi)$ over characters trivial on $H$ with $\\psi(-1)=(-1)^k$ when $\\ell\\nmid[E:\\mathbf Q]$, and in general up to a loss $\\lambda=(n+n^2)\\nu+\\omega(N)(n+1)v_\\ell(n)\\le(Nk)^6$ per character, $n=[E:\\mathbf Q]$.",
+      "reference": "",
+      "label": "sha-plus-by-characters"
+    },
+    {
+      "lean": "UpperTheory.V.U3.Dat",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/UnitaryThreeGroups/RhoKApply.lean",
+      "line": 16,
+      "role": "new",
+      "statement": "Eisenstein data $(\\ell,k,\\psi,K)$ with $K$ imaginary quadratic; deformation data $\\eta,c,\\Psi=\\chi_{\\mathrm{cyc}}^k\\psi$; ordinary normalized points $r:G_{\\mathbf Q}\\to\\mathcal G_3(A)$ reducing to $\\operatorname{diag}(\\Psi,1,\\Psi^{-1})$ with multiplier $\\eta$.",
+      "reference": "",
+      "label": "sha-ordinary-deformation"
+    },
+    {
+      "lean": "UpperTheory.V.HV.Host",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/DirichletPrimeToLPartMulLPowerPart.lean",
+      "line": 148,
+      "role": "new",
+      "statement": "Bad primes $B_\\psi$ (from $o_\\psi$, $N_\\psi$, $p_K(\\psi)$, $h^*(\\psi)$, $p_1(\\psi)$ and $3$); host data $(\\psi,e,q,d)$ with modulus $N_h$ and subgroup $H_h$; largeness for $t$; the even characters $X_h(k)$; cases I, Z, II, III, IV, V.",
+      "reference": "",
+      "label": "sha-host-datum"
+    },
+    {
+      "lean": "UpperTheory.V.HV.cases",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Cases.lean",
+      "line": 8,
+      "role": "new",
+      "statement": "For a host datum large for $t$: $N_E=N_h$, and every $(\\ell,k,\\psi')$ with $0<k<t$ is in case I, Z, II or III when $\\ell\\notin B_\\psi$ (with $\\ell\\nmid\\operatorname{ord}\\psi'$), and in case II, IV or V when $\\ell\\in B_\\psi$.",
+      "reference": "",
+      "label": "sha-cases"
+    },
+    {
+      "lean": "UpperTheory.V.HV.CountI",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/HeightAndVanishing/Counts.lean",
+      "line": 53,
+      "role": "new",
+      "statement": "Bounds for $\\bar V_\\ell(k,\\psi')$ in each case: case I summed over $\\ell$ by $(N_ht)^C$; cases II, III, V by $(\\ell N_hk)^C$; case Z by $0$; case IV summed over $k$ by $B+(N_ht)^C$ given the layer bound. Cases I, II, III and V (small $2$-conductor) assume the Galois representations.",
+      "reference": "",
+      "label": "sha-counts"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.Ch",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/HasVal.lean",
+      "line": 15,
+      "role": "new",
+      "statement": "Inhomogeneous chains $C_m(G;A)$ with boundary, functoriality, the prism operator $h_k$, the cycle $z_{q,e}$ of $\\mathbf Z/q$ and the maps $\\Delta_t$.",
+      "reference": "",
+      "label": "sha-bar-chains"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SChain",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 17,
+      "role": "new",
+      "statement": "Chain identities: $d^2=0$ and functoriality, the prism homotopy $dh_k+h_kd=(c_k)_*-1$, additivity of prisms on cycles up to boundaries, and $z_{q,e}$ is a cycle.",
+      "reference": "",
+      "label": "sha-bar-identities"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SRel",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 40,
+      "role": "new",
+      "statement": "Among the cycles $(\\Delta_t)_*z_{q,e}$, $0\\le t\\le2e+3$, in $C_{2e+2}(\\mathbf Z/q\\times\\mathbf Z/q;\\mathbf Z/q)$ there is a relation modulo boundaries with a unit coefficient.",
+      "reference": "",
+      "label": "sha-bar-relation"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SEta",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 71,
+      "role": "new",
+      "statement": "A function $\\eta$ on $(\\mathbf Z/\\ell^\\nu)^2$ whose pushforwards along $x+ty$ vanish for $t\\ne t_0$ and equal the coefficients of $\\prod_{j<M}(X-(1+\\ell^c)^j)$ at the powers of $1+\\ell^c$ for $t=t_0$.",
+      "reference": "",
+      "label": "sha-eta"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.IsAdd",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/HasVal.lean",
+      "line": 93,
+      "role": "new",
+      "statement": "Additive families of linear forms on chains of $GL(V)$ over a finite field, their value $v$ on prisms of scalars, and primitive families over a ring.",
+      "reference": "",
+      "label": "sha-additive-family"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.STrans",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 44,
+      "role": "new",
+      "statement": "A linear form on chains of $k^\\times$ killing boundaries extends to an additive family, by the transfer through the action on lines, when $|k|=1$ in the coefficients.",
+      "reference": "",
+      "label": "sha-transfer"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SCoc",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 49,
+      "role": "new",
+      "statement": "A cup product of a carry two-cocycle with a homomorphism $v$ takes the value $x^{e+1}v(g)$ on $h_g(\\chi_x)_*z_{q,e}$.",
+      "reference": "",
+      "label": "sha-cocycle"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.STheta",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 55,
+      "role": "new",
+      "statement": "For a primitive $q$-th root of unity in a finite field and a homomorphism $v$, there is an additive family with value $v$.",
+      "reference": "",
+      "label": "sha-theta"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SPhi",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 67,
+      "role": "new",
+      "statement": "An additive family composed with reduction $R\\to k$ is a primitive family over $R$.",
+      "reference": "",
+      "label": "sha-primitive"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SStein",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 78,
+      "role": "new",
+      "statement": "Steinitz: lattices $\\bigoplus\\mathfrak a_j$ and $\\bigoplus\\mathfrak b_j$ are related by an $F$-linear map of determinant $\\beta$ when $\\operatorname{div}\\beta=\\sum(\\mathfrak b_j-\\mathfrak a_j)$.",
+      "reference": "",
+      "label": "sha-steinitz"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SDetect",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 109,
+      "role": "new",
+      "statement": "An element that is an $\\ell^\\nu$-th power modulo almost all primes of degree one is an $\\ell^\\nu$-th power, when $\\mu_{\\ell^\\nu}\\subset F$ (Chebotarev).",
+      "reference": "",
+      "label": "sha-detect"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SClass",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 84,
+      "role": "new",
+      "statement": "For $\\alpha$ with divisor $(\\gamma-a)\\mathfrak d$ in a Kummer layer there is a cycle $y$ of $GL_N(\\mathcal O_L)$ whose value under every additive family with value $v$ at a good prime is $p_e\\,v(\\text{residue of }N_a\\alpha)$.",
+      "reference": "",
+      "label": "sha-class-cycle"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.BOdd",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 11,
+      "role": "standard",
+      "statement": "Borel: for $L$ totally complex and $k$ even with $k+1<r_2(L)$, the classes $z_k(x)$ in $H_{k+1}(GL_{l^kn}(\\mathcal O_L);\\mathbf Z)$ span a subgroup of rank at most $r_2(L)$.",
+      "reference": "Borel, Ann. Sci. ENS 7 (1974)",
+      "label": "sha-borel-rank"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SUpper",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 100,
+      "role": "new",
+      "statement": "A primitive family of degree $k+1$ over $\\mathcal O_L$ takes at most $(\\ell^\\nu)^{r_2(L)}t(L,2k+6,k+1)t(L,2k+6,k)$ values $\\ell^k\\Phi_n(y)$ on cycles.",
+      "reference": "",
+      "label": "sha-few-values"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SFew",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 131,
+      "role": "new",
+      "statement": "Step 4 of the bound of Soulé type: few twisted norms.",
+      "reference": "",
+      "label": "sha-few-norms"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SCount",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 123,
+      "role": "new",
+      "statement": "Step 3: counting class-group homomorphisms through twisted norms.",
+      "reference": "",
+      "label": "sha-count-homs"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SSha",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 143,
+      "role": "new",
+      "statement": "Step 2: Kummer theory bounds $\\ell^{\\operatorname{len}\\text{Ш}^1_\\ell(L,k)}$ by the number of equivariant class-group homomorphisms of Kummer layers.",
+      "reference": "",
+      "label": "sha-kummer-descent"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.SLayer",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 149,
+      "role": "new",
+      "statement": "Step 1: a cyclotomic layer $L'$ with enough roots of unity and complex places, bounded degree and discriminant, and larger Tate-Shafarevich group.",
+      "reference": "",
+      "label": "sha-enlarging"
+    },
+    {
+      "lean": "UpperTheory.V.ConeExtensionAcyclic.nerve_convex",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ConvexNerveComplexes/NerveConvex.lean",
+      "line": 7,
+      "role": "new",
+      "statement": "Nerve lemma: for a nonempty convex set covered by closed convex sets, finitely many of which meet the convex hull of any finite subset, the augmented complex of ordered tuples with a common point is exact.",
+      "reference": "",
+      "label": "sha-convex-nerve"
+    },
+    {
+      "lean": "UpperTheory.V.ConeExtensionAcyclic.acyc_simp",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ConvexNerveComplexes/AcycSimp.lean",
+      "line": 9,
+      "role": "new",
+      "statement": "For a locally finite polyhedron $P=\\{q_y\\ge1\\}$ inside a closed cone $T$, the normal cones at the vertices of $P$ cover the forms positive on $T\\smallsetminus\\{0\\}$ as the nerve lemma requires.",
+      "reference": "",
+      "label": "sha-polyhedron-nerve"
+    },
+    {
+      "lean": "UpperTheory.V.KT.good",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/HermiteNormalForms/Imports.lean",
+      "line": 10,
+      "role": "new",
+      "statement": "The polyhedron of tuples of Hermitian forms with $q_y(h)\\ge1$ on $\\mathcal O_L^N\\smallsetminus0$: its nerve complex is exact, stabilizers have order at most $3^{DN}$, and $X_p$ has at most $(2|d_L|D)^{12(p+1)D^3N}$ orbits.",
+      "reference": "",
+      "label": "sha-hermitian-polyhedron"
+    },
+    {
+      "lean": "UpperTheory.V.KH.main",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/TorsionBoundsChains/LogLeExp.lean",
+      "line": 49,
+      "role": "new",
+      "statement": "An exact complex of permutation modules up to degree $m$, with at most $A$ orbits, stabilizers of order at most $s$ and boundaries of $\\ell^1$-norm at most $b$, bounds the torsion of $H_m(G;M)$ by $b^As^{mAs^m}$.",
+      "reference": "",
+      "label": "sha-torsion-from-action"
+    },
+    {
+      "lean": "UpperTheory.V.ZK.STors",
+      "file": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ClassCounting/LemmaKOfSteps.lean",
+      "line": 157,
+      "role": "new",
+      "statement": "Step 5: $\\log t(L,4E+6,m)\\le\\exp((2En)^{24}\\log(2|d_L|))$ for $m\\le2E+1$.",
+      "reference": "",
+      "label": "sha-gl-torsion"
+    }
+  ],
+  "updated": "2026-11-21T00:11:50Z"
+}

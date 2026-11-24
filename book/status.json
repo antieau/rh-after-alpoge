@@ -1,0 +1,52 @@
+{
+  "phase": "Working draft: 170 open steps; review pending",
+  "summary": "All 13 chapters are drafted. The current manuscript has 170 visibly marked open steps: 49 in the assembly, 45 in Chapter 8, 39 in Chapter 9, 25 in Chapter 10, 11 in Chapter 7 and 1 in Chapter 11; Chapters 1–6 and 12 have none. Several remaining steps cover substantial Lean developments. Completion and independent mathematical review remain.\n\nThe chapter revisions left by the interrupted Claude session have been recovered for this checkpoint. Statement checks have corrected an overclaim in Chapter 10 and marked Chapter 11's ingredient bounds open where published references did not establish the Lean's statement. These corrections concern the book's exposition; the book is still a working draft.\n\nThe recorded cluster build reached dependency extraction at 04:36 UTC on 21 November. Its watcher stopped at 04:56 when AWS authentication expired. The dependency graph has not yet been collected, and the cluster's final extraction status needs checking after sign-in. The build panel below records the current book build.",
+  "updated": "2026-11-21T15:12:38Z",
+  "next": [
+    "Sign in to resolution-h200-2, check the existing job and collect its dependency graph.",
+    "Reconcile the interrupted chapter tasks and the outstanding fidelity checks in the integration notes.",
+    "Close or narrow the remaining open steps to the agreed depth floor, then arrange independent chapter reviews."
+  ],
+  "log": [
+    {
+      "time": "2026-11-21T15:12:38Z",
+      "text": "Recovered the interrupted chapter revisions for a branch checkpoint; current manuscript has 170 open steps, with independent review and cluster data collection pending."
+    },
+    {
+      "time": "2026-11-21T00:12:18Z",
+      "text": "All 43 open steps worked; fix passes on Chapters 6-11 and 13; 48 narrower open steps remain."
+    },
+    {
+      "time": "2026-11-20T22:16:05Z",
+      "text": "Final round done on all chapters: 566 statements, 309 proofs, 43 open steps marked."
+    },
+    {
+      "time": "2026-11-20T21:49:30Z",
+      "text": "Depth floor set; final round started on seven chapters; book is now the landing page."
+    },
+    {
+      "time": "2026-11-20T20:10:29Z",
+      "text": "Completion rounds finished; 43 steps OPEN; waiting on the depth decision."
+    },
+    {
+      "time": "2026-11-20T19:16:15Z",
+      "text": "First completion round done on Chapters 1-5, 10, 12, 13; second rounds on 6, 7, 8."
+    },
+    {
+      "time": "2026-11-20T18:47:43Z",
+      "text": "Gerby book live under /book/; completion pass started with nine agents."
+    },
+    {
+      "time": "2026-11-20T17:49:06Z",
+      "text": "First drafts of all 13 chapters committed; cross-references checked."
+    },
+    {
+      "time": "2026-11-20T16:56:31Z",
+      "text": "Chapter plan settled (13 chapters, 121 statements); drafting started."
+    },
+    {
+      "time": "2026-11-20T16:17:36Z",
+      "text": "Archive unpacked and indexed; mapping and Lean build started."
+    }
+  ]
+}

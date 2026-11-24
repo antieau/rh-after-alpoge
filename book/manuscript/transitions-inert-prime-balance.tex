@@ -1,0 +1,203 @@
+% before: ib-host-group
+The window bound is proved inside a host field whose Galois group is
+$\{\pm1\}^2\times A$ for a finite abelian group $A$. The balance identity uses
+only the group structure, the index-two subgroup fixing $\sqrt{-d}$, complex
+conjugation and the inertia at $d$, so we state it for an abstract group of
+this shape.
+
+% before: ib-host-group-fields
+The abstract elements of the host group have arithmetic meaning in a host field.
+The dictionary explains why primes whose Frobenius lies outside the split
+subgroup are called inert.
+
+% before: ib-arithmetic-data
+The identity needs, for each prime, a Frobenius class and an inertia subgroup,
+and only a few facts about them: the primes in a finite set $S$ split, the
+primes outside $S\cup\{d\}$ are unramified, and $d$ is tamely ramified with
+inertia of order two. These are the facts that orthogonality of characters
+turns into the shape of the inert-prime sum.
+
+% before: ib-host-chebyshev
+Each character of the host group has a corrected Chebyshev sum, built from its values at
+prime powers and corrected by a number $\ell(\psi)$. For a host field and the
+right choice of $\ell$ these are the corrected Chebyshev sums of
+Chapter~\ref{chapter-windowed-landau}, but the identity holds for every
+$\ell$.
+
+% before: ib-inert-sums
+The identity compares three quantities attached to a scale $a$, a class $t$
+and a weight function $w$ on the split subgroup. The inert-prime sum is the
+quantity that divisibility of periods bounds from below, and the main term is
+the one that covolumes bound from above.
+
+% before: ib-prime-power-orthogonality
+The values of characters at prime powers are averages over cosets of the
+inertia subgroup. Orthogonality therefore picks out the coset of the Frobenius
+class, with a factor $2$ from the index of the split subgroup.
+
+% before: ib-inert-expansion
+The first half of the identity writes the inert-prime sum as a sum over all
+characters. Each prime contributes according to its type: split primes
+contribute nothing because their Frobenius classes and inertia lie in the split
+subgroup, $d$ contributes once per power, and an unramified prime contributes
+only when it is inert.
+
+% before: ib-truncation
+The second half rescales each character sum to the corrected Chebyshev sum at the scale
+$a/W$. The rescaling produces an explicit remainder, which for the trivial
+character carries the archimedean terms $a\log a-(1+\gamma)a$.
+
+% before: ib-balance-identity
+Combining the two halves, the remainders add up to the main term, because
+summing a character over the complement of the split subgroup isolates the
+trivial character and $\chi_C$. The identity is exact, with no error term.
+
+% before: ib-comparison-data
+The inequality that bounds the inert-prime sum is stated for numbers, not for
+lattices: slopes, heights, sizes and losses attached to base points $u_0$ and
+words $u$. Chapters~\ref{chapter-hermitian-slopes} to~\ref{chapter-covolumes}
+construct the lattices and prove the hypotheses for their invariants.
+
+% before: ib-comparison-quantities
+The inequality and its hypotheses are expressed through a few derived
+quantities. Two of them carry the argument: the weighted mean slope $s(u_0)$
+of the words, and the main term $\mathrm{Main}(u_0)$, which in the application
+is the sum of the main terms of the balance identity over the top classes and
+the lifts.
+
+% before: ib-comparison-hypotheses
+There are eleven hypotheses. The division inequality (H2) and the frame slope
+inequality (H9) are the two measurements of the glued lattice; (H7) and (H8)
+bring in the gain from divisibility; the others bound the losses, heights and
+sizes that enter the error.
+
+% before: ib-slope-of-n-lower
+The first step bounds the mean slope of the words from below. Divisibility
+raises each slope by the gain, and the division inequality converts the height
+of each word into a lower bound in terms of the slope of the glued lattice.
+
+% before: ib-spread
+The frame slope inequality loses a term that depends on how far the largest
+slope exceeds the mean slope. The hypotheses on the words bound this spread by
+the variation of their exponents, heights and sizes.
+
+% before: ib-comparison-inequality
+Putting the two bounds for the slope of the glued lattice together, the slope
+cancels and the gain is bounded by the main term. Since the gain bounds the
+inert-prime sum up to a loss, the inert-prime sum is bounded by the main term
+plus an explicit error.
+
+% before: ib-two-measurements
+The comparison inequality is the descendant of Stepanov's method in this
+argument. The remark identifies which hypotheses measure the glued lattice from
+below and which from above.
+
+% before: ib-size-windows
+To turn the balance identity into a bound for a weighted Chebyshev sum, the
+weights $w$ must be close to a fixed size $b$ at the thick places and small
+elsewhere, and all corrected Chebyshev sums must be small at very large
+scales.
+These size conditions make the error terms of the next lemmas smaller than the
+main quantities.
+
+% before: ib-kept-characters
+Only the characters trivial on a subgroup $A_0$ survive averaging over $A_0$.
+Among them, the kept characters are those whose corrected Chebyshev sums enter the
+weighted sum $G_K$, and the conditions say that the top classes $T$ are
+equidistributed for them and that their values $\ell(\psi)$ are bounded.
+
+% before: ib-weight-lipschitz
+Replacing a weight $w$ near $b$ by $b$ itself changes $w\,g_\psi(A/w)$ by an
+amount proportional to $|w-b|$. The constant comes from Chebyshev's bound for
+$\sum_{n\leq Y}\Lambda(n)$.
+
+% before: ib-chebyshev-lipschitz
+The scales $a(t)/b$ differ from $x$ by at most $1$. Moving the scale from
+$a(t)/b$ to $x$ changes each corrected Chebyshev sum by a logarithmic amount, by Mertens'
+estimate.
+
+% before: ib-thick-replacement
+After the weights are replaced, the character side of the balance identity
+becomes a sum over the thick places at the single scale $A/b$. The other
+elements of $\Psi_H$ contribute little because their scales $A/w$ are large, where the
+corrected Chebyshev sums are small.
+
+% before: ib-kept-character-sum
+Summed over the top classes, each character trivial on $A_0$ contributes
+either its weighted corrected Chebyshev sum at $x$, if it is kept, or at least minus its
+absolute value. The error per character is the cost of moving the scale and of
+the imperfect equidistribution of $T$.
+
+% before: ib-size-arithmetic
+The averaged inequality has the form "density times weighted sum $\leq$ error".
+The size conditions make the error a factor $x^{1/2+O(\varepsilon)}$ times the
+density, which is the arithmetic of this lemma.
+
+% before: ib-core-window-bound
+The four previous lemmas combine into a bound for the weighted sum
+$g^{\mathcal K}_c$ of the corrected Chebyshev sums of the kept characters. Its
+hypothesis is that the comparison inequality holds at
+every class of $A_0$, in the form of a bound for the gap between the inert-prime
+sums and their main terms.
+
+% before: ib-window-bound-shape
+The proof hides the shape of the argument in its error terms. The remark states
+the approximate identity that the proof makes rigorous.
+
+% before: ib-host-arithmetic-data
+In a host field the Frobenius and inertia data come from the Artin map on
+$(\mathbf Z/Q_Sqd\mathbf Z)^\times$. The primes dividing $Q_Sq$ split in
+$\mathbf Q(\sqrt{-d})$, and $d$ is ramified with inertia generated by $\sigma$,
+which are the conditions of the abstract arithmetic data.
+
+% before: ib-host-character-values
+The corrected Chebyshev sums of the host group must be identified with those of
+Dirichlet characters. Each character of the Galois group determines a primitive
+Dirichlet character through the Artin map, and the compatibility of $\ell$ makes
+the two sums agree.
+
+% before: ib-level-sum-host-characters
+The weighted sum of the kept host characters must be the weighted Chebyshev sum
+$G_K$ of Chapter~\ref{chapter-windowed-landau}, with the same weights. The host
+conditions match the kept characters with $K$, and the weights agree because a
+kept character trivial on $A$ is the trivial character or the one attached to
+the exceptional character.
+
+% before: ib-host-kept-characters
+The remaining conditions on the kept characters, and the bound on the others,
+are what the host conditions of Chapter~\ref{chapter-host-fields} were chosen
+to give. The characters that are not kept have square-root cancellation at
+the scale $x$.
+
+% before: ib-error-windows
+The error of the comparison inequality is a long expression. Under size
+conditions on the parameters, which the construction satisfies at every large
+scale, it is bounded by a simple expression.
+
+% before: ib-error-size
+With these conditions the error is at most a power $x^{O(\varepsilon)}$ times a
+quantity linear in the parameters. This puts it in the form of the error
+bracket of the size windows.
+
+% before: ib-gap-bound
+When the numbers of the comparison data are those of the balance identity, the
+quantity $\mathrm{ASK}-\mathrm{Main}$ of the comparison inequality is the gap of
+Definition~\ref{ib-kept-characters}. The comparison inequality and the bound on
+its error then give the gap bound required by
+Theorem~\ref{ib-core-window-bound}.
+
+% before: ib-core-data
+All the data needed at one host field and one scale fit into a single
+definition. A family of definite-side data that is tied at a scale carries such
+core data there, and Chapter~\ref{chapter-assembly} shows that suitably designed
+families are tied at all large scales.
+
+% before: ib-host-window-bound
+At one host field and one scale, the host conditions and the core data now give
+the window bound. The exponent $e_D+e_L+7$ collects the exponents of the
+division and loss bounds and the losses of the averaging.
+
+% before: ib-window-bound-on-scales
+The window bound along the scales of a family is condition (1) of
+Theorem~\ref{wl-level-from-windows}. It follows from the bound at one host field,
+because a family tied at a scale carries core data there.

@@ -1,0 +1,432 @@
+diff --git a/gerby/presentation.py b/gerby/presentation.py
+index 5b6ee8f23f2413f9d6706ae1dcdab6c271d0cd09..6e822223a6f9d6416a6c2589dfd1d64164645801 100644
+--- a/gerby/presentation.py
++++ b/gerby/presentation.py
+@@ -92,7 +92,11 @@ def present_tag(tag, mathematical_html):
+ 
+ def reading_neighbours(tag, original):
+     from gerby.database import Tag
+-    if tag.type in HEADINGS:
++    if tag.type in ("section", "subsection"):
++        # Sections and subsections are read in the book's order: a subsection continues to the
++        # next subsection, and the last one of a section to the next section.
++        candidates = sorted(Tag.select().where(Tag.active == True, Tag.type << ["section", "subsection"]))
++    elif tag.type in HEADINGS:
+         candidates = sorted(Tag.select().where(Tag.active == True, Tag.type == tag.type))
+     else:
+         candidates = sorted(t for t in Tag.select().where(Tag.active == True)
+diff --git a/gerby/static/css/reader.css b/gerby/static/css/reader.css
+index b4143a9714d135d922fb876a5481f5ba93b81346..bf459394d2c29fe501e444f9fed19296e0a91a29 100644
+--- a/gerby/static/css/reader.css
++++ b/gerby/static/css/reader.css
+@@ -172,3 +172,8 @@ pre {white-space:pre-wrap;overflow-wrap:anywhere;}
+ }
+ 
+ #header a,.page-actions a,.toc-actions a,.bibliography-list a,.merged-navigation a {background-image:none!important;padding-right:0!important;}
++
++/* The book's title in place of the Resolution brand, and the credit at the foot of every page. */
++#first-bar .brand-name {font-size:24px;line-height:1.25;}
++.site-credit {border-top:1px solid var(--color-rule);margin:0 0 40px;padding:16px 0 0;font:12px var(--font-heading);color:var(--color-muted);}
++@media(max-width:600px) {#first-bar .brand-name {font-size:18px;}}
+diff --git a/gerby/static/zeta-favicon.png b/gerby/static/zeta-favicon.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..0b0a15af07a12398835935df24d5d0b7f467c52b
+GIT binary patch
+literal 4230
+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
+TNsSEtOMqyp>0+x?Y$E;-*O|sz
+
+literal 0
+HcmV?d00001
+
+diff --git a/gerby/static/zeta-favicon.svg b/gerby/static/zeta-favicon.svg
+new file mode 100644
+index 0000000000000000000000000000000000000000..40ecfbbe3b800f1190c28c92f13b59677d0bcbbd
+--- /dev/null
++++ b/gerby/static/zeta-favicon.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#fbfaf7"/><path fill="#1d1d1b" d="M42.33 51.84 C42.33 46.95 38.18 45.71 35.64 44.97 L30.2 43.3 C27.54 42.49 23.02 41.13 23.02 34.38 C23.02 25.97 29.7 16.88 35.34 13.34 C36.7 15.2 38.75 15.2 39.97 15.2 C41.65 15.2 46.67 15.2 46.67 11.86 C46.67 9.44 43.63 9.26 40.97 9.26 C39.92 9.26 38.68 9.26 36.95 9.88 C36.82 8.15 37.25 6.29 37.32 6.05 C37.44 5.55 37.44 5.48 37.44 5.3 C37.44 4.07 36.14 4 36.14 4 C34.1 4 34.1 7.65 34.1 8.7 C34.1 9.07 34.1 10.13 34.35 11.05 C25.81 15.82 17.33 26.59 17.33 37.42 C17.33 40.51 18.19 43.67 20.36 46.08 C22.78 48.68 24.45 49.17 32.31 51.52 C34.97 52.26 37.01 52.89 37.01 55.24 C37.01 55.48 36.88 57.78 34.78 57.78 C33.48 57.78 31.62 57.46 29.52 56.23 C29.03 55.98 28.96 55.92 28.59 55.92 C27.91 55.92 27.42 56.54 27.42 57.03 C27.42 58.33 31.81 60 34.78 60 C39.36 60 42.33 55.43 42.33 51.84 Z M43.75 11.92 C43.32 12.54 43.26 12.66 42.27 12.85 C41.4 12.97 39.97 12.97 39.97 12.97 C39.12 12.97 38.06 12.97 37.56 12.17 C38.8 11.49 39.67 11.49 40.78 11.49 C42.58 11.49 42.82 11.55 43.75 11.92 Z"/></svg>
+diff --git a/gerby/templates/bibliography.overview.html b/gerby/templates/bibliography.overview.html
+index 6215633892c76ba0d432ecd14e18079698f109fd..51eaf0d276cf204b5383c40ecf4b5a4c20bb5d30 100644
+--- a/gerby/templates/bibliography.overview.html
++++ b/gerby/templates/bibliography.overview.html
+@@ -1,6 +1,6 @@
+ {% extends "layout.html" %}
+ {% block title %}Bibliography{% endblock %}
+ {% block body %}<div class="html bibliography"><h1>Bibliography</h1>
+-<p>Historical references record the origins and formulations of the constructions. Proofs are included in this text, except for explicitly cited Stacks Project background.</p>
++<p>Published sources cited in the book. A result from the literature is stated in full and cited, with no proof; its correspondence note says how the Lean statement relates to the published one.</p>
+ {% include "bibliography.list.html" %}</div>{% endblock %}
+-{% block sidebar %}<ul class="page-actions"><li><a href="/download/references.bib">Download BibTeX</a></li><li><a href="/about">About this edition</a></li></ul>{% endblock %}
++{% block sidebar %}<ul class="page-actions"><li><a href="/download/references.bib">Download BibTeX</a></li><li><a href="/about">About this book</a></li></ul>{% endblock %}
+diff --git a/gerby/templates/index.html b/gerby/templates/index.html
+index 924a0ec02a74f38bafa73b2b67781b85507268fe..5d8d13c2311f45694c64438208f960198c1d8fbe 100644
+--- a/gerby/templates/index.html
++++ b/gerby/templates/index.html
+@@ -1,24 +1,26 @@
+ {% extends "layout.html" %}
+ {% set index = true %}
+-{% block title %}Library{% endblock %}
++{% block title %}Book{% endblock %}
+ {% block body %}
+ <section class="home-intro">
+-  <p class="eyebrow">The Resolution library · Tagged edition</p>
+-  <h1>Resolution of<br>singularities</h1>
+-  <p class="lead">A mathematical reconstruction of the formalization, from local algebra to algebraic and analytic resolution.</p>
++  <p class="eyebrow">Working draft</p>
++  <h1>The Riemann Hypothesis<br>after Alpöge</h1>
++  <p class="lead">A reading of Levent Alpöge's Lean proof of the Riemann Hypothesis and of the Generalized Riemann Hypothesis for Dirichlet $L$-functions.</p>
+   <ul class="home-reading-links">
+     <li><a href="/read">Read the complete text →</a><span>A continuous view with proofs and reading navigation.</span></li>
+-    <li><a href="/browse">Explore the tagged contents</a><span>Algebraic geometry, analytic geometry, and worked examples.</span></li>
++    <li><a href="/browse">Explore the tagged contents</a><span>The main theorems, the reduction to a half-plane, and the proof chapter by chapter.</span></li>
+   </ul>
+ </section>
+ {% endblock %}
+ {% block sidebar %}
+ <h3>Reading this text</h3>
+-<p>Statements have permanent local tags and links to their Lean sources. Background references lead to the Stacks Project.</p>
+-<p><a href="/download/book.pdf">Download the complete PDF</a></p>
++<p>This is a reading of Levent Alpöge's Lean proof; a working draft, not Alpöge's own exposition.</p>
++<p>Statements have permanent tags and links to the declarations of Alpöge's Lean they correspond to. Results from the literature are stated in full and cited.</p>
++<p><a href="/download/{{ config.BOOK_PDF }}">Download the complete PDF</a></p>
+ <p><a href="/download/manuscript.tex">Download the LaTeX manuscript</a></p>
+-<p><a href="/about">Scope and provenance</a></p>
++<p><a href="/about">About this book and its sources</a></p>
+ <p><a href="/bibliography">Bibliography</a></p>
++<p><a href="/status">Where the work stands</a></p>
+ <h3>Built with Gerby</h3>
+ <p>The mathematical publishing software developed by Pieter Belmans and Raymond Cheng.</p>
+ {% endblock %}
+diff --git a/gerby/templates/layout.html b/gerby/templates/layout.html
+index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..e3879b15987a2f672d01a7ffd4adac52fe9581cc 100644
+--- a/gerby/templates/layout.html
++++ b/gerby/templates/layout.html
+@@ -8,9 +8,10 @@
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#d9d8d1">
+ 
+-<title>{% block title %}{% endblock %}&mdash;Resolution of singularities</title>
++<title>{% block title %}{% endblock %}&mdash;{{ config.BOOK_TITLE }}</title>
+ 
+-<meta name="description" content="A tagged mathematical reconstruction with Stacks Project and Lean references">
++<meta name="description" content="A reading of Levent Alpöge's Lean proof of the Riemann Hypothesis; a working draft, not Alpöge's own exposition">
++<meta name="robots" content="noindex, nofollow">
+ 
+ <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 
+@@ -18,7 +19,7 @@
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}">
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reconstruction.css', v='5') }}">
+ 
+-<link rel="stylesheet" href="/static/css/reader.css?v=5">
++<link rel="stylesheet" href="/static/css/reader.css?v=6">
+ <script defer src="/static/js/lesswrong-progress.js?v=5"></script>
+ <script defer src="/static/js/source-sidenotes.js?v=1"></script>
+ 
+@@ -53,8 +54,8 @@
+ <link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
+ <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
+ 
+-<link rel="icon" type="image/png" href="/static/resolution-favicon.png">
+-<link rel="shortcut icon" type="image/png" href="/static/resolution-favicon.png">
++<link rel="icon" type="image/png" sizes="192x192" href="/static/zeta-favicon.png">
++<link rel="icon" type="image/svg+xml" href="/static/zeta-favicon.svg">
+ 
+ {% block head %}{% endblock %}
+ 
+@@ -64,7 +65,7 @@
+ <div class="container-fluid bounded">
+   <div id="first-bar" class="row topbar inner-top top">
+     <header class="col">
+-      <h1><a class="brand-name" href="/">Resolution</a><span class="book-label">Resolution of singularities</span></h1>
++      <h1><a class="brand-name" href="/">{{ config.BOOK_TITLE }}</a></h1>
+     </header>
+ 
+     <nav id="header">
+@@ -72,7 +73,7 @@
+         <li><a href="/read">Read</a>
+         <li><a href="/browse">Contents</a>
+         <li><a href="/bibliography">Bibliography</a>
+-        <li><a href="/download/book.pdf">PDF</a>
++        <li><a href="/download/{{ config.BOOK_PDF }}">PDF</a>
+       </ul>
+ 
+       <form id="quicksearch" action="/search">
+@@ -121,6 +122,7 @@
+       </section>
+     </div>
+   </div>
++  <footer class="site-credit">Created by Benjamin Antieau at Resolution.</footer>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+ </div>
+ </body>
+diff --git a/gerby/templates/macros.html b/gerby/templates/macros.html
+index 595716c540f7c811937bf77c93d7d1be1d8d7d28..8b8536298060208525cbf72f749552dba412f595 100644
+--- a/gerby/templates/macros.html
++++ b/gerby/templates/macros.html
+@@ -44,7 +44,7 @@
+   <ul class="page-actions">
+   {% if tag.type in ["part", "chapter", "section", "subsection"] %}<li><a href="/read/{{ tag.tag }}">Read this {{ tag.type }}</a></li>{% endif %}
+   <li><a href="/read#{{ tag.tag }}">Read in the complete text</a></li>
+-  <li><a href="/download/book.pdf#nameddest={{ tag.tag }}">View in PDF</a></li>
++  <li><a href="/download/{{ config.BOOK_PDF }}#nameddest={{ tag.tag }}">View in PDF</a></li>
+   <li><a href="/tag/{{ tag.tag }}/cite">Cite this {{ tag.type }}</a></li>
+   <li><a href="/download/manuscript.tex">LaTeX source</a></li>
+   <li><a href="/tag/{{ tag.tag }}/statistics">Dependencies and statistics</a></li>
+diff --git a/gerby/templates/reader.html b/gerby/templates/reader.html
+index 07fa647a0234a9aca61338426cec62e8a55b93e4..1beccef7ad355cb776ee734b48739620bae7684a 100644
+--- a/gerby/templates/reader.html
++++ b/gerby/templates/reader.html
+@@ -3,9 +3,9 @@
+ {% block bodyclass %}long-reader{% endblock %}
+ {% block body %}
+ {% if not scope %}<header class="reader-title">
+-  <h1>Resolution of singularities</h1>
+-  <p>Algebraic and analytic geometry in characteristic zero</p>
+-</header>{% else %}<nav class="merged-navigation"><a href="/tag/{{ scope.tag }}">{{ scope.type | capitalize }} {{ scope.ref }} · contents</a><a href="/download/book.pdf#nameddest={{ scope.tag }}">PDF</a></nav>{% endif %}
++  <h1>{{ config.BOOK_TITLE }}</h1>
++  <p>A reading of Levent Alpöge's Lean proof; a working draft, not Alpöge's own exposition.</p>
++</header>{% else %}<nav class="merged-navigation"><a href="/tag/{{ scope.tag }}">{{ scope.type | capitalize }} {{ scope.ref }} · contents</a><a href="/download/{{ config.BOOK_PDF }}#nameddest={{ scope.tag }}">PDF</a></nav>{% endif %}
+ <article class="html continuous-text" id="postContent">
+ {% for chunk in chunks %}
+   <div id="{{ chunk.tag.tag }}" class="reader-unit reader-{{ chunk.tag.type }}"{% if chunk.navigation %} data-reader-heading{% endif %}>
+diff --git a/gerby/templates/single/about.html b/gerby/templates/single/about.html
+index b2a9f427ff64214dbdf61282fdaac49133810ef7..f5f988333304f492811f2ab95597e283f981c909 100644
+--- a/gerby/templates/single/about.html
++++ b/gerby/templates/single/about.html
+@@ -1,9 +1,15 @@
+ {% extends "layout.html" %}
+ {% block title %}About{% endblock %}
+-{% block body %}<h2>About this reconstruction</h2>
+-<p>This is an independent mathematical reconstruction of the algebraic and analytic resolution library, presented using the actual Gerby software used by the Stacks Project.</p>
+-<p>Local tags identify statements in this text. They are not tags assigned by the Stacks Project. External Stacks references link to <a href="https://stacks.math.columbia.edu/">the Stacks Project</a>; formal source references point to the <a href="https://github.com/resolutionorg/hironaka/tree/29f3df958d023a944de44adcca91a18e5dabec88">Resolution Lean repository at revision <code>29f3df958d023a944de44adcca91a18e5dabec88</code></a>.</p>
+-<p>The <a href="/tag/R000">introduction</a> records the mathematical scope. The <a href="/download/manuscript.tex">local LaTeX source</a> contains the complete reconstructed manuscript. This is a working reconstruction; the prose requires mathematical review. The web software does not certify the prose proof.</p>
+-<p>This instance runs <a href="https://gerby-project.github.io/">Gerby</a>, the open-source system developed by Pieter Belmans and Raymond Cheng: its <a href="https://github.com/gerby-project/plastex/tree/a75473f890db3d21e3bf76430c5c1ffc0661a69a">plasTeX Gerby renderer</a> and <a href="https://github.com/gerby-project/gerby-website/tree/01b11bbbbd1a910bc997eb3d53bd1cd8c8de8652">Gerby website application</a>, with documented local compatibility and instance patches.</p>
+-<p>Typography and colors follow <a href="https://resolution.org/">Resolution</a>: Spectral, Inter, IBM Plex Mono, white paper, dark ink, and a slate accent. The reading layout is inspired by LessWrong. Its progress-line interpolation and contents scaling are adapted from <a href="https://github.com/ForumMagnum/ForumMagnum/tree/a1665ead02e2c00647c098797979c4c994980673/packages/lesswrong/components/posts/TableOfContents">ForumMagnum</a>, with the <a href="/static/third-party/forum-magnum/LICENSE">GPL version 3 license</a>, original sources, and modification notes distributed with this edition. Gerby continues to render and serve the mathematical text.</p>
++{% set source = config.LEAN_SOURCE %}
++{% block body %}<h2>About this book</h2>
++<p>This is a reading of Levent Alpöge's Lean proof of the Riemann Hypothesis and of the Generalized Riemann Hypothesis for Dirichlet $L$-functions; a working draft, not Alpöge's own exposition. The statements, proofs and notes were written from the Lean, and their mistakes are not Alpöge's.</p>
++<h3>Sources</h3>
++<p>Alpöge announced the proof in <a href="{{ source.announcement.url }}">{{ source.announcement.url }}</a> on {{ source.announcement.date }}. The Lean proof is published as an archive in {{ source.archive.parts | length }} parts, <a href="{{ source.archive.parts[0].url }}">{{ source.archive.parts[0].url.rsplit('/', 1)[1] }}</a> to <a href="{{ source.archive.parts[-1].url }}">{{ source.archive.parts[-1].url.rsplit('/', 1)[1] }}</a> at <a href="{{ source.archive.parts[0].url.rsplit('/', 1)[0] }}/">{{ source.archive.parts[0].url.rsplit('/', 1)[0] }}</a>. The joined archive has SHA-256</p>
++<p><code class="archive-digest">{{ source.archive.sha256 }}</code></p>
++<p>Its toolchain is <code>{{ source.toolchain }}</code>, with Mathlib at <code>{{ source.mathlib.rev }}</code>. The book cites this archive only. Each statement links to the declarations of the archive it corresponds to, on this site's copy of the Lean sources, and its correspondence note says where the Lean and the text differ. The links are checked against the archive when the book is built; the prose is not checked against the Lean by any machine.</p>
++<h3>Tags</h3>
++<p>Each chapter, section and statement has a permanent four-character tag, beginning with <code>Z</code>. A tag is never reassigned or reused, so links to tags survive renumbering. These are not Stacks Project tags.</p>
++<h3>Software</h3>
++<p>This edition is built with <a href="https://gerby-project.github.io/">Gerby</a>, the open-source system developed by Pieter Belmans and Raymond Cheng: its <a href="https://github.com/gerby-project/plastex/tree/a75473f890db3d21e3bf76430c5c1ffc0661a69a">plasTeX Gerby renderer</a> and <a href="https://github.com/gerby-project/gerby-website/tree/01b11bbbbd1a910bc997eb3d53bd1cd8c8de8652">Gerby website application</a>, with the local patches of Resolution's Hironaka book and of this book.</p>
++<p>Typography and colors follow <a href="https://resolution.org/">Resolution</a>. The reading layout is inspired by LessWrong. Its progress-line interpolation and contents scaling are adapted from <a href="https://github.com/ForumMagnum/ForumMagnum/tree/a1665ead02e2c00647c098797979c4c994980673/packages/lesswrong/components/posts/TableOfContents">ForumMagnum</a>, with the <a href="/static/third-party/forum-magnum/LICENSE">GPL version 3 license</a>, original sources, and modification notes distributed with this edition.</p>
+ {% endblock %}
+diff --git a/gerby/templates/single/statistics.html b/gerby/templates/single/statistics.html
+index 93e5af7ad35cf5e70759f9baaa55cc5d1ea2052a..8003271680dc458cfb2f7f4f29deedccdeedb3ae 100644
+--- a/gerby/templates/single/statistics.html
++++ b/gerby/templates/single/statistics.html
+@@ -15,7 +15,7 @@
+ 
+ {% block body %}
+ <h2>Statistics</h2>
+-<p>Here we collect some metrics regarding the Stacks project. If you have a suggestion for an interesting metric, <a href="mailto:stacks.project@gmail.com">please get in touch</a>.
++<p>Counts of the tags of this book.
+ 
+ <h3>Breakdown of tags per type</h3>
+ <p>There are {{ total }} tags in total.
+diff --git a/gerby/templates/single/tags.html b/gerby/templates/single/tags.html
+index fb7b2597690c3aacbc8e98609afe210077d4e448..3aeb812cd1e6e683b198e54ab69a1ea9720728c4 100644
+--- a/gerby/templates/single/tags.html
++++ b/gerby/templates/single/tags.html
+@@ -11,7 +11,7 @@
+   <p>Each tag refers to a unique item (section, lemma, theorem, etc.) in order for this project to be referenceable. These tags don't change even if the item moves within the text.
+ 
+   <h2>How to use it?</h2>
+-  <p>To find the tag for an item, hover/click on the item in the <a href="/download/book.pdf">pdf file</a> or find the item from the <a href="/browse">table of contents</a>. See below for LaTeX instructions on how to reference a tag.
++  <p>To find the tag for an item, hover/click on the item in the <a href="/download/{{ config.BOOK_PDF }}">pdf file</a> or find the item from the <a href="/browse">table of contents</a>. See below for LaTeX instructions on how to reference a tag.
+   <!-- TODO don't mention the pdf as a means to search for a tag! -->
+ 
+   <h2>More information</h2>
+diff --git a/gerby/templates/tag.citation.html b/gerby/templates/tag.citation.html
+index b9ba44a816441a36cde5ef3b16b9f7dd650e86aa..b9a79874f0f7ba1614fd2de5dde12e837eb986a6 100644
+--- a/gerby/templates/tag.citation.html
++++ b/gerby/templates/tag.citation.html
+@@ -3,14 +3,14 @@
+ {% block breadcrumb %}{{ macros.breadcrumb(breadcrumb) }}{% endblock %}
+ {% block body %}
+ <h2>Citing Tag <span class="tag">{{ tag.tag }}</span></h2>
+-<p class="citation-text"><em>Resolution of singularities: algebraic and analytic geometry</em>, {{ tag.type }} {{ tag.ref }}, Tag {{ tag.tag }}.</p>
++<p class="citation-text"><em>{{ config.BOOK_TITLE }}</em>, {{ tag.type }} {{ tag.ref }}, Tag {{ tag.tag }}.</p>
+ <h3>LaTeX</h3>
+-<pre><code>\emph{Resolution of singularities: algebraic and analytic geometry},
++<pre><code>\emph{ {{- config.BOOK_TITLE -}} },
+ {{ tag.type }} {{ tag.ref }}, Tag~{{ tag.tag }}.</code></pre>
+ <h3>BibTeX</h3>
+-<pre><code>@misc{resolution-{{ tag.tag }},
+-  title = {Resolution of singularities: algebraic and analytic geometry},
+-  note = { {{- tag.type | capitalize }} {{ tag.ref }}, Tag {{ tag.tag }}; tagged reconstruction},
++<pre><code>@misc{rh-alpoge-{{ tag.tag }},
++  title = { {{- config.BOOK_TITLE -}} },
++  note = { {{- tag.type | capitalize }} {{ tag.ref }}, Tag {{ tag.tag }}; working draft},
+   year = {2026}
+ }</code></pre>
+ <p><a href="/tag/{{ tag.tag }}">Return to {{ tag.type }} {{ tag.ref }}</a></p>
+diff --git a/gerby/templates/toc.chapters.html b/gerby/templates/toc.chapters.html
+index cae408c42c1d2cfa87cc723b8f25594353ed49c0..4b6c2489df5544adbb94ee8aac5a77df98bc3387 100644
+--- a/gerby/templates/toc.chapters.html
++++ b/gerby/templates/toc.chapters.html
+@@ -1,16 +1,25 @@
+ {% extends "layout.html" %}
+ 
+-{% block title %}Chapters{% endblock %}
++{% block title %}Contents{% endblock %}
+ 
+ {% block breadcrumb %}
+ {% endblock %}
+ 
+ {% block body %}
+   <h2>Table of contents</h2>
+-  <ul class="entries">
++  <ul id="toc" class="entries">
+   {% for chapter in chapters %}
+-    <li><a href="/tag/{{ chapter.tag }}">Chapter <span data-tag="{{ chapter.tag }}">{{ chapter.ref }}</span> {{ chapter.name }}</a>
++    <li><p><a href="/tag/{{ chapter.tag }}">Chapter <span data-tag="{{ chapter.tag }}">{{ chapter.ref }}</span></a>: {{ chapter.name }}</p>
++    <span class="toc-actions"><a href="/read/{{ chapter.tag }}">Read chapter</a><a href="/download/{{ config.CHAPTER_PDFS[chapter.tag] }}">PDF</a></span>
+   {% endfor %}
+   </ul>
++<p><a href="/bibliography">Bibliography</a></p>
+ {% endblock %}
+ 
++{% block sidebar %}
++  <ul class="page-actions">
++  <li><a href="/read">Read the complete text</a></li>
++  <li><a href="/download/{{ config.BOOK_PDF }}">Download the complete PDF</a></li>
++  <li><a href="/about">About this book</a></li>
++  </ul>
++{% endblock %}
+diff --git a/gerby/templates/toc.parts.html b/gerby/templates/toc.parts.html
+index d4cc381d4170838beda9dddf756e5b3984b69f6b..d6cf2368b86151745400516983b76c4d6c287e04 100644
+--- a/gerby/templates/toc.parts.html
++++ b/gerby/templates/toc.parts.html
+@@ -34,7 +34,7 @@
+           {% for chapter in part.chapters %}
+             <li><p><a href="/tag/{{ chapter.tag }}">Chapter <span data-tag="{{ chapter.tag }}">{{ chapter.ref }}</span></a>: {{ chapter.name }}
+             {% set filename = chapter.label.split("-section-")[0] %}</p>
+-            <span class="toc-actions"><a href="/read/{{ chapter.tag }}">Read chapter</a><a href="/download/chapter-{{ chapter.tag }}.pdf">PDF</a></span>
++            <span class="toc-actions"><a href="/read/{{ chapter.tag }}">Read chapter</a><a href="/download/{{ config.CHAPTER_PDFS[chapter.tag] }}">PDF</a></span>
+           {% endfor %}
+         </ul>
+         <hr class="my-1">
+@@ -83,6 +83,6 @@ $("a.sidebar-link").click(function() {
+ 
+   <hr>
+ 
+-  <a href="/download/book.pdf">Download the complete PDF</a>
++  <a href="/download/{{ config.BOOK_PDF }}">Download the complete PDF</a>
+ {% endblock %}
+ 
+diff --git a/gerby/views/tag.py b/gerby/views/tag.py
+index 9ddadaae4d6d75f3f71eb2816402cef3f15ff603..2a4adc0d98a3819a6a3ba5e0fd30015eb46addd9 100644
+--- a/gerby/views/tag.py
++++ b/gerby/views/tag.py
+@@ -188,7 +188,10 @@ def show_tag(tag):
+ 
+   tree = None
+   # if it's a heading
+-  if tag.type in headings and headings.index(tag.type) < headings.index(gerby.configuration.UNIT):
++  # A section divided into subsections holds only the text above its first subsection, so its page
++  # also lists its subsections.
++  if tag.type in headings and (headings.index(tag.type) < headings.index(gerby.configuration.UNIT)
++                               or tag.type == "section"):
+     # if the tag is a part, we select all chapters, and then do the startswith for these
+     if tag.type == "part":
+       chapters = Part.select(Part.chapter).where(Part.part == tag.tag)
+@@ -200,11 +203,12 @@ def show_tag(tag):
+ 
+       tags = list(chapters) + list(sections)
+     else:
++      # The contents go down to subsections; a statement is reached from its section's page.
+       tags = (Tag.select(Tag,
+                          Reference.html,
+                          Slogan.html,
+                          History.html)
+-                .where(Tag.ref.startswith(tag.ref + "."))
++                .where(Tag.ref.startswith(tag.ref + "."), Tag.type << ["section", "subsection"])
+                 .join_from(Tag, Slogan, JOIN.LEFT_OUTER, attr="slogan")
+                 .join_from(Tag, History, JOIN.LEFT_OUTER, attr="history")
+                 .join_from(Tag, Reference, JOIN.LEFT_OUTER, attr="reference"))

@@ -1,0 +1,668 @@
+{
+  "id": "galois-representations",
+  "title": "Galois representations and local Langlands",
+  "state": "drafted",
+  "summary": "The automorphy arguments of Chapter 10 and the final assembly use $\\ell$-adic Galois representations attached to regular algebraic polarized cuspidal representations of $GL_a$ over CM fields and a local Langlands correspondence for $GL_n$ over $p$-adic fields. Both are proved in forms weaker than the published theorems: the correspondence is any map satisfying a list of laws with no $L$- or $\\varepsilon$-factors, determined only on good representations (supercuspidal support in characters, or over $\\mathbf Q_g$ in twists of depth-zero supercuspidals), and the Galois representations carry no polarization, no purity, and local-global compatibility only where the image of the local component is abelian and monodromy-free, or tame, monodromy-free and multiplicity-free over $\\mathbf Q_g$ with $g>16a^2$. Both are Alpöge's constructions, carried out in the chapter. The Galois representations are built from seeds in the etale cohomology of PEL unitary Shimura varieties, interpolated with pseudo-characters in the manner of Chenevier-Harris, with theta lifts to definite unitary groups of large rank, descent to definite unitary groups, cyclic base change and gluing over CM extensions.",
+  "timeline": [],
+  "progress": "Fix pass done: the statements of the division lemma, the congruences, the pair of enlargements and the plans now match the Lean; the proofs of the depth-zero lift, the split Satake parameters, the conjugate character and the bounded functional follow the Lean, with the shorter published arguments as remarks. Fifteen open steps remain; the ten new ones mark outlines not yet carried out: the crystalline comparison on test algebras (four), finiteness and the trace in the count (three), the Iwahori inverse, the stability of weak base change, and the local theta lift.",
+  "statements": [
+    {
+      "lean": "GlobalTheory.WeilDeligne.Weil",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/ExistsNotCongPow.lean",
+      "line": 149,
+      "role": "new",
+      "statement": "Setting: a number field $E$, an algebraic closure $\\Omega$, a finite place $w$ and a valuation ring $A$ of $\\Omega$ over $w$, with decomposition, inertia, wild inertia and Weil groups $D_A\\supset W_A\\supset I_A\\supset P_A$ inside $\\operatorname{Gal}(\\Omega/E)$ and the degree $d:W_A\\to\\mathbf Z$.",
+      "label": "gal-local-situation"
+    },
+    {
+      "lean": "GlobalTheory.LocLanglands.IsLocalArtin",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/AutomorphicForms₂/HasExponentZeroIff.lean",
+      "line": 145,
+      "role": "new",
+      "statement": "A local Artin map is a surjection $a:W_A\\to E_w^\\times$, continuous on inertia, with $v_w(a(\\sigma))=-d(\\sigma)$, through which every smooth character of $W_A$ factors, and compatible with every global reciprocity map.",
+      "label": "gal-local-artin"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.artEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ArtEx.lean",
+      "line": 7,
+      "role": "standard",
+      "reference": "Local class field theory; Serre, Local class field theory, in Cassels-Fröhlich (1967)",
+      "statement": "There is exactly one local Artin map.",
+      "label": "gal-local-artin-unique"
+    },
+    {
+      "lean": "GlobalTheory.WeilDeligne.WDRep",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/MonodromyZeroOfWeilDeligneRepClassIff.lean",
+      "line": 36,
+      "role": "new",
+      "statement": "Frobenius-semisimple Weil-Deligne representations of $W_A$, their isomorphism classes $\\mathrm{WD}(A)$, sums, tensor products, duals, twists and $\\operatorname{Sp}(l)$.",
+      "label": "gal-weil-deligne"
+    },
+    {
+      "lean": "UpperTheory.GalStar.Sqf",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjAlt.lean",
+      "line": 29,
+      "role": "new",
+      "statement": "Monodromy-free, irreducible, tame (trivial on $P_A$), abelian (trivial on commutators) and multiplicity-free tame part (repeated eigenvalues of a tame generator are $(q_w-1)$-th roots of unity).",
+      "label": "gal-wd-classes"
+    },
+    {
+      "lean": "GlobalTheory.WeilDeligne.wdOf",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/WeilDeligneParamMonodromyEqZeroIff.lean",
+      "line": 352,
+      "role": "new",
+      "statement": "$\\mathrm{WD}_\\iota(r|_{W_A})$ for $w\\nmid\\ell$: the Frobenius semisimplification given by Grothendieck's monodromy theorem when the monodromy data exist, and the trivial representation otherwise.",
+      "label": "gal-wd-galois"
+    },
+    {
+      "lean": "GlobalTheory.Pst.wdAt",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/FiniteDimensionalWdSpace.lean",
+      "line": 234,
+      "role": "new",
+      "statement": "Crystalline, de Rham and potentially semistable restrictions to $D_A$ for $w\\mid\\ell$, Hodge-Tate multisets and $\\mathrm{WD}_\\iota$ from $D_{\\mathrm{pst}}$, all relative to axiomatized period-ring packages identified with constructions of $B_{\\mathrm{cris}}$ and $B_{\\mathrm{dR}}$.",
+      "label": "gal-p-adic-hodge"
+    },
+    {
+      "lean": "GlobalTheory.LocGL.IrrGL",
+      "file": "Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/NonemptyEquivMultiProdOne.lean",
+      "line": 179,
+      "role": "new",
+      "statement": "$\\operatorname{Irr}(E_w)$, supercuspidals, supercuspidal support, segments and Langlands quotients, depth zero.",
+      "label": "gal-irreducible-classes"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.Good",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+      "line": 24,
+      "role": "new",
+      "statement": "A supercuspidal is good if it is a character, or if $E_w\\cong\\mathbf Q_g$ and it is a twist by a smooth character of a depth-zero representation; a representation is good if its supercuspidal support consists of good supercuspidals.",
+      "label": "gal-good"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.Names",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/RecTTransport.lean",
+      "line": 23,
+      "role": "new",
+      "statement": "For $E_w\\cong\\mathbf Q_g$: Green data (an unramified place $w'$ of residue degree $n$ of a larger number field, with its local Artin map), regular characters $\\theta$ of $\\mathbf F_{g^n}^\\times$, cuspidal representations of $\\operatorname{GL}_n(\\mathbf F_g)$ attached to $\\theta$ by Green's character formula, and representations of $\\operatorname{GL}_n(E_w)$ containing them.",
+      "label": "gal-green-datum"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.LawsT",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+      "line": 55,
+      "role": "standard",
+      "reference": "Harris-Taylor (2001); Henniart, Invent. Math. 139 (2000); Scholze, Invent. Math. 192 (2013)",
+      "statement": "Given a local Artin map $a$, a map $\\mathrm{rc}:\\operatorname{Irr}(E_w)\\to\\mathrm{WD}(A)$ satisfies the laws if: (1) dimension; (2) $\\mathrm{rc}(\\chi)=\\chi\\circ a$; (3) compatibility with the Langlands classification by segments; (4) supercuspidals go to irreducibles; (5) $\\mathrm{rc}(\\pi\\nu^s)=\\mathrm{rc}(\\pi)\\otimes|\\cdot|^s\\circ a$; (6) $|\\det\\mathrm{rc}(\\pi)|$ matches $|\\omega_\\pi\\circ a|$; and only for good $\\pi$: (7) twists, (8) central characters, (9) contragredients, (10) injectivity, (11) depth zero gives tame; (12) for $E_w\\cong\\mathbf Q_g$, a representation containing the cuspidal type attached to a regular $\\theta$ goes to a monodromy-free representation whose inertia has characteristic polynomial $\\prod_j(X-\\theta(\\bar a'(t))^{g^j})$. No $L$- or $\\varepsilon$-factors, no bijectivity.",
+      "label": "gal-llc-laws"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.recTExists",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean",
+      "line": 20,
+      "role": "new",
+      "reference": "Alpoge's construction (Section section-gal-local-construction). Related to Harris-Taylor (2001), Henniart, Invent. Math. 139 (2000) and Scholze, Invent. Math. 192 (2013) only on good representations and only conditionally; uses Green, Trans. Amer. Math. Soc. 80 (1955) and Zelevinsky, Ann. Sci. ENS 13 (1980)",
+      "statement": "For every number field $E$ and valuation ring $A$ over a finite place $w$ there are a local Artin map $a$ and a map satisfying the laws with respect to $a$. The map constructed is class field theory on characters, an explicit tame parameter from Green's parametrization on twists of depth-zero supercuspidals over $\\mathbf Q_g$, a placeholder depending only on the degree and $|\\omega|$ on all other supercuspidals, extended by the Langlands classification; it is not the local Langlands correspondence outside good representations.",
+      "label": "gal-llc-exists"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.parUniq",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ParUniq.lean",
+      "line": 15,
+      "role": "new",
+      "statement": "For $E_w\\cong\\mathbf Q_g$ and a depth-zero supercuspidal $\\rho$, an irreducible tame Weil-Deligne representation with determinant $\\omega_\\rho\\circ a$ and the inertial characteristic polynomials of the type law is unique, and determines $\\rho$ among depth-zero supercuspidals.",
+      "label": "gal-depth-zero-parameter"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.recTUnique",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTUnique.lean",
+      "line": 28,
+      "role": "new",
+      "statement": "Any two maps satisfying the laws agree on every good representation.",
+      "label": "gal-llc-unique"
+    },
+    {
+      "lean": "GlobalTheory.LocLanglands.IsRec",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/AutomorphicForms₂/LocalLanglandsGL.lean",
+      "line": 76,
+      "role": "new",
+      "statement": "The published-style characterization: bijective, laws (1)-(3), epsilon-factors of pairs via the Jacquet-Piatetski-Shapiro-Shalika functional equation with Deligne's constants, twists, central characters and contragredients for all $\\pi$, supercuspidal iff irreducible, determinant characters, products, supercuspidal support, spherical iff unramified with Satake parameters, depth zero iff tame.",
+      "label": "gal-llc-characterization"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.isRecT_of_isRec",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+      "line": 106,
+      "role": "new",
+      "reference": "Comparison with the characterization of Harris-Taylor (2001) and Henniart (2000); no published source for the laws themselves",
+      "statement": "Conditional: assuming the statement DepthZeroTypeInertia (every map with the published characterization satisfies the type law (12)), every map with the published characterization satisfies the laws. Neither DepthZeroTypeInertia nor the existence of a map with the published characterization (LocalLanglandsGL) is proved in the source.",
+      "label": "gal-llc-of-rec"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.RecTUnique",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+      "line": 82,
+      "role": "new",
+      "statement": "Remark: what the laws determine (good representations only) and what the conditional comparison with the published correspondence gives.",
+      "label": "gal-llc-scope"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.typeEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/TypeEx.lean",
+      "line": 173,
+      "role": "standard",
+      "reference": "Moy-Prasad, Comment. Math. Helv. 71 (1996); Bushnell-Kutzko (1993); Carayol, Ann. Sci. ENS 17 (1984); Green, Trans. AMS 80 (1955); Serre, Local class field theory (1967)",
+      "statement": "Depth-zero facts over $E_w\\cong\\mathbf Q_g$: a depth-zero supercuspidal contains a cuspidal type, unique up to character; containing a cuspidal type forces cuspidal and depth zero; type and central character determine the representation; scalars act on a type attached to $\\theta$ by $\\theta$; twists preserve depth zero exactly for tame characters; supports of depth-zero representations have depth zero; $\\chi$ tame iff $\\chi\\circ a$ is trivial on wild inertia.",
+      "label": "gal-depth-zero-facts"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.resEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/FinrankK.lean",
+      "line": 46,
+      "role": "new",
+      "statement": "Green data exist; $\\bar a'$ is a surjective homomorphism $I_A\\to k'^\\times$ with open kernel, trivial on wild inertia, with $\\bar a'(\\sigma t\\sigma^{-1})=\\bar a'(t)^g$; $a(t)$ reduces to the norm of $\\bar a'(t)$; $\\bar a'(t)$ is the residue of $t(\\varpi)/\\varpi$ for $\\varpi^{g^n-1}=g$, so it does not depend on the Green datum.",
+      "label": "gal-tame-inertia-character"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.indEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/IsSemisimpleInducedParam.lean",
+      "line": 316,
+      "role": "new",
+      "statement": "From $n$ Frobenius-conjugate characters $\\eta_j$ of inertia and $c\\in\\mathbf C^\\times$, an irreducible Weil-Deligne representation of dimension $n$ with $\\det V(\\varphi)=c$, inertial eigenvalues $\\eta_j$, tame if the $\\eta_j$ are.",
+      "label": "gal-induced-parameter"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.parEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/CentralUnit.lean",
+      "line": 39,
+      "role": "new",
+      "statement": "Over $E_w\\cong\\mathbf Q_g$, every depth-zero supercuspidal has a parameter.",
+      "label": "gal-depth-zero-parameter-exists"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.parTw",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/NormEqProd.lean",
+      "line": 100,
+      "role": "new",
+      "statement": "Parameters of tame characters, of twists by tame characters and of contragredients.",
+      "label": "gal-parameter-operations"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.goodMap",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/GoodMap.lean",
+      "line": 144,
+      "role": "new",
+      "statement": "A map $r_0$ with $r_0(\\chi)=\\chi\\circ a$, compatible with twists of good supercuspidals, and giving parameters on depth-zero supercuspidals.",
+      "label": "gal-good-map"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.junkEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/JunkEx.lean",
+      "line": 257,
+      "role": "new",
+      "statement": "For $n\\geq2$, an irreducible $J_n$ of dimension $n$ with $|\\det|=1$ that is not a twist of a tame representation when $E_w\\cong\\mathbf Q_g$ (induced from a wild character of inertia).",
+      "label": "gal-placeholder"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.expo",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ExponentMulAbsPow.lean",
+      "line": 63,
+      "role": "new",
+      "statement": "A real exponent $e(x)$ with $e(x\\nu^s)=e(x)+s$ that corrects $|\\det|$ of a placeholder to $|\\omega_x\\circ a|$.",
+      "label": "gal-exponent"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.CuspT",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/RecTTransport.lean",
+      "line": 86,
+      "role": "new",
+      "statement": "The laws on supercuspidals: irreducibility and dimension, characters, unramified twists, absolute central character, twists and central characters of good ones, contragredients, injectivity at good ones, depth, types.",
+      "label": "gal-cusp-laws"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.cuspEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/CuspEx.lean",
+      "line": 168,
+      "role": "new",
+      "statement": "A map satisfying the laws on supercuspidals: $r_0$ on good supercuspidals and $J_n\\otimes|\\cdot|^{e(x)}\\circ a$ on the others.",
+      "label": "gal-cusp-map"
+    },
+    {
+      "lean": "GlobalTheory.LocLanglands.exists_isLExt",
+      "file": "Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/LanglandsExtensionUniqueOnCuspidal.lean",
+      "line": 34,
+      "role": "new",
+      "reference": "Langlands classification: Zelevinsky, Ann. Sci. ENS 13 (1980)",
+      "statement": "The Langlands extension of a map on supercuspidals through the classification by segments.",
+      "label": "gal-langlands-extension"
+    },
+    {
+      "lean": "UpperTheory.Zero.LLC.extDim",
+      "file": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ExtDim.lean",
+      "line": 57,
+      "role": "new",
+      "statement": "The Langlands extension of a map with the laws on supercuspidals has dimension, characteristic polynomials and central characters from the support, twists, contragredients, injectivity at good representations and depth zero.",
+      "label": "gal-extension-laws"
+    },
+    {
+      "lean": "GlobalTheory.ContraPair.PolarizedPair",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/DualIsConjByOne.lean",
+      "line": 53,
+      "role": "new",
+      "statement": "Cuspidal automorphic representations of $\\operatorname{GL}_a(\\mathbf A_E)$, local components, infinitesimal characters, regular algebraic, and polarized pairs $(\\pi,\\chi)$: $\\chi_v(-1)=(-1)^a$ at real places and $\\pi^c\\cong\\pi^\\vee\\otimes\\chi\\circ N\\circ\\det$.",
+      "label": "gal-polarized"
+    },
+    {
+      "lean": "UpperTheory.GalStar.AwayB",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean",
+      "line": 26,
+      "role": "new",
+      "statement": "$x$ is compatible with $y$: same dimension; $x=y$ if $y$ is abelian and monodromy-free; if $E_w\\cong\\mathbf Q_g$ with $n=1$ or $g>16n^2$ and $y$ is tame, monodromy-free with multiplicity-free tame part, then $x$ is monodromy-free with the same characteristic polynomials on inertia.",
+      "label": "gal-compatible"
+    },
+    {
+      "lean": "UpperTheory.GalStar.PropsB",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean",
+      "line": 54,
+      "role": "new",
+      "statement": "$(r,m,\\mathrm{HT})$ attached to $\\pi$ relative to a class of maps $\\mathcal R$: $r$ continuous semisimple; away from $\\ell$, $\\mathrm{WD}_\\iota(r)$ compatible with $\\mathrm{rc}(\\pi_w\\nu^{(1-a)/2})$ for every $\\mathrm{rc}\\in\\mathcal R$; Hodge-Tate weights from the infinitesimal character with the symmetry $\\mathrm{HT}_{\\tau c}=m-\\mathrm{HT}_\\tau$; above $\\ell$, crystalline with these weights where $\\pi_w$ is spherical, and potentially semistable with compatible $\\mathrm{WD}$ in the two cases of compatibility. No polarization, no purity.",
+      "label": "gal-attached"
+    },
+    {
+      "lean": "UpperTheory.GalStar.Row0b",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean",
+      "line": 69,
+      "role": "standard",
+      "reference": "A weak form of Barnet-Lamb, Gee, Geraghty and Taylor, Ann. of Math. 179 (2014), Theorem 2.1.1",
+      "statement": "Definition (the property Row0b relative to a class of maps $\\mathcal R$): for every CM field $E$, $\\ell$, $\\iota$, $a\\geq1$, regular algebraic cuspidal $\\pi$ of $\\operatorname{GL}_a(\\mathbf A_E)$ and Hecke character $\\chi$ with $(\\pi,\\chi)$ polarized, there is a triple attached to $\\pi$ relative to $\\mathcal R$. It asserts no polarization of $r$, no purity, and local-global compatibility only in the two cases of Definition gal-compatible.",
+      "label": "gal-galois-representations"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean",
+      "line": 6,
+      "role": "new",
+      "reference": "Alpoge's construction (Sections section-gal-seed-construction and section-gal-construction); weaker than Barnet-Lamb, Gee, Geraghty and Taylor, Ann. of Math. 179 (2014), Theorem 2.1.1",
+      "statement": "Galois representations exist (Definition gal-galois-representations) relative to the class of maps satisfying the laws. The source proves the slightly stronger Row0 without the bound $g>16a^2$. Built from seeds in the etale cohomology of PEL unitary Shimura varieties, Chenevier-Harris-style interpolation with pseudo-characters, theta lifts to large definite unitary groups, descent to definite unitary groups, cyclic base change and gluing over CM extensions; no Igusa varieties and no Taylor-Wiles patching.",
+      "label": "gal-galois-representations-any-rc"
+    },
+    {
+      "lean": "UpperTheory.GalStar.Tor",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjAlt.lean",
+      "line": 27,
+      "role": "new",
+      "statement": "Remark: by the laws, full compatibility holds where $\\pi_w$ has supercuspidal support in characters and segments of length one; partial compatibility in the tame case over $\\mathbf Q_g$; nothing elsewhere (e.g. Steinberg components); no polarization or purity.",
+      "label": "gal-galois-scope"
+    },
+    {
+      "lean": "GlobalTheory.Published.ArthurClozelStrongTC",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisGeometry₂/ArthurClozelStrongTC.lean",
+      "line": 13,
+      "role": "standard",
+      "reference": "Arthur-Clozel, Simple algebras, base change and the advanced theory of the trace formula (1989)",
+      "statement": "Let $M/K$ be a Galois extension of prime degree $p$ of totally complex fields and $\\pi$ cuspidal on $\\operatorname{GL}_a(\\mathbf A_K)$, with no nontrivial character $\\eta$ of $K^\\times\\backslash\\mathbf A_K^\\times$ of order $p$ trivial on local norms at almost all places such that the Satake parameters of $\\pi$ are almost everywhere stable under $\\eta$. Then there is a cuspidal $\\Pi$ on $\\operatorname{GL}_a(\\mathbf A_M)$ with the base-change Satake parameters at unramified places, the same infinitesimal characters, and isomorphic local components at places of local degree one. Proved by strongTC_holds.",
+      "label": "gal-cyclic-base-change"
+    },
+    {
+      "lean": "GlobalTheory.UnitaryBC.UA",
+      "file": "Development/AbelianVarietyTheory/PublishedTheorems/GaloisCohomology₂/BaseChangeDefiniteUnitary.lean",
+      "line": 71,
+      "role": "new",
+      "statement": "The definite unitary group $U_n$ of the standard Hermitian form, its automorphic representations, local components at finite places, unramified places, Satake parameters, and weights at infinity.",
+      "label": "gal-definite-unitary"
+    },
+    {
+      "lean": "UpperTheory.BaseChangeIdentities.baseChangeN",
+      "file": "Development/AutomorphicArithmetic/Foundations/BaseChangeIdentities/DefiniteNHolds.lean",
+      "line": 5,
+      "role": "standard",
+      "reference": "Labesse, Changement de base CM et séries discrètes (2011)",
+      "statement": "Let $E/F$ be CM and unramified at all finite places and $U$ automorphic on the definite $U_n$. Then there are Speh representations $V_1,\\ldots,V_c$ of conjugate self-dual unitary cuspidal representations of $\\operatorname{GL}_{N_i}(\\mathbf A_E)$, $\\sum N_i=n$, and local representations $\\Pi_w$ that are subquotients of the products of local components, spherical where $U$ is unramified, with the base-change Satake parameters at inert unramified places, equal to the local component of $U$ at split places, and with the matching infinitesimal character.",
+      "label": "gal-base-change-definite"
+    },
+    {
+      "lean": "UpperTheory.TP.W.GoodK",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/HalfIndexLattices/SplitStab.lean",
+      "line": 18,
+      "role": "new",
+      "statement": "Good base for a CM field (standard additive character, CM type, split places $P$; $E/F$ unramified at finite places, $\\sqrt{-d}\\in E$, conditions at inert places), standard Hermitian spaces with self-dual lattices and scalar skew-Hermitian spaces with trace-dual lattices.",
+      "label": "gal-good-base"
+    },
+    {
+      "lean": "UpperTheory.TP.tLift_holds_k",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TPGHolds.lean",
+      "line": 58,
+      "role": "standard",
+      "reference": "Weaker than what the stable-range theta correspondence gives: J.-S. Li, Duke Math. J. 61 (1990); Harris-Kudla-Sweet, J. Amer. Math. Soc. 9 (1996)",
+      "statement": "Let $E$ be CM with a good base, $n\\geq1$ and $X$ a standard Hermitian space of rank $n$. There is $d_0$ such that for $d\\geq d_0$, every scalar skew-Hermitian $W$ of rank $d$, unitary Hecke characters $\\chi_X,\\chi_W$ restricting to $\\eta^n,\\eta^d$ with infinity types $m_X,m_W$, and every automorphic $U$ of the definite $U_n$ of weights $\\lambda$ with $d+m_W(v)\\leq2\\lambda(v)_k$, there is an automorphic $U'$ of the definite $U_d$ with explicitly shifted weights and related to $U$ by the local theta correspondence at every split place. It does not assert that $U'$ is the global theta lift.",
+      "label": "gal-theta-lift-large-rank"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Div.VBase",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/ZetaCharacterDivisibility/InsideRefl.lean",
+      "line": 73,
+      "role": "new",
+      "statement": "$d$-split places, lacunary sets, and seed representations for an automorphic $U$ of $U_a$: continuous semisimple $\\rho$ of any dimension, unramified at almost all $d$-split places with geometric Frobenius annihilated by $\\prod_b(X-q^{(a-1)/2}b)$, and with a lacunary set of $a$ Hodge-Tate weights at some place over $\\ell$.",
+      "label": "gal-seed"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.geoOne_holds",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/WeightOneGeometricRealization.lean",
+      "line": 11,
+      "role": "new",
+      "reference": "Alpoge's construction (Section section-gal-seed-construction); geometric ingredients from Kottwitz, Invent. Math. 108 (1992); Harris-Taylor (2001); Faltings-Chai (1990)",
+      "statement": "Let $E$ be CM, $a$ odd, $d$ with $-d$ a square in $E$ and $\\mathbf Q_\\ell$, $[F:\\mathbf Q]$ even, non-split places prime to $\\ell$ and unramified over $F$. For an automorphic $U$ of $U_a$ unramified at non-split places outside a finite set, with a supercuspidal type at a place $w_0$ over $\\ell$, Satake parameters at almost all split places and at a place $v'$ over $\\ell$, and lacunary weight at $v'$: there is a seed representation; for each $d$-split place prime to $\\ell$ there is one with the Frobenius condition there; and for suitable places $w$ over $\\ell$ there are crystalline seeds containing the predicted Hodge-Tate weights and with crystalline Frobenius eigenvalues among $q^{(a-1)/2}B$. Proved from etale cohomology of PEL unitary Shimura varieties, a congruence relation, a holomorphic Lefschetz formula and Kodaira-Spencer; not a published theorem; proved in Section section-gal-seed-construction from packs (Hecke towers of PEL Shimura varieties), with the deepest geometric steps OPEN.",
+      "label": "gal-seed-representations"
+    },
+    {
+      "lean": "GlobalTheory.GalV.HTower",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/IdTower.lean",
+      "line": 9,
+      "role": "new",
+      "statement": "Hecke towers over a field, smooth projective towers, the $\\theta$-part of total etale cohomology and its pieces, Hodge occurrence of an eigensystem.",
+      "label": "gal-hecke-tower"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Cover",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/IsGrRefl.lean",
+      "line": 80,
+      "role": "new",
+      "statement": "Good models of a Hecke tower at a place and the congruence (Eichler-Shimura) relation with its Hecke polynomial.",
+      "label": "gal-tower-reduction"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.OneK",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/HodgeTrAt.lean",
+      "line": 49,
+      "role": "new",
+      "statement": "The hypotheses (1)-(4) of Theorem gal-seed-representations.",
+      "label": "gal-seed-situation"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Pack",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/HodgeTrAt.lean",
+      "line": 58,
+      "role": "new",
+      "statement": "A pack for $U$: smooth projective Hecke tower, eigensystem, algebraic Hecke character, congruent to $U$ at almost all $d$-split places; congruence and Hodge data at a place.",
+      "label": "gal-pack"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Steps",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/MapInvMul.lean",
+      "line": 19,
+      "role": "standard",
+      "reference": "Etale cohomology; Faltings, J. AMS 1 (1988) and Crystalline cohomology and p-adic Galois representations (1989); Katz-Messing, Invent. Math. 23 (1974)",
+      "statement": "Semisimple Galois pieces exist; Frobenius eigenvalues from the congruence relation; crystallinity and Hodge-Tate weights at good places over $\\ell$; crystalline Frobenius divides a power of the Hecke polynomial.",
+      "label": "gal-tower-cohomology"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Pack.rep",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/MapInvMul.lean",
+      "line": 43,
+      "role": "new",
+      "statement": "A pack with Hodge data at a place with lacunary weight gives a seed, with the Frobenius condition at congruent places, crystallinity and Hodge-Tate weights at places with Hodge data, and crystalline Frobenius divisibility at congruent places over $\\ell$.",
+      "label": "gal-pack-seed"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.packEx_of",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/PackExOf.lean",
+      "line": 127,
+      "role": "new",
+      "statement": "Packs exist, from PEL Shimura varieties of unitary type (plans, Kodaira-Spencer, holomorphic Lefschetz formula), with Hodge data at $v'$ and congruence or Hodge data at a given place.",
+      "label": "gal-packs-exist"
+    },
+    {
+      "lean": "GlobalTheory.GalCut.Weak",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/IsWeight.lean",
+      "line": 18,
+      "role": "new",
+      "statement": "Frobenius eigenvalues at a place; weakly attached Galois representations (continuous, semisimple, Frobenius eigenvalues $q^{(a-1)/2}B$ at almost all places).",
+      "label": "gal-weakly-attached"
+    },
+    {
+      "lean": "GlobalTheory.RoadU.SphAt",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/CyclicStrongAtCusp.lean",
+      "line": 78,
+      "role": "new",
+      "statement": "The four conditions (unr), (dR), (crys), (phi) at a place with Satake parameters.",
+      "label": "gal-spherical-conditions"
+    },
+    {
+      "lean": "GlobalTheory.GalCut.InScope",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/IsWeight.lean",
+      "line": 58,
+      "role": "new",
+      "statement": "The scopes (all, good, self-dual) of polarized pairs, existence and the four conditions in a scope.",
+      "label": "gal-scope"
+    },
+    {
+      "lean": "GlobalTheory.RoadU.PlainTor",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/CyclicStrongAtCusp.lean",
+      "line": 30,
+      "role": "new",
+      "statement": "Unlinked supports and plain representations; $\\sigma^\\flat=\\sigma\\nu^{(1-a)/2}$.",
+      "label": "gal-plain"
+    },
+    {
+      "lean": "GlobalTheory.DeRhamOfPlainTorus.R1",
+      "file": "Development/AbelianVarietyTheory/Statements/EllipticCurveLevels/IsQg.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "From the four conditions in the first scope: full local-global compatibility at places with plain local component, away from and above $\\ell$.",
+      "label": "gal-plain-compatibility"
+    },
+    {
+      "lean": "UpperTheory.Gal.ToralGalois.R2.LocalGlobalCompatAtIwahoriFixedPlaces",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/SphericalGaloisCompatibility/PAdicSplitting/LocalGlobalCompatAtIwahoriFixedPlaces.lean",
+      "line": 16,
+      "role": "new",
+      "statement": "Inertial compatibility at depth-zero places with plain components or, over $\\mathbf Q_g$, with pairwise inertially inequivalent supercuspidals of degree at least 2.",
+      "label": "gal-depth-zero-compatibility"
+    },
+    {
+      "lean": "UpperTheory.GalStar.Row0",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjAlt.lean",
+      "line": 85,
+      "role": "new",
+      "statement": "From the four conditions in the first scope, attached triples with the tame clause over any $\\mathbf Q_g$ (Row0).",
+      "label": "gal-row-from-core"
+    },
+    {
+      "lean": "GlobalTheory.RoadU.coreAll_of_core",
+      "file": "Development/AbelianVarietyTheory/Proofs/SatakeParameters/CoreAllOfCore.lean",
+      "line": 24,
+      "role": "new",
+      "statement": "From the self-dual scope to the first scope, by twisting, base change, gluing and descent.",
+      "label": "gal-core-all"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Core.LimU",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/CrystallineDescent/LimOddOfLimWU3.lean",
+      "line": 37,
+      "role": "new",
+      "statement": "Setting for definite unitary groups of odd rank: suitable CM field, $T$, $U$, two places over $\\ell$.",
+      "label": "gal-definite-situation"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Core.limU_of_limOdd",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/CrystallineDescent/LimOddOfLimWU3.lean",
+      "line": 48,
+      "role": "new",
+      "statement": "Galois representations for automorphic representations of definite $U_a$, $a$ odd, at $d$-split places and at places over $\\ell$ away from $w_0,v'$: seeds of rank $a$, congruences and trace limits.",
+      "label": "gal-limits"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Core.toCoreK",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/CrystallineDescent/ToCoreK.lean",
+      "line": 7,
+      "role": "new",
+      "statement": "Existence and the four conditions in the self-dual scope: odd rank, all ranks by theta lifts and subtraction, descent to definite unitary groups, base change and gluing to all places.",
+      "label": "gal-core"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.DegFin",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/FlagBasis.lean",
+      "line": 108,
+      "role": "standard",
+      "statement": "Finiteness of etale cohomology of smooth projective varieties and smooth and proper base change (specialization isomorphism, Galois-equivariant, trivial inertia).",
+      "label": "gal-etale-foundations",
+      "reference": "SGA 4 (Artin-Grothendieck-Verdier 1973), Exposes XIV, XVI; Deligne, SGA 4 1/2 (1977)"
+    },
+    {
+      "lean": "CrystallineSemistableComparison.CstSmooth",
+      "file": "Development/WeilBound/CoreStatements/PadicHodgeComparison/EtaleCohomologyComparison/BocksteinBaseChange/CstSmoothOf.lean",
+      "line": 38,
+      "role": "standard",
+      "statement": "For Y smooth projective over O_K: H^n(Y_Kbar) is crystalline, has a natural Hodge-Tate decomposition, and D_cris is crystalline cohomology of the special fibre with its Frobenius.",
+      "label": "gal-padic-comparison",
+      "reference": "Faltings, JAMS 1 (1988); Faltings, Algebraic Analysis, Geometry and Number Theory (1989)"
+    },
+    {
+      "lean": "UpperTheory.Gal.TranscendenceTraces.tr",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TranscendenceTraces/IsWtZero.lean",
+      "line": 99,
+      "role": "new",
+      "statement": "Weighted traces along finite morphisms on etale cohomology with torsion and l-adic coefficients: stalkwise weighted sums, additivity in the weight, compatibility with pushing weights forward, and vanishing of a weight that vanishes over a dense set.",
+      "label": "gal-weighted-trace"
+    },
+    {
+      "lean": "UpperTheory.Gal.TranscendenceTraces.CorrEqQ",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TranscendenceTraces/WtDegConst.lean",
+      "line": 124,
+      "role": "new",
+      "statement": "Weighted finite correspondences whose 0-cycles agree over a dense set of points act equally on etale cohomology.",
+      "label": "gal-weighted-correspondences"
+    },
+    {
+      "lean": "UpperTheory.Gal.Mod.ESGen",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/BasicOpenSections/BaseFacts.lean",
+      "line": 45,
+      "role": "new",
+      "statement": "For Y smooth proper over a DVR with correspondences satisfying the Eichler-Shimura relation at generic points of the special fibre: inertia acts trivially and sum_j (-1)^j q^{j(j-1)/2} t_j Frob^{-(n-j)} = 0 on H^k of the geometric generic fibre.",
+      "label": "gal-eichler-shimura-cohomology"
+    },
+    {
+      "lean": "GlobalTheory.UPel.HT.Datum",
+      "file": "Development/AbelianVarietyTheory/Definitions/Divisors/NotCompactOfMEqOne.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "Unitary PEL datum of simple type (O = O_E, odd rank n, signature (1,n-1) at one place and (0,n) elsewhere, auxiliary prime p split in Q(omega)); its Shimura variety is proper.",
+      "label": "gal-pel-datum"
+    },
+    {
+      "lean": "UpperTheory.Gal.LocalSmoothExtension.HolomorphicLefschetzFormula",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/LefschetzSigmaSums/HodgeTraceFromLefschetzAndGroupSide.lean",
+      "line": 102,
+      "role": "standard",
+      "statement": "Holomorphic Lefschetz formula for finite etale correspondences with isolated nondegenerate fixed points on Hodge cohomology H^b(Z, Omega^a).",
+      "label": "gal-holomorphic-lefschetz",
+      "reference": "Atiyah-Bott, Ann. of Math. 88 (1968)"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Plan",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/PackExOf.lean",
+      "line": 43,
+      "role": "new",
+      "statement": "Plan: PEL datum, level, Hecke operators with eigenvalues theta, Hecke character kappa, weight lambda, test function f with the spectral condition and the congruences at almost all d-split places; Hodge data and congruence at a place.",
+      "label": "gal-plan"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.KSAll",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/PackExOf.lean",
+      "line": 93,
+      "role": "new",
+      "statement": "Hecke towers on the fibre powers of the universal abelian scheme over the PEL Shimura varieties: smooth projective, good models, congruence relations, and Hodge occurrences from the spectral condition via the holomorphic Lefschetz formula.",
+      "label": "gal-ks-towers"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.Plan.pack",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/PackExOf.lean",
+      "line": 101,
+      "role": "new",
+      "statement": "A plan gives a pack with the same Hodge data and congruences.",
+      "label": "gal-plan-pack"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Geo.PlanEx",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/PackExOf.lean",
+      "line": 82,
+      "role": "new",
+      "statement": "Plans exist with Hodge data at v and congruent at given places, via the identification of finite adelic groups away from p, the vector, the exponents and the spectral statement.",
+      "label": "gal-plans-exist"
+    },
+    {
+      "lean": "GlobalTheory.CongL.DGen",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/LimWPhi.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "Generic and multiplicatively generic multisets of Satake parameters (the polynomial D_a).",
+      "label": "gal-generic-parameters"
+    },
+    {
+      "lean": "UpperTheory.Gal.crystallineComparison.CharOfAnn",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/AnnihilatorModels/GenericMulOfProd.lean",
+      "line": 23,
+      "role": "new",
+      "statement": "A matrix killed by prod (X - z), z in a multiplicatively generic R, with determinant prod R has characteristic polynomial prod (X - z).",
+      "label": "gal-char-of-ann"
+    },
+    {
+      "lean": "PositivityTheory.AutomorphicGaloisHodgeTate.Div.SenWLac",
+      "file": "Development/WeilBound/CoreStatements/PadicHodgeComparison/CocharacterLieDivisors/StGalW.lean",
+      "line": 26,
+      "role": "standard",
+      "statement": "Lacunary Hodge-Tate weights give an element of the Lie algebra of the Zariski closure of the image with those eigenvalues (Sen operator).",
+      "label": "gal-sen",
+      "reference": "Sen, Ann. of Math. 97 (1973)"
+    },
+    {
+      "lean": "PositivityTheory.AutomorphicGaloisHodgeTate.Div.DivWCoreLac",
+      "file": "Development/WeilBound/CoreStatements/PadicHodgeComparison/CocharacterLieDivisors/DivWCoreLacUseType.lean",
+      "line": 90,
+      "role": "new",
+      "statement": "Division: a continuous semisimple representation of a compact group whose elements on a dense set are killed by degree-n polynomials with consistent constant term, with a lacunary Lie element, contains an n-dimensional r with det psi of which it is a quotient of copies.",
+      "label": "gal-division"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Div.DivAll",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/ZetaCharacterDivisibility/InsideRefl.lean",
+      "line": 107,
+      "role": "new",
+      "statement": "From a seed for U: an a-dimensional r, unique up to isomorphism, with Frobenius eigenvalues at generic split places, crystalline with the right Hodge-Tate weights, and (phi) at generic places over l.",
+      "label": "gal-division-seed"
+    },
+    {
+      "lean": "GlobalTheory.CongL.CongFinOdd",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/LimWU4OfLimWU3.lean",
+      "line": 105,
+      "role": "new",
+      "statement": "Congruences: the Hecke eigenvalue system of U (with power sums at places over l) is approximated l-adically by those of forms with lacunary weight at v, the supercuspidal type at w0 and generic Satake parameters.",
+      "label": "gal-congruences"
+    },
+    {
+      "lean": "UpperTheory.Gal.Lim.exists_trace_limit",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TraceLimits/ExistsTraceLimit.lean",
+      "line": 15,
+      "role": "new",
+      "statement": "Limits of traces: approximated systems give a continuous trace limit, which is the trace of a continuous semisimple representation (Taylor).",
+      "label": "gal-trace-limit"
+    },
+    {
+      "lean": "GlobalTheory.LimitTop.closedAtL",
+      "file": "Development/AbelianVarietyTheory/Proofs/SatakeParameters/ClosedAtL.lean",
+      "line": 25,
+      "role": "new",
+      "statement": "Crystallinity with fixed Hodge-Tate weights, and power sums of the crystalline Frobenius, pass to trace limits.",
+      "label": "gal-closed-crystalline"
+    },
+    {
+      "lean": "UpperTheory.Gal.Int.Row.mixed_of_tame",
+      "file": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/InertCharpoly/CharPolOfInert.lean",
+      "line": 151,
+      "role": "new",
+      "statement": "For generic x with rc(x) monodromy-free: x is induced from an unlinked support with rc(x) the sum; abelian implies plain; over Q_g, tame with multiplicity-free tame part implies depth zero with pairwise inertially inequivalent supercuspidals of degree >= 2.",
+      "label": "gal-generic-monodromy-free"
+    }
+  ],
+  "updated": "2026-11-21T00:09:22Z"
+}

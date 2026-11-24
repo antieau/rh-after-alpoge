@@ -1,0 +1,641 @@
+{
+  "id": "period-divisibility",
+  "title": "Divisibility of periods",
+  "state": "drafted",
+  "summary": "Multiplicity in Stepanov's method is replaced by $p$-adic divisibility of periods. Theta functions on CM elliptic curves have $p$-integral Taylor jets in suitable coordinates; for the definite-side data of the construction, the periods of lattice vectors are integral up to explicit stabilizer denominators, by the duality of Weyl module lattices and the integrality of the rows of top forms. Along the chain of $m$ lifts, the period of a lifted vector against an integral top form is either $0$ or has valuation at least an explicit gain at each place. At a prime $p$ inert in the host field the gains satisfy $\\sum_j\\mathrm{gain}_j(p)\\ge\\sum_j\\sum_t\\sum_{i\\ \\mathrm{odd}}(a_t/p^{i}-w)_+-O(\\cdots)$, the quantity $a/p+a/p^{3}+\\cdots$ of the announcement, and this is what feeds the inert-prime sum of Chapter 4.",
+  "timeline": [
+    2,
+    9,
+    10
+  ],
+  "progress": "Final round: the single-monomial bound and the one-place bound are at the depth floor (weight calculus, letter series, Lemma S, the weighted Dwork bound, row radii), the formal group system conditions and the level-prime characters are stated in full; open steps remain for the comparison with standard columns, the served column bounds, the two theorems on the gains and the gain link.",
+  "statements": [
+    {
+      "lean": "Formalism.L2.Th1.CM.HasCMBy",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/CMGoodModels/Statement.lean",
+      "line": 10,
+      "role": "standard",
+      "reference": "Silverman, Advanced Topics in the Arithmetic of Elliptic Curves, Chapter II",
+      "statement": "For $d$ squarefree with $d\\equiv3\\pmod4$, a lattice $L\\subset\\mathbf C$ has complex multiplication by $\\mathcal O_K$, $K=\\mathbf Q(\\sqrt{-d})$, if $\\omega_KL\\subset L$ with $\\omega_K=(1+\\sqrt{-d})/2$; $j(L)=1728g_2^3/(g_2^3-27g_3^2)$.",
+      "label": "pd-cm-lattice"
+    },
+    {
+      "lean": "Formalism.L2.Th1.CM.JInvariantIntegrality",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/CMGoodModels/Statement.lean",
+      "line": 42,
+      "role": "standard",
+      "reference": "Silverman, Advanced Topics in the Arithmetic of Elliptic Curves, Chapter II, Section 6",
+      "statement": "Let $d$ be squarefree with $d\\equiv3\\pmod4$ and let $L\\subset\\mathbf C$ be a lattice with complex multiplication by the ring of integers of $\\mathbf Q(\\sqrt{-d})$. Then $j(L)$ is an algebraic integer.",
+      "label": "pd-j-invariant-integral"
+    },
+    {
+      "lean": "Formalism.L2.Th1.CM.IsGoodModel",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/CMGoodModels/Statement.lean",
+      "line": 38,
+      "role": "standard",
+      "reference": "",
+      "statement": "A good model of a lattice $L$ at $(l,\\iota)$ is a rescaling $(\\lambda^4\\iota g_2(L),\\lambda^6\\iota g_3(L))$ with both invariants integral in the closure of $\\mathbf Q_l^{\\mathrm{ur}}$ and unit discriminant.",
+      "label": "pd-good-model"
+    },
+    {
+      "lean": "Formalism.L2.Th1.CM.CM3",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/CMGoodModels/Statement.lean",
+      "line": 49,
+      "role": "standard",
+      "reference": "Deuring 1941; Lubin-Tate 1965; Hazewinkel, Formal Groups and Applications",
+      "statement": "Let $L$ have CM by $\\mathcal O_K$, $K=\\mathbf Q(\\sqrt{-d})$, let $l\\geq5$ be inert in $K$ and $(g_2',g_3')$ a good model at $l$. Then for some unit $\\varepsilon$ of $\\widehat{\\mathbf Q}_l^{\\mathrm{ur}}$ the formal parameter $u=-2\\wp/\\wp'$ composed with $\\varepsilon\\sum_jX^{l^{2j}}/l^j$ has integral coefficients: the formal group is isomorphic to the height-two Lubin-Tate group.",
+      "label": "pd-inert-formal-group"
+    },
+    {
+      "lean": "Formalism.L2.Th1.H.Th",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/QuadraticSemicharacters/IsSemiChar.lean",
+      "line": 83,
+      "role": "standard",
+      "reference": "",
+      "statement": "Self-dual lattices for $\\operatorname{Im}H$, the operators $U_xF(z)=F(z+x)e^{-\\pi H(z,x)-\\pi H(x,x)/2}$, theta functions with normalization $c$ (entire $F$ with $\\alpha_c(x)U_xF=F$ on $\\Lambda$), and the normalized one-variable theta function $\\vartheta_{L,t}$ built from $\\sigma_L e^{-s_2(L)z^2/2}$.",
+      "label": "pd-theta-function"
+    },
+    {
+      "lean": "Formalism.L2.Th1.GD.LocNorm",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussianEigenFrames/StatementC.lean",
+      "line": 20,
+      "role": "new",
+      "reference": "",
+      "statement": "CM data $(a_0,b_0,c_0,d,\\lambda)$ with $4a_0c_0=b_0^2+d$, $a_0$ odd, $d\\equiv7\\pmod8$ prime, lattice $\\lambda(\\mathbf Za_0+\\mathbf Z\\theta_K)$; a theta function is locally normalized at $(p,\\iota)$ if its fourth tensor power is a $p$-integral multiple of the transfer of $\\prod\\vartheta_{L,\\lambda a_0/2}$ through an isometry $g$ of $H^{\\oplus4}$ with the standard form, with index prime to $p$.",
+      "label": "pd-cm-datum"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.JetsIntegral",
+      "file": "Formalism/GaussJetBounds/StatementN.lean",
+      "line": 27,
+      "role": "new",
+      "reference": "",
+      "statement": "A power series has integral jets if $|\\kappa!\\,g_\\kappa|\\leq1$ for all $\\kappa$; the jet pairing is $\\langle P,G\\rangle=\\sum p_\\kappa\\kappa!g_\\kappa$.",
+      "label": "pd-integral-jets"
+    },
+    {
+      "lean": "GlobalTheory.ThLoc.LocJets.jets_comb",
+      "file": "Development/AbelianVarietyTheory/Definitions/GaloisGeometry/FourthPowerTheta.lean",
+      "line": 55,
+      "role": "new",
+      "statement": "Integral jets are preserved by sums, products, constants in the valuation ring, exponentials of series with zero constant term, linear substitutions with integral matrices and substitution of series with integral jets into integral series; if the fourth tensor power of a series has integral jets, so does the series.",
+      "label": "pd-jets-closure"
+    },
+    {
+      "lean": "Formalism.L2.Th1.Top.phC",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/UniformGaussModels/GoodModelAll.lean",
+      "line": 21,
+      "role": "new",
+      "statement": "For a lattice $L$ whose Weierstrass curve has good reduction at $(p,\\iota)$, the normalizing series $\\phi_L$ is defined by $Xe^{-\\phi_L(X)}=\\iota(\\sigma^*_L)(\\log_{\\mathcal E}X)$; its jets are $(\\partial^i\\phi_L)(0)$ for the invariant derivation; congruence of series means an integral exponential of the difference, and $\\beta_L(x,y)=\\phi_L(x\\oplus y)-\\phi_L(x)-\\phi_L(y)$.",
+      "label": "pd-normalizing-series"
+    },
+    {
+      "lean": "Formalism.L2.Th1.D.CurveNormEndomorphisms.cdata",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussSumParity/KummerThetaLogarithms/SecondLogDerivativeUnique.lean",
+      "line": 136,
+      "role": "new",
+      "statement": "For $L$ with CM by $\\mathcal O_K$ and $\\alpha=m+n\\omega_K$ of norm $N\\neq0$, the nonzero points $S$ of $\\alpha^{-1}L/L$ number $N-1$, $\\alpha^2\\wp_L(\\alpha z)=\\wp_L(z)+\\sum_{P\\in S}(\\wp_L(z+P)-\\wp_L(P))$, and $\\alpha(\\alpha-\\bar\\alpha)s_2(L)=\\sum_{P\\in S}\\wp_L(P)$.",
+      "label": "pd-cm-isogeny"
+    },
+    {
+      "lean": "Formalism.L2.Th1.G.WeierstrassBiadditiveModEquiv",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/RamifiedCurveKernels/StatementR.lean",
+      "line": 48,
+      "role": "new",
+      "statement": "For a lattice with good reduction at an odd prime: $\\phi_L([-1]X)\\equiv\\phi_L(X)$; $\\beta_L$ is additive in each variable up to congruence; and for a CM endomorphism $\\alpha$ of norm $N$ prime to $p$ with $|\\iota(\\alpha)|=1$, $[\\alpha],[\\alpha^{-1}],[\\bar\\alpha]$ are integral and $\\phi_L([\\alpha]X)\\equiv N\\phi_L(X)$.",
+      "label": "pd-sigma-congruences"
+    },
+    {
+      "lean": "Formalism.L2.Th1.C.JetsUnramified",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/SecondCoefficientNorms/ThirdJetIntegral.lean",
+      "line": 17,
+      "role": "new",
+      "statement": "For an integral formal group over a complete field with $|2|=1$ and a series $\\phi$ that is even up to congruence, whose $\\beta$ is additive up to congruence, and that satisfies a norm relation $\\phi([a]X)\\equiv ab\\,\\phi(X)$ with $ab\\in\\mathbf Z_{>0}$, $[a],[a^{-1}],[b]$ integral and $a-b$ a unit, every jet $(\\partial^i\\phi)(0)$, $i\\geq1$, is integral.",
+      "label": "pd-jets-abstract"
+    },
+    {
+      "lean": "Formalism.L2.Th1.Top.JetsCM",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/UniformGaussModels/GoodModelAll.lean",
+      "line": 47,
+      "role": "new",
+      "statement": "For $L$ with CM by $\\mathcal O_K$, $K=\\mathbf Q(\\sqrt{-d})$, at an odd prime $p\\nmid d$ of good reduction, every jet of order at least one of the normalizing series $\\phi_L$ is integral.",
+      "label": "pd-cm-jets"
+    },
+    {
+      "lean": "Formalism.L2.Th1.E.IsTransSys",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/TorsionTranslationPowers/IsTransSys.lean",
+      "line": 60,
+      "role": "new",
+      "statement": "A translation system for a homomorphism from an abelian group to the points of an integral Weierstrass curve with unit discriminant: series $G_t$ with $G_t=\\varepsilon X$, $|\\varepsilon|=1$, at the kernel, $G_t(0)\\neq0$ elsewhere, and the addition formula $X^2G_{s+t}G_{s-t}=G_t(0)^2(x(\\pi t)X^2-x_2(\\pi s))G_s^2$.",
+      "label": "pd-translation-system"
+    },
+    {
+      "lean": "Formalism.L2.Th1.E.TransUnit",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/TorsionTranslationPowers/StatementT.lean",
+      "line": 37,
+      "role": "new",
+      "statement": "For a translation system with integral points and $t$ with $N\\pi(t)=0$, $|N|=1$: $G_t$ is integral with a coefficient of absolute value $1$, and if $\\pi(t)\\neq0$ then $|G_t(0)|=1$ and $G_t/G_t(0)$ is an integral $1$-unit.",
+      "label": "pd-translation-units"
+    },
+    {
+      "lean": "Formalism.L2.Th1.E.AnalyticSys",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/TorsionTranslationPowers/StatementA.lean",
+      "line": 63,
+      "role": "new",
+      "statement": "The series $G_t=e^{\\phi_L}\\iota(U^L_t\\sigma^*_L)(\\log_{\\mathcal E}X)$ form a translation system for $t\\mapsto(\\iota\\wp_L(t),\\iota\\wp'_L(t)/2)$; torsion points of order prime to $p$ are integral; and $U^L_t\\vartheta_{L,t_0}=\\zeta(U^L_{t_0}\\sigma^*_L)(0)^{-1}U^L_{t+t_0}\\sigma^*_L$ with $\\zeta$ a root of unity.",
+      "label": "pd-analytic-translation-system"
+    },
+    {
+      "lean": "Formalism.L2.Th1.H.TransInt",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/QuadraticSemicharacters/QuadraticSemicharactersFactVersion.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "At an odd prime of good reduction, for $\\omega_0\\in L$ with $\\omega_0/2\\notin L$: $e^{\\phi_L}\\iota(\\vartheta_{L,\\omega_0/2})(\\log_{\\mathcal E}X)$ is an integral $1$-unit, and for $s$ with $Ns\\in L$, $p\\nmid N$, the series $e^{\\phi_L(X)}\\iota(U^L_s\\vartheta_{L,\\omega_0/2})(\\log_{\\mathcal E}X)$ is integral with a coefficient of absolute value $1$.",
+      "label": "pd-theta-translates"
+    },
+    {
+      "lean": "Formalism.L2.Th1.GD.TensStd",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussianEigenFrames/StatementC.lean",
+      "line": 38,
+      "role": "new",
+      "statement": "For a locally normalized theta function and a translate $U_t\\theta$ with $Nt\\in\\Lambda$, $p\\nmid N$, the fourth tensor power of its Taylor series in the coordinates given by the local normalization is $e^{-\\sum_w\\phi_L(X_w)}G(X)$ with $G$ integral and $X_w=\\exp_{\\mathcal E}(Z_w)$.",
+      "label": "pd-fourfold-product"
+    },
+    {
+      "lean": "Formalism.L2.Th1.GD.GramTransfer",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussianEigenFrames/StatementB.lean",
+      "line": 23,
+      "role": "new",
+      "statement": "Vectors of the multiplier module have $p$-integral coordinates in the basis of the local normalization, so the substitution $X\\mapsto MX$ in four blocks factors through an integral matrix $C$ with $\\gamma C$ block diagonal.",
+      "label": "pd-multiplier-coordinates"
+    },
+    {
+      "lean": "Formalism.L2.Th1.GD.JetsLin",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussianEigenFrames/StatementA.lean",
+      "line": 51,
+      "role": "new",
+      "statement": "If the jets of $\\phi_L$ are integral, the fourfold product of $T$ has the shape of Lemma pd-fourfold-product, and $\\gamma C$ is block diagonal with blocks $M$ for an integral $C$, then $T(MX)$ has integral jets.",
+      "label": "pd-jets-from-fourth-power"
+    },
+    {
+      "lean": "Formalism.L2.Th1.GD.IntOpLoc",
+      "file": "Formalism/LocalToGlobal/TorsionIntegrality/GaussianEigenFrames/StatementC.lean",
+      "line": 134,
+      "role": "new",
+      "statement": "Let $K=\\mathbf Q(\\sqrt{-d_K})$ and let $E_\\lambda$ be a CM elliptic curve over a number field with period lattice attached to $(a_0,b_0,d_K,\\lambda)$. Let $\\Lambda\\subset\\mathbf C^{n}$ be a lattice self-dual for a Hermitian form $h$ and stable under the CM action, and let $\\theta$ be a theta function for $(h,\\Lambda)$ with the normalization attached to $\\sqrt{d_K}/2$. Let $p\\ne2$ be a prime not dividing $d_K$ at which the curve has good reduction and $\\theta$ is locally normalized, and fix $\\iota:\\mathbf C\\cong\\mathbf C_p$. Then for $p$-integral coefficients, torsion translates $t_k$ with $Nt_k\\in\\Lambda$, $p\\nmid N$, and $p$-integral linear combinations of vectors in the CM multiplier module, all Taylor jets of the corresponding linear combination of translates of $\\theta$ are $p$-integral, and so is its pairing with every polynomial with $p$-integral coefficients.",
+      "reference": "",
+      "label": "pd-theta-jets-integral"
+    },
+    {
+      "lean": "Formalism.BasicNotions.DGamDef",
+      "file": "Formalism/LocalRingCardinality/DataErr.lean",
+      "line": 74,
+      "role": "new",
+      "reference": "",
+      "statement": "The parts of a definite-side datum used for periods beyond Chapter 6: places of the coefficient field, the condition that the stabilizer denominators $D_\\Gamma(u,\\mu)$ are defined, integral top forms, lattices of forms and point lattices with integral evaluations, twisted forms, used tuples and exceptional primes, and the maps $j_N$, $\\nu_u$ of the division lattices.",
+      "label": "pd-period-data"
+    },
+    {
+      "lean": "Formalism.MainNotions.WeightDegreeSizes.PeriodClassSumWeyl",
+      "file": "Formalism/SharpRestriction/Divisibility/WeightDegreeSizes.lean",
+      "line": 723,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum with its coefficient field $L$. Period integrality for $D$ holds if, whenever the stabilizer denominators are defined, for every word $u$, every vector $x$ of the point lattice of $u$ and every integral top form $F$ for the trivial tuple of characters, the period of $x$ against $F$ is $\\iota(y)$ for some $y\\in L$ that is $0$ or has $v_w(y)\\ge-r_w(u)$ at every place $w$, where $r_w(u)$ is the stabilizer denominator of $u$ at $w$.",
+      "reference": "",
+      "label": "pd-period-integrality"
+    },
+    {
+      "lean": "Formalism.L2.G.Adm2InU.TwistedPeriodAdmissible",
+      "file": "Formalism/LocalToGlobal/GroupLattices/AdmissibleAtGeneratorPlaces.lean",
+      "line": 14,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum with division data and twisted forms. Twisted period integrality holds if, whenever the stabilizer denominators are defined, for every word $u$ and every used nontrivial tuple $\\mu$ of Hecke characters, the period of every vector of the twisted point lattice against every integral top form for $\\mu$ is $\\iota(y)$ with $y\\in L$, and at every place $w$ outside the exceptional set of $\\mu$ either $y=0$ or $v_w(y)\\ge-r_w(u)$.",
+      "reference": "",
+      "label": "pd-twisted-period-integrality"
+    },
+    {
+      "lean": "Formalism.BasicNotions.SizeData₂",
+      "file": "Formalism/LocalRingCardinality/DataParams₂.lean",
+      "line": 76,
+      "role": "new",
+      "reference": "",
+      "statement": "Size data: the scale $(x,\\varepsilon)$ with $b,a,X',X''$, exponents $a_t$, local gains $\\mathrm{gain}_j(w)$, terms $F_j(w)$, errors $E_{u,j}(w)$, $\\tau_w,\\iota_w$, dropped primes, lattices $N^\\circ_u$, sets $T_w$, weights $w_{j,t,p,i}$ and lengths; $s(u,w)=\\sum_j(\\mathrm{gain}^\\flat_j+F_j-E_{u,j})(w)$, and the constant $C_\\Gamma$ with $\\log\\Gamma_P=C_\\Gamma m^5fx^\\varepsilon$.",
+      "label": "pd-size-data"
+    },
+    {
+      "lean": "Formalism.MainNotions.LocalQuadraticParts.adm2",
+      "file": "Formalism/SharpRestriction/Divisibility/LocalQuadraticParts.lean",
+      "line": 206,
+      "role": "new",
+      "statement": "Let $D$ be a definite-side datum at a scale with size data. The multiplicity bound holds if for every word $u$, every place $w$ of the coefficient field $L$, every vector $\\varphi$ of the division lattice $N_u$ and every integral top form $F$ for the tuple of characters $\\mu_w$ attached to $w$, the period of the lifted vector $j_N\\varphi$ against $F$ equals $\\iota(y)$ for some $y\\in L$ with $y=0$ or $v_w(y)\\ge\\lfloor e_w\\,s(u,w)\\rfloor$, where $s(u,w)=\\sum_{j=1}^{m}(\\mathrm{gain}_j+F_j-E_{u,j})(w)$ is the accumulated local gain along the chain of lifts.",
+      "reference": "",
+      "label": "pd-multiplicity-bound"
+    },
+    {
+      "lean": "Formalism.MainNotions.WeilJacquetShalikaLaw.ColGe",
+      "file": "Formalism/SharpRestriction/GrowthBounds/WeilJacquetShalikaLaw.lean",
+      "line": 33,
+      "role": "new",
+      "reference": "",
+      "statement": "The iterated lift of $x$ has $w$-valuation at least $s$ if it is $\\iota(a)z$ with $z$ in the $w$-local top lattice and $v_w(a)\\geq e_ws$.",
+      "label": "pd-lift-valuation"
+    },
+    {
+      "lean": "Formalism.L2.G.Adm2InU.period_geTU",
+      "file": "Formalism/LocalToGlobal/GroupLattices/AdmissibleAtGeneratorPlaces.lean",
+      "line": 72,
+      "role": "new",
+      "reference": "",
+      "statement": "Under period and point integrality, if the iterated lift of a division vector has $w$-valuation at least $s$, its periods against integral top forms have $v_w\\geq e_w(s-v_{p_w}(\\Gamma_u))$.",
+      "label": "pd-period-of-divisible-lift"
+    },
+    {
+      "lean": "Formalism.MainNotions.Closed",
+      "file": "Formalism/SharpRestriction/ParamsHeightRankConstant.lean",
+      "line": 159,
+      "role": "new",
+      "reference": "",
+      "statement": "Families of definite-side data with exponent $\\varepsilon$ (threshold, scales, members with data and size data, shared invariants, constants), classes of families, largeness thresholds in three stages, and properties that hold eventually along a class and at all large scales; the members at one scale cover the base points.",
+      "label": "pd-family"
+    },
+    {
+      "lean": "Formalism.BasicNotions.LT.Nlam",
+      "file": "Formalism/LocalRingCardinality/DataLatDefs.lean",
+      "line": 96,
+      "role": "new",
+      "statement": "The Hecke operators $U_v$ at the places over $T_u$, their product $U_w$ over the places attached to top embeddings seen at $w$, the exponent $e_T(u,w)$, the local lattice $N_\\lambda(u,w)$ (image of the ramified $w$-local lattice under $T_u^{e_T}U_w^m$), and the exponent $E_T(u,w)=2\\sum_\\tau W_\\tau(u)+fN(m)+|\\mathcal T_{\\mathrm{top}}|(t+1)(m+1)/4$ at places that see $\\pi_u$.",
+      "label": "pd-hecke-at-T"
+    },
+    {
+      "lean": "Formalism.BasicNotions.posPl",
+      "file": "Formalism/LocalRingCardinality/DataForced.lean",
+      "line": 19,
+      "role": "new",
+      "statement": "Places $z\\in\\{0,1\\}\\times A$ with embeddings $\\tau_z$, weights $w_j(z)=e_j(\\tau_z)$, row exponents of the lifts and their Young diagrams $\\nu_{u,i}(z)$, positions along the Frobenius orbits and the orbit length $\\ell_p$.",
+      "label": "pd-orbit-places"
+    },
+    {
+      "lean": "Formalism.MainNotions.product_zeroth_first_parts.KvalGe",
+      "file": "Formalism/SharpRestriction/Divisibility/ProductZerothFirstParts.lean",
+      "line": 99,
+      "role": "new",
+      "statement": "Column choices, products of minors $G_I$ and $\\nabla_J$, the jet pairing in the $X$-variables, and the $\\nu$-valuation of a power series: every coefficient of $\\langle G_I,\\Theta\\rangle_X$ has absolute value at most $l^{-B}$.",
+      "label": "pd-minor-valuation"
+    },
+    {
+      "lean": "Formalism.BasicNotions.KerEnt",
+      "file": "Formalism/LocalRingCardinality/DataKerI.lean",
+      "line": 74,
+      "role": "new",
+      "statement": "Kernel entries: embeddings $\\iota_w$, kernel series and constants, rational vectors with source and target coordinates that describe the local lattices of forms, and the identity expressing each kernel map as the pairing of its kernel series with products of minors.",
+      "label": "pd-kernel-entries"
+    },
+    {
+      "lean": "Formalism.MainNotions.OrbitPlaces.ThetaExpansionAllPlaces",
+      "file": "Formalism/SharpRestriction/Divisibility/OrbitPlaces.lean",
+      "line": 186,
+      "role": "new",
+      "statement": "The orbit logarithm, the conditions (B1) to (B4), the orbit expansion, the expansion at a split orbit and the theta product form of a kernel series at an inert prime.",
+      "label": "pd-orbit-expansions"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.GAtP",
+      "file": "Formalism/SharpRestriction/GrowthBounds/DataG.lean",
+      "line": 163,
+      "role": "new",
+      "statement": "Local models at an inert prime $p$: Hida settings, orbits with dominant weights, lattice tuples with the lattices $H^\\Delta(L)$, levels with integral modules, Hecke operators at the orbits, fills with the weights of the lifts, levels and chains over the fills, and valuations.",
+      "label": "pd-local-model"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.LatInst",
+      "file": "Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean",
+      "line": 418,
+      "role": "new",
+      "statement": "Admissible places of a definite-side datum, its local models and their ties to the embeddings, a lattice instance with a comparison of the lattice of forms in degree $0$ with the integral module, and the condition that the instance is tied to the gain data.",
+      "label": "pd-lattice-instance"
+    },
+    {
+      "lean": "Formalism.MainNotions.FormalGroupSystem.Pend",
+      "file": "Formalism/SharpRestriction/GrowthBounds/FormalGroupSystem.lean",
+      "line": 447,
+      "role": "new",
+      "statement": "Formal group systems at $p$: a local model with fills and a chain, kernel data with kernel series in Lubin-Tate coordinates, lower bounds for the jets at an orbit, and the admitted conditions (Dwork's lemma, expansion of the kernels, equivariance, adjunction, Hecke edges).",
+      "label": "pd-formal-group-system"
+    },
+    {
+      "lean": "Formalism.L2.G.ServT.SelectionServed",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/GServT.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "A twist selection is served if, eventually along the class, the twisted comparisons hold and the selected kernel entries have unit normalizations, rational kernel maps and trivial level-zero stabilizers, the expansions required by the local theory at inert and signal primes, the orbit bounds, integral jet pairings away from $d$, the shape at $d$, and the size conditions on the row exponents.",
+      "label": "pd-served-selection"
+    },
+    {
+      "lean": "Formalism.MainNotions.OrbitPlaces.kform_of_ker",
+      "file": "Formalism/SharpRestriction/Divisibility/OrbitPlaces.lean",
+      "line": 1621,
+      "role": "new",
+      "statement": "If the kernel series at a free place have $\\nu$-valuation at least $B$, the lift $K_i$ has $w$-valuation at least $B-v_{p_w}(D_\\Gamma(u))$, and at least $B$ at level $0$ when the level-$0$ stabilizers are trivial.",
+      "label": "pd-kernel-form"
+    },
+    {
+      "lean": "Formalism.IncomingBounds.Fnum",
+      "file": "Formalism/IncomingBounds/IncomingBound.lean",
+      "line": 28,
+      "role": "new",
+      "statement": "The odd-level linear programme $M(D')$ on $\\mathbf Z/d$, the function $F(D')=\\gamma_l\\sum D'-M(D')$, and dual vectors.",
+      "label": "pd-odd-level-programme"
+    },
+    {
+      "lean": "Formalism.IncomingBounds.LemmaFc",
+      "file": "Formalism/IncomingBounds/IncomingBound.lean",
+      "line": 69,
+      "role": "new",
+      "statement": "Duality for the odd-level programme, the sensitivity bounds for $F(D'+E')$, and the bound on the weight at positions with dual price at least $2/l$.",
+      "label": "pd-lp-duality"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.OddLevelGainBounds.PropSix7",
+      "file": "Formalism/GaussJetBounds/OneLetterGaussJets/StatementN.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "If $D=(k-1)w+E$ off $T$ and $(k-3)w+E$ on $T$ with $0\\le E\\le4w$, then $F((k-1)w)-\\frac{11}l\\sum w\\le F(D)$.",
+      "label": "pd-lp-comparison"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.WtGe",
+      "file": "Formalism/GaussJetBounds/Statement.lean",
+      "line": 22,
+      "role": "new",
+      "statement": "Weighted valuations: a coefficient $c$ at $X^n$ has weight at least $w$ for weights $r$ if $|c|\\leq|l|^{w-\\sum n_ir_i}$; a series has weight at least $w$ (up to $\\kappa$) if all its coefficients (at $n\\leq\\kappa$) do; $\\rho_l=1/(l^2-1)$.",
+      "reference": "",
+      "label": "pd-weights"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.substitution_weight_bound",
+      "file": "Formalism/GaussJetBounds/GaussJetProofs/SubstitutionWeightBound.lean",
+      "line": 102,
+      "role": "standard",
+      "statement": "Weights behave well under substitution, increase of the weights, products and the exponential; $\\exp(D)-1$ of weight $1/(l-1)$ forces $D$ of weight $1/(l-1)$; and $|\\kappa!|\\leq|l|^{|\\kappa|/(l-1)-|\\iota|(\\log_la+1)}$.",
+      "reference": "",
+      "label": "pd-weight-calculus"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.BHyp",
+      "file": "Formalism/GaussJetBounds/Statement.lean",
+      "line": 85,
+      "role": "new",
+      "statement": "The logarithm along a map, bipowers, and letter series: series with unramified coefficients, torus invariance, condition (B3) and integral exponentials of $\\delta_{\\mathrm{ev}}\\beta$, $\\delta_{\\mathrm{od}}\\beta$ with the orbit logarithm substituted.",
+      "reference": "",
+      "label": "pd-letter-series"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.GenLogWeight",
+      "file": "Formalism/GaussJetBounds/GenLogInverse.lean",
+      "line": 24,
+      "role": "new",
+      "statement": "The logarithm along a map has a two-sided compositional inverse, and the inverse has weight at least $\\rho_l$ for the weights $\\rho_l$.",
+      "reference": "",
+      "label": "pd-log-inverse"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.BinomExtract",
+      "file": "Formalism/GaussJetBounds/GenLogInverse.lean",
+      "line": 112,
+      "role": "new",
+      "statement": "If $\\beta$ is torus invariant, satisfies (B3), and $\\delta_{\\mathrm{ev}}\\beta$, $\\delta_{\\mathrm{od}}\\beta$ have weight $1/(l-1)$, then $\\beta$ has weight $1/(l-1)-1$, and $1/(l-1)$ off the bipowers.",
+      "reference": "",
+      "label": "pd-binomial-extraction"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.LemmaS",
+      "file": "Formalism/GaussJetBounds/Statement.lean",
+      "line": 98,
+      "role": "new",
+      "statement": "A letter series has weight at least $1/(l-1)-1$ for $\\rho_l$, and $1/(l-1)$ at every monomial that is not a bipower.",
+      "reference": "",
+      "label": "pd-letter-weights"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.PureCross",
+      "file": "Formalism/GaussJetBounds/GenLogInverse.lean",
+      "line": 75,
+      "role": "new",
+      "statement": "After substitution of linear forms with integral coefficients the loss of one unit survives only at monomials $X_i^{l^e}X_j^{l^f}$, in a frame only at positions of different parity with $\\mathrm{pos}(i)+e=\\mathrm{pos}(j)+f$, and not at pairs of nearly orthogonal rows.",
+      "reference": "",
+      "label": "pd-letter-substitution"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.LemmaRA",
+      "file": "Formalism/GaussJetBounds/StatementG.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "The weighted Dwork bound: if weights $\\sigma\\geq0$ satisfy $l^e\\sigma_i+l^f\\sigma_j\\geq1$ at every bad pure monomial dividing $X^\\kappa$, then $|\\kappa!\\theta_\\kappa|\\leq|l|^{\\sum\\kappa_i(\\gamma_l-\\sigma_i)-|\\iota|(\\log_la+1)}$.",
+      "reference": "",
+      "label": "pd-weighted-dwork"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.OneLetterR",
+      "file": "Formalism/GaussJetBounds/Statement.lean",
+      "line": 179,
+      "role": "new",
+      "statement": "At one place, with $\\beta(L_x,\\varepsilon_1L_x)$, the jets satisfy $|\\kappa!\\theta_\\kappa|\\leq|l|^{\\rho_l|\\kappa|-|\\iota|(\\log_l|\\kappa|+1)}$.",
+      "reference": "",
+      "label": "pd-one-place-weighted"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.dualRadiiInequalities",
+      "file": "Formalism/GaussJetBounds/GaussJetProofs/OneLetterRadiusIdentity.lean",
+      "line": 124,
+      "role": "new",
+      "statement": "Inequalities for dual vectors of the odd-level programme and numbers $\\omega(s)\\geq l^{-d_T(s)}$ at the top positions, the cases of the hypothesis of the weighted Dwork bound.",
+      "reference": "",
+      "label": "pd-dual-radii"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.rowRadiusAssembly",
+      "file": "Formalism/GaussJetBounds/GaussJetProofs/CapacityLeReachCapacity.lean",
+      "line": 278,
+      "role": "new",
+      "statement": "Row radii built from an optimal dual vector and numbers at the top positions satisfy $\\sum_T(\\mathrm{top}-\\gamma_lW)+F(D)\\leq\\sum\\kappa_i(\\gamma_l-r(i))$.",
+      "reference": "",
+      "label": "pd-row-radii"
+    },
+    {
+      "lean": "Formalism.DworkPowerSeriesWeights.thmAJetA",
+      "file": "Formalism/GaussJetBounds/MonoShapeTop.lean",
+      "line": 9,
+      "role": "new",
+      "statement": "The single-monomial bound: in a frame whose top rows are nearly orthogonal to the unlabelled rows, $|\\kappa!\\theta_\\kappa|\\leq|l|^{\\sum_T(\\mathrm{top}-\\gamma_lW)+F(D)-dN_0N_1(\\log_la+1)}$.",
+      "reference": "",
+      "label": "pd-single-monomial"
+    },
+    {
+      "lean": "Formalism.MainNotions.DIV.Bridge.DworkPowerSeriesWeights.split_bound_eleven_one",
+      "file": "Formalism/SharpRestriction/Divisibility/JetPolynomialLogs/LocalBoundElevenComparison.lean",
+      "line": 64,
+      "role": "new",
+      "statement": "Local orbit bounds: a kernel series with an orbit expansion on one Frobenius orbit has $\\nu$-valuation at least the top terms $\\sum_e A/l^e$ minus caps, plus a linear-programme term, minus $dN_0N_1(\\log_la+1)$ (Theorem A), with a corollary for weights $w_s$; at a split orbit it has $\\nu$-valuation at least $|\\nu|/(l^2-1)$ minus an error (Theorem One). Proof OPEN.",
+      "label": "pd-orbit-letter-bounds"
+    },
+    {
+      "lean": "GlobalTheory.Top.closed_family_admissible_twist_link_alt",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ClosedFamilyAdmissibleTwistLink.lean",
+      "line": 12,
+      "role": "new",
+      "statement": "Let $\\mathcal A$ be a class of families with a twist selection. Suppose that, eventually along the families of the class, point integrality, twisted point integrality, period integrality, twisted period integrality, the sharp column bounds at the auxiliary prime $T$, a bound on the used tuples of characters and the second complement conditions hold, and that the selections are served. Then, eventually along the families of the class, the multiplicity bound holds at every member and scale.",
+      "reference": "",
+      "label": "pd-multiplicity-from-integrality"
+    },
+    {
+      "lean": "Formalism.L2.DIV.VV",
+      "file": "Formalism/LocalToGlobal/Divisibility/CoefMod.lean",
+      "line": 67,
+      "role": "new",
+      "reference": "",
+      "statement": "For dominant weights $\\lambda=(\\lambda_\\tau)$ of $GL_n$: the space $V_\\lambda(K)$ spanned by products of dual Weyl module polynomials in matrices of variables $X_\\tau$, the normalized Fock pairing $\\langle f,g\\rangle_\\lambda=[f,g]\\prod_\\tau[h_{\\nu_\\tau},h_{\\nu_\\tau}]^{-1}$, the standard lattices $\\nabla_\\lambda$ and $\\Delta_\\lambda$ (dual Weyl and Weyl modules over $\\mathcal O_K$), and their transports $\\nabla_\\lambda(M)$, $\\Delta_\\lambda(M)$ to lattices $M_\\tau\\subset K^n$ by local bases, with $\\nabla_\\lambda(L')$ and $\\Delta_\\lambda(L'^\\vee)$ for an $\\mathcal O_E$-lattice $L'\\subset E^n$.",
+      "label": "pd-weight-lattices"
+    },
+    {
+      "lean": "Formalism.L2.DIV.PairBDual",
+      "file": "Formalism/LocalToGlobal/Columns/CoefModB.lean",
+      "line": 112,
+      "role": "new",
+      "reference": "",
+      "statement": "For an $\\mathcal O_E$-lattice $L'\\subset E^n$ spanning $E^n$ and $x\\in V_\\lambda(K)$: $x\\in\\Delta_\\lambda(L'^\\vee)$ if and only if $\\langle x,y\\rangle_\\lambda\\in\\mathcal O_K$ for all $y\\in\\nabla_\\lambda(L')$, and $x\\in\\nabla_\\lambda(L'^\\vee)$ if and only if $\\langle x,y\\rangle_\\lambda\\in\\mathcal O_K$ for all $y\\in\\Delta_\\lambda(L')$. Proved by reduction to the standard lattices at each finite place and dual bases indexed by semistandard tableaux.",
+      "label": "pd-weight-duality"
+    },
+    {
+      "lean": "GlobalTheory.Mem.Col2.PerIn.per",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/PredMemGamRanks.lean",
+      "line": 540,
+      "role": "new",
+      "reference": "",
+      "statement": "Point data: point classes $c$ with lattices $L_c\\subset E^n$ and finite stabilizers $\\Gamma_c$, top forms with rows $R_c(F)\\in V_\\sigma(\\mathbf C)$, the point lattice of $\\Gamma_c$-invariant families $x_c\\in\\Delta_\\sigma(L_c^\\vee)$, the period $P(z,F)=\\sum_c|\\Gamma_c|^{-1}\\langle z_c,R_c(F)\\rangle_\\sigma$, and integral rows $R_c(F)\\in\\iota(\\nabla_\\sigma(L_c))$.",
+      "label": "pd-point-data"
+    },
+    {
+      "lean": "GlobalTheory.T.classPairing_integral_form_row_isIntegral",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ClassPairingIntegralFormRowIsIntegralStatement.lean",
+      "line": 9,
+      "role": "new",
+      "reference": "",
+      "statement": "If the row of a top form $F$ at a point class $c$ is integral, then for every point-lattice vector $x$ the term of $c$ in the period, multiplied by $|\\Gamma_c|$, is $\\iota(a)$ with $a=\\langle x_c,y\\rangle_\\sigma\\in\\mathcal O_L$.",
+      "label": "pd-class-term-integral"
+    },
+    {
+      "lean": "GlobalTheory.Mem.Col2.ColIn",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/TrueColumnChoicesHeckeCharReferenceEqOne.lean",
+      "line": 165,
+      "role": "new",
+      "reference": "",
+      "statement": "True columns: explicit classes of decorated $\\mathcal O_E$-lattices forming the chains $C_{u,\\mu}$ and the point data of each tuple; definite-side data built from them, whose point lattices and period pairings are those of the point data; integral period rows (the rows of every integral top form at every point class lie in $\\iota(\\nabla_\\sigma(L_c))$); the degree-zero condition and the twisted forms of the true columns; ties of the tuples to Hecke characters; and slots over true columns.",
+      "label": "pd-true-columns"
+    },
+    {
+      "lean": "GlobalTheory.T.periodClassSumWeyl_of_rowInt",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PeriodAdmissibleOfIntegralPeriodRowsStatement.lean",
+      "line": 8,
+      "role": "new",
+      "reference": "",
+      "statement": "Let $D$ be built from true columns with integral period rows. Then period integrality holds for $D$; if moreover the degree-zero condition holds and the tuples of $D$ are tied to the characters of the true columns, twisted period integrality holds for every choice of divisibility data. The period is $\\sum_c|\\Gamma_c|^{-1}\\iota(a_c)$ with $a_c\\in\\mathcal O_L$, and $|\\Gamma_c|$ divides $D_\\Gamma(u)$.",
+      "label": "pd-period-integrality-from-rows"
+    },
+    {
+      "lean": "GlobalTheory.Mem.R3.Rw.Pre2",
+      "file": "Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/NonzeroPlacesOverPrimesLifts.lean",
+      "line": 46,
+      "role": "new",
+      "reference": "",
+      "statement": "A row stage: algebraic modular forms on decorated lattices of rank $N(m)-1$ with values in $V_\\sigma(L)$, the $\\nabla$-integral ones, and identifications $e_\\mu$ with the top forms under which rows are values at the representatives and integral top forms come from $\\nabla$-integral forms.",
+      "label": "pd-row-stage"
+    },
+    {
+      "lean": "GlobalTheory.T.periodRowLatticesIntegral_provisionalRows",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PeriodRowLatticesIntegralProvisionalRowsStatement.lean",
+      "line": 16,
+      "role": "new",
+      "reference": "",
+      "statement": "A definite-side datum built at a row stage has integral period rows.",
+      "label": "pd-rows-integral-built"
+    },
+    {
+      "lean": "GlobalTheory.T.referencePeriodIntegral_bundlePoints_of_overColumns",
+      "file": "Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ReferencePeriodIntegralBundlePointsOfOverColumnsStatement.lean",
+      "line": 8,
+      "role": "new",
+      "reference": "",
+      "statement": "For a slot over true columns and any link data, along the slot: for every class $\\mathcal A$ and selection, eventually along the working subclass $\\mathcal W(\\mathcal A)$ and at all large scales, every member satisfies period integrality and twisted period integrality.",
+      "label": "pd-period-integrality-along-families"
+    },
+    {
+      "lean": "GlobalTheory.T.period_entries_tie_and_level_valuations_at_built",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SixRowsAtMemberStatement.lean",
+      "line": 12,
+      "role": "new",
+      "reference": "",
+      "statement": "The slots of good cores of the construction lie over true columns, so period integrality and twisted period integrality hold along them; this gives item (10) of the collection of definite-side hypotheses and hypotheses (3) and (4) of the multiplicity theorem.",
+      "label": "pd-integrality-inputs"
+    },
+    {
+      "lean": "Formalism.BasicNotions.SizeData₂.vonMangoldtClassSum",
+      "file": "Formalism/LocalRingCardinality/DataParams₂.lean",
+      "line": 240,
+      "role": "new",
+      "statement": "For a lift index $j$, a top class $t$ with exponent $a_t$, and a prime $p$, the von Mangoldt class sum is $\\mathrm{VM}_{j,t}(p)=\\sum_{i\\ \\mathrm{odd},\\ i\\le\\log_pa_t+1}\\max\\big(0,\\ a_t/p^{i}-w_{j,t,p,i}\\big)$, where $w_{j,t,p,i}$ is a weight determined by the size data.",
+      "reference": "",
+      "label": "pd-class-sum"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.VV",
+      "file": "Formalism/SharpRestriction/GrowthBounds/IsResidueClassZero.lean",
+      "line": 292,
+      "role": "new",
+      "statement": "Gain data: orbit representatives for translation by the Frobenius component $h_p$, positions of the top classes, good representatives, candidate primes, local constants $\\kappa$, the deviation $\\Sigma(p)$, the served representatives $V(p)$, served gains $S(p,t_0)$, and means over windows of exponents.",
+      "label": "pd-gain-data"
+    },
+    {
+      "lean": "Formalism.MainNotions.LinkG",
+      "file": "Formalism/SharpRestriction/GlobalTheoremInputs.lean",
+      "line": 138,
+      "role": "new",
+      "statement": "A family satisfies the gain link if there are $C$, $x_0$ and $\\delta(x)\\to0$ such that for every scale $x\\ge x_0$ and every member: at every place $w$ not over the auxiliary prime $T_u$ the lifted lattice has the local divisibility $\\lfloor r_w(\\tau_w)\\rfloor$ and $\\operatorname{len}_w(M_u/N_u)\\le d_u(\\tau_w+\\iota_w)$; and at every place $w$ over a prime $p\\le X''$ inert in the host field, $0\\le\\mathrm{gain}_j(w)\\le4|T|a/p$ for each lift $j$ and $\\sum_j\\sum_t\\big(\\mathrm{VM}_{j,t}(p)-\\mathrm{lo}(p)\\big)-m\\,\\mathrm{fl}(p)\\le\\sum_j\\mathrm{gain}_j(w)-\\tau_w$, with error terms $\\mathrm{lo},\\mathrm{fl}$ controlled by $C$ and $b^{\\delta(x)}$; together with bounds on served orbits and a mean bound.",
+      "reference": "",
+      "label": "pd-gain-link"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.LPprime",
+      "file": "Formalism/SharpRestriction/GrowthBounds/UnramifiedQuadraticSetting.lean",
+      "line": 216,
+      "role": "new",
+      "statement": "Unramified quadratic Hida settings, the lattices $H(L)$, $H(e)$ of lattices and edges, $N_{\\mathrm{src}}$, $N_{\\mathrm{tgt}}$, the edge pairing, and the projection property $\\mathrm{LP}(r,\\lambda_0;t,D,\\kappa,c_*)$.",
+      "label": "pd-projection-property"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.second_theorem_absolute_constant",
+      "file": "Formalism/SharpRestriction/GrowthBounds/PlaneCountTheoremWithConstants.lean",
+      "line": 1137,
+      "role": "new",
+      "statement": "Second theorem on the gains: with an absolute constant $C_0$, for $p\\ge13$, good orbits and base weights in windows, the projection property holds with $r$, defect $C_0|T|r^2(m+1)/Y$ and every $t$ above an explicit bound.",
+      "label": "pd-gain-theorem-two"
+    },
+    {
+      "lean": "Formalism.MainNotions.G.first_theorem_threshold_functions",
+      "file": "Formalism/SharpRestriction/GrowthBounds/PlaneCountTheoremWithConstants.lean",
+      "line": 1282,
+      "role": "new",
+      "statement": "First theorem on the gains: with threshold functions, for orbits whose even top positions cut short segments and exponents in short windows, there is a defect function of small mean for which the projection property holds with $r=1$.",
+      "label": "pd-gain-theorem-one"
+    },
+    {
+      "lean": "GlobalTheory.Top.closed_linkG_of_duty",
+      "file": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkG.lean",
+      "line": 13,
+      "role": "new",
+      "statement": "Let $\\mathcal A$ be a class of families with a twist selection in which every family carries its duty data. Then, eventually along the designed families of the class, the gain link holds. The proof combines group coherence of the second-layer families, admissibility of the tops (an elementary bound of Mertens type on $\\sum\\log p/p$ and the chosen bound on bad tops), and the local theory of Frobenius orbits.",
+      "reference": "",
+      "label": "pd-gain-link-holds"
+    }
+  ],
+  "updated": "2026-11-20T22:15:38Z"
+}

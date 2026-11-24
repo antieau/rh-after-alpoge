@@ -1,0 +1,327 @@
+\chapter{The main theorems and their reduction to a half-plane}\label{chapter-main-theorems}
+
+Alpöge proves the Riemann Hypothesis and the Generalized Riemann Hypothesis for Dirichlet
+$L$-functions, for the functions $\zeta(s)$ and $L(s,\chi)$ of Mathlib \cite{Mat20}. This chapter
+states the theorems and deduces all of them from one statement: $L(s,\chi)\neq0$ for every
+Dirichlet character $\chi$ and every $s$ with $\operatorname{Re}s>1/2$, except at the pole of a
+trivial character. The deduction uses the functional equation of a primitive $L$-function and the
+Euler factors that separate an imprimitive character from the primitive character inducing it. The
+rest of the book proves the half-plane statement for primitive characters.
+
+\section{Dirichlet characters and their $L$-functions}\label{section-mt-l-functions}
+
+\begin{definition}\label{mt-dirichlet-character}
+Let $N\geq1$ be an integer. A \emph{Dirichlet character modulo $N$} is a function
+$\chi:\mathbf Z/N\mathbf Z\to\mathbf C$ such that $\chi(1)=1$, $\chi(xy)=\chi(x)\chi(y)$ for all
+$x,y\in\mathbf Z/N\mathbf Z$, and $\chi(x)=0$ for every $x$ that is not a unit. For $n\in\mathbf Z$
+we write $\chi(n)$ for $\chi(n\bmod N)$.
+\begin{itemize}
+\item The \emph{trivial character} $\mathbf 1_N$ modulo $N$ takes the value $1$ at every unit. The
+  ring $\mathbf Z/1\mathbf Z$ is zero and its element $0$ is a unit, so $\mathbf 1_1$ is the only
+  Dirichlet character modulo $1$, and $\mathbf 1_1(n)=1$ for every $n\in\mathbf Z$.
+\item The \emph{conjugate} of $\chi$ is the Dirichlet character $\bar\chi$ modulo $N$ with
+  $\bar\chi(x)=\overline{\chi(x)}$.
+\item The character $\chi$ is \emph{even} if $\chi(-1)=1$ and \emph{odd} if $\chi(-1)=-1$. Every
+  Dirichlet character is even or odd. We put $a_\chi=0$ if $\chi$ is even and $a_\chi=1$ if $\chi$
+  is odd.
+\item Let $M\geq1$ be a divisor of $N$ and let $\psi$ be a Dirichlet character modulo $M$. The
+  character modulo $N$ \emph{induced} by $\psi$ is the Dirichlet character $\chi$ modulo $N$ with
+  $\chi(n)=\psi(n)$ for every $n\in\mathbf Z$ prime to $N$.
+\item The \emph{conductor} of $\chi$ is the least divisor $M\geq1$ of $N$ such that $\chi$ is
+  induced by a Dirichlet character modulo $M$. That character is unique; we write it $\chi^*$. The
+  character $\chi$ is \emph{primitive} if its conductor is $N$.
+\end{itemize}
+The character $\chi^*$ is primitive, $\bar\chi$ has the same conductor as $\chi$, and
+$\mathbf 1_N$ has conductor $1$ \cite[Chapter 5]{Dav00}.
+\end{definition}
+
+\begin{definition}\label{mt-l-function}
+Let $N\geq1$ and let $\chi$ be a Dirichlet character modulo $N$
+(Definition~\ref{mt-dirichlet-character}). The \emph{$L$-function} of $\chi$ is the function
+$s\mapsto L(s,\chi)$ from $\mathbf C$ to $\mathbf C$ such that:
+\begin{itemize}
+\item $L(s,\chi)=\sum_{n\geq1}\chi(n)n^{-s}$ for $\operatorname{Re}s>1$;
+\item if $\chi\neq\mathbf 1_N$, it is holomorphic on $\mathbf C$;
+\item if $\chi=\mathbf 1_N$, it is holomorphic on $\mathbf C\setminus\{1\}$ with a simple pole at
+  $s=1$, and $L(1,\mathbf 1_N)$ is the conventional value of Remark~\ref{mt-value-at-one}.
+\end{itemize}
+By analytic continuation, these conditions determine $L(s,\chi)$ at every $s$ other than the
+pole. The \emph{Riemann zeta function} is $\zeta(s)=L(s,\mathbf 1_1)$. Thus
+$\zeta(s)=\sum_{n\geq1}n^{-s}$ for $\operatorname{Re}s>1$, and $\zeta(1)=(\gamma-\log4\pi)/2$,
+where $\gamma$ is Euler's constant.
+\end{definition}
+
+\begin{remark}\label{mt-value-at-one}
+Mathlib constructs $L(s,\chi)$ for every $s\in\mathbf C$ from Hurwitz zeta functions, and the
+construction assigns a value to $L(1,\mathbf 1_N)$, where the $L$-function has its pole. For $N=1$
+the value is $\zeta(1)=(\gamma-\log4\pi)/2\approx-0.977$, the constant term at $s=1$ of the
+Laurent expansion of $\pi^{-s/2}\Gamma(s/2)\zeta(s)$. It is not zero, and this matters in two places.
+The hypothesis $s\neq1$ of Theorem~\ref{mt-riemann-hypothesis} excludes no zero of
+$\zeta$; it is part of Mathlib's statement of the Riemann Hypothesis. The hypothesis of
+Proposition~\ref{mt-imprimitive} concerns every primitive character, $\mathbf 1_1$ among them, and
+every $s$ with $\operatorname{Re}s>1/2$, so it includes the assertion $\zeta(1)\neq0$, which holds
+for this value. For $N>1$ no statement of this chapter depends on the value of
+$L(1,\mathbf 1_N)$: each one assumes $\chi\neq\mathbf 1_N$ or $s\neq1$, or concerns
+$0<\operatorname{Re}s<1$.
+\end{remark}
+
+\begin{lemma}\label{mt-euler-factors}
+Let $M$ and $N$ be positive integers with $M\mid N$, let $\psi$ be a Dirichlet character modulo
+$M$, and let $\chi$ be the character modulo $N$ induced by $\psi$
+(Definition~\ref{mt-dirichlet-character}). Let $s\in\mathbf C$, and suppose that
+$\psi\neq\mathbf 1_M$ or $s\neq1$. Then
+\[
+ L(s,\chi)=L(s,\psi)\prod_{p\mid N}\bigl(1-\psi(p)p^{-s}\bigr),
+\]
+where the product runs over the primes $p$ dividing $N$. For $\operatorname{Re}s>1$ this is the
+comparison of Euler products in \cite[Chapter 5]{Dav00}, and both sides are holomorphic away from
+$s=1$.
+\end{lemma}
+
+\begin{remark}\label{mt-imprimitive-zeros}
+For an imprimitive character $\chi$ modulo $N$, the function $L(s,\chi)$ of
+Definition~\ref{mt-l-function} is the $L$-function of $\chi$ as a character modulo $N$: its
+Dirichlet series and its Euler product omit every prime dividing $N$. Lemma~\ref{mt-euler-factors}
+with $\psi=\chi^*$ compares it with $L(s,\chi^*)$. Let $p$ be a prime that divides $N$ but not
+the conductor of $\chi$, and write $\chi^*(p)=e^{i\theta}$. The factor $1-\chi^*(p)p^{-s}$ vanishes at
+the points $s=(i\theta+2\pi ik)/\log p$ with $k\in\mathbf Z$, which lie on the line
+$\operatorname{Re}s=0$. So $L(s,\chi)$ has infinitely many zeros on that line whenever such a prime exists. For example,
+$L(s,\mathbf 1_N)=\zeta(s)\prod_{p\mid N}(1-p^{-s})$ for $s\neq1$, and it vanishes at $2\pi ik/\log p$
+for every prime $p\mid N$ and every $k\in\mathbf Z$.
+\end{remark}
+
+\begin{remark}\label{mt-trivial-zeros}
+The trivial zeros of $\zeta$ are $-2,-4,-6,\ldots$, and $\zeta(0)=-1/2$ \cite[Chapter 2]{Tit86}.
+Theorem~\ref{mt-riemann-hypothesis} excludes this set, written $\{-2(n+1):n\geq0\}$ as in Mathlib's
+statement of the Riemann Hypothesis, and the point $s=1$ of Remark~\ref{mt-value-at-one}; since
+$\zeta(0)\neq0$, the point $0$ needs no exclusion. Let $\chi\neq\mathbf 1_1$ be a Dirichlet character
+modulo $N$ and $a=a_\chi$. Then $L(s,\chi)$ vanishes at $s=-a-2k$ for every integer $k\geq0$, by
+\cite[Chapter 9]{Dav00} for primitive $\chi$ and by Lemma~\ref{mt-euler-factors} in general; these
+are the trivial zeros of $L(s,\chi)$. When $\chi$ is primitive,
+the functional equation and the nonvanishing of $L(s,\bar\chi)$ on $\operatorname{Re}s\geq1$ show
+that the trivial zeros are the only zeros with $\operatorname{Re}s\leq0$
+\cite[Chapters 9 and 14]{Dav00}. So for a primitive character, Theorem~\ref{mt-strip-primitive} is
+the Generalized Riemann Hypothesis in its usual form. For an imprimitive character the zeros of
+Remark~\ref{mt-imprimitive-zeros} also lie on $\operatorname{Re}s=0$, and the theorems for all
+characters are stated on the strip $0<\operatorname{Re}s<1$ and the half-plane
+$\operatorname{Re}s>1/2$.
+\end{remark}
+
+\section{The main theorems}\label{section-mt-main-theorems}
+
+\begin{theorem}\label{mt-riemann-hypothesis}
+Let $s\in\mathbf C$ with $\zeta(s)=0$, where $\zeta$ is the Riemann zeta function of
+Definition~\ref{mt-l-function}. Suppose that $s\neq-2(n+1)$ for every integer $n\geq0$, and that
+$s\neq1$. Then $\operatorname{Re}s=1/2$.
+\end{theorem}
+\leanref{Main.lean}{riemannHypothesis}
+\leanref{Main.lean}{riemannZeta_eq_zero_re}
+\leanref{Statements.lean}{RiemannZetaZerosOnLine}
+\begin{proof}
+By Theorem~\ref{mt-half-plane} for $N=1$, $\zeta(w)=L(w,\mathbf 1_1)$ is nonzero for every
+$w\in\mathbf C$ with $\operatorname{Re}w>1/2$ and $w\neq1$. Proposition~\ref{mt-riemann-of-half-plane}
+gives $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\begin{theorem}\label{mt-half-plane}
+Let $N\geq1$, let $\chi$ be a Dirichlet character modulo $N$
+(Definition~\ref{mt-dirichlet-character}), and let $s\in\mathbf C$ with $\operatorname{Re}s>1/2$.
+Suppose that $\chi\neq\mathbf 1_N$ or $s\neq1$. Then $L(s,\chi)\neq0$, where $L(s,\chi)$ is the
+$L$-function of Definition~\ref{mt-l-function}.
+\end{theorem}
+\leanref{Main.lean}{LFunction_ne_zero_of_half_lt_re}
+\leanref{Statements.lean}{DirichletLNonvanishingRightOfHalf}
+\leanref{Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean}{UpperTheory.FinalTheorems.everyCharacter}
+\begin{proof}
+This is Theorem~\ref{asm-every-character} of Chapter~\ref{chapter-assembly}, whose hypothesis on
+Galois representations holds by Theorem~\ref{gal-galois-representations-any-rc} of
+Chapter~\ref{chapter-galois-representations}. In that deduction,
+Theorem~\ref{asm-zero-free-primitive} treats primitive characters, and
+Theorem~\ref{asm-every-character-green} passes to all characters by
+Proposition~\ref{mt-imprimitive}.
+\end{proof}
+
+\begin{theorem}\label{mt-strip}
+Let $N\geq1$, let $\chi$ be a Dirichlet character modulo $N$
+(Definition~\ref{mt-dirichlet-character}), and let $s\in\mathbf C$ with $0<\operatorname{Re}s<1$ and
+$L(s,\chi)=0$ (Definition~\ref{mt-l-function}). Then $\operatorname{Re}s=1/2$.
+\end{theorem}
+\leanref{Main.lean}{LFunction_eq_zero_re}
+\leanref{Statements.lean}{DirichletLZerosOnLine}
+\begin{proof}
+Theorem~\ref{mt-half-plane} is the hypothesis of Proposition~\ref{mt-strip-of-half-plane}, which
+gives $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\begin{theorem}\label{mt-strip-primitive}
+Let $N\geq1$, let $\chi$ be a primitive Dirichlet character modulo $N$
+(Definition~\ref{mt-dirichlet-character}), and let $s\in\mathbf C$ with $0<\operatorname{Re}s<1$
+and $L(s,\chi)=0$ (Definition~\ref{mt-l-function}). Then $\operatorname{Re}s=1/2$.
+\end{theorem}
+\leanref{Main.lean}{LFunction_eq_zero_re_of_isPrimitive}
+\leanref{Statements.lean}{PrimitiveDirichletLZerosOnLine}
+\begin{proof}
+Theorem~\ref{mt-half-plane} is the hypothesis of
+Proposition~\ref{mt-strip-primitive-of-half-plane}, which gives $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\section{Reduction to primitive characters}\label{section-mt-imprimitive}
+
+\begin{lemma}\label{mt-euler-factor-nonzero}
+Let $M\geq1$, let $\psi$ be a Dirichlet character modulo $M$
+(Definition~\ref{mt-dirichlet-character}), let $p$ be a prime, and let $s\in\mathbf C$ with
+$\operatorname{Re}s>0$. Then $1-\psi(p)p^{-s}\neq0$.
+\end{lemma}
+\leanref{Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean}{Claim.factor_ne_zero}
+\begin{proof}
+The values of $\psi$ have absolute value at most $1$, and $|p^{-s}|=p^{-\operatorname{Re}s}<1$.
+So $|\psi(p)p^{-s}|<1$.
+\end{proof}
+
+\begin{proposition}\label{mt-imprimitive}
+Suppose that $L(w,\psi)\neq0$ for every integer $M\geq1$, every primitive Dirichlet character
+$\psi$ modulo $M$ and every $w\in\mathbf C$ with $\operatorname{Re}w>1/2$
+(Definitions~\ref{mt-dirichlet-character} and~\ref{mt-l-function}). Let $N\geq1$, let $\chi$ be a
+Dirichlet character modulo $N$, and let $s\in\mathbf C$ with $\operatorname{Re}s>1/2$. Suppose that
+$\chi\neq\mathbf 1_N$ or $s\neq1$. Then $L(s,\chi)\neq0$.
+\end{proposition}
+\leanref{Development/AutomorphicArithmetic/CharacterBoxes/Imprimitive.lean}{UpperTheory.Top.imprimitive}
+\begin{proof}
+Let $M$ be the conductor of $\chi$ and let $\psi=\chi^*$, a primitive character modulo $M$ that
+induces $\chi$. By hypothesis $L(s,\psi)\neq0$. If $\chi\neq\mathbf 1_N$ then $\psi\neq\mathbf 1_M$,
+since the character induced by a trivial character is trivial. So $\psi\neq\mathbf 1_M$ or
+$s\neq1$, and Lemma~\ref{mt-euler-factors} gives
+\[
+ L(s,\chi)=L(s,\psi)\prod_{p\mid N}\bigl(1-\psi(p)p^{-s}\bigr).
+\]
+Each factor of the product is nonzero by Lemma~\ref{mt-euler-factor-nonzero}, since
+$\operatorname{Re}s>0$. Hence $L(s,\chi)\neq0$.
+\end{proof}
+
+\section{Reflection by the functional equation}\label{section-mt-functional-equation}
+
+\begin{proposition}\label{mt-functional-equation}
+Let $\Gamma_{\mathbf R}(s)=\pi^{-s/2}\Gamma(s/2)$. Let $N\geq1$, let $\chi$ be a primitive Dirichlet
+character modulo $N$, and let $a=a_\chi$ (Definition~\ref{mt-dirichlet-character}). The function
+$\Lambda(s,\chi)=\Gamma_{\mathbf R}(s+a)L(s,\chi)$ extends to a holomorphic function on
+$\mathbf C\setminus\{0,1\}$, and to an entire function if $N>1$. For every
+$s\in\mathbf C\setminus\{0,1\}$,
+\[
+ \Lambda(1-s,\chi)=N^{s-1/2}\,\varepsilon(\chi)\,\Lambda(s,\bar\chi),\qquad
+ \varepsilon(\chi)=\frac{\tau(\chi)}{i^{a}N^{1/2}},\qquad
+ \tau(\chi)=\sum_{x\in\mathbf Z/N\mathbf Z}\chi(x)e^{2\pi ix/N}.
+\]
+For $N=1$ this reads $\Lambda(1-s)=\Lambda(s)$, where $\Lambda(s)=\Gamma_{\mathbf R}(s)\zeta(s)$.
+This is the functional equation of Riemann \cite{Rie59} and, for $N>1$, of
+\cite[Chapter 9]{Dav00}.
+\end{proposition}
+
+\begin{proposition}\label{mt-zeta-functional-equation}
+Let $s\in\mathbf C$ with $s\neq1$ and $s\notin\{0,-1,-2,\ldots\}$. Then
+\[
+ \zeta(1-s)=2(2\pi)^{-s}\,\Gamma(s)\cos(\pi s/2)\,\zeta(s),
+\]
+where $\zeta$ is the Riemann zeta function of Definition~\ref{mt-l-function}. This form of
+Riemann's functional equation is in \cite[Chapter 2]{Tit86}.
+\end{proposition}
+
+\begin{proposition}\label{mt-strip-primitive-of-half-plane}
+Suppose that $L(w,\eta)\neq0$ for every integer $M\geq1$, every Dirichlet character $\eta$ modulo
+$M$ and every $w\in\mathbf C$ with $\operatorname{Re}w>1/2$ such that $\eta\neq\mathbf 1_M$ or
+$w\neq1$ (Definitions~\ref{mt-dirichlet-character} and~\ref{mt-l-function}). Let $N\geq1$, let
+$\chi$ be a primitive Dirichlet character modulo $N$, and let $s\in\mathbf C$ with
+$0<\operatorname{Re}s<1$ and $L(s,\chi)=0$. Then $\operatorname{Re}s=1/2$.
+\end{proposition}
+\leanref{Formalism/GammaFactorNonvanishing/CritLine.lean}{Formalism.VW.critLine}
+\begin{proof}
+Since $0<\operatorname{Re}s<1$, we have $s\neq0$ and $s\neq1$. If $\operatorname{Re}s>1/2$, the
+hypothesis for $\chi$ and $s$ contradicts $L(s,\chi)=0$.
+
+Suppose that $\operatorname{Re}s<1/2$, and let $a=a_\chi$. The Gamma function has no zeros, and no
+poles in the half-plane $\operatorname{Re}z>0$. So $\Gamma_{\mathbf R}(s+a)$ and
+$\Gamma_{\mathbf R}(1-s+a)$ are finite and nonzero, and $\Lambda(s,\chi)=0$. The character
+$\bar\chi$ is primitive modulo $N$, with $a_{\bar\chi}=a$, and its conjugate is $\chi$.
+Proposition~\ref{mt-functional-equation} for $\bar\chi$ gives
+\[
+ \Lambda(1-s,\bar\chi)=N^{s-1/2}\,\varepsilon(\bar\chi)\,\Lambda(s,\chi)=0,
+\]
+so $L(1-s,\bar\chi)=0$. But $\operatorname{Re}(1-s)>1/2$ and $1-s\neq1$, so the hypothesis for
+$\bar\chi$ and $1-s$ gives $L(1-s,\bar\chi)\neq0$.
+
+Both cases are impossible, so $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\begin{proposition}\label{mt-strip-of-half-plane}
+Suppose that $L(w,\eta)\neq0$ for every integer $M\geq1$, every Dirichlet character $\eta$ modulo
+$M$ and every $w\in\mathbf C$ with $\operatorname{Re}w>1/2$ such that $\eta\neq\mathbf 1_M$ or
+$w\neq1$ (Definitions~\ref{mt-dirichlet-character} and~\ref{mt-l-function}). Let $N\geq1$, let
+$\chi$ be a Dirichlet character modulo $N$, and let $s\in\mathbf C$ with $0<\operatorname{Re}s<1$
+and $L(s,\chi)=0$. Then $\operatorname{Re}s=1/2$.
+\end{proposition}
+\leanref{Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean}{Claim.strip}
+\begin{proof}
+Since $\operatorname{Re}s<1$, we have $s\neq1$. If $\operatorname{Re}s>1/2$, the hypothesis for
+$\chi$ and $s$ contradicts $L(s,\chi)=0$.
+
+Suppose that $\operatorname{Re}s<1/2$. Let $M$ be the conductor of $\chi$ and let $\psi=\chi^*$,
+a primitive character modulo $M$ that induces $\chi$. Since $s\neq1$, Lemma~\ref{mt-euler-factors}
+gives $L(s,\chi)=L(s,\psi)\prod_{p\mid N}(1-\psi(p)p^{-s})$. The left side is $0$, and each factor
+of the product is nonzero by Lemma~\ref{mt-euler-factor-nonzero}, since $\operatorname{Re}s>0$. So
+$L(s,\psi)=0$.
+
+Let $a=a_\psi$. Since $\operatorname{Re}s>0$, the point $s$ is not a pole of $\Gamma_{\mathbf R}(s+a)$,
+and $\Gamma_{\mathbf R}(s+a)\neq0$; as $s\neq0,1$, this gives
+$\Lambda(s,\psi)=\Gamma_{\mathbf R}(s+a)L(s,\psi)=0$. The character $\bar\psi$ is primitive modulo
+$M$, since $\bar\psi$ and $\psi$ have the same conductor, and $a_{\bar\psi}=a$ and
+$\bar{\bar\psi}=\psi$. Proposition~\ref{mt-functional-equation} for $\bar\psi$ gives
+\[
+ \Lambda(1-s,\bar\psi)=M^{s-1/2}\,\varepsilon(\bar\psi)\,\Lambda(s,\psi)=0.
+\]
+Since $\operatorname{Re}(1-s)>0$, the factor $\Gamma_{\mathbf R}(1-s+a)$ is finite and nonzero, so
+$L(1-s,\bar\psi)=0$. This contradicts the hypothesis for the character $\bar\psi$ modulo $M$ and the
+point $1-s$, since $\operatorname{Re}(1-s)>1/2$ and $1-s\neq1$.
+
+Both cases are impossible, so $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\begin{proposition}\label{mt-riemann-of-half-plane}
+Suppose that $\zeta(w)\neq0$ for every $w\in\mathbf C$ with $\operatorname{Re}w>1/2$ and $w\neq1$,
+where $\zeta$ is the Riemann zeta function of Definition~\ref{mt-l-function}. Let $s\in\mathbf C$
+with $\zeta(s)=0$. Suppose that $s\neq-2(n+1)$ for every integer $n\geq0$, and that $s\neq1$. Then
+$\operatorname{Re}s=1/2$.
+\end{proposition}
+\leanref{Formalism/GammaFactorNonvanishing/RhOfRight.lean}{Formalism.VW.rh_of_right}
+\leanref{Formalism/GammaFactorNonvanishing/CritLine.lean}{Formalism.VW.rh_of_every}
+\begin{proof}
+If $\operatorname{Re}s>1/2$, the hypothesis contradicts $\zeta(s)=0$, since $s\neq1$.
+
+Suppose that $\operatorname{Re}s<1/2$. Then $s\neq0$, since $\zeta(0)=-1/2$. Put $w=1-s$. Then
+$\operatorname{Re}w>1/2$, $w\neq1$ and $w\notin\{0,-1,-2,\ldots\}$, so
+Proposition~\ref{mt-zeta-functional-equation} at $w$ gives
+\[
+ \zeta(s)=2(2\pi)^{-w}\,\Gamma(w)\cos(\pi w/2)\,\zeta(w).
+\]
+The factor $2(2\pi)^{-w}$ is nonzero, and the Gamma function has no zeros. If $\cos(\pi w/2)=0$,
+then $w=2k+1$ for an integer $k$, so $s=-2k$. Here $k\leq-1$ contradicts
+$\operatorname{Re}s<1/2$, $k=0$ contradicts $s\neq0$, and $k\geq1$ is excluded by hypothesis. So
+$\cos(\pi w/2)\neq0$. Finally $\zeta(w)\neq0$ by hypothesis. Hence $\zeta(s)\neq0$, a
+contradiction.
+
+Both cases are impossible, so $\operatorname{Re}s=1/2$.
+\end{proof}
+
+\begin{remark}\label{mt-riemann-via-strip}
+Suppose that $L(w,\eta)\neq0$ for every integer $M\geq1$, every Dirichlet character $\eta$ modulo
+$M$ and every $w$ with $\operatorname{Re}w>1/2$ such that $\eta\neq\mathbf 1_M$ or $w\neq1$. The
+conclusion of Theorem~\ref{mt-riemann-hypothesis} then also follows from
+Proposition~\ref{mt-strip-of-half-plane} for $N=1$. Let $s$ be a zero of $\zeta$ with $s\neq1$ and
+$s\notin\{-2,-4,\ldots\}$; then $s\neq0$, since $\zeta(0)=-1/2$. If $0<\operatorname{Re}s<1$,
+Proposition~\ref{mt-strip-of-half-plane} for $\mathbf 1_1$ gives $\operatorname{Re}s=1/2$. The
+function $\zeta$ has no zeros with $\operatorname{Re}s\geq1$, by Hadamard and de la Vallée Poussin
+\cite{Had96,VP96}. If $\operatorname{Re}s\leq0$, then $s$ is not a pole of $\Gamma_{\mathbf R}$, so
+$\Lambda(s)=\Gamma_{\mathbf R}(s)\zeta(s)=0$. Proposition~\ref{mt-functional-equation} for $N=1$
+gives $\Lambda(1-s)=0$, and $\Gamma_{\mathbf R}(1-s)$ is finite because
+$\operatorname{Re}(1-s)\geq1$. So $\zeta(1-s)=0$ with $\operatorname{Re}(1-s)\geq1$, which is
+impossible.
+\end{remark}
+\leanref{Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean}{Claim.zeta}
