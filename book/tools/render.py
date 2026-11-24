@@ -164,15 +164,15 @@ def current_pdfs():
 
 def write_redirects():
     """site/_redirects, which Workers static assets read (and do not serve): the book's home page
-    address goes to the root, and the PDFs' old names go to the current files with a 302, so that old
-    links keep working."""
+    address goes to the root, and the PDFs' old names go to the current files, so that old links
+    keep working. All are 302s, which browsers do not keep."""
     book, chapters = current_pdfs()
     path = SITE / "_redirects"
     if not book:
         path.unlink(missing_ok=True)
         return
     # The book's home page is served at the root (see home_page); its own address goes there.
-    lines = ["/book/ / 301", "/book/index.html / 301", f"/book/book.pdf /book/{book} 302"]
+    lines = ["/book/ / 302", "/book/index.html / 302", f"/book/book.pdf /book/{book} 302"]
     lines += [f"/book/chapter-{tag}.pdf /book/{name} 302" for tag, name in sorted(chapters.items())]
     path.write_text("\n".join(lines) + "\n")
 
