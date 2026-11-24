@@ -1,0 +1,16 @@
+diff --git a/plasTeX/Packages/amsmath.py b/plasTeX/Packages/amsmath.py
+index 9a06b4e13bd831a8788fa749189aaae403621704..fbb922094a0bb346b7eb4a241bf3f4bbe2bd3d9c 100644
+--- a/plasTeX/Packages/amsmath.py
++++ b/plasTeX/Packages/amsmath.py
+@@ -14,6 +14,11 @@ deflog = getLogger('parse.definitions')
+ class pmatrix(Array):
+     pass
+ 
++class substack(Command):
++    """\\substack{...}: its argument is kept as written. Read as a group, its \\\\ would end a row of
++    an enclosing alignment, and the source would show the group as \\begin{bgroup}...\\end{bgroup}."""
++    args = 'self:nox'
++
+ class _AMSEquation(eqnarray):
+     pass
+ 

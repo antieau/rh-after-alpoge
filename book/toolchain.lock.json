@@ -20,8 +20,8 @@
       "patch_sha256": "382bb84bd1a99a77ef35d8e4f315acbffabdb8a757220df30fb02dbbdba26269",
       "overlay": {
         "patch": "gerby/patches/gerby-website-rh.patch",
-        "tree": "861ee9acf6effd0630ca231093d5b42744fb5373",
-        "patch_sha256": "3efdfd1495fc25aab4568d9cecca33974261a4a65e7f1ca84da80cec64c07ebc"
+        "tree": "51caa93d869871550cd86e42627538ac9f9b11f4",
+        "patch_sha256": "7f23dbc57e7ee710c8d3ae3dab9905dc938b5ace869ba0185df2a3ecdf8e876e"
       }
     },
     "plastex": {
@@ -31,7 +31,12 @@
       "patch": "gerby/patches/plastex.patch",
       "revision": "a2b319c487ac7d9b27d77baec94657607055a02c",
       "tree": "278e803b106d0d0d424a793c9962ff5ee53a4047",
-      "patch_sha256": "4392a41173c0fd91beb2719ae41ba17ffcb035b7f9caf17074b09502d55dd640"
+      "patch_sha256": "4392a41173c0fd91beb2719ae41ba17ffcb035b7f9caf17074b09502d55dd640",
+      "overlay": {
+        "patch": "gerby/patches/plastex-rh.patch",
+        "tree": "16efbcbe07d0c1f1f9e02cae234fc0126a8f4673",
+        "patch_sha256": "b577f141b5f3a26bc2ae1b8fb28f3aeabd8a924cad9a6f659ba71f7342cdc83d"
+      }
     }
   }
 }

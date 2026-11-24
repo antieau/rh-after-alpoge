@@ -3,7 +3,8 @@
 Usage: python3 tools/render.py
 
 Reads manuscript/, plan/, status.json, runtime/status/ and the Git history, and writes
-site/index.html (where the work stands), site/plan.html (the chapter plan), site/src/ (every Lean
+site/status.html (where the work stands), site/index.html (the book's home page, served at the
+root), site/plan.html (the chapter plan), site/src/ (every Lean
 file that the plan, the manuscript or the built book cites, with an anchor #L<line> on each line)
 and site/read.html, which now forwards to the Gerby book's reader. It copies explorer/ to
 site/explorer/ and writes the explorer's data, site/explorer/rh.graph.json, with
@@ -148,26 +149,30 @@ def macros():
 @functools.lru_cache(maxsize=None)
 def current_pdfs():
     """The PDFs now in site/book/, named with their build time (tools/build_pdf.py): the book's file
-    name and the chapters' by tag, or (None, {}) before the first build."""
-    stamps = sorted(m[1] for p in (SITE / "book").glob("rh-after-alpoge-*.pdf")
-                    if (m := re.fullmatch(r"rh-after-alpoge-(\d{8}-\d{4}Z)\.pdf", p.name)))
+    name and the chapters' by tag, or (None, {}) before the first build. A file that publish.sh has
+    split into <name>.part0, <name>.part1, ... for upload counts as <name>."""
+    stamps = sorted(m[1] for p in (SITE / "book").glob("rh-after-alpoge-*.pdf*")
+                    if (m := re.fullmatch(r"rh-after-alpoge-(\d{8}-\d{4}Z)\.pdf(\.part0)?", p.name)))
     if not stamps:
         return None, {}
     stamp = stamps[-1]
-    chapters = {m[1]: p.name for p in (SITE / "book").glob("chapter-*-" + stamp + ".pdf")
-                if (m := re.fullmatch(r"chapter-([0-9A-Z]{4})-" + stamp + r"\.pdf", p.name))}
+    chapters = {m[1]: "chapter-" + m[1] + "-" + stamp + ".pdf"
+                for p in (SITE / "book").glob("chapter-*-" + stamp + ".pdf*")
+                if (m := re.fullmatch(r"chapter-([0-9A-Z]{4})-" + stamp + r"\.pdf(\.part0)?", p.name))}
     return "rh-after-alpoge-" + stamp + ".pdf", chapters
 
 
 def write_redirects():
-    """site/_redirects, which Workers static assets read (and do not serve): the PDFs' old names go to
-    the current files with a 302, so that old links keep working."""
+    """site/_redirects, which Workers static assets read (and do not serve): the book's home page
+    address goes to the root, and the PDFs' old names go to the current files with a 302, so that old
+    links keep working."""
     book, chapters = current_pdfs()
     path = SITE / "_redirects"
     if not book:
         path.unlink(missing_ok=True)
         return
-    lines = [f"/book/book.pdf /book/{book} 302"]
+    # The book's home page is served at the root (see home_page); its own address goes there.
+    lines = ["/book/ / 301", "/book/index.html / 301", f"/book/book.pdf /book/{book} 302"]
     lines += [f"/book/chapter-{tag}.pdf /book/{name} 302" for tag, name in sorted(chapters.items())]
     path.write_text("\n".join(lines) + "\n")
 
@@ -175,7 +180,7 @@ def write_redirects():
 def page(title, here, body, refresh=False, depth=0):
     up = "../" * depth
     book_pdf = current_pdfs()[0]
-    links = [("status.html", "Status"), ("plan.html", "Plan"), ("book/index.html", "Book"),
+    links = [("status.html", "Status"), ("plan.html", "Plan"), ("index.html", "Book"),
              ("book/read.html", "Read")] + ([("book/" + book_pdf, "PDF")] if book_pdf else []) + [
              ("explorer/index.html", "Explorer")]
     nav = "".join(f'<a href="{up}{h}"{" class=here" if h == here else ""}>{t}</a>' for h, t in links)
@@ -497,6 +502,22 @@ def brief_status():
     path.write_text(html_text)
 
 
+def home_page():
+    """The root serves the book's home page itself, not a redirect to it. Its links are relative to
+    book/, so a <base> element sends them there."""
+    path = SITE / "book" / "index.html"
+    if not path.exists():
+        (SITE / "index.html").write_text(
+            '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex">'
+            '<title>The Riemann Hypothesis after Alpöge</title>'
+            '<p>The book is being built. <a href="status.html">Where the work stands</a>.</p>\n')
+        return
+    html_text = path.read_text()
+    if "<base " in html_text or html_text.count("<head>") != 1:
+        raise SystemExit("book/index.html: expected one <head> and no <base>")
+    (SITE / "index.html").write_text(html_text.replace("<head>", '<head>\n<base href="book/">', 1))
+
+
 def render_explorer():
     """Copy explorer/ (the page, its adapter and the pinned Tau Ceti Explorer files, without the tests and
     the notes) into site/explorer/, and write its data with tools/explorer_data.py. A failure is reported
@@ -533,12 +554,8 @@ def main():
     (SITE / "read.html").write_text(REDIRECT)
     (SITE / "plan.html").write_text(render_plan(chs))
     (SITE / "status.html").write_text(render_status(chs))
-    # The book is the landing page; the root sends readers there.
-    (SITE / "index.html").write_text(
-        '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex">'
-        '<meta http-equiv="refresh" content="0; url=book/index.html"><title>The Riemann Hypothesis after Alpöge</title>'
-        '<p><a href="book/index.html">The Riemann Hypothesis after Alpöge</a></p>\n')
     brief_status()
+    home_page()
     files = cited_files(book) | {s["file"] for c in chs for s in c.get("statements", []) if s.get("file")}
     # The pages of files that are no longer cited stay, so that old links to them work, and are
     # rendered again with the rest, so that their own links stay current.

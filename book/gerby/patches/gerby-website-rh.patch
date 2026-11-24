@@ -28,6 +28,18 @@ index b4143a9714d135d922fb876a5481f5ba93b81346..bf459394d2c29fe501e444f9fed19296
 +#first-bar .brand-name {font-size:24px;line-height:1.25;}
 +.site-credit {border-top:1px solid var(--color-rule);margin:0 0 40px;padding:16px 0 0;font:12px var(--font-heading);color:var(--color-muted);}
 +@media(max-width:600px) {#first-bar .brand-name {font-size:18px;}}
+diff --git a/gerby/static/js/source-sidenotes.js b/gerby/static/js/source-sidenotes.js
+index 0e4e09a0a9b3034da2c736031a207f5771834b60..01fbb32f9580ebd2d06cf7526ecad6da28b13ba0 100644
+--- a/gerby/static/js/source-sidenotes.js
++++ b/gerby/static/js/source-sidenotes.js
+@@ -23,7 +23,6 @@
+   }
+   function schedule() { if (!frame) frame = requestAnimationFrame(arrange); }
+   function mode() {
+-    notes.forEach(note => { note.querySelector('details').open = wide.matches; });
+     content.style.removeProperty('min-height');
+     schedule();
+   }
 diff --git a/gerby/static/zeta-favicon.png b/gerby/static/zeta-favicon.png
 new file mode 100644
 index 0000000000000000000000000000000000000000..0b0a15af07a12398835935df24d5d0b7f467c52b
@@ -178,7 +190,7 @@ index 924a0ec02a74f38bafa73b2b67781b85507268fe..5d8d13c2311f45694c64438208f96019
  <p>The mathematical publishing software developed by Pieter Belmans and Raymond Cheng.</p>
  {% endblock %}
 diff --git a/gerby/templates/layout.html b/gerby/templates/layout.html
-index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..8bf2bd0ba2cc08380276cc13a2f63da1ede95c5c 100644
+index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..4fa9c9f7ec2460a03ddf0c48f1154d6944c5ab7f 100644
 --- a/gerby/templates/layout.html
 +++ b/gerby/templates/layout.html
 @@ -8,9 +8,10 @@
@@ -194,15 +206,18 @@ index db3dfd55180ec6350e7c0a40ad2c3640172e06a9..8bf2bd0ba2cc08380276cc13a2f63da1
  
  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  
-@@ -18,7 +19,7 @@
+@@ -18,9 +19,9 @@
  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}">
  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reconstruction.css', v='5') }}">
  
 -<link rel="stylesheet" href="/static/css/reader.css?v=5">
 +<link rel="stylesheet" href="/static/css/reader.css?v=6">
  <script defer src="/static/js/lesswrong-progress.js?v=5"></script>
- <script defer src="/static/js/source-sidenotes.js?v=1"></script>
+-<script defer src="/static/js/source-sidenotes.js?v=1"></script>
++<script defer src="/static/js/source-sidenotes.js?v=2"></script>
  
+ <script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
 @@ -53,8 +54,8 @@
  <link rel="stylesheet" type="text/css" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" integrity="sha384-yBEPaZw444dClEfen526Q6x4nwuzGO6PreKpbRVSLFCci3oYGE5DnD1pNsubCxYW" crossorigin="anonymous">
  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha384-cd07Jx5KAMCf7qM+DveFKIzHXeCSYUrai+VWCPIXbYL7JraHMFL/IXaCKbLtsxyB" crossorigin="anonymous"></script>
